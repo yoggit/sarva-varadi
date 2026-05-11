@@ -6,9 +6,9 @@ const path = require('path');
 
 console.log('🔄 Generating demo historical runs...\n');
 
-// Load the TestNG test data
-const seleniumTestNG = JSON.parse(fs.readFileSync('demo-selenium/sarva-report/history/2026-05-11T15-32-23/data.json', 'utf8'));
-const restAssuredTestNG = JSON.parse(fs.readFileSync('demo-restassured/sarva-report/history/2026-05-11T15-32-23/data.json', 'utf8'));
+// Load the TestNG test data from the new location
+const seleniumTestNG = JSON.parse(fs.readFileSync('demo-selenium/testng-source/data.json', 'utf8'));
+const restAssuredTestNG = JSON.parse(fs.readFileSync('demo-restassured/testng-source/data.json', 'utf8'));
 
 // Historical timestamps (3 days ago, 2 days ago, 1 day ago)
 const baseTime = Date.now();
@@ -17,6 +17,36 @@ const historicalTimestamps = [
   baseTime - 2 * 24 * 60 * 60 * 1000,
   baseTime - 1 * 24 * 60 * 60 * 1000
 ];
+
+// Function to add variation to test results
+function varyTestResults(tests, runIndex) {
+  // Seed-based random for consistent results
+  const random = (index) => {
+    const x = Math.sin(runIndex * 42 + index) * 10000;
+    return x - Math.floor(x);
+  };
+
+  return tests.map((test, i) => {
+    const rand = random(i);
+    const varied = { ...test };
+
+    // 15% chance to change status
+    if (rand < 0.15) {
+      // Change to failed
+      varied.status = 'failed';
+      varied.statusDetails = {
+        message: 'Random test failure for demo variation',
+        trace: `  at Test.${test.name}(test.java:${Math.floor(random(i + 100) * 100)})`
+      };
+    } else if (rand < 0.25 && runIndex > 0) {
+      // 10% chance to skip (but not in first run)
+      varied.status = 'skipped';
+      delete varied.statusDetails;
+    }
+
+    return varied;
+  });
+}
 
 // Function to adjust timestamps
 function adjustTimestamps(tests, newBaseTime) {
@@ -49,7 +79,9 @@ historicalTimestamps.forEach((timestamp, index) => {
   console.log('  🔄 Converting Selenium...');
   const seleniumConverter = new TestNGSeleniumConverter();
   const seleniumAdjusted = adjustTimestamps(seleniumTestNG, timestamp);
-  const seleniumResults = seleniumConverter.convert(seleniumAdjusted);
+  let seleniumResults = seleniumConverter.convert(seleniumAdjusted);
+  // Add variation to make runs different
+  seleniumResults = varyTestResults(seleniumResults, index);
 
   const seleniumRunDir = path.join(__dirname, `demo-selenium/sarva-report/history/${runId}`);
   fs.mkdirSync(seleniumRunDir, { recursive: true });
@@ -63,7 +95,9 @@ historicalTimestamps.forEach((timestamp, index) => {
   console.log('  🔄 Converting RestAssured...');
   const restAssuredConverter = new TestNGListenerConverter();
   const restAssuredAdjusted = adjustTimestamps(restAssuredTestNG, timestamp);
-  const restAssuredResults = restAssuredConverter.convert(restAssuredAdjusted);
+  let restAssuredResults = restAssuredConverter.convert(restAssuredAdjusted);
+  // Add variation to make runs different
+  restAssuredResults = varyTestResults(restAssuredResults, index);
 
   const restAssuredRunDir = path.join(__dirname, `demo-restassured/sarva-report/history/${runId}`);
   fs.mkdirSync(restAssuredRunDir, { recursive: true });
