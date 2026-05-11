@@ -92,19 +92,41 @@ jobs:
           git clone --depth 1 --branch gh-pages https://github.com/${{ github.repository }}.git gh-pages-old 2>/dev/null || echo "No gh-pages branch yet"
 
           if [ -d "gh-pages-old" ]; then
+            echo "✅ Found existing gh-pages branch"
+
             # Merge existing history for each framework
             for framework in playwright:demo-playwright selenium:demo-selenium rest-assured:demo-restassured; do
               IFS=':' read -r gh_name local_name <<< "$framework"
 
-              if [ -d "gh-pages-old/$gh_name/history" ] && [ -d "$local_name/sarva-report/history" ]; then
-                echo "  Merging $gh_name history..."
-                # Copy old history folders that don't exist in new report
-                cp -rn gh-pages-old/$gh_name/history/* $local_name/sarva-report/history/ 2>/dev/null || true
+              echo "  📊 Processing $gh_name..."
+              echo "    Looking for: gh-pages-old/$gh_name/history"
+              echo "    Target: $local_name/sarva-report/history"
+
+              if [ -d "gh-pages-old/$gh_name/history" ]; then
+                echo "    ✓ Found old history"
+                ls -la "gh-pages-old/$gh_name/history" | head -5
+
+                if [ -d "$local_name/sarva-report/history" ]; then
+                  echo "    ✓ Found new history directory"
+                  echo "    📋 Before merge:"
+                  ls -la "$local_name/sarva-report/history" | wc -l
+
+                  # Copy old history folders that don't exist in new report
+                  cp -rn gh-pages-old/$gh_name/history/* $local_name/sarva-report/history/ 2>/dev/null || true
+
+                  echo "    📋 After merge:"
+                  ls -la "$local_name/sarva-report/history" | wc -l
+                  echo "    ✅ Merged $gh_name history"
+                else
+                  echo "    ⚠️  New history directory doesn't exist yet"
+                fi
+              else
+                echo "    ⚠️  No old history found for $gh_name"
               fi
             done
 
             rm -rf gh-pages-old
-            echo "✅ History merged successfully"
+            echo "✅ History merge complete"
           else
             echo "ℹ️  No existing history to merge (first deployment)"
           fi
