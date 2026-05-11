@@ -5,6 +5,9 @@ export class TrendsGenerator {
   constructor(private options: Required<SarvaReporterOptions>) {}
 
   generate(history: RunHistory, currentMetadata: RunMetadata): string {
+    // Sort runs chronologically (oldest to newest) for consistent chart display
+    history.runs.sort((a, b) => a.timestamp - b.timestamp);
+
     const styles = AssetsLoader.getStyles();
     const scripts = AssetsLoader.getScripts();
     const toolName = this.getToolName(history);
@@ -433,8 +436,9 @@ export class TrendsGenerator {
   private generateChartsScript(history: RunHistory): string {
     const passRateData = this.preparePassRateData(history);
     const distributionData = this.prepareDistributionData(history);
-    const runs = history.runs.slice(0, 30).reverse();
-    const distributionRuns = history.runs.slice(0, 30).reverse();
+    // Runs are already sorted chronologically, get the most recent 30
+    const runs = history.runs.slice(-30);
+    const distributionRuns = history.runs.slice(-30);
 
     return `
     <script>
@@ -628,8 +632,8 @@ export class TrendsGenerator {
                 filteredRuns = allRuns.filter(run => run.timestamp >= cutoff);
             }
 
-            // Update Pass Rate chart
-            const passRateData = filteredRuns.slice(0, 30).reverse();
+            // Update Pass Rate chart (filteredRuns already sorted chronologically)
+            const passRateData = filteredRuns.slice(-30);
             const passRateLabels = passRateData.map(r => {
                 const date = new Date(r.timestamp);
                 const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -652,8 +656,8 @@ export class TrendsGenerator {
                 passRateCountEl.textContent = '(' + passRateData.length + ' runs)';
             }
 
-            // Update Distribution chart
-            const distributionData = filteredRuns.slice(0, 30).reverse();
+            // Update Distribution chart (filteredRuns already sorted chronologically)
+            const distributionData = filteredRuns.slice(-30);
             const distributionLabels = distributionData.map(r => {
                 const date = new Date(r.timestamp);
                 const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -784,7 +788,8 @@ export class TrendsGenerator {
   }
 
   private preparePassRateData(history: RunHistory) {
-    const runs = history.runs.slice(0, 30).reverse();
+    // Runs are already sorted chronologically, get the most recent 30
+    const runs = history.runs.slice(-30);
 
     return {
       labels: runs.map(run => {
@@ -808,7 +813,8 @@ export class TrendsGenerator {
   }
 
   private prepareDistributionData(history: RunHistory) {
-    const runs = history.runs.slice(0, 30).reverse();
+    // Runs are already sorted chronologically, get the most recent 30
+    const runs = history.runs.slice(-30);
 
     return {
       labels: runs.map(run => {
