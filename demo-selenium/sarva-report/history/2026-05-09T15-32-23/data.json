@@ -1,0 +1,186 @@
+{
+  "summary": {
+    "passed": 5,
+    "failed": 2,
+    "skipped": 0,
+    "total": 10,
+    "duration": 42700,
+    "startTime": "2026-05-09T15:32:23.000Z",
+    "endTime": "2026-05-09T15:33:05.700Z"
+  },
+  "tests": [
+    {
+      "name": "Login Test",
+      "status": "passed",
+      "duration": 5000,
+      "className": "com.example.selenium.tests.DemoTests",
+      "steps": [
+        {
+          "name": "Navigate to login page",
+          "status": "passed",
+          "duration": 1000
+        },
+        {
+          "name": "Enter credentials",
+          "status": "passed",
+          "duration": 500
+        },
+        {
+          "name": "Click login button",
+          "status": "passed",
+          "duration": 500
+        }
+      ],
+      "screenshots": [
+        "screenshots/login-test-end-passed.png"
+      ]
+    },
+    {
+      "name": "Search Functionality Test",
+      "status": "flaky",
+      "duration": 4000,
+      "className": "com.example.selenium.tests.DemoTests",
+      "steps": [
+        {
+          "name": "Open search page",
+          "status": "passed",
+          "duration": 800
+        },
+        {
+          "name": "Enter search term",
+          "status": "passed",
+          "duration": 600
+        },
+        {
+          "name": "Verify results",
+          "status": "failed",
+          "duration": 700
+        }
+      ]
+    },
+    {
+      "name": "Add to Cart Test",
+      "status": "failed",
+      "duration": 3500,
+      "className": "com.example.selenium.tests.DemoTests",
+      "steps": [
+        {
+          "name": "Select product",
+          "status": "passed",
+          "duration": 1000
+        },
+        {
+          "name": "Click add to cart",
+          "status": "failed",
+          "duration": 500,
+          "errorMessage": "Element not found: #add-to-cart-button"
+        }
+      ],
+      "errorMessage": "Element not found: #add-to-cart-button",
+      "errorStackTrace": "org.openqa.selenium.NoSuchElementException: Unable to locate element: #add-to-cart-button\n  at DemoTests.testAddToCart(DemoTests.java:45)",
+      "screenshots": [
+        "screenshots/add-to-cart-test-end-failed.png"
+      ]
+    },
+    {
+      "name": "Checkout Process Test",
+      "status": "failed",
+      "duration": 6000,
+      "className": "com.example.selenium.tests.DemoTests",
+      "steps": [
+        {
+          "name": "Go to cart",
+          "status": "failed",
+          "duration": 1200,
+          "errorMessage": "Step failed"
+        },
+        {
+          "name": "Enter shipping details",
+          "status": "passed",
+          "duration": 1500
+        },
+        {
+          "name": "Complete payment",
+          "status": "passed",
+          "duration": 1800
+        }
+      ],
+      "errorMessage": "Test failed",
+      "screenshots": [
+        "screenshots/checkout-process-test-end-failed.png"
+      ]
+    },
+    {
+      "name": "User Profile Test",
+      "status": "passed",
+      "duration": 4500,
+      "className": "com.example.selenium.tests.DemoTests",
+      "steps": [
+        {
+          "name": "Navigate to profile",
+          "status": "passed",
+          "duration": 1000
+        },
+        {
+          "name": "Update profile info",
+          "status": "passed",
+          "duration": 2000
+        }
+      ],
+      "screenshots": [
+        "screenshots/user-profile-test-end-passed.png"
+      ]
+    },
+    {
+      "name": "Navigation Menu Test",
+      "status": "passed",
+      "duration": 3000,
+      "className": "com.example.selenium.tests.DemoTests",
+      "screenshots": [
+        "screenshots/navigation-menu-test-end-passed.png"
+      ]
+    },
+    {
+      "name": "Filter Products Test",
+      "status": "passed",
+      "duration": 4000,
+      "className": "com.example.selenium.tests.DemoTests",
+      "steps": [
+        {
+          "name": "Apply filters",
+          "status": "passed",
+          "duration": 1500
+        },
+        {
+          "name": "Verify filtered results",
+          "status": "failed",
+          "duration": 800
+        }
+      ],
+      "screenshots": [
+        "screenshots/filter-products-test-end-passed.png"
+      ]
+    },
+    {
+      "name": "Sort Products Test",
+      "status": "passed",
+      "duration": 3500,
+      "className": "com.example.selenium.tests.DemoTests",
+      "screenshots": [
+        "screenshots/sort-products-test-end-passed.png"
+      ]
+    },
+    {
+      "name": "Product Details Test",
+      "status": "flaky",
+      "duration": 5000,
+      "className": "com.example.selenium.tests.DemoTests"
+    },
+    {
+      "name": "Wishlist Test",
+      "status": "flaky",
+      "duration": 4200,
+      "className": "com.example.selenium.tests.DemoTests"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "summary": {
+    "passed": 6,
+    "failed": 2,
+    "skipped": 1,
+    "total": 10,
+    "duration": 10350,
+    "startTime": "2026-05-10T15:32:23.000Z",
+    "endTime": "2026-05-10T15:32:33.350Z"
+  },
+  "tests": [
+    {
+      "name": "GET /users - List all users",
+      "status": "passed",
+      "duration": 1200,
+      "className": "com.example.restassured.tests.ApiTests"
+    },
+    {
+      "name": "GET /users/{id} - Get user by ID",
+      "status": "failed",
+      "duration": 800,
+      "className": "com.example.restassured.tests.ApiTests"
+    },
+    {
+      "name": "POST /users - Create new user",
+      "status": "passed",
+      "duration": 1500,
+      "className": "com.example.restassured.tests.ApiTests"
+    },
+    {
+      "name": "PUT /users/{id} - Update user",
+      "status": "passed",
+      "duration": 1800,
+      "className": "com.example.restassured.tests.ApiTests"
+    },
+    {
+      "name": "DELETE /users/{id} - Delete user",
+      "status": "passed",
+      "duration": 1000,
+      "className": "com.example.restassured.tests.ApiTests"
+    },
+    {
+      "name": "GET /posts - List all posts",
+      "status": "passed",
+      "duration": 1100,
+      "className": "com.example.restassured.tests.ApiTests"
+    },
+    {
+      "name": "POST /posts - Create new post",
+      "status": "skipped",
+      "duration": 0,
+      "className": "com.example.restassured.tests.ApiTests"
+    },
+    {
+      "name": "GET /posts/{id}/comments - Get post comments",
+      "status": "passed",
+      "duration": 900,
+      "className": "com.example.restassured.tests.ApiTests"
+    },
+    {
+      "name": "GET /users/{id}/posts - Get user posts",
+      "status": "flaky",
+      "duration": 1100,
+      "className": "com.example.restassured.tests.ApiTests"
+    },
+    {
+      "name": "PATCH /users/{id} - Partial update",
+      "status": "failed",
+      "duration": 950,
+      "className": "com.example.restassured.tests.ApiTests"
+    }
+  ]
+}

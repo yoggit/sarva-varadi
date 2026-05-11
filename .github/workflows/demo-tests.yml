@@ -65,7 +65,7 @@ jobs:
         run: |
           # Use static test data for Selenium demo
           node packages/core/dist/cli.js convert \
-            --input demo-selenium/sarva-report/history/2026-05-11-153223/data.json \
+            --input demo-selenium/sarva-report/history/2026-05-11T15-32-23/data.json \
             --output demo-selenium/sarva-report \
             --format testng-selenium \
             --use-current-timestamp
@@ -76,7 +76,7 @@ jobs:
         run: |
           # Use static test data for RestAssured demo
           node packages/core/dist/cli.js convert \
-            --input demo-restassured/sarva-report/history/2026-05-11-153223/data.json \
+            --input demo-restassured/sarva-report/history/2026-05-11T15-32-23/data.json \
             --output demo-restassured/sarva-report \
             --format testng-listener \
             --use-current-timestamp
