@@ -1,0 +1,161 @@
+[
+  {
+    "testName": "com.example.selenium.tests.LoginTest.testSuccessfulLogin",
+    "methodName": "testSuccessfulLogin",
+    "status": "PASS",
+    "startTime": 1715400000000,
+    "endTime": 1715400005000,
+    "duration": 5000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Firefox",
+      "version": "118.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "navigate",
+        "description": "GET https://example.com/login",
+        "timestamp": 1715400000500,
+        "status": "success"
+      },
+      {
+        "type": "sendKeys",
+        "description": "Type into input#username: testuser",
+        "timestamp": 1715400001000,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button#login-btn",
+        "timestamp": 1715400002000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.LoginTest.testInvalidLogin",
+    "methodName": "testInvalidLogin",
+    "status": "FAIL",
+    "startTime": 1715400005000,
+    "endTime": 1715400010000,
+    "duration": 5000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Firefox",
+      "version": "118.0",
+      "platform": "Windows 11"
+    },
+    "error": {
+      "message": "AssertionError: Expected error message to be displayed",
+      "stackTrace": "java.lang.AssertionError: Expected error message to be displayed\n\tat com.example.selenium.tests.LoginTest.testInvalidLogin(LoginTest.java:45)"
+    },
+    "actions": [
+      {
+        "type": "sendKeys",
+        "description": "Type into input#username: invalid",
+        "timestamp": 1715400005500,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button#login-btn",
+        "timestamp": 1715400006000,
+        "status": "success"
+      },
+      {
+        "type": "error",
+        "description": "Error: Element not found: .error-message",
+        "timestamp": 1715400008000,
+        "status": "failed"
+      },
+      {
+        "type": "screenshot",
+        "description": "Screenshot captured: error-1-1715400008500.png",
+        "file": "error-1-1715400008500.png",
+        "timestamp": 1715400008500
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.ProductTest.testAddToCart",
+    "methodName": "testAddToCart",
+    "status": "PASS",
+    "startTime": 1715400010000,
+    "endTime": 1715400014000,
+    "duration": 4000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Firefox",
+      "version": "118.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "navigate",
+        "description": "GET https://example.com/products",
+        "timestamp": 1715400010500,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button.add-to-cart",
+        "timestamp": 1715400011000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.ProductTest.testProductDetails",
+    "methodName": "testProductDetails",
+    "status": "FAIL",
+    "startTime": 1715400014000,
+    "endTime": 1715400020000,
+    "duration": 6000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Firefox",
+      "version": "118.0",
+      "platform": "Windows 11"
+    },
+    "error": {
+      "message": "TimeoutException: Timeout waiting for product description",
+      "stackTrace": "org.openqa.selenium.TimeoutException: Timeout waiting for product description\n\tat com.example.selenium.tests.ProductTest.testProductDetails(ProductTest.java:67)"
+    },
+    "actions": [
+      {
+        "type": "click",
+        "description": "Click on a.product-link",
+        "timestamp": 1715400014500,
+        "status": "success"
+      },
+      {
+        "type": "error",
+        "description": "Error: Timeout waiting for element",
+        "timestamp": 1715400019000,
+        "status": "failed"
+      },
+      {
+        "type": "screenshot",
+        "description": "Screenshot captured: error-2-1715400019500.png",
+        "file": "error-2-1715400019500.png",
+        "timestamp": 1715400019500
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.CheckoutTest.testCheckoutFlow",
+    "methodName": "testCheckoutFlow",
+    "status": "SKIP",
+    "startTime": 1715400020000,
+    "endTime": 1715400020100,
+    "duration": 100,
+    "retryCount": 0,
+    "browser": {
+      "name": "Firefox",
+      "version": "118.0",
+      "platform": "Windows 11"
+    },
+    "actions": []
+  }
+]

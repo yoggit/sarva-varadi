@@ -1,0 +1,38 @@
+{
+  "name": "@sarva-varadi/playwright",
+  "version": "1.0.0",
+  "description": "Playwright adapter for Sarva-Varadi test reporter",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "playwright",
+    "test-reporter",
+    "sarva-varadi"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yoggit/sarva-varadi.git",
+    "directory": "packages/playwright"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "@playwright/test": ">=1.40.0"
+  },
+  "dependencies": {
+    "@sarva-varadi/core": "*"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  }
+}

@@ -1,0 +1,194 @@
+[
+  {
+    "testName": "com.example.selenium.tests.LoginTest.testSuccessfulLogin",
+    "methodName": "testSuccessfulLogin",
+    "status": "FLAKY",
+    "startTime": 1715400000000,
+    "endTime": 1715400006000,
+    "duration": 6000,
+    "retryCount": 1,
+    "flakyReason": "Test passed after 1 retry attempt(s)",
+    "browser": {
+      "name": "Edge",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "navigate",
+        "description": "GET https://example.com/login",
+        "timestamp": 1715400000500,
+        "status": "success"
+      },
+      {
+        "type": "sendKeys",
+        "description": "Type into input#username: testuser",
+        "timestamp": 1715400001000,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button#login-btn",
+        "timestamp": 1715400002000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.ProductTest.testAddToCart",
+    "methodName": "testAddToCart",
+    "status": "PASS",
+    "startTime": 1715400006000,
+    "endTime": 1715400010000,
+    "duration": 4000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Edge",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "navigate",
+        "description": "GET https://example.com/products",
+        "timestamp": 1715400006500,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button.add-to-cart",
+        "timestamp": 1715400007000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.ProductTest.testSearchProducts",
+    "methodName": "testSearchProducts",
+    "status": "FLAKY",
+    "startTime": 1715400010000,
+    "endTime": 1715400015000,
+    "duration": 5000,
+    "retryCount": 2,
+    "flakyReason": "Test passed after 2 retry attempt(s)",
+    "browser": {
+      "name": "Edge",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "sendKeys",
+        "description": "Type into input[name=search]: laptop",
+        "timestamp": 1715400010500,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button#search-btn",
+        "timestamp": 1715400011000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.CheckoutTest.testCheckoutFlow",
+    "methodName": "testCheckoutFlow",
+    "status": "PASS",
+    "startTime": 1715400015000,
+    "endTime": 1715400020000,
+    "duration": 5000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Edge",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "navigate",
+        "description": "GET https://example.com/checkout",
+        "timestamp": 1715400015500,
+        "status": "success"
+      },
+      {
+        "type": "sendKeys",
+        "description": "Type into input#card-number: ***MASKED***",
+        "timestamp": 1715400016000,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button#confirm-order",
+        "timestamp": 1715400017000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.NavigationTest.testHeaderLinks",
+    "methodName": "testHeaderLinks",
+    "status": "PASS",
+    "startTime": 1715400020000,
+    "endTime": 1715400023000,
+    "duration": 3000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Edge",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "click",
+        "description": "Click on a.nav-home",
+        "timestamp": 1715400020500,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on a.nav-products",
+        "timestamp": 1715400021000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.NavigationTest.testBreadcrumbs",
+    "methodName": "testBreadcrumbs",
+    "status": "FAIL",
+    "startTime": 1715400023000,
+    "endTime": 1715400028000,
+    "duration": 5000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Edge",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "error": {
+      "message": "AssertionError: Expected breadcrumb text to be 'Home > Products' but got 'Home'",
+      "stackTrace": "java.lang.AssertionError: Expected breadcrumb text\n\tat com.example.selenium.tests.NavigationTest.testBreadcrumbs(NavigationTest.java:34)"
+    },
+    "actions": [
+      {
+        "type": "findElement",
+        "description": "Find element: By.className: breadcrumb",
+        "timestamp": 1715400023500,
+        "status": "success"
+      },
+      {
+        "type": "error",
+        "description": "Error: Assertion failed on breadcrumb text",
+        "timestamp": 1715400026000,
+        "status": "failed"
+      },
+      {
+        "type": "screenshot",
+        "description": "Screenshot captured: error-3-1715400026500.png",
+        "file": "error-3-1715400026500.png",
+        "timestamp": 1715400026500
+      }
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "name": "@sarva-varadi/core",
+  "version": "1.0.0",
+  "description": "Core library for Sarva-Varadi test reporter - common types, adapters, and report generation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "sarva-varadi": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "node -e \"const fs=require('fs'); const path=require('path'); const src='src/generators'; const dst='dist/generators'; const dstScreenshots='dist/screenshots'; if(!fs.existsSync(dst)) fs.mkdirSync(dst, {recursive:true}); if(!fs.existsSync(dstScreenshots)) fs.mkdirSync(dstScreenshots, {recursive:true}); fs.copyFileSync(path.join(src,'varadi-styles.css'), path.join(dst,'varadi-styles.css')); fs.copyFileSync(path.join(src,'varadi-scripts.js'), path.join(dst,'varadi-scripts.js')); fs.copyFileSync('screenshots/logo.svg', path.join(dstScreenshots,'logo.svg'));\"",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "test-reporter",
+    "test-automation",
+    "html-report"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yoggit/sarva-varadi.git",
+    "directory": "packages/core"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "src/generators/varadi-styles.css",
+    "src/generators/varadi-scripts.js"
+  ],
+  "dependencies": {
+    "nodemailer": "^6.9.0",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/nodemailer": "^6.4.0",
+    "@types/xml2js": "^0.4.14",
+    "typescript": "^5.3.0"
+  }
+}

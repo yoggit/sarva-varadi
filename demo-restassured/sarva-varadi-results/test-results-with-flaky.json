@@ -1,0 +1,153 @@
+[
+  {
+    "testName": "com.example.tests.FlakyApiTest.testFlakyEndpoint",
+    "methodName": "testFlakyEndpoint",
+    "status": "FLAKY",
+    "startTime": 1715382000000,
+    "endTime": 1715382001500,
+    "retryCount": 1,
+    "flakyReason": "Test passed after 1 retry attempt(s)",
+    "apiCalls": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/users/1",
+        "request": {
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/users/1",
+          "headers": "[Content-Type: application/json, Accept: */*]"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "234ms",
+          "headers": "[Content-Type: application/json; charset=utf-8]",
+          "body": "{\"id\": 1, \"name\": \"Leanne Graham\", \"email\": \"Sincere@april.biz\"}"
+        },
+        "startTime": 1715382000100,
+        "endTime": 1715382000334,
+        "duration": 234,
+        "status": "passed"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.tests.FlakyApiTest.testStableEndpoint",
+    "methodName": "testStableEndpoint",
+    "status": "PASS",
+    "startTime": 1715382001500,
+    "endTime": 1715382002000,
+    "retryCount": 0,
+    "apiCalls": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/users/2",
+        "request": {
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/users/2",
+          "headers": "[Content-Type: application/json, Accept: */*]"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "145ms",
+          "headers": "[Content-Type: application/json; charset=utf-8]",
+          "body": "{\"id\": 2, \"name\": \"Ervin Howell\", \"email\": \"Shanna@melissa.tv\"}"
+        },
+        "startTime": 1715382001500,
+        "endTime": 1715382001645,
+        "duration": 145,
+        "status": "passed"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.tests.UserApiTest.testGetUser",
+    "methodName": "testGetUser",
+    "status": "PASS",
+    "startTime": 1715382002000,
+    "endTime": 1715382003234,
+    "retryCount": 0,
+    "apiCalls": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/users/1",
+        "request": {
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/users/1",
+          "headers": "[Content-Type: application/json, Accept: */*]"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "234ms",
+          "headers": "[Content-Type: application/json; charset=utf-8]",
+          "body": "{\"id\": 1, \"name\": \"Leanne Graham\", \"email\": \"Sincere@april.biz\", \"username\": \"Bret\"}"
+        },
+        "startTime": 1715382002100,
+        "endTime": 1715382002334,
+        "duration": 234,
+        "status": "passed"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.tests.UserApiTest.testCreateUser",
+    "methodName": "testCreateUser",
+    "status": "PASS",
+    "startTime": 1715382003456,
+    "endTime": 1715382004678,
+    "retryCount": 0,
+    "apiCalls": [
+      {
+        "name": "POST https://jsonplaceholder.typicode.com/users",
+        "request": {
+          "method": "POST",
+          "uri": "https://jsonplaceholder.typicode.com/users",
+          "headers": "[Content-Type: application/json, Accept: */*]",
+          "body": "{ \"name\": \"John Doe\", \"email\": \"john@example.com\", \"password\": \"***MASKED***\" }"
+        },
+        "response": {
+          "statusCode": 201,
+          "statusLine": "HTTP/1.1 201 Created",
+          "responseTime": "456ms",
+          "headers": "[Content-Type: application/json; charset=utf-8, Location: /users/11]",
+          "body": "{\"id\": 11, \"name\": \"John Doe\", \"email\": \"john@example.com\"}"
+        },
+        "startTime": 1715382003456,
+        "endTime": 1715382003912,
+        "duration": 456,
+        "status": "passed"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.tests.PostApiTest.testFailedPost",
+    "methodName": "testFailedPost",
+    "status": "FAIL",
+    "startTime": 1715382005234,
+    "endTime": 1715382006456,
+    "retryCount": 0,
+    "error": {
+      "message": "Expected title to be 'This will fail', but got 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit'",
+      "stackTrace": "java.lang.AssertionError: Expected title to be 'This will fail'\n\tat com.example.tests.PostApiTest.testFailedPost(PostApiTest.java:62)"
+    },
+    "apiCalls": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/posts/1",
+        "request": {
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/posts/1",
+          "headers": "[Content-Type: application/json, Accept: */*]"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "123ms",
+          "headers": "[Content-Type: application/json; charset=utf-8]",
+          "body": "{\"userId\": 1, \"id\": 1, \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\"}"
+        },
+        "startTime": 1715382005234,
+        "endTime": 1715382005357,
+        "duration": 123,
+        "status": "failed"
+      }
+    ]
+  }
+]

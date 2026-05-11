@@ -1,0 +1,17 @@
+{
+  "name": "sarva-varadi-demo-selenium",
+  "version": "1.0.0",
+  "description": "Selenium + TestNG demo for Sarva-Varadi reporter",
+  "scripts": {
+    "report": "npx sarva-varadi generate --input sarva-varadi-results/test-results-with-flaky.json --output sarva-report",
+    "report:all-pass": "npx sarva-varadi generate --input sarva-varadi-results/test-results-all-pass.json --output sarva-report",
+    "report:mixed": "npx sarva-varadi generate --input sarva-varadi-results/test-results-mixed.json --output sarva-report",
+    "report:screenshots-always": "npx sarva-varadi generate --input sarva-varadi-results/test-results-with-screenshots-always.json --output sarva-report"
+  },
+  "keywords": [
+    "selenium",
+    "testng",
+    "test-reporter",
+    "sarva-varadi"
+  ]
+}

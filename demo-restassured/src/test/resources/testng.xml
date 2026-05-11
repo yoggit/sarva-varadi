@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Sarva-Varadi RestAssured Demo Suite">
+    <listeners>
+        <listener class-name="SarvaVaradiListener"/>
+    </listeners>
+
+    <test name="API Tests" parallel="false">
+        <classes>
+            <class name="com.example.tests.UserApiTest"/>
+            <class name="com.example.tests.PostApiTest"/>
+        </classes>
+    </test>
+</suite>

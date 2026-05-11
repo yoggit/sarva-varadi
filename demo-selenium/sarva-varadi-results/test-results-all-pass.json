@@ -1,0 +1,166 @@
+[
+  {
+    "testName": "com.example.selenium.tests.LoginTest.testSuccessfulLogin",
+    "methodName": "testSuccessfulLogin",
+    "status": "PASS",
+    "startTime": 1715400000000,
+    "endTime": 1715400005000,
+    "duration": 5000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Chrome",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "navigate",
+        "description": "GET https://example.com/login",
+        "timestamp": 1715400000500,
+        "status": "success"
+      },
+      {
+        "type": "sendKeys",
+        "description": "Type into input#username: testuser",
+        "timestamp": 1715400001000,
+        "status": "success"
+      },
+      {
+        "type": "sendKeys",
+        "description": "Type into input#password: ***MASKED***",
+        "timestamp": 1715400001500,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button#login-btn",
+        "timestamp": 1715400002000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.LoginTest.testLogout",
+    "methodName": "testLogout",
+    "status": "PASS",
+    "startTime": 1715400005000,
+    "endTime": 1715400008000,
+    "duration": 3000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Chrome",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "click",
+        "description": "Click on a#logout-link",
+        "timestamp": 1715400005500,
+        "status": "success"
+      },
+      {
+        "type": "findElement",
+        "description": "Find element: By.id: login-form",
+        "timestamp": 1715400006000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.ProductTest.testAddToCart",
+    "methodName": "testAddToCart",
+    "status": "PASS",
+    "startTime": 1715400008000,
+    "endTime": 1715400012000,
+    "duration": 4000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Chrome",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "navigate",
+        "description": "GET https://example.com/products",
+        "timestamp": 1715400008500,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button.add-to-cart",
+        "timestamp": 1715400009000,
+        "status": "success"
+      },
+      {
+        "type": "findElement",
+        "description": "Find element: By.className: cart-count",
+        "timestamp": 1715400010000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.ProductTest.testSearchProducts",
+    "methodName": "testSearchProducts",
+    "status": "PASS",
+    "startTime": 1715400012000,
+    "endTime": 1715400015000,
+    "duration": 3000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Chrome",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "sendKeys",
+        "description": "Type into input[name=search]: laptop",
+        "timestamp": 1715400012500,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button#search-btn",
+        "timestamp": 1715400013000,
+        "status": "success"
+      }
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.CheckoutTest.testCheckoutFlow",
+    "methodName": "testCheckoutFlow",
+    "status": "PASS",
+    "startTime": 1715400015000,
+    "endTime": 1715400020000,
+    "duration": 5000,
+    "retryCount": 0,
+    "browser": {
+      "name": "Chrome",
+      "version": "120.0",
+      "platform": "Windows 11"
+    },
+    "actions": [
+      {
+        "type": "navigate",
+        "description": "GET https://example.com/checkout",
+        "timestamp": 1715400015500,
+        "status": "success"
+      },
+      {
+        "type": "sendKeys",
+        "description": "Type into input#card-number: ***MASKED***",
+        "timestamp": 1715400016000,
+        "status": "success"
+      },
+      {
+        "type": "click",
+        "description": "Click on button#confirm-order",
+        "timestamp": 1715400017000,
+        "status": "success"
+      }
+    ]
+  }
+]

@@ -1,0 +1,129 @@
+name: Demo Tests
+
+run-name: Demo Tests - ${{ inputs.test_framework }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_framework:
+        description: 'Test Framework'
+        required: true
+        type: choice
+        options:
+          - playwright
+          - restassured
+          - selenium
+        default: 'playwright'
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm ci --workspaces --if-present --ignore-scripts
+
+      - name: Clean build artifacts
+        run: |
+          rm -rf packages/*/dist packages/*/*.tsbuildinfo
+
+      - name: Build core package first
+        run: cd packages/core && npm run build
+
+      - name: Build all packages
+        run: npm run build
+
+      - name: Download existing history from GitHub Pages
+        if: always()
+        continue-on-error: true
+        run: |
+          mkdir -p demo-${{ inputs.test_framework }}/sarva-report/history
+
+          # Download all archived run folders (NOT runs.json - let it rebuild)
+          curl -s https://api.github.com/repos/yoggit/sarva-varadi/git/trees/gh-pages?recursive=1 | \
+            grep -o "reports/${{ inputs.test_framework }}/history/[^/]*/data.json" | \
+            sed 's|reports/${{ inputs.test_framework }}/history/||' | \
+            sed 's|/data.json||' | \
+            while read runId; do
+              mkdir -p "demo-${{ inputs.test_framework }}/sarva-report/history/$runId"
+              curl -f -o "demo-${{ inputs.test_framework }}/sarva-report/history/$runId/data.json" \
+                "https://yoggit.github.io/sarva-varadi/reports/${{ inputs.test_framework }}/history/$runId/data.json" || true
+            done
+
+          echo "Downloaded archived run folders. Will rebuild runs.json from archives during report generation."
+
+      - name: Install Playwright browsers
+        if: ${{ inputs.test_framework == 'playwright' }}
+        run: npx playwright install --with-deps
+        working-directory: demo-playwright
+
+      - name: Run Playwright tests
+        if: ${{ inputs.test_framework == 'playwright' }}
+        run: npm test
+        working-directory: demo-playwright
+        continue-on-error: true
+
+      - name: Run RestAssured tests
+        if: ${{ inputs.test_framework == 'restassured' }}
+        run: |
+          # Randomly select a sample file to create variation in trends
+          cd demo-restassured/sarva-varadi-results
+          SELECTED_FILE=$(ls test-results*.json | shuf -n 1)
+          echo "📝 Using sample file: $SELECTED_FILE"
+          cd ../..
+
+          # Convert RestAssured test results to Sarva-Varadi format
+          node packages/core/dist/cli.js convert \
+            --input demo-restassured/sarva-varadi-results/$SELECTED_FILE \
+            --output demo-restassured/sarva-report \
+            --format testng-listener \
+            --use-current-timestamp
+        continue-on-error: true
+
+      - name: Run Selenium tests
+        if: ${{ inputs.test_framework == 'selenium' }}
+        run: |
+          # Randomly select a sample file to create variation in trends
+          cd demo-selenium/sarva-varadi-results
+          SELECTED_FILE=$(ls test-results*.json | shuf -n 1)
+          echo "📝 Using sample file: $SELECTED_FILE"
+          cd ../..
+
+          # Convert Selenium test results to Sarva-Varadi format
+          node packages/core/dist/cli.js convert \
+            --input demo-selenium/sarva-varadi-results/$SELECTED_FILE \
+            --output demo-selenium/sarva-report \
+            --format testng-selenium \
+            --use-current-timestamp
+        continue-on-error: true
+
+      - name: Upload Sarva-Varadi Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sarva-varadi-report-${{ inputs.test_framework }}
+          path: demo-${{ inputs.test_framework }}/sarva-report/
+          retention-days: 30
+
+      - name: Deploy to GitHub Pages
+        if: always() && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: demo-${{ inputs.test_framework }}/sarva-report
+          destination_dir: reports/${{ inputs.test_framework }}
+          keep_files: true

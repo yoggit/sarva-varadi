@@ -1,0 +1,20 @@
+{
+  "name": "sarva-varadi-restassured-demo",
+  "version": "1.0.0",
+  "description": "Demo RestAssured API tests with Sarva-Varadi reporting",
+  "scripts": {
+    "test": "mvn clean test",
+    "report": "npx sarva-varadi generate --input sarva-varadi-results/test-results.json --output sarva-report",
+    "test:report": "npm run test && npm run report"
+  },
+  "keywords": [
+    "rest-assured",
+    "api-testing",
+    "testng",
+    "sarva-varadi"
+  ],
+  "dependencies": {
+    "@sarva-varadi/core": "^1.0.0",
+    "@sarva-varadi/rest-assured": "^1.0.0"
+  }
+}
