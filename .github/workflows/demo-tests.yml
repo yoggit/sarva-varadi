@@ -34,13 +34,6 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Setup Java 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: 'maven'
-
       - name: Install dependencies
         run: |
           npm ci
@@ -67,16 +60,26 @@ jobs:
         working-directory: demo-playwright
         continue-on-error: true
 
-      - name: Run Selenium tests
+      - name: Generate Selenium report from static data
         if: ${{ inputs.test_framework == 'selenium' || inputs.test_framework == '' }}
-        run: mvn clean test
-        working-directory: demo-selenium
+        run: |
+          # Use static test data for Selenium demo
+          node packages/core/dist/cli.js convert \
+            --input demo-selenium/sarva-report/history/2026-05-11-153223/data.json \
+            --output demo-selenium/sarva-report \
+            --format testng-selenium \
+            --use-current-timestamp
         continue-on-error: true
 
-      - name: Run RestAssured tests
+      - name: Generate RestAssured report from static data
         if: ${{ inputs.test_framework == 'restassured' || inputs.test_framework == '' }}
-        run: mvn clean test
-        working-directory: demo-restassured
+        run: |
+          # Use static test data for RestAssured demo
+          node packages/core/dist/cli.js convert \
+            --input demo-restassured/sarva-report/history/2026-05-11-153223/data.json \
+            --output demo-restassured/sarva-report \
+            --format testng-listener \
+            --use-current-timestamp
         continue-on-error: true
 
       - name: Create deployment structure
