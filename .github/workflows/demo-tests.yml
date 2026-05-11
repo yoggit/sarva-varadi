@@ -114,4 +114,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./gh-pages-deploy
-          force_orphan: true
+          keep_files: true  # Preserve existing history folders
