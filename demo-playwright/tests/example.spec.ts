@@ -113,4 +113,21 @@ test.describe('Playwright Website Tests', () => {
     await page.goto('/');
     await expect(page).toHaveTitle(/Test/);
   });
+
+  test('should be flaky', async ({ page }) => {
+    await test.step('Navigate to homepage', async () => {
+      await page.goto('/');
+    });
+
+    await test.step('Flaky assertion', async () => {
+      // Flaky: fails randomly 50% of the time
+      if (Math.random() < 0.5) {
+        throw new Error('Flaky test failure');
+      }
+    });
+
+    await test.step('Verify title', async () => {
+      await expect(page).toHaveTitle(/Playwright/);
+    });
+  });
 });
