@@ -82,6 +82,33 @@ jobs:
             --use-current-timestamp
         continue-on-error: true
 
+      - name: Fetch and merge existing history from GitHub Pages
+        if: always()
+        continue-on-error: true
+        run: |
+          echo "📦 Fetching existing history from GitHub Pages..."
+
+          # Clone gh-pages branch to a temporary directory
+          git clone --depth 1 --branch gh-pages https://github.com/${{ github.repository }}.git gh-pages-old 2>/dev/null || echo "No gh-pages branch yet"
+
+          if [ -d "gh-pages-old" ]; then
+            # Merge existing history for each framework
+            for framework in playwright:demo-playwright selenium:demo-selenium rest-assured:demo-restassured; do
+              IFS=':' read -r gh_name local_name <<< "$framework"
+
+              if [ -d "gh-pages-old/$gh_name/history" ] && [ -d "$local_name/sarva-report/history" ]; then
+                echo "  Merging $gh_name history..."
+                # Copy old history folders that don't exist in new report
+                cp -rn gh-pages-old/$gh_name/history/* $local_name/sarva-report/history/ 2>/dev/null || true
+              fi
+            done
+
+            rm -rf gh-pages-old
+            echo "✅ History merged successfully"
+          else
+            echo "ℹ️  No existing history to merge (first deployment)"
+          fi
+
       - name: Create deployment structure
         if: always()
         run: |
