@@ -56,7 +56,8 @@ export class TrendsGenerator {
 
   private generateHeader(history: RunHistory, toolName: string): string {
     const titleText = toolName ? `Sarva-Varadi → ${toolName} Trends` : `${this.options.title} - Trends`;
-    const latestRun = history.runs.length > 0 ? history.runs[0] : null;
+    // Runs are sorted chronologically, so the last one is the most recent
+    const latestRun = history.runs.length > 0 ? history.runs[history.runs.length - 1] : null;
 
     return `
     <header class="header">
@@ -362,7 +363,8 @@ export class TrendsGenerator {
 
   private generateRecentRuns(history: RunHistory): string {
     // Generate rows for all available runs (will be filtered by JavaScript)
-    const allRuns = history.runs;
+    // Reverse to show newest first in the activity stream
+    const allRuns = [...history.runs].reverse();
 
     const rows = allRuns.map(run => {
       const date = new Date(run.timestamp);
