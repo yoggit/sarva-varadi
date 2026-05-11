@@ -131,6 +131,37 @@ jobs:
             echo "ℹ️  No existing history to merge (first deployment)"
           fi
 
+      - name: Regenerate reports with merged history
+        if: always()
+        run: |
+          echo "🔄 Regenerating HTML reports with complete history..."
+
+          # Regenerate Playwright report if it exists
+          if [ -d "demo-playwright/sarva-report/history" ]; then
+            echo "  📊 Regenerating Playwright report..."
+            node packages/core/dist/cli.js generate \
+              --input demo-playwright/sarva-report/history \
+              --output demo-playwright/sarva-report
+          fi
+
+          # Regenerate Selenium report if it exists
+          if [ -d "demo-selenium/sarva-report/history" ]; then
+            echo "  📊 Regenerating Selenium report..."
+            node packages/core/dist/cli.js generate \
+              --input demo-selenium/sarva-report/history \
+              --output demo-selenium/sarva-report
+          fi
+
+          # Regenerate RestAssured report if it exists
+          if [ -d "demo-restassured/sarva-report/history" ]; then
+            echo "  📊 Regenerating RestAssured report..."
+            node packages/core/dist/cli.js generate \
+              --input demo-restassured/sarva-report/history \
+              --output demo-restassured/sarva-report
+          fi
+
+          echo "✅ Reports regenerated with complete history"
+
       - name: Create deployment structure
         if: always()
         run: |
