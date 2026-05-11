@@ -1,73 +1,305 @@
-{
-  "summary": {
-    "passed": 8,
-    "failed": 0,
-    "skipped": 2,
-    "total": 10,
-    "duration": 9650,
-    "startTime": "2026-05-11T15:32:23.000Z",
-    "endTime": "2026-05-11T15:32:32.650Z"
+[
+  {
+    "testName": "com.example.restassured.tests.ApiTests.GET /users - List all users",
+    "methodName": "GET /users - List all users",
+    "status": "PASS",
+    "startTime": 1778513543000,
+    "endTime": 1778513544200,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "GET /users - List all users",
+        "startTime": 1778513543100,
+        "endTime": 1778513544060,
+        "duration": 960,
+        "status": "passed",
+        "request": {
+          "method": "GET",
+          "uri": "/users",
+          "headers": "Content-Type: application/json\nAccept: application/json"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "960ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"success\":true,\"data\":{\"id\":123}}"
+        }
+      }
+    ]
   },
-  "tests": [
-    {
-      "name": "GET /users - List all users",
-      "status": "passed",
-      "duration": 1200,
-      "className": "com.example.restassured.tests.ApiTests"
-    },
-    {
-      "name": "GET /users/{id} - Get user by ID",
-      "status": "passed",
-      "duration": 800,
-      "className": "com.example.restassured.tests.ApiTests"
-    },
-    {
-      "name": "POST /users - Create new user",
-      "status": "passed",
-      "duration": 1500,
-      "className": "com.example.restassured.tests.ApiTests"
-    },
-    {
-      "name": "PUT /users/{id} - Update user",
-      "status": "passed",
-      "duration": 1800,
-      "className": "com.example.restassured.tests.ApiTests"
-    },
-    {
-      "name": "DELETE /users/{id} - Delete user",
-      "status": "skipped",
-      "duration": 0,
-      "className": "com.example.restassured.tests.ApiTests"
-    },
-    {
-      "name": "GET /posts - List all posts",
-      "status": "passed",
-      "duration": 1100,
-      "className": "com.example.restassured.tests.ApiTests"
-    },
-    {
-      "name": "POST /posts - Create new post",
-      "status": "passed",
-      "duration": 1400,
-      "className": "com.example.restassured.tests.ApiTests"
-    },
-    {
-      "name": "GET /posts/{id}/comments - Get post comments",
-      "status": "passed",
-      "duration": 900,
-      "className": "com.example.restassured.tests.ApiTests"
-    },
-    {
-      "name": "GET /users/{id}/posts - Get user posts",
-      "status": "skipped",
-      "duration": 0,
-      "className": "com.example.restassured.tests.ApiTests"
-    },
-    {
-      "name": "PATCH /users/{id} - Partial update",
-      "status": "passed",
-      "duration": 950,
-      "className": "com.example.restassured.tests.ApiTests"
-    }
-  ]
-}
+  {
+    "testName": "com.example.restassured.tests.ApiTests.GET /users/{id} - Get user by ID",
+    "methodName": "GET /users/{id} - Get user by ID",
+    "status": "PASS",
+    "startTime": 1778513544200,
+    "endTime": 1778513545000,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "GET /users/{id} - Get user by ID",
+        "startTime": 1778513544300,
+        "endTime": 1778513544940,
+        "duration": 640,
+        "status": "passed",
+        "request": {
+          "method": "GET",
+          "uri": "/users/{id}",
+          "headers": "Content-Type: application/json\nAccept: application/json"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "640ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"success\":true,\"data\":{\"id\":123}}"
+        }
+      }
+    ]
+  },
+  {
+    "testName": "com.example.restassured.tests.ApiTests.POST /users - Create new user",
+    "methodName": "POST /users - Create new user",
+    "status": "PASS",
+    "startTime": 1778513545000,
+    "endTime": 1778513546500,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "POST /users - Create new user",
+        "startTime": 1778513545100,
+        "endTime": 1778513546300,
+        "duration": 1200,
+        "status": "passed",
+        "request": {
+          "method": "POST",
+          "uri": "/users",
+          "headers": "Content-Type: application/json\nAccept: application/json",
+          "body": "{\"name\":\"test\",\"email\":\"test@example.com\"}"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "1200ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"success\":true,\"data\":{\"id\":123}}"
+        }
+      }
+    ]
+  },
+  {
+    "testName": "com.example.restassured.tests.ApiTests.PUT /users/{id} - Update user",
+    "methodName": "PUT /users/{id} - Update user",
+    "status": "PASS",
+    "startTime": 1778513546500,
+    "endTime": 1778513548300,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "PUT /users/{id} - Update user",
+        "startTime": 1778513546600,
+        "endTime": 1778513548040,
+        "duration": 1440,
+        "status": "passed",
+        "request": {
+          "method": "PUT",
+          "uri": "/users/{id}",
+          "headers": "Content-Type: application/json\nAccept: application/json",
+          "body": "{\"name\":\"test\",\"email\":\"test@example.com\"}"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "1440ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"success\":true,\"data\":{\"id\":123}}"
+        }
+      }
+    ]
+  },
+  {
+    "testName": "com.example.restassured.tests.ApiTests.DELETE /users/{id} - Delete user",
+    "methodName": "DELETE /users/{id} - Delete user",
+    "status": "SKIP",
+    "startTime": 1778513548300,
+    "endTime": 1778513548300,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "DELETE /users/{id} - Delete user",
+        "startTime": 1778513548400,
+        "endTime": 1778513548400,
+        "duration": 0,
+        "status": "passed",
+        "request": {
+          "method": "DELETE",
+          "uri": "/users/{id}",
+          "headers": "Content-Type: application/json\nAccept: application/json"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "0ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"success\":true,\"data\":{\"id\":123}}"
+        }
+      }
+    ]
+  },
+  {
+    "testName": "com.example.restassured.tests.ApiTests.GET /posts - List all posts",
+    "methodName": "GET /posts - List all posts",
+    "status": "PASS",
+    "startTime": 1778513548300,
+    "endTime": 1778513549400,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "GET /posts - List all posts",
+        "startTime": 1778513548400,
+        "endTime": 1778513549280,
+        "duration": 880,
+        "status": "passed",
+        "request": {
+          "method": "GET",
+          "uri": "/posts",
+          "headers": "Content-Type: application/json\nAccept: application/json"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "880ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"success\":true,\"data\":{\"id\":123}}"
+        }
+      }
+    ]
+  },
+  {
+    "testName": "com.example.restassured.tests.ApiTests.POST /posts - Create new post",
+    "methodName": "POST /posts - Create new post",
+    "status": "PASS",
+    "startTime": 1778513549400,
+    "endTime": 1778513550800,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "POST /posts - Create new post",
+        "startTime": 1778513549500,
+        "endTime": 1778513550620,
+        "duration": 1120,
+        "status": "passed",
+        "request": {
+          "method": "POST",
+          "uri": "/posts",
+          "headers": "Content-Type: application/json\nAccept: application/json",
+          "body": "{\"name\":\"test\",\"email\":\"test@example.com\"}"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "1120ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"success\":true,\"data\":{\"id\":123}}"
+        }
+      }
+    ]
+  },
+  {
+    "testName": "com.example.restassured.tests.ApiTests.GET /posts/{id}/comments - Get post comments",
+    "methodName": "GET /posts/{id}/comments - Get post comments",
+    "status": "PASS",
+    "startTime": 1778513550800,
+    "endTime": 1778513551700,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "GET /posts/{id}/comments - Get post comments",
+        "startTime": 1778513550900,
+        "endTime": 1778513551620,
+        "duration": 720,
+        "status": "passed",
+        "request": {
+          "method": "GET",
+          "uri": "/posts/{id}/comments",
+          "headers": "Content-Type: application/json\nAccept: application/json"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "720ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"success\":true,\"data\":{\"id\":123}}"
+        }
+      }
+    ]
+  },
+  {
+    "testName": "com.example.restassured.tests.ApiTests.GET /users/{id}/posts - Get user posts",
+    "methodName": "GET /users/{id}/posts - Get user posts",
+    "status": "SKIP",
+    "startTime": 1778513551700,
+    "endTime": 1778513551700,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "GET /users/{id}/posts - Get user posts",
+        "startTime": 1778513551800,
+        "endTime": 1778513551800,
+        "duration": 0,
+        "status": "passed",
+        "request": {
+          "method": "GET",
+          "uri": "/users/{id}/posts",
+          "headers": "Content-Type: application/json\nAccept: application/json"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "0ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"success\":true,\"data\":{\"id\":123}}"
+        }
+      }
+    ]
+  },
+  {
+    "testName": "com.example.restassured.tests.ApiTests.PATCH /users/{id} - Partial update",
+    "methodName": "PATCH /users/{id} - Partial update",
+    "status": "PASS",
+    "startTime": 1778513551700,
+    "endTime": 1778513552650,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "PATCH /users/{id} - Partial update",
+        "startTime": 1778513551800,
+        "endTime": 1778513552560,
+        "duration": 760,
+        "status": "passed",
+        "request": {
+          "method": "PATCH",
+          "uri": "/users/{id}",
+          "headers": "Content-Type: application/json\nAccept: application/json"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "760ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"success\":true,\"data\":{\"id\":123}}"
+        }
+      }
+    ]
+  }
+]

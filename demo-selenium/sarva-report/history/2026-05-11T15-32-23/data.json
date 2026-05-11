@@ -1,184 +1,306 @@
-{
-  "summary": {
-    "passed": 8,
-    "failed": 0,
-    "skipped": 1,
-    "total": 10,
-    "duration": 37700,
-    "startTime": "2026-05-11T15:32:23.000Z",
-    "endTime": "2026-05-11T15:33:00.700Z"
+[
+  {
+    "testName": "com.example.selenium.tests.DemoTests.Login Test",
+    "methodName": "Login Test",
+    "status": "PASS",
+    "startTime": 1778513543000,
+    "endTime": 1778513548000,
+    "retryCount": 0,
+    "browser": {
+      "name": "chrome",
+      "version": "120.0",
+      "platform": "Windows 10"
+    },
+    "parameters": [],
+    "actions": [
+      {
+        "type": "navigate",
+        "description": "Navigate to login page",
+        "timestamp": 1778513543000,
+        "status": "passed",
+        "screenshot": "screenshots/login-test-step-1.png"
+      },
+      {
+        "type": "sendKeys",
+        "description": "Enter credentials",
+        "timestamp": 1778513544000,
+        "status": "passed",
+        "screenshot": "screenshots/login-test-step-2.png"
+      },
+      {
+        "type": "click",
+        "description": "Click login button",
+        "timestamp": 1778513544500,
+        "status": "passed",
+        "screenshot": "screenshots/login-test-step-3.png"
+      }
+    ],
+    "screenshots": [
+      "screenshots/login-test-step-1.png",
+      "screenshots/login-test-step-2.png",
+      "screenshots/login-test-step-3.png",
+      "screenshots/login-test-end-passed.png"
+    ]
   },
-  "tests": [
-    {
-      "name": "Login Test",
-      "status": "passed",
-      "duration": 5000,
-      "className": "com.example.selenium.tests.DemoTests",
-      "steps": [
-        {
-          "name": "Navigate to login page",
-          "status": "passed",
-          "duration": 1000
-        },
-        {
-          "name": "Enter credentials",
-          "status": "passed",
-          "duration": 500
-        },
-        {
-          "name": "Click login button",
-          "status": "passed",
-          "duration": 500
-        }
-      ],
-      "screenshots": [
-        "screenshots/login-test-end-passed.png"
-      ]
+  {
+    "testName": "com.example.selenium.tests.DemoTests.Search Functionality Test",
+    "methodName": "Search Functionality Test",
+    "status": "PASS",
+    "startTime": 1778513548000,
+    "endTime": 1778513552000,
+    "retryCount": 0,
+    "browser": {
+      "name": "chrome",
+      "version": "120.0",
+      "platform": "Windows 10"
     },
-    {
-      "name": "Search Functionality Test",
-      "status": "passed",
-      "duration": 4000,
-      "className": "com.example.selenium.tests.DemoTests",
-      "steps": [
-        {
-          "name": "Open search page",
-          "status": "passed",
-          "duration": 800
-        },
-        {
-          "name": "Enter search term",
-          "status": "passed",
-          "duration": 600
-        },
-        {
-          "name": "Verify results",
-          "status": "failed",
-          "duration": 700
-        }
-      ],
-      "screenshots": [
-        "screenshots/search-functionality-test-end-passed.png"
-      ]
+    "parameters": [],
+    "actions": [
+      {
+        "type": "action",
+        "description": "Open search page",
+        "timestamp": 1778513548000,
+        "status": "passed",
+        "screenshot": "screenshots/search-functionality-test-step-1.png"
+      },
+      {
+        "type": "sendKeys",
+        "description": "Enter search term",
+        "timestamp": 1778513548800,
+        "status": "passed",
+        "screenshot": "screenshots/search-functionality-test-step-2.png"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify results",
+        "timestamp": 1778513549400,
+        "status": "passed",
+        "screenshot": "screenshots/search-functionality-test-step-3.png"
+      }
+    ],
+    "screenshots": [
+      "screenshots/search-functionality-test-step-1.png",
+      "screenshots/search-functionality-test-step-2.png",
+      "screenshots/search-functionality-test-step-3.png",
+      "screenshots/search-functionality-test-end-passed.png"
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.DemoTests.Add to Cart Test",
+    "methodName": "Add to Cart Test",
+    "status": "PASS",
+    "startTime": 1778513552000,
+    "endTime": 1778513555500,
+    "retryCount": 0,
+    "browser": {
+      "name": "chrome",
+      "version": "120.0",
+      "platform": "Windows 10"
     },
-    {
-      "name": "Add to Cart Test",
-      "status": "passed",
-      "duration": 3500,
-      "className": "com.example.selenium.tests.DemoTests",
-      "steps": [
-        {
-          "name": "Select product",
-          "status": "passed",
-          "duration": 1000
-        },
-        {
-          "name": "Click add to cart",
-          "status": "passed",
-          "duration": 500
-        }
-      ],
-      "screenshots": [
-        "screenshots/add-to-cart-test-end-passed.png"
-      ]
+    "parameters": [],
+    "actions": [
+      {
+        "type": "action",
+        "description": "Select product",
+        "timestamp": 1778513552000,
+        "status": "passed",
+        "screenshot": "screenshots/add-to-cart-test-step-1.png"
+      },
+      {
+        "type": "click",
+        "description": "Click add to cart",
+        "timestamp": 1778513553000,
+        "status": "passed",
+        "screenshot": "screenshots/add-to-cart-test-step-2.png"
+      }
+    ],
+    "screenshots": [
+      "screenshots/add-to-cart-test-step-1.png",
+      "screenshots/add-to-cart-test-step-2.png",
+      "screenshots/add-to-cart-test-end-passed.png"
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.DemoTests.Checkout Process Test",
+    "methodName": "Checkout Process Test",
+    "status": "FLAKY",
+    "startTime": 1778513555500,
+    "endTime": 1778513561500,
+    "retryCount": 1,
+    "flakyReason": "Test passed after retry",
+    "browser": {
+      "name": "chrome",
+      "version": "120.0",
+      "platform": "Windows 10"
     },
-    {
-      "name": "Checkout Process Test",
-      "status": "flaky",
-      "duration": 6000,
-      "className": "com.example.selenium.tests.DemoTests",
-      "steps": [
-        {
-          "name": "Go to cart",
-          "status": "passed",
-          "duration": 1200
-        },
-        {
-          "name": "Enter shipping details",
-          "status": "passed",
-          "duration": 1500
-        },
-        {
-          "name": "Complete payment",
-          "status": "passed",
-          "duration": 1800
-        }
-      ]
+    "parameters": [],
+    "actions": [
+      {
+        "type": "action",
+        "description": "Go to cart",
+        "timestamp": 1778513555500,
+        "status": "passed",
+        "screenshot": "screenshots/checkout-process-test-step-1.png"
+      },
+      {
+        "type": "sendKeys",
+        "description": "Enter shipping details",
+        "timestamp": 1778513556700,
+        "status": "passed",
+        "screenshot": "screenshots/checkout-process-test-step-2.png"
+      },
+      {
+        "type": "action",
+        "description": "Complete payment",
+        "timestamp": 1778513558200,
+        "status": "passed",
+        "screenshot": "screenshots/checkout-process-test-step-3.png"
+      }
+    ],
+    "screenshots": [
+      "screenshots/checkout-process-test-step-1.png",
+      "screenshots/checkout-process-test-step-2.png",
+      "screenshots/checkout-process-test-step-3.png"
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.DemoTests.User Profile Test",
+    "methodName": "User Profile Test",
+    "status": "PASS",
+    "startTime": 1778513561500,
+    "endTime": 1778513566000,
+    "retryCount": 0,
+    "browser": {
+      "name": "chrome",
+      "version": "120.0",
+      "platform": "Windows 10"
     },
-    {
-      "name": "User Profile Test",
-      "status": "passed",
-      "duration": 4500,
-      "className": "com.example.selenium.tests.DemoTests",
-      "steps": [
-        {
-          "name": "Navigate to profile",
-          "status": "passed",
-          "duration": 1000
-        },
-        {
-          "name": "Update profile info",
-          "status": "passed",
-          "duration": 2000
-        }
-      ],
-      "screenshots": [
-        "screenshots/user-profile-test-end-passed.png"
-      ]
+    "parameters": [],
+    "actions": [
+      {
+        "type": "navigate",
+        "description": "Navigate to profile",
+        "timestamp": 1778513561500,
+        "status": "passed",
+        "screenshot": "screenshots/user-profile-test-step-1.png"
+      },
+      {
+        "type": "action",
+        "description": "Update profile info",
+        "timestamp": 1778513562500,
+        "status": "passed",
+        "screenshot": "screenshots/user-profile-test-step-2.png"
+      }
+    ],
+    "screenshots": [
+      "screenshots/user-profile-test-step-1.png",
+      "screenshots/user-profile-test-step-2.png",
+      "screenshots/user-profile-test-end-passed.png"
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.DemoTests.Navigation Menu Test",
+    "methodName": "Navigation Menu Test",
+    "status": "PASS",
+    "startTime": 1778513566000,
+    "endTime": 1778513569000,
+    "retryCount": 0,
+    "browser": {
+      "name": "chrome",
+      "version": "120.0",
+      "platform": "Windows 10"
     },
-    {
-      "name": "Navigation Menu Test",
-      "status": "passed",
-      "duration": 3000,
-      "className": "com.example.selenium.tests.DemoTests",
-      "screenshots": [
-        "screenshots/navigation-menu-test-end-passed.png"
-      ]
+    "parameters": [],
+    "actions": [],
+    "screenshots": [
+      "screenshots/navigation-menu-test-end-passed.png"
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.DemoTests.Filter Products Test",
+    "methodName": "Filter Products Test",
+    "status": "PASS",
+    "startTime": 1778513569000,
+    "endTime": 1778513573000,
+    "retryCount": 0,
+    "browser": {
+      "name": "chrome",
+      "version": "120.0",
+      "platform": "Windows 10"
     },
-    {
-      "name": "Filter Products Test",
-      "status": "passed",
-      "duration": 4000,
-      "className": "com.example.selenium.tests.DemoTests",
-      "steps": [
-        {
-          "name": "Apply filters",
-          "status": "passed",
-          "duration": 1500
-        },
-        {
-          "name": "Verify filtered results",
-          "status": "failed",
-          "duration": 800
-        }
-      ],
-      "screenshots": [
-        "screenshots/filter-products-test-end-passed.png"
-      ]
+    "parameters": [],
+    "actions": [
+      {
+        "type": "action",
+        "description": "Apply filters",
+        "timestamp": 1778513569000,
+        "status": "passed",
+        "screenshot": "screenshots/filter-products-test-step-1.png"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify filtered results",
+        "timestamp": 1778513570500,
+        "status": "passed",
+        "screenshot": "screenshots/filter-products-test-step-2.png"
+      }
+    ],
+    "screenshots": [
+      "screenshots/filter-products-test-step-1.png",
+      "screenshots/filter-products-test-step-2.png",
+      "screenshots/filter-products-test-end-passed.png"
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.DemoTests.Sort Products Test",
+    "methodName": "Sort Products Test",
+    "status": "PASS",
+    "startTime": 1778513573000,
+    "endTime": 1778513576500,
+    "retryCount": 0,
+    "browser": {
+      "name": "chrome",
+      "version": "120.0",
+      "platform": "Windows 10"
     },
-    {
-      "name": "Sort Products Test",
-      "status": "passed",
-      "duration": 3500,
-      "className": "com.example.selenium.tests.DemoTests",
-      "screenshots": [
-        "screenshots/sort-products-test-end-passed.png"
-      ]
+    "parameters": [],
+    "actions": [],
+    "screenshots": [
+      "screenshots/sort-products-test-end-passed.png"
+    ]
+  },
+  {
+    "testName": "com.example.selenium.tests.DemoTests.Product Details Test",
+    "methodName": "Product Details Test",
+    "status": "SKIP",
+    "startTime": 1778513576500,
+    "endTime": 1778513576500,
+    "retryCount": 0,
+    "browser": {
+      "name": "chrome",
+      "version": "120.0",
+      "platform": "Windows 10"
     },
-    {
-      "name": "Product Details Test",
-      "status": "skipped",
-      "duration": 0,
-      "className": "com.example.selenium.tests.DemoTests"
+    "parameters": [],
+    "actions": [],
+    "screenshots": []
+  },
+  {
+    "testName": "com.example.selenium.tests.DemoTests.Wishlist Test",
+    "methodName": "Wishlist Test",
+    "status": "PASS",
+    "startTime": 1778513576500,
+    "endTime": 1778513580700,
+    "retryCount": 0,
+    "browser": {
+      "name": "chrome",
+      "version": "120.0",
+      "platform": "Windows 10"
     },
-    {
-      "name": "Wishlist Test",
-      "status": "passed",
-      "duration": 4200,
-      "className": "com.example.selenium.tests.DemoTests",
-      "screenshots": [
-        "screenshots/wishlist-test-end-passed.png"
-      ]
-    }
-  ]
-}
+    "parameters": [],
+    "actions": [],
+    "screenshots": [
+      "screenshots/wishlist-test-end-passed.png"
+    ]
+  }
+]
