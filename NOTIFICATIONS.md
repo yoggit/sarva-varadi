@@ -1,32 +1,47 @@
 # 📧 Notification Configuration Guide
 
-Sarva-Varadi can automatically send test results to Slack, Microsoft Teams, and Email after test execution.
+Get Slack, Teams, or Email notifications up and running in **5 minutes**!
 
-## Quick Start
+## ✅ What's Already Working
 
-### 1. Slack Notifications
+The notification system is **fully integrated** and ready to use:
+- ✅ Slack notifications with rich formatting
+- ✅ Microsoft Teams adaptive cards
+- ✅ Email with HTML templates
+- ✅ Automatic triggering after test runs
+- ✅ Supports all frameworks (Playwright, Selenium, RestAssured)
 
-**Step 1: Get Slack Webhook URL**
+---
+
+## 🚀 Quick Start (Pick One)
+
+<details open>
+<summary><b>Option 1: Slack (Fastest)</b></summary>
+
+### Step 1: Get Webhook URL
+
 1. Go to https://api.slack.com/apps
-2. Create a new app or select existing
-3. Enable "Incoming Webhooks"
-4. Add webhook to your workspace
-5. Copy the webhook URL
+2. Click "Create New App" → "From scratch"
+3. Name it "Sarva-Varadi"
+4. Select your workspace
+5. Click "Incoming Webhooks" → Toggle ON
+6. Click "Add New Webhook to Workspace"
+7. Select channel → Copy the webhook URL
 
-**Step 2: Configure in playwright.config.ts**
+### Step 2: Add to Your Config
 
 ```typescript
+// playwright.config.ts
 export default defineConfig({
   reporter: [
     ['@sarva-varadi/playwright', {
-      outputFolder: 'sarva-report',
       notifications: {
         enabled: true,
         slack: {
           enabled: true,
-          webhookUrl: process.env.SLACK_WEBHOOK_URL, // Store in .env file
+          webhookUrl: process.env.SLACK_WEBHOOK_URL,
           channel: '#test-results', // Optional: override default channel
-          mentionOnFailure: ['john.doe', 'jane.smith'], // Optional: mention users when tests fail
+          mentionOnFailure: ['john.doe', 'jane.smith'], // Optional: @mention on failures
         },
       },
     }]
@@ -34,27 +49,30 @@ export default defineConfig({
 });
 ```
 
-**Step 3: Set environment variable**
+### Step 3: Set Environment Variable
 
 ```bash
 # .env file
-SLACK_WEBHOOK_URL=https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXX
-
-# Or in CI/CD (GitHub Actions)
-# Add SLACK_WEBHOOK_URL to repository secrets
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
 ```
 
----
+**Done!** Run your tests and check Slack 🎉
 
-### 2. Microsoft Teams Notifications
+</details>
 
-**Step 1: Get Teams Webhook URL**
+<details>
+<summary><b>Option 2: Microsoft Teams</b></summary>
+
+### Step 1: Get Webhook URL
+
 1. Open Microsoft Teams
-2. Go to your channel
-3. Click "..." → "Connectors" → "Incoming Webhook"
-4. Configure and copy the webhook URL
+2. Go to your desired channel
+3. Click "..." → "Connectors"
+4. Search "Incoming Webhook" → Configure
+5. Name it "Sarva-Varadi" → Create
+6. Copy the webhook URL
 
-**Step 2: Configure**
+### Step 2: Add to Config
 
 ```typescript
 export default defineConfig({
@@ -72,18 +90,28 @@ export default defineConfig({
 });
 ```
 
----
+### Step 3: Set Environment Variable
 
-### 3. Email Notifications
+```bash
+# .env
+TEAMS_WEBHOOK_URL=https://outlook.office.com/webhook/YOUR-WEBHOOK-URL
+```
 
-**Step 1: Get SMTP credentials**
+**Done!** Run tests and check Teams 🎉
 
-For Gmail:
-1. Enable 2-factor authentication
-2. Generate app password: https://myaccount.google.com/apppasswords
-3. Use app password in configuration
+</details>
 
-**Step 2: Configure**
+<details>
+<summary><b>Option 3: Email (Gmail Example)</b></summary>
+
+### Step 1: Generate App Password
+
+1. Enable 2FA: https://myaccount.google.com/signinoptions/two-step-verification
+2. Generate App Password: https://myaccount.google.com/apppasswords
+3. Select "Mail" → "Other" → Name it "Sarva-Varadi"
+4. Copy the 16-character password
+
+### Step 2: Add to Config
 
 ```typescript
 export default defineConfig({
@@ -99,12 +127,12 @@ export default defineConfig({
             secure: false,
             auth: {
               user: process.env.EMAIL_USER,
-              pass: process.env.EMAIL_PASS, // App password for Gmail
+              pass: process.env.EMAIL_PASS, // App password
             },
           },
           from: 'noreply@yourcompany.com',
-          to: ['team@yourcompany.com', 'qa@yourcompany.com'],
-          subject: 'Test Results - ${passRate}% Pass Rate', // Optional custom subject
+          to: ['qa@yourcompany.com', 'dev@yourcompany.com'],
+          subject: 'Test Results - ${passRate}% Pass Rate', // Optional
         },
       },
     }]
@@ -112,53 +140,26 @@ export default defineConfig({
 });
 ```
 
-**Alternative SMTP providers:**
+### Step 3: Set Environment Variables
 
-```typescript
-// SendGrid
-smtp: {
-  host: 'smtp.sendgrid.net',
-  port: 587,
-  auth: {
-    user: 'apikey',
-    pass: process.env.SENDGRID_API_KEY,
-  },
-}
-
-// Outlook
-smtp: {
-  host: 'smtp-mail.outlook.com',
-  port: 587,
-  auth: {
-    user: process.env.OUTLOOK_EMAIL,
-    pass: process.env.OUTLOOK_PASSWORD,
-  },
-}
-
-// AWS SES
-smtp: {
-  host: 'email-smtp.us-east-1.amazonaws.com',
-  port: 587,
-  auth: {
-    user: process.env.AWS_SES_USER,
-    pass: process.env.AWS_SES_PASS,
-  },
-}
+```bash
+# .env
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-app-password-here
 ```
+
+**Done!** Run tests and check your inbox 🎉
+
+</details>
 
 ---
 
-## 🔥 All-in-One Configuration
-
-Send to **all channels** simultaneously:
+## 🔥 Enable All Three at Once
 
 ```typescript
 export default defineConfig({
   reporter: [
     ['@sarva-varadi/playwright', {
-      outputFolder: 'sarva-report',
-      title: 'My Test Report',
-      
       notifications: {
         enabled: true,
         
@@ -166,7 +167,6 @@ export default defineConfig({
           enabled: true,
           webhookUrl: process.env.SLACK_WEBHOOK_URL,
           channel: '#test-results',
-          mentionOnFailure: ['john.doe'],
         },
         
         teams: {
@@ -185,7 +185,7 @@ export default defineConfig({
             },
           },
           from: 'tests@company.com',
-          to: ['qa@company.com', 'dev@company.com'],
+          to: ['qa@company.com'],
         },
       },
     }]
@@ -195,88 +195,63 @@ export default defineConfig({
 
 ---
 
-## 📊 What Gets Sent?
+## 📊 What You'll Receive
 
-### Summary Card includes:
-- ✅ Total tests, pass rate, duration
-- 📈 Pass/Fail/Flaky/Skipped counts
-- ⚠️ Top 5 failed tests (with names)
-- 🔗 Link to full HTML report (if hosted)
-
-### Example Slack Message:
-
+### Slack Message Example:
 ```
 📊 Test Results
-━━━━━━━━━━━━━━━━━━━━━
-Total: 100          Pass Rate: 95%
-Passed: ✅ 95       Failed: ❌ 4
-Duration: 2m 15s    Skipped: ⏭️ 1
-━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━
+Total: 50           Pass Rate: 90%
+Passed: ✅ 45       Failed: ❌ 3
+Duration: 2m 5s     Skipped: ⏭️ 1
+Flaky: ⚠️ 1
+━━━━━━━━━━━━━━━━━━
 
 Failed Tests:
-• Login flow - timeout
+• Login flow - timeout after 30s
 • Checkout process - assertion failed
-• API integration - network error
+• API integration test - network error
 
-[View Full Report →]
+[📊 View Full Report] (button)
 ```
+
+### Teams Card:
+- Rich adaptive card with stats
+- Color-coded pass rate (green/yellow/red)
+- Failed test list
+- Direct link to report
+
+### Email:
+- Professional HTML template
+- Grid layout with stats
+- Failed tests section
+- "View Full Report" button
 
 ---
 
-## 🔒 Security Best Practices
+## 🎯 Advanced Configuration
 
-### 1. **Never commit credentials**
+### Conditional Notifications
 
-```bash
-# .gitignore
-.env
-.env.local
-```
-
-### 2. **Use environment variables**
-
-```bash
-# .env (local development)
-SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...
-TEAMS_WEBHOOK_URL=https://outlook.office.com/webhook/...
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASS=your-app-password
-```
-
-### 3. **CI/CD secrets (GitHub Actions)**
-
-```yaml
-# .github/workflows/test.yml
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run tests
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-        run: npx playwright test
-```
-
----
-
-## 🎯 Conditional Notifications
-
-Send notifications **only on failures**:
-
+**Only notify on failures:**
 ```typescript
-const shouldNotify = process.env.CI === 'true'; // Only in CI
+const hasFailures = process.env.FAILURES === 'true';
 
 notifications: {
-  enabled: shouldNotify,
+  enabled: hasFailures,
   slack: { ... },
 }
 ```
 
-Send to **different channels** based on environment:
+**Only in CI:**
+```typescript
+notifications: {
+  enabled: process.env.CI === 'true',
+  slack: { ... },
+}
+```
 
+**Different channels per environment:**
 ```typescript
 const channel = process.env.NODE_ENV === 'production' 
   ? '#prod-alerts' 
@@ -291,45 +266,79 @@ slack: {
 
 ---
 
-## 🧪 Testing Notifications
+## 📖 Other SMTP Providers
 
-Test your setup without running full test suite:
+<details>
+<summary><b>SendGrid</b></summary>
 
 ```typescript
-// test-notification.ts
-import { NotificationManager } from '@sarva-varadi/core';
-
-const manager = new NotificationManager({
-  enabled: true,
-  slack: {
-    enabled: true,
-    webhookUrl: process.env.SLACK_WEBHOOK_URL!,
+smtp: {
+  host: 'smtp.sendgrid.net',
+  port: 587,
+  auth: {
+    user: 'apikey',
+    pass: process.env.SENDGRID_API_KEY,
   },
-});
-
-await manager.notify({
-  summary: {
-    id: 'test-123',
-    timestamp: Date.now(),
-    duration: 5000,
-    total: 10,
-    passed: 8,
-    failed: 2,
-    skipped: 0,
-    flaky: 0,
-    passRate: 80,
-  },
-  failedTests: [
-    { name: 'Test notification', error: 'This is a test' }
-  ],
-});
-
-console.log('Notification sent!');
+}
 ```
 
-Run:
+</details>
+
+<details>
+<summary><b>Outlook/Office 365</b></summary>
+
+```typescript
+smtp: {
+  host: 'smtp-mail.outlook.com',
+  port: 587,
+  auth: {
+    user: process.env.OUTLOOK_EMAIL,
+    pass: process.env.OUTLOOK_PASSWORD,
+  },
+}
+```
+
+</details>
+
+<details>
+<summary><b>AWS SES</b></summary>
+
+```typescript
+smtp: {
+  host: 'email-smtp.us-east-1.amazonaws.com',
+  port: 587,
+  auth: {
+    user: process.env.AWS_SES_USER,
+    pass: process.env.AWS_SES_PASS,
+  },
+}
+```
+
+</details>
+
+---
+
+## 🔒 Security Best Practices
+
+### Never Commit Credentials
+
 ```bash
-npx ts-node test-notification.ts
+# .gitignore
+.env
+.env.local
+```
+
+### Use CI/CD Secrets
+
+```yaml
+# GitHub Actions
+- name: Run tests
+  env:
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+    EMAIL_USER: ${{ secrets.EMAIL_USER }}
+    EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+  run: npx playwright test
 ```
 
 ---
@@ -337,58 +346,62 @@ npx ts-node test-notification.ts
 ## 🛠️ Troubleshooting
 
 ### Slack: "url_verification failed"
-- ✅ Make sure webhook URL starts with `https://hooks.slack.com/services/`
-- ✅ Check webhook is still active in Slack app settings
+- ✅ Webhook URL must start with `https://hooks.slack.com/services/`
+- ✅ Check webhook is active in Slack app settings
 
-### Teams: "Message not appearing"
-- ✅ Verify connector is added to the correct channel
-- ✅ Check webhook URL is correct (starts with `https://outlook.office.com/webhook/`)
+### Teams: Message not appearing
+- ✅ Verify connector added to correct channel
+- ✅ URL should start with `https://outlook.office.com/webhook/`
 
-### Email: "Authentication failed"
-- ✅ For Gmail: use App Password, not regular password
-- ✅ Enable "Less secure app access" if using regular SMTP
-- ✅ Check SMTP host and port are correct
+### Email: Authentication failed
+- ✅ Gmail: Use App Password, NOT regular password
+- ✅ Enable 2FA first, then generate app password
+- ✅ Check SMTP host/port are correct
 
-### General: "Notifications not sending"
-- ✅ Ensure `notifications.enabled: true`
-- ✅ Check environment variables are loaded
-- ✅ Look for errors in console output
-- ✅ Verify network/firewall allows outbound connections
+### Not receiving any notifications?
+- ✅ Check `notifications.enabled: true`
+- ✅ Verify environment variables loaded (`console.log(process.env.SLACK_WEBHOOK_URL)`)
+- ✅ Look for errors in terminal output
+- ✅ Check notification config is inside reporter config
 
 ---
 
-## 📖 Advanced Examples
+## ✨ Framework-Specific Setup
 
-### Send report URL (if hosting on S3/GitHub Pages)
+### Selenium/RestAssured Projects
 
-```typescript
-// After uploading report to S3
-const reportUrl = 'https://your-bucket.s3.amazonaws.com/reports/latest/index.html';
+Notifications work the same way! Just configure in your test runner:
 
-// In custom script
-await notificationManager.notify({
-  summary: runSummary,
-  reportUrl,
-  trendsUrl: reportUrl.replace('index.html', 'trends.html'),
-  failedTests,
+```javascript
+// After generating report with CLI
+const { NotificationService } = require('@sarva-varadi/core');
+
+const notifier = new NotificationService({
+  slack: {
+    enabled: true,
+    webhookUrl: process.env.SLACK_WEBHOOK_URL,
+  },
+});
+
+// Send notification after test run
+await notifier.sendAll({
+  total: 50,
+  passed: 45,
+  failed: 3,
+  skipped: 1,
+  flaky: 1,
+  passRate: 90,
+  duration: 125000, // ms
+  failedTests: ['Login Test', 'Checkout Test'],
 });
 ```
 
-### Custom notification wrapper
+---
 
-```typescript
-// notify.ts
-export async function notifyTeam(passRate: number, reportUrl: string) {
-  const emoji = passRate >= 95 ? '🎉' : passRate >= 80 ? '⚠️' : '🚨';
-  
-  await fetch(process.env.SLACK_WEBHOOK_URL!, {
-    method: 'POST',
-    body: JSON.stringify({
-      text: `${emoji} Tests completed with ${passRate}% pass rate\n${reportUrl}`
-    }),
-  });
-}
-```
+## 📞 Support
+
+- 🐛 [Report Issues](https://github.com/yoggit/sarva-varadi/issues)
+- 💬 [Discussions](https://github.com/yoggit/sarva-varadi/discussions)
 
 ---
 

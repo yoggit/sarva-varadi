@@ -5,7 +5,7 @@
 <h1 align="center">Sarva-Varadi - <sub><sup>Unified Insights...Universal Reports</sup></sub></h1>
 
 <p align="center">
-  <strong>Comprehensive test reporting framework with historical trend analysis, intelligent flaky test detection, and interactive dashboards for Playwright and RestAssured.</strong>
+  <strong>Comprehensive test reporting framework with historical trend analysis, intelligent flaky test detection, and interactive dashboards for multiple test automation tools.</strong>
 </p>
 
 <p align="center">
@@ -24,34 +24,63 @@
 
 <p align="center">
   <a href="#-quick-start">Quick Start</a> •
-  <a href="https://github.com/yoggit/sarva-varadi/actions">Try Demo</a> •
-  <a href="#-two-views">Features</a> •
-  <a href="QUICKSTART.md">Documentation</a> •
-  <a href="CONVERTER.md">CLI Converter</a>
+  <a href="https://yoggit.github.io/sarva-varadi">🎬 Live Demo</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-visual-preview">Screenshots</a> •
+  <a href="QUICKSTART.md">Full Docs</a>
 </p>
+
+<p align="center">
+  <strong>🎭 <a href="https://yoggit.github.io/sarva-varadi/playwright/trends.html">Playwright Demo</a></strong> • 
+  <strong>🌐 <a href="https://yoggit.github.io/sarva-varadi/selenium/trends.html">Selenium Demo</a></strong> • 
+  <strong>🔌 <a href="https://yoggit.github.io/sarva-varadi/rest-assured/trends.html">RestAssured Demo</a></strong>
+</p>
+
+---
 
 ## 🎯 Supported Frameworks
 
-- ✅ **Playwright** - Web automation with TypeScript/JavaScript
-- ✅ **RestAssured** - API testing with Java/TestNG
-- ✅ **Selenium** - WebDriver-based browser automation with TestNG
-- 🚧 **Cypress** - Modern web testing (Coming soon)
+<table>
+<tr>
+<td width="25%" align="center"><strong>🎭 Playwright</strong><br/>Web automation<br/>TypeScript/JavaScript</td>
+<td width="25%" align="center"><strong>🔌 RestAssured</strong><br/>API testing<br/>Java/TestNG</td>
+<td width="25%" align="center"><strong>🌐 Selenium</strong><br/>WebDriver browser tests<br/>Java/TestNG</td>
+<td width="25%" align="center"><strong>🚧 Cypress</strong><br/>Modern web testing<br/><em>(Coming soon)</em></td>
+</tr>
+</table>
+
+---
 
 ## ✨ Features
 
-- 🎨 **Beautiful UI** - Modern dark/light theme with responsive design
-- 📊 **Historical Trends** - Track test stability and pass rates over time with interactive charts
-- 🔥 **Intelligent Flaky Test Detection** - Automatically identifies tests that passed after retry across entire history
-- 🎯 **Top Offenders** - Highlights historically flaky tests with scores and last flaky occurrence date
-- 📅 **Activity Stream** - Filterable test run history (Last 20/50/100/All runs) with scrollable view
-- 📈 **Interactive Dashboards** - Pass rate trends, distribution charts with zoom controls
-- 📎 **Rich Attachments** - Screenshots, videos, traces with inline viewing
-- 🔍 **Smart Filtering** - Search and filter by status, test name, or browser
-- ⚡ **Zero Config** - Works out of the box with sensible defaults
-- 📁 **File-Based** - No database or server required
-- 🔄 **Framework Agnostic** - Consistent experience across all tools
-- 📧 **Notifications** - Send results to Slack, Teams, or Email automatically
-- 🎪 **Multi-Browser Support** - Automatically groups and displays results by browser
+<table>
+<tr>
+<td width="50%">
+
+**📊 Reporting & Analytics**
+- 🎨 Beautiful dark/light theme UI
+- 📈 Interactive trend charts with zoom
+- 🔥 Intelligent flaky test detection
+- 🎯 Top offenders leaderboard
+- 📅 Activity stream with filters
+- 📎 Rich attachments (screenshots/videos/traces)
+
+</td>
+<td width="50%">
+
+**⚡ Developer Experience**
+- ⚡ Zero config - works out of the box
+- 📁 File-based - no database needed
+- 🔄 Framework agnostic
+- 🎪 Multi-browser support
+- 🔍 Smart search & filtering
+- 📧 Slack/Teams/Email notifications
+
+</td>
+</tr>
+</table>
+
+---
 
 ## 📸 Visual Preview
 
@@ -115,6 +144,8 @@
 <p><i>Filterable test run history (Last 20/50/100/All) with scrollable view showing date, pass rate, results, and duration</i></p>
 </details>
 
+---
+
 ## 🏗️ Architecture
 
 Sarva-Varadi uses a **two-phase execution model** inspired by Allure:
@@ -133,6 +164,8 @@ After execution, the core generator creates beautiful HTML reports from the coll
 │  RestAssured    │──┘
 └─────────────────┘
 ```
+
+---
 
 ## 📦 Installation
 
@@ -155,6 +188,8 @@ npm install --save-dev @sarva-varadi/core @sarva-varadi/rest-assured
 ```bash
 npm install --save-dev @sarva-varadi/core @sarva-varadi/selenium
 ```
+
+---
 
 ## 🚀 Quick Start
 
@@ -509,6 +544,8 @@ npx sarva-varadi convert \
 
 </details>
 
+---
+
 ## 🔄 Universal Converter
 
 <details>
@@ -672,6 +709,8 @@ Start using Sarva-Varadi with existing reports, then migrate to native adapters 
 
 </details>
 
+---
+
 ## 📊 Two Views
 
 ### View 1: Latest Run (`index.html`)
@@ -692,6 +731,8 @@ Start using Sarva-Varadi with existing reports, then migrate to native adapters 
 - Date range filters and zoom controls on charts
 
 Navigation between views via header buttons.
+
+---
 
 ## ⚙️ Configuration Options
 
@@ -766,6 +807,8 @@ sarva-report/
 
 </details>
 
+---
+
 ## 🎯 Historical Trends & Flaky Test Detection
 
 <details>
@@ -804,6 +847,8 @@ Old test runs are automatically cleaned up based on **dual criteria**:
 2. **retentionDays**: Removes runs older than N days (default: 180)
 
 </details>
+
+---
 
 ## 📧 Notifications
 
@@ -903,6 +948,8 @@ Failed Tests:
 
 </details>
 
+---
+
 ## 🔄 Comparison with Other Tools
 
 | Feature | Allure | ReportPortal | Sarva-Varadi |
@@ -916,6 +963,8 @@ Failed Tests:
 | Notifications | ❌ No | ✅ Yes | ✅ Slack/Teams/Email |
 | CI/CD friendly | ✅ Yes | ⚠️ Complex | ✅ Yes |
 | Setup time | 15 min | 1+ hour | < 2 min |
+
+---
 
 ## 🏛️ Monorepo Structure
 
@@ -935,6 +984,8 @@ packages/
     ├── adapter.ts    # RestAssured adapter
     └── testng/       # TestNG listener & retry analyzer
 ```
+
+---
 
 ## 🛠️ Development
 
@@ -983,6 +1034,8 @@ Contributions are welcome! Especially for adding new framework adapters.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 </details>
+
+---
 
 ## 📜 License
 

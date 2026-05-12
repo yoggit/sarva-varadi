@@ -36,7 +36,16 @@ Thank you for your interest in contributing to Sarva-Varadi! 🎉
 
 ## Adding a New Framework Adapter
 
-Want to add support for Cypress, RestAssured, or another framework? Here's how:
+Want to add support for Cypress or another framework? Here's how:
+
+**Currently Supported:**
+- ✅ Playwright (TypeScript/JavaScript)
+- ✅ Selenium (Java/TestNG)
+- ✅ RestAssured (Java/TestNG)
+
+**To Be Added:**
+- 🚧 Cypress (community contributions welcome!)
+- 💡 Mocha, Jest, JUnit, etc.
 
 ### 1. Create Package Structure
 
@@ -111,7 +120,7 @@ Create `demo-<framework>/` with:
 
 4. **Commit with clear messages**
    ```bash
-   git commit -m "feat: add support for Cypress framework"
+   git commit -m "feat: add support for Mocha framework"
    ```
 
 5. **Push and create PR**
@@ -130,7 +139,7 @@ Use conventional commits:
 - `chore:` Maintenance tasks
 
 Examples:
-- `feat: add Cypress adapter`
+- `feat: add Mocha adapter`
 - `fix: flaky test detection for retried tests`
 - `docs: update README with new features`
 

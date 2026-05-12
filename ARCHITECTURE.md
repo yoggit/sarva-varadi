@@ -2,7 +2,7 @@
 
 ## Overview
 
-Sarva-Varadi is a universal test reporter that supports multiple testing frameworks (Playwright, Selenium, Cypress, RestAssured) with a unified, beautiful UI and historical trend analysis.
+Sarva-Varadi is a universal test reporter that supports multiple testing frameworks (Playwright, Selenium, RestAssured, and more coming) with a unified, beautiful UI and historical trend analysis.
 
 ## Design Principles
 
@@ -20,9 +20,9 @@ Sarva-Varadi is a universal test reporter that supports multiple testing framewo
 Each framework adapter listens to test execution events and converts them to the common `SarvaTestResult` format:
 
 ```
-Playwright Test → Playwright Adapter → SarvaTestResult JSON
-Selenium Test   → Selenium Adapter   → SarvaTestResult JSON
-Cypress Test    → Cypress Adapter    → SarvaTestResult JSON
+Playwright Test  → Playwright Adapter  → SarvaTestResult JSON
+Selenium Test    → Selenium Adapter    → SarvaTestResult JSON
+RestAssured Test → RestAssured Adapter → SarvaTestResult JSON
 ```
 
 **Output**: `sarva-varadi-results/*.json` (one file per test or suite)
@@ -139,21 +139,28 @@ abstract class BaseAdapter {
 - Converts Playwright's `TestResult` → `SarvaTestResult`
 - Handles trace files, videos, screenshots
 
-#### Selenium Adapter
-- Implements TestNG `ITestListener` or JUnit `TestWatcher`
-- Captures WebDriver logs, browser info
-- Converts TestNG/JUnit results → `SarvaTestResult`
-- Handles screenshots, driver logs
+#### Selenium Adapter (✅ Implemented)
+- Implements TestNG `ITestListener`
+- Captures WebDriver actions via `WebDriverListener`
+- Browser information (Chrome, Firefox, Edge)
+- Screenshots on failure
+- Converts TestNG results → `SarvaTestResult`
+- Handles flaky test detection with retry analyzer
 
-#### Cypress Adapter (Future)
+#### RestAssured Adapter (✅ Implemented)
+- Hooks into RestAssured filters via `RestAssuredRequestCapture`
+- Captures full request/response data (method, URL, headers, body)
+- Hierarchical test steps with parent-child structure
+- Sensitive data masking (opt-in)
+- Converts TestNG listener data → `SarvaTestResult`
+- Works with any TestNG-based API tests
+
+#### Cypress Adapter (🚧 Future)
 - Uses Cypress reporter API
 - Handles time-travel debugging data
 - Converts Cypress results → `SarvaTestResult`
-
-#### RestAssured Adapter (Future)
-- Hooks into RestAssured filters
-- Captures request/response data
-- Converts API test results → `SarvaTestResult`
+- Screenshots and videos
+- DOM snapshots
 
 ## History Management
 
@@ -230,12 +237,13 @@ Cleanup runs automatically after each test execution.
 sarva-varadi/
 ├── packages/
 │   ├── core/                      # @sarva-varadi/core
-│   ├── playwright/                # @sarva-varadi/playwright
-│   ├── selenium/                  # @sarva-varadi/selenium
-│   ├── cypress/                   # @sarva-varadi/cypress (future)
-│   └── rest-assured/              # @sarva-varadi/rest-assured (future)
+│   ├── playwright/                # @sarva-varadi/playwright ✅
+│   ├── selenium/                  # @sarva-varadi/selenium ✅
+│   ├── rest-assured/              # @sarva-varadi/rest-assured ✅
+│   └── cypress/                   # @sarva-varadi/cypress 🚧 (future)
 ├── demo-playwright/
 ├── demo-selenium/
+├── demo-restassured/
 └── docs/
 ```
 
@@ -269,19 +277,23 @@ The HTML report detects the test tool from `test.tool` field and shows/hides rel
 - Retry count badges
 - Browser name/version
 
-**Selenium-specific**:
-- Driver logs expandable section
-- Browser + platform info
+**Selenium-specific** (✅ Implemented):
+- WebDriver action logs (clicks, navigation, form inputs)
+- Browser + platform info (Chrome, Firefox, Edge)
+- Screenshots on failure
 - Selenium version
 
-**Cypress-specific** (future):
+**RestAssured-specific** (✅ Implemented):
+- Request/response JSON viewers
+- HTTP method + endpoint (GET, POST, PUT, etc.)
+- Status code badges
+- Request/response headers
+- Hierarchical test steps
+
+**Cypress-specific** (🚧 Future):
 - Time-travel debugging links
 - Spec file references
-
-**RestAssured-specific** (future):
-- Request/response JSON viewers
-- HTTP method + endpoint
-- Status code badges
+- DOM snapshots
 
 ## Configuration
 
