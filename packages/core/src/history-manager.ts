@@ -293,10 +293,18 @@ export class HistoryManager {
 
       try {
         const tests: SarvaTestResult[] = JSON.parse(fs.readFileSync(dataFile, 'utf-8'));
-        if (tests.length === 0) return;
+        if (tests.length === 0) {
+          console.log(`⚠️  Skipping ${runId} - empty test array`);
+          return;
+        }
 
         // Get unique final tests for this run
         const uniqueTests = this.getUniqueFinalTests(tests);
+
+        if (uniqueTests.length === 0) {
+          console.log(`⚠️  Skipping ${runId} - no unique tests after filtering`);
+          return;
+        }
 
         // Calculate run summary
         const runSummary: RunSummary = {
