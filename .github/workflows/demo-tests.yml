@@ -126,6 +126,12 @@ jobs:
             done
 
             rm -rf gh-pages-old
+
+            # Delete runs.json files to force rebuild from merged folders
+            rm -f demo-playwright/sarva-report/runs.json 2>/dev/null || true
+            rm -f demo-selenium/sarva-report/runs.json 2>/dev/null || true
+            rm -f demo-restassured/sarva-report/runs.json 2>/dev/null || true
+
             echo "✅ History merge complete"
           else
             echo "ℹ️  No existing history to merge (first deployment)"
