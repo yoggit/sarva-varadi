@@ -16,6 +16,20 @@ function regenerateTrends(reportDir, title) {
     return;
   }
 
+  // Debug: Check what folders exist and which have valid data
+  const folders = fs.readdirSync(historyDir).filter(f => {
+    const stat = fs.statSync(path.join(historyDir, f));
+    return stat.isDirectory();
+  });
+  console.log(`  📁 Found ${folders.length} history folders in filesystem`);
+
+  const validFolders = folders.filter(f => {
+    const dataFile = path.join(historyDir, f, 'data.json');
+    return fs.existsSync(dataFile);
+  });
+  console.log(`  ✓ ${validFolders.length} folders have valid data.json`);
+  console.log(`  📂 Sample folders: ${folders.slice(0, 5).join(', ')}`);
+
   // Load existing history
   const historyManager = new HistoryManager(reportDir, { enabled: true, maxRuns: 20 });
   const history = historyManager.loadHistory();
