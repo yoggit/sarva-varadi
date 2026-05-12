@@ -622,9 +622,6 @@
         visibility: hidden;
         opacity: 0;
         position: absolute;
-        right: 0;
-        top: 100%;
-        margin-top: 0.5rem;
         background-color: var(--color-surface);
         color: var(--color-text);
         padding: 0.75rem 1rem;
@@ -640,6 +637,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
+        /* Position is dynamically set by JavaScript */
     }
 
     .info-tooltip:hover .tooltip-text {
@@ -1050,7 +1048,7 @@
                         </label>
                     </div>
                     <div class="subtitle">
-                        Last Run on <span id="timestamp" data-time="2026-05-12T02:24:55.113Z"></span>
+                        Last Run on <span id="timestamp" data-time="2026-05-12T02:59:16.196Z"></span>
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 1rem;">
@@ -1058,7 +1056,7 @@
                         FAILED
                     </div>
                     <div class="duration">
-                        ⏱️ 23.62s
+                        ⏱️ 15.96s
                     </div>
                 </div>
             </div>
@@ -1092,7 +1090,7 @@
                         </svg>
                     </div>
                     <div class="card-content">
-                        <div class="card-value">9</div>
+                        <div class="card-value">10</div>
                         <div class="card-label">Passed</div>
                     </div>
                 </div>
@@ -1120,7 +1118,7 @@
                         </svg>
                     </div>
                     <div class="card-content">
-                        <div class="card-value">1</div>
+                        <div class="card-value">0</div>
                         <div class="card-label">Flaky</div>
                     </div>
                 </div>
@@ -1145,7 +1143,7 @@
                         </svg>
                     </div>
                     <div class="card-content">
-                        <div class="card-value">64.3%
+                        <div class="card-value">71.4%
                             <span class="info-tooltip" style="position: relative; display: inline-flex; cursor: help; margin-left: 0.25rem; vertical-align: super; font-size: 0.5em;">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2">
                                     <circle cx="12" cy="12" r="10"></circle>
@@ -1161,7 +1159,7 @@
             </div>
 
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 64.3%"></div>
+                <div class="progress-fill" style="width: 71.4%"></div>
             </div>
         </div>
 
@@ -1189,7 +1187,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
                     <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
                 </svg>
-                Retried Tests (3)
+                Retried Tests (2)
                 <span class="info-tooltip" style="position: relative; display: inline-flex; cursor: help; margin-left: 0.25rem; vertical-align: super; font-size: 0.7em;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2">
                         <circle cx="12" cy="12" r="10"></circle>
@@ -1206,19 +1204,13 @@
             <div id="retries-content" style="padding: 1rem; display: none;">
                 
         <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--color-border);">
+          <span style="font-weight: 500;">should be flaky - chromium</span>
+          <span style="margin-left: 1rem; color: var(--color-text-secondary);">
+            🔄 1 retry
+          </span>
+        </div>
+        <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--color-border);">
           <span style="font-weight: 500;">should load homepage successfully - firefox</span>
-          <span style="margin-left: 1rem; color: var(--color-text-secondary);">
-            🔄 1 retry
-          </span>
-        </div>
-        <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--color-border);">
-          <span style="font-weight: 500;">should navigate to Getting Started - firefox</span>
-          <span style="margin-left: 1rem; color: var(--color-text-secondary);">
-            🔄 1 retry
-          </span>
-        </div>
-        <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--color-border);">
-          <span style="font-weight: 500;">should be flaky - firefox</span>
           <span style="margin-left: 1rem; color: var(--color-text-secondary);">
             🔄 1 retry
           </span>
@@ -1230,30 +1222,30 @@
     <section class="tests-section">
         <div class="tests-list">
             
-    <div class="test-item test-group" data-status="failed" data-all-statuses="passed failed flaky" data-testid="group-1778552697637-7rg3mhs3l">
-        <div class="test-header" onclick="toggleTest('group-1778552697637-7rg3mhs3l')">
+    <div class="test-item test-group" data-status="failed" data-all-statuses="passed failed failed" data-testid="group-1778554758619-dgkndf5ip">
+        <div class="test-header" onclick="toggleTest('group-1778554758619-dgkndf5ip')">
             <div class="test-header-left">
                 <span class="status-icon status-failed">✗</span>
                 <div class="test-info">
                     <div class="test-title">should load homepage successfully<span class="tool-badge" style="background: #2EAD33; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">playwright</span></div>
                     <div class="test-meta">
                         <span class="test-location">📁 chromium &gt; example.spec.ts &gt; Playwright Website Tests &gt; should load homepage successfully</span>
-                        <span style="margin-left: 1rem;"><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">chromium</span><span class="browser-badge" style="background: var(--color-failed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span><span class="browser-badge" style="background: var(--color-flaky); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span></span>
+                        <span style="margin-left: 1rem;"><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">chromium</span><span class="browser-badge" style="background: var(--color-failed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span><span class="browser-badge" style="background: var(--color-failed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span></span>
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 6.52s</span>
+                <span class="test-duration">⏱️ 5.45s</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-group-1778552697637-7rg3mhs3l">
+        <div class="test-details" id="details-group-1778554758619-dgkndf5ip">
             <div class="test-details-content">
                 <div class="browser-results">
                     
-    <div class="browser-test-item" data-testid="1778552697637-7rg3mhs3l" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552697637-7rg3mhs3l')">
+    <div class="browser-test-item" data-testid="1778554758619-dgkndf5ip" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554758619-dgkndf5ip')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
@@ -1265,10 +1257,10 @@
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552697637-7rg3mhs3l">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554758619-dgkndf5ip">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552697637-7rg3mhs3l" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554758619-dgkndf5ip" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1278,19 +1270,19 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">451ms</span>
+                <span class="step-duration">669ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">354ms</span>
+                <span class="step-duration">426ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Launch browser</span>
-                <span class="step-duration">348ms</span>
+                <span class="step-duration">420ms</span>
             </div>
         </div>
         </div>
@@ -1298,13 +1290,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">25ms</span>
+                <span class="step-duration">14ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create context</span>
-                <span class="step-duration">13ms</span>
+                <span class="step-duration">7ms</span>
             </div>
         </div>
         </div>
@@ -1312,13 +1304,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">48ms</span>
+                <span class="step-duration">214ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">46ms</span>
+                <span class="step-duration">212ms</span>
             </div>
         </div>
         </div>
@@ -1327,13 +1319,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to Playwright homepage</span>
-                <span class="step-duration">565ms</span>
+                <span class="step-duration">593ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">561ms</span>
+                <span class="step-duration">588ms</span>
             </div>
         </div>
         </div>
@@ -1341,13 +1333,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Verify page title</span>
-                <span class="step-duration">80ms</span>
+                <span class="step-duration">96ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Expect &quot;toHaveTitle&quot;</span>
-                <span class="step-duration">76ms</span>
+                <span class="step-duration">89ms</span>
             </div>
         </div>
         </div>
@@ -1355,13 +1347,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Check main heading is visible</span>
-                <span class="step-duration">36ms</span>
+                <span class="step-duration">63ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Expect &quot;toBeVisible&quot; locator(&#039;h1&#039;).first()</span>
-                <span class="step-duration">30ms</span>
+                <span class="step-duration">56ms</span>
             </div>
         </div>
         </div>
@@ -1376,26 +1368,26 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">654ms</span>
+                <span class="step-duration">426ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">0ms</span>
+                <span class="step-duration">1ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">395ms</span>
+                <span class="step-duration">234ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">201ms</span>
+                <span class="step-duration">80ms</span>
             </div>
         </div>
         </div>
@@ -1430,23 +1422,23 @@
         </div></div>
         </div>
     </div>
-    <div class="browser-test-item" data-testid="1778552705130-l5iwsymd3" style="margin-bottom: 1rem; border-left: 3px solid var(--color-failed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552705130-l5iwsymd3')">
+    <div class="browser-test-item" data-testid="1778554764143-m9g7ag6fl" style="margin-bottom: 1rem; border-left: 3px solid var(--color-failed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554764143-m9g7ag6fl')">
             <div class="test-header-left">
                 <span class="status-icon status-failed">✗</span>
                 <div class="test-info">
                     <div class="test-title" style="font-weight: 500;">firefox</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 2.89s</span>
+                        <span class="test-duration">⏱️ 1.76s</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552705130-l5iwsymd3">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554764143-m9g7ag6fl">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552705130-l5iwsymd3" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554764143-m9g7ag6fl" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1456,19 +1448,19 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">1.37s</span>
+                <span class="step-duration">1.21s</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">486ms</span>
+                <span class="step-duration">540ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Launch browser</span>
-                <span class="step-duration">479ms</span>
+                <span class="step-duration">537ms</span>
             </div>
         </div>
         </div>
@@ -1476,13 +1468,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">107ms</span>
+                <span class="step-duration">112ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create context</span>
-                <span class="step-duration">83ms</span>
+                <span class="step-duration">73ms</span>
             </div>
         </div>
         </div>
@@ -1490,13 +1482,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">755ms</span>
+                <span class="step-duration">535ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">752ms</span>
+                <span class="step-duration">532ms</span>
             </div>
         </div>
         </div>
@@ -1505,13 +1497,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to Playwright homepage</span>
-                <span class="step-duration">890ms</span>
+                <span class="step-duration">563ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">885ms</span>
+                <span class="step-duration">559ms</span>
             </div>
         </div>
         </div>
@@ -1519,13 +1511,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Verify page title</span>
-                <span class="step-duration">221ms</span>
+                <span class="step-duration">99ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Expect &quot;toHaveTitle&quot;</span>
-                <span class="step-duration">213ms</span>
+                <span class="step-duration">96ms</span>
             </div>
         </div>
         </div>
@@ -1533,13 +1525,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Check main heading is visible</span>
-                <span class="step-duration">116ms</span>
+                <span class="step-duration">58ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Expect &quot;toBeVisible&quot; locator(&#039;h1&#039;).first()</span>
-                <span class="step-duration">85ms</span>
+                <span class="step-duration">52ms</span>
             </div>
         </div>
         </div>
@@ -1547,33 +1539,33 @@
             <div class="step-header">
                 <span class="step-status status-failed">✗</span>
                 <span class="step-title">Variable check</span>
-                <span class="step-duration">0ms</span>
+                <span class="step-duration">1ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">829ms</span>
+                <span class="step-duration">399ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">0ms</span>
+                <span class="step-duration">2ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">595ms</span>
+                <span class="step-duration">277ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">179ms</span>
+                <span class="step-duration">89ms</span>
             </div>
         </div>
         </div>
@@ -1582,13 +1574,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Worker Cleanup</span>
-                <span class="step-duration">739ms</span>
+                <span class="step-duration">590ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">733ms</span>
+                <span class="step-duration">587ms</span>
             </div>
         </div>
         </div>
@@ -1634,23 +1626,23 @@
         </div></div>
         </div>
     </div>
-    <div class="browser-test-item" data-testid="1778552708879-1n0izgwv1" style="margin-bottom: 1rem; border-left: 3px solid var(--color-flaky); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552708879-1n0izgwv1')">
+    <div class="browser-test-item" data-testid="1778554769049-q9zcbe3bz" style="margin-bottom: 1rem; border-left: 3px solid var(--color-failed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554769049-q9zcbe3bz')">
             <div class="test-header-left">
-                <span class="status-icon status-flaky">~</span>
+                <span class="status-icon status-failed">✗</span>
                 <div class="test-info">
                     <div class="test-title" style="font-weight: 500;">firefox</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 2.22s</span>
+                        <span class="test-duration">⏱️ 2.29s</span>
                         <span class="test-retries" style="margin-left: 1rem;">🔄 1 retry</span>
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552708879-1n0izgwv1">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554769049-q9zcbe3bz">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552708879-1n0izgwv1" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554769049-q9zcbe3bz" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1660,19 +1652,19 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">1.31s</span>
+                <span class="step-duration">1.18s</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">519ms</span>
+                <span class="step-duration">420ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Launch browser</span>
-                <span class="step-duration">516ms</span>
+                <span class="step-duration">414ms</span>
             </div>
         </div>
         </div>
@@ -1680,13 +1672,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">107ms</span>
+                <span class="step-duration">97ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create context</span>
-                <span class="step-duration">87ms</span>
+                <span class="step-duration">78ms</span>
             </div>
         </div>
         </div>
@@ -1694,13 +1686,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">667ms</span>
+                <span class="step-duration">634ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">665ms</span>
+                <span class="step-duration">631ms</span>
             </div>
         </div>
         </div>
@@ -1709,13 +1701,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to Playwright homepage</span>
-                <span class="step-duration">754ms</span>
+                <span class="step-duration">699ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">750ms</span>
+                <span class="step-duration">696ms</span>
             </div>
         </div>
         </div>
@@ -1723,13 +1715,13 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Verify page title</span>
-                <span class="step-duration">175ms</span>
+                <span class="step-duration">148ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Expect &quot;toHaveTitle&quot;</span>
-                <span class="step-duration">169ms</span>
+                <span class="step-duration">142ms</span>
             </div>
         </div>
         </div>
@@ -1737,28 +1729,28 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Check main heading is visible</span>
-                <span class="step-duration">63ms</span>
+                <span class="step-duration">45ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Expect &quot;toBeVisible&quot; locator(&#039;h1&#039;).first()</span>
-                <span class="step-duration">54ms</span>
+                <span class="step-duration">40ms</span>
             </div>
         </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
-                <span class="step-status status-passed">✓</span>
+                <span class="step-status status-failed">✗</span>
                 <span class="step-title">Variable check</span>
-                <span class="step-duration">1ms</span>
+                <span class="step-duration">0ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">473ms</span>
+                <span class="step-duration">787ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -1771,25 +1763,51 @@
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">362ms</span>
+                <span class="step-duration">467ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">113ms</span>
+                <span class="step-duration">63ms</span>
             </div>
         </div>
         </div>
         </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Worker Cleanup</span>
+                <span class="step-duration">1.19s</span>
             </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;browser&quot;</span>
+                <span class="step-duration">1.19s</span>
+            </div>
+        </div>
+        </div>
+            </div>
+        </div>
+        <div class="details-section error-section">
+            <h3 class="section-title">❌ Error</h3>
+            <div class="error-message">Error: Demo failure for trend variation</div>
+            
+                <details class="stack-trace">
+                    <summary>Stack Trace</summary>
+                    <pre>Error: Demo failure for trend variation
+    at /home/runner/work/sarva-varadi/sarva-varadi/demo-playwright/tests/example.spec.ts:40:15
+    at /home/runner/work/sarva-varadi/sarva-varadi/demo-playwright/tests/example.spec.ts:38:5</pre>
+                </details>
+            
         </div>
         <div class="details-section attachments-section">
             <h3 class="section-title">📎 Attachments</h3>
             <div class="attachments-grid">
                 <div class="attachment-item">
-            <a href="attachments/test-finished-1.png" target="_blank" title="Click to open in new tab">
-                <img src="attachments/test-finished-1.png" alt="screenshot" class="attachment-image">
+            <a href="attachments/test-failed-1.png" target="_blank" title="Click to open in new tab">
+                <img src="attachments/test-failed-1.png" alt="screenshot" class="attachment-image">
             </a>
             <div class="attachment-name">screenshot</div>
         </div><div class="attachment-item">
@@ -1816,719 +1834,45 @@
             </div>
         </div>
     </div>
-    <div class="test-item test-group" data-status="failed" data-all-statuses="passed failed failed" data-testid="group-1778552698154-p2vsq3ym0">
-        <div class="test-header" onclick="toggleTest('group-1778552698154-p2vsq3ym0')">
+    <div class="test-item test-group" data-status="passed" data-all-statuses="passed passed" data-testid="group-1778554758892-xwamiq0mq">
+        <div class="test-header" onclick="toggleTest('group-1778554758892-xwamiq0mq')">
             <div class="test-header-left">
-                <span class="status-icon status-failed">✗</span>
+                <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
                     <div class="test-title">should navigate to Getting Started<span class="tool-badge" style="background: #2EAD33; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">playwright</span></div>
                     <div class="test-meta">
                         <span class="test-location">📁 chromium &gt; example.spec.ts &gt; Playwright Website Tests &gt; should navigate to Getting Started</span>
-                        <span style="margin-left: 1rem;"><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">chromium</span><span class="browser-badge" style="background: var(--color-failed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span><span class="browser-badge" style="background: var(--color-failed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span></span>
-                    </div>
-                </div>
-            </div>
-            <div class="test-header-right">
-                <span class="test-duration">⏱️ 9.57s</span>
-                <span class="expand-icon">▼</span>
-            </div>
-        </div>
-
-        <div class="test-details" id="details-group-1778552698154-p2vsq3ym0">
-            <div class="test-details-content">
-                <div class="browser-results">
-                    
-    <div class="browser-test-item" data-testid="1778552698154-p2vsq3ym0" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552698154-p2vsq3ym0')">
-            <div class="test-header-left">
-                <span class="status-icon status-passed">✓</span>
-                <div class="test-info">
-                    <div class="test-title" style="font-weight: 500;">chromium</div>
-                    <div class="test-meta">
-                        <span class="test-duration">⏱️ 1.71s</span>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552698154-p2vsq3ym0">▼</span>
-            </div>
-        </div>
-        <div class="browser-test-details" id="browser-details-1778552698154-p2vsq3ym0" style="display: none; margin-top: 1rem;">
-            <div class="test-details-content">
-        <div class="details-section steps-section">
-            <h3 class="section-title">📋 Test Steps</h3>
-            <div class="steps-list">
-                
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Before Hooks</span>
-                <span class="step-duration">447ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">354ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Launch browser</span>
-                <span class="step-duration">345ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">19ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Create context</span>
-                <span class="step-duration">9ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">50ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Create page</span>
-                <span class="step-duration">47ms</span>
-            </div>
-        </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Go to homepage</span>
-                <span class="step-duration">558ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">554ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Click on Get Started button</span>
-                <span class="step-duration">242ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Click getByRole(&#039;link&#039;, { name: &#039;Get started&#039; }).first()</span>
-                <span class="step-duration">235ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Verify we are on docs page</span>
-                <span class="step-duration">311ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Expect &quot;toHaveURL&quot;</span>
-                <span class="step-duration">306ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Check installation section exists</span>
-                <span class="step-duration">1ms</span>
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">After Hooks</span>
-                <span class="step-duration">534ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">1ms</span>
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">364ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Close context</span>
-                <span class="step-duration">122ms</span>
-            </div>
-        </div>
-        </div>
-        </div>
-            </div>
-        </div>
-        <div class="details-section attachments-section">
-            <h3 class="section-title">📎 Attachments</h3>
-            <div class="attachments-grid">
-                <div class="attachment-item">
-            <a href="attachments/test-finished-1.png" target="_blank" title="Click to open in new tab">
-                <img src="attachments/test-finished-1.png" alt="screenshot" class="attachment-image">
-            </a>
-            <div class="attachment-name">screenshot</div>
-        </div><div class="attachment-item">
-            <video src="attachments/video.webm" controls class="attachment-video"></video>
-            <div class="attachment-name">video</div>
-        </div><div class="attachment-item">
-            <a href="https://trace.playwright.dev/?trace=attachments/trace.zip" target="_blank" class="attachment-link">
-                🔍 View Trace
-            </a>
-            <div class="attachment-name">trace</div>
-        </div>
-            </div>
-        </div>
-        <div class="details-section tool-specific-section">
-            <h3 class="section-title">🎭 Playwright Details</h3>
-            <div class="tool-info">
-                <div><strong>Browser:</strong> chromium</div>
-                <div><strong>Project:</strong> chromium</div>
-            </div>
-        </div></div>
-        </div>
-    </div>
-    <div class="browser-test-item" data-testid="1778552706207-08zawzhuf" style="margin-bottom: 1rem; border-left: 3px solid var(--color-failed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552706207-08zawzhuf')">
-            <div class="test-header-left">
-                <span class="status-icon status-failed">✗</span>
-                <div class="test-info">
-                    <div class="test-title" style="font-weight: 500;">firefox</div>
-                    <div class="test-meta">
-                        <span class="test-duration">⏱️ 3.59s</span>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552706207-08zawzhuf">▼</span>
-            </div>
-        </div>
-        <div class="browser-test-details" id="browser-details-1778552706207-08zawzhuf" style="display: none; margin-top: 1rem;">
-            <div class="test-details-content">
-        <div class="details-section steps-section">
-            <h3 class="section-title">📋 Test Steps</h3>
-            <div class="steps-list">
-                
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Before Hooks</span>
-                <span class="step-duration">1.56s</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">607ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Launch browser</span>
-                <span class="step-duration">603ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">120ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Create context</span>
-                <span class="step-duration">95ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">815ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Create page</span>
-                <span class="step-duration">811ms</span>
-            </div>
-        </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Go to homepage</span>
-                <span class="step-duration">1.04s</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">1.04s</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Click on Get Started button</span>
-                <span class="step-duration">420ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Click getByRole(&#039;link&#039;, { name: &#039;Get started&#039; }).first()</span>
-                <span class="step-duration">412ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Verify we are on docs page</span>
-                <span class="step-duration">298ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Expect &quot;toHaveURL&quot;</span>
-                <span class="step-duration">289ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-failed">✗</span>
-                <span class="step-title">Check installation section exists</span>
-                <span class="step-duration">204ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-failed">✗</span>
-                <span class="step-title">Expect &quot;toBeVisible&quot; locator(&#039;text=Installation&#039;)</span>
-                <span class="step-duration">201ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">After Hooks</span>
-                <span class="step-duration">695ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">1ms</span>
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">580ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Close context</span>
-                <span class="step-duration">116ms</span>
-            </div>
-        </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Worker Cleanup</span>
-                <span class="step-duration">634ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">630ms</span>
-            </div>
-        </div>
-        </div>
-            </div>
-        </div>
-        <div class="details-section error-section">
-            <h3 class="section-title">❌ Error</h3>
-            <div class="error-message">Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
-
-Locator: locator(&#039;text=Installation&#039;)
-Expected: visible
-Error: strict mode violation: locator(&#039;text=Installation&#039;) resolved to 3 elements:
-    1) &lt;a tabindex=&quot;0&quot; href=&quot;/docs/intro&quot; aria-current=&quot;page&quot; class=&quot;menu__link menu__link--active&quot;&gt;Installation&lt;/a&gt; aka getByRole(&#039;link&#039;, { name: &#039;Installation&#039; })
-    2) &lt;span class=&quot;breadcrumbs__link&quot;&gt;Installation&lt;/span&gt; aka getByLabel(&#039;Breadcrumbs&#039;).getByText(&#039;Installation&#039;)
-    ...
-
-Call log:
-[2m  - Expect &quot;toBeVisible&quot; with timeout 5000ms[22m
-[2m  - waiting for locator(&#039;text=Installation&#039;)[22m
-</div>
-            
-                <details class="stack-trace">
-                    <summary>Stack Trace</summary>
-                    <pre>Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
-
-Locator: locator(&#039;text=Installation&#039;)
-Expected: visible
-Error: strict mode violation: locator(&#039;text=Installation&#039;) resolved to 3 elements:
-    1) &lt;a tabindex=&quot;0&quot; href=&quot;/docs/intro&quot; aria-current=&quot;page&quot; class=&quot;menu__link menu__link--active&quot;&gt;Installation&lt;/a&gt; aka getByRole(&#039;link&#039;, { name: &#039;Installation&#039; })
-    2) &lt;span class=&quot;breadcrumbs__link&quot;&gt;Installation&lt;/span&gt; aka getByLabel(&#039;Breadcrumbs&#039;).getByText(&#039;Installation&#039;)
-    ...
-
-Call log:
-[2m  - Expect &quot;toBeVisible&quot; with timeout 5000ms[22m
-[2m  - waiting for locator(&#039;text=Installation&#039;)[22m
-
-    at /home/runner/work/sarva-varadi/sarva-varadi/demo-playwright/tests/example.spec.ts:61:57
-    at /home/runner/work/sarva-varadi/sarva-varadi/demo-playwright/tests/example.spec.ts:58:5</pre>
-                </details>
-            
-        </div>
-        <div class="details-section attachments-section">
-            <h3 class="section-title">📎 Attachments</h3>
-            <div class="attachments-grid">
-                <div class="attachment-item">
-            <a href="attachments/test-failed-1.png" target="_blank" title="Click to open in new tab">
-                <img src="attachments/test-failed-1.png" alt="screenshot" class="attachment-image">
-            </a>
-            <div class="attachment-name">screenshot</div>
-        </div><div class="attachment-item">
-            <video src="attachments/video.webm" controls class="attachment-video"></video>
-            <div class="attachment-name">video</div>
-        </div><div class="attachment-item">
-            <a href="https://trace.playwright.dev/?trace=attachments/trace.zip" target="_blank" class="attachment-link">
-                🔍 View Trace
-            </a>
-            <div class="attachment-name">trace</div>
-        </div>
-            </div>
-        </div>
-        <div class="details-section tool-specific-section">
-            <h3 class="section-title">🎭 Playwright Details</h3>
-            <div class="tool-info">
-                <div><strong>Browser:</strong> firefox</div>
-                <div><strong>Project:</strong> firefox</div>
-            </div>
-        </div></div>
-        </div>
-    </div>
-    <div class="browser-test-item" data-testid="1778552712997-4cyz9ie8d" style="margin-bottom: 1rem; border-left: 3px solid var(--color-failed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552712997-4cyz9ie8d')">
-            <div class="test-header-left">
-                <span class="status-icon status-failed">✗</span>
-                <div class="test-info">
-                    <div class="test-title" style="font-weight: 500;">firefox</div>
-                    <div class="test-meta">
-                        <span class="test-duration">⏱️ 4.28s</span>
-                        <span class="test-retries" style="margin-left: 1rem;">🔄 1 retry</span>
-                    </div>
-                </div>
-            </div>
-            <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552712997-4cyz9ie8d">▼</span>
-            </div>
-        </div>
-        <div class="browser-test-details" id="browser-details-1778552712997-4cyz9ie8d" style="display: none; margin-top: 1rem;">
-            <div class="test-details-content">
-        <div class="details-section steps-section">
-            <h3 class="section-title">📋 Test Steps</h3>
-            <div class="steps-list">
-                
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Before Hooks</span>
-                <span class="step-duration">1.59s</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">543ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Launch browser</span>
-                <span class="step-duration">534ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">125ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Create context</span>
-                <span class="step-duration">99ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">885ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Create page</span>
-                <span class="step-duration">882ms</span>
-            </div>
-        </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Go to homepage</span>
-                <span class="step-duration">842ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">834ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Click on Get Started button</span>
-                <span class="step-duration">517ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Click getByRole(&#039;link&#039;, { name: &#039;Get started&#039; }).first()</span>
-                <span class="step-duration">510ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Verify we are on docs page</span>
-                <span class="step-duration">375ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Expect &quot;toHaveURL&quot;</span>
-                <span class="step-duration">366ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-failed">✗</span>
-                <span class="step-title">Check installation section exists</span>
-                <span class="step-duration">346ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-failed">✗</span>
-                <span class="step-title">Expect &quot;toBeVisible&quot; locator(&#039;text=Installation&#039;)</span>
-                <span class="step-duration">342ms</span>
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">After Hooks</span>
-                <span class="step-duration">1.20s</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">0ms</span>
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">1.02s</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Close context</span>
-                <span class="step-duration">157ms</span>
-            </div>
-        </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Worker Cleanup</span>
-                <span class="step-duration">782ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">778ms</span>
-            </div>
-        </div>
-        </div>
-            </div>
-        </div>
-        <div class="details-section error-section">
-            <h3 class="section-title">❌ Error</h3>
-            <div class="error-message">Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
-
-Locator: locator(&#039;text=Installation&#039;)
-Expected: visible
-Error: strict mode violation: locator(&#039;text=Installation&#039;) resolved to 3 elements:
-    1) &lt;a tabindex=&quot;0&quot; href=&quot;/docs/intro&quot; aria-current=&quot;page&quot; class=&quot;menu__link menu__link--active&quot;&gt;Installation&lt;/a&gt; aka getByRole(&#039;link&#039;, { name: &#039;Installation&#039; })
-    2) &lt;span class=&quot;breadcrumbs__link&quot;&gt;Installation&lt;/span&gt; aka getByLabel(&#039;Breadcrumbs&#039;).getByText(&#039;Installation&#039;)
-    ...
-
-Call log:
-[2m  - Expect &quot;toBeVisible&quot; with timeout 5000ms[22m
-[2m  - waiting for locator(&#039;text=Installation&#039;)[22m
-</div>
-            
-                <details class="stack-trace">
-                    <summary>Stack Trace</summary>
-                    <pre>Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
-
-Locator: locator(&#039;text=Installation&#039;)
-Expected: visible
-Error: strict mode violation: locator(&#039;text=Installation&#039;) resolved to 3 elements:
-    1) &lt;a tabindex=&quot;0&quot; href=&quot;/docs/intro&quot; aria-current=&quot;page&quot; class=&quot;menu__link menu__link--active&quot;&gt;Installation&lt;/a&gt; aka getByRole(&#039;link&#039;, { name: &#039;Installation&#039; })
-    2) &lt;span class=&quot;breadcrumbs__link&quot;&gt;Installation&lt;/span&gt; aka getByLabel(&#039;Breadcrumbs&#039;).getByText(&#039;Installation&#039;)
-    ...
-
-Call log:
-[2m  - Expect &quot;toBeVisible&quot; with timeout 5000ms[22m
-[2m  - waiting for locator(&#039;text=Installation&#039;)[22m
-
-    at /home/runner/work/sarva-varadi/sarva-varadi/demo-playwright/tests/example.spec.ts:61:57
-    at /home/runner/work/sarva-varadi/sarva-varadi/demo-playwright/tests/example.spec.ts:58:5</pre>
-                </details>
-            
-        </div>
-        <div class="details-section attachments-section">
-            <h3 class="section-title">📎 Attachments</h3>
-            <div class="attachments-grid">
-                <div class="attachment-item">
-            <a href="attachments/test-failed-1.png" target="_blank" title="Click to open in new tab">
-                <img src="attachments/test-failed-1.png" alt="screenshot" class="attachment-image">
-            </a>
-            <div class="attachment-name">screenshot</div>
-        </div><div class="attachment-item">
-            <video src="attachments/video.webm" controls class="attachment-video"></video>
-            <div class="attachment-name">video</div>
-        </div><div class="attachment-item">
-            <a href="https://trace.playwright.dev/?trace=attachments/trace.zip" target="_blank" class="attachment-link">
-                🔍 View Trace
-            </a>
-            <div class="attachment-name">trace</div>
-        </div>
-            </div>
-        </div>
-        <div class="details-section tool-specific-section">
-            <h3 class="section-title">🎭 Playwright Details</h3>
-            <div class="tool-info">
-                <div><strong>Browser:</strong> firefox</div>
-                <div><strong>Project:</strong> firefox</div>
-            </div>
-        </div></div>
-        </div>
-    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="test-item test-group" data-status="passed" data-all-statuses="passed passed" data-testid="group-1778552698921-od8txbrgh">
-        <div class="test-header" onclick="toggleTest('group-1778552698921-od8txbrgh')">
-            <div class="test-header-left">
-                <span class="status-icon status-passed">✓</span>
-                <div class="test-info">
-                    <div class="test-title">should search documentation<span class="tool-badge" style="background: #2EAD33; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">playwright</span></div>
-                    <div class="test-meta">
-                        <span class="test-location">📁 chromium &gt; example.spec.ts &gt; Playwright Website Tests &gt; should search documentation</span>
                         <span style="margin-left: 1rem;"><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">chromium</span><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span></span>
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 3.02s</span>
+                <span class="test-duration">⏱️ 3.66s</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-group-1778552698921-od8txbrgh">
+        <div class="test-details" id="details-group-1778554758892-xwamiq0mq">
             <div class="test-details-content">
                 <div class="browser-results">
                     
-    <div class="browser-test-item" data-testid="1778552698921-od8txbrgh" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552698921-od8txbrgh')">
+    <div class="browser-test-item" data-testid="1778554758892-xwamiq0mq" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554758892-xwamiq0mq')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
                     <div class="test-title" style="font-weight: 500;">chromium</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 1.09s</span>
+                        <span class="test-duration">⏱️ 1.56s</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552698921-od8txbrgh">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554758892-xwamiq0mq">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552698921-od8txbrgh" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554758892-xwamiq0mq" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -2538,13 +1882,27 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">69ms</span>
+                <span class="step-duration">662ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;browser&quot;</span>
+                <span class="step-duration">424ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Launch browser</span>
+                <span class="step-duration">419ms</span>
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">8ms</span>
+                <span class="step-duration">11ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
@@ -2558,13 +1916,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">47ms</span>
+                <span class="step-duration">209ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">46ms</span>
+                <span class="step-duration">208ms</span>
             </div>
         </div>
         </div>
@@ -2572,69 +1930,76 @@ Call log:
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Navigate to docs</span>
-                <span class="step-duration">300ms</span>
+                <span class="step-title">Go to homepage</span>
+                <span class="step-duration">562ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Navigate to &quot;/docs/intro&quot;</span>
-                <span class="step-duration">298ms</span>
+                <span class="step-title">Navigate to &quot;/&quot;</span>
+                <span class="step-duration">560ms</span>
             </div>
         </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Open search</span>
-                <span class="step-duration">53ms</span>
+                <span class="step-title">Click on Get Started button</span>
+                <span class="step-duration">206ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Press &quot;Control+K&quot;</span>
-                <span class="step-duration">51ms</span>
+                <span class="step-title">Click getByRole(&#039;link&#039;, { name: &#039;Get started&#039; }).first()</span>
+                <span class="step-duration">201ms</span>
             </div>
         </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Search for &quot;locators&quot;</span>
-                <span class="step-duration">210ms</span>
+                <span class="step-title">Verify we are on docs page</span>
+                <span class="step-duration">190ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Wait for timeout</span>
-                <span class="step-duration">209ms</span>
+                <span class="step-title">Expect &quot;toHaveURL&quot;</span>
+                <span class="step-duration">186ms</span>
             </div>
         </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Check installation section exists</span>
+                <span class="step-duration">1ms</span>
+            </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">483ms</span>
+                <span class="step-duration">384ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">1ms</span>
+                <span class="step-duration">0ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">267ms</span>
+                <span class="step-duration">290ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">125ms</span>
+                <span class="step-duration">96ms</span>
             </div>
         </div>
         </div>
@@ -2669,23 +2034,23 @@ Call log:
         </div></div>
         </div>
     </div>
-    <div class="browser-test-item" data-testid="1778552711060-ux7q6isch" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552711060-ux7q6isch')">
+    <div class="browser-test-item" data-testid="1778554765746-nuc9jhhpr" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554765746-nuc9jhhpr')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
                     <div class="test-title" style="font-weight: 500;">firefox</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 1.93s</span>
+                        <span class="test-duration">⏱️ 2.10s</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552711060-ux7q6isch">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554765746-nuc9jhhpr">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552711060-ux7q6isch" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554765746-nuc9jhhpr" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -2695,19 +2060,33 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">299ms</span>
+                <span class="step-duration">980ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;browser&quot;</span>
+                <span class="step-duration">378ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Launch browser</span>
+                <span class="step-duration">375ms</span>
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">14ms</span>
+                <span class="step-duration">77ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create context</span>
-                <span class="step-duration">7ms</span>
+                <span class="step-duration">60ms</span>
             </div>
         </div>
         </div>
@@ -2715,13 +2094,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">274ms</span>
+                <span class="step-duration">511ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">273ms</span>
+                <span class="step-duration">508ms</span>
             </div>
         </div>
         </div>
@@ -2729,50 +2108,57 @@ Call log:
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Navigate to docs</span>
-                <span class="step-duration">622ms</span>
+                <span class="step-title">Go to homepage</span>
+                <span class="step-duration">599ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Navigate to &quot;/docs/intro&quot;</span>
-                <span class="step-duration">618ms</span>
+                <span class="step-title">Navigate to &quot;/&quot;</span>
+                <span class="step-duration">596ms</span>
             </div>
         </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Open search</span>
-                <span class="step-duration">107ms</span>
+                <span class="step-title">Click on Get Started button</span>
+                <span class="step-duration">317ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Press &quot;Control+K&quot;</span>
-                <span class="step-duration">102ms</span>
+                <span class="step-title">Click getByRole(&#039;link&#039;, { name: &#039;Get started&#039; }).first()</span>
+                <span class="step-duration">312ms</span>
             </div>
         </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Search for &quot;locators&quot;</span>
-                <span class="step-duration">252ms</span>
+                <span class="step-title">Verify we are on docs page</span>
+                <span class="step-duration">172ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Wait for timeout</span>
-                <span class="step-duration">239ms</span>
+                <span class="step-title">Expect &quot;toHaveURL&quot;</span>
+                <span class="step-duration">170ms</span>
             </div>
         </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Check installation section exists</span>
+                <span class="step-duration">0ms</span>
+            </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">671ms</span>
+                <span class="step-duration">422ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -2785,13 +2171,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">340ms</span>
+                <span class="step-duration">295ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">133ms</span>
+                <span class="step-duration">78ms</span>
             </div>
         </div>
         </div>
@@ -2830,45 +2216,45 @@ Call log:
             </div>
         </div>
     </div>
-    <div class="test-item test-group" data-status="passed" data-all-statuses="passed passed" data-testid="group-1778552699273-f6ae0lxy0">
-        <div class="test-header" onclick="toggleTest('group-1778552699273-f6ae0lxy0')">
+    <div class="test-item test-group" data-status="passed" data-all-statuses="passed passed" data-testid="group-1778554759648-l214hcifo">
+        <div class="test-header" onclick="toggleTest('group-1778554759648-l214hcifo')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
-                    <div class="test-title">should fail intentionally - missing element<span class="tool-badge" style="background: #2EAD33; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">playwright</span></div>
+                    <div class="test-title">should search documentation<span class="tool-badge" style="background: #2EAD33; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">playwright</span></div>
                     <div class="test-meta">
-                        <span class="test-location">📁 chromium &gt; example.spec.ts &gt; Playwright Website Tests &gt; should fail intentionally - missing element</span>
+                        <span class="test-location">📁 chromium &gt; example.spec.ts &gt; Playwright Website Tests &gt; should search documentation</span>
                         <span style="margin-left: 1rem;"><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">chromium</span><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span></span>
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 2.05s</span>
+                <span class="test-duration">⏱️ 2.71s</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-group-1778552699273-f6ae0lxy0">
+        <div class="test-details" id="details-group-1778554759648-l214hcifo">
             <div class="test-details-content">
                 <div class="browser-results">
                     
-    <div class="browser-test-item" data-testid="1778552699273-f6ae0lxy0" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552699273-f6ae0lxy0')">
+    <div class="browser-test-item" data-testid="1778554759648-l214hcifo" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554759648-l214hcifo')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
                     <div class="test-title" style="font-weight: 500;">chromium</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 959ms</span>
+                        <span class="test-duration">⏱️ 887ms</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552699273-f6ae0lxy0">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554759648-l214hcifo">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552699273-f6ae0lxy0" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554759648-l214hcifo" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -2878,19 +2264,19 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">101ms</span>
+                <span class="step-duration">47ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">26ms</span>
+                <span class="step-duration">7ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create context</span>
-                <span class="step-duration">16ms</span>
+                <span class="step-duration">4ms</span>
             </div>
         </div>
         </div>
@@ -2898,13 +2284,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">64ms</span>
+                <span class="step-duration">30ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">62ms</span>
+                <span class="step-duration">29ms</span>
             </div>
         </div>
         </div>
@@ -2912,29 +2298,50 @@ Call log:
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Go to homepage</span>
-                <span class="step-duration">353ms</span>
+                <span class="step-title">Navigate to docs</span>
+                <span class="step-duration">252ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">350ms</span>
+                <span class="step-title">Navigate to &quot;/docs/intro&quot;</span>
+                <span class="step-duration">252ms</span>
             </div>
         </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Try to find non-existent element</span>
-                <span class="step-duration">0ms</span>
+                <span class="step-title">Open search</span>
+                <span class="step-duration">39ms</span>
             </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Press &quot;Control+K&quot;</span>
+                <span class="step-duration">38ms</span>
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Search for &quot;locators&quot;</span>
+                <span class="step-duration">190ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Wait for timeout</span>
+                <span class="step-duration">189ms</span>
+            </div>
+        </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">529ms</span>
+                <span class="step-duration">375ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -2947,13 +2354,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">296ms</span>
+                <span class="step-duration">209ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">162ms</span>
+                <span class="step-duration">128ms</span>
             </div>
         </div>
         </div>
@@ -2988,23 +2395,23 @@ Call log:
         </div></div>
         </div>
     </div>
-    <div class="browser-test-item" data-testid="1778552712305-u6o3tkbim" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552712305-u6o3tkbim')">
+    <div class="browser-test-item" data-testid="1778554767932-lq4l6yz9b" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554767932-lq4l6yz9b')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
                     <div class="test-title" style="font-weight: 500;">firefox</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 1.09s</span>
+                        <span class="test-duration">⏱️ 1.82s</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552712305-u6o3tkbim">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554767932-lq4l6yz9b">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552712305-u6o3tkbim" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554767932-lq4l6yz9b" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -3014,13 +2421,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">207ms</span>
+                <span class="step-duration">176ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">13ms</span>
+                <span class="step-duration">11ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
@@ -3034,13 +2441,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">185ms</span>
+                <span class="step-duration">160ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">184ms</span>
+                <span class="step-duration">159ms</span>
             </div>
         </div>
         </div>
@@ -3048,48 +2455,69 @@ Call log:
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Go to homepage</span>
-                <span class="step-duration">477ms</span>
+                <span class="step-title">Navigate to docs</span>
+                <span class="step-duration">389ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">476ms</span>
+                <span class="step-title">Navigate to &quot;/docs/intro&quot;</span>
+                <span class="step-duration">387ms</span>
             </div>
         </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Try to find non-existent element</span>
-                <span class="step-duration">0ms</span>
+                <span class="step-title">Open search</span>
+                <span class="step-duration">256ms</span>
             </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Press &quot;Control+K&quot;</span>
+                <span class="step-duration">253ms</span>
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Search for &quot;locators&quot;</span>
+                <span class="step-duration">144ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Wait for timeout</span>
+                <span class="step-duration">138ms</span>
+            </div>
+        </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">426ms</span>
+                <span class="step-duration">862ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">0ms</span>
+                <span class="step-duration">1ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">242ms</span>
+                <span class="step-duration">626ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">118ms</span>
+                <span class="step-duration">115ms</span>
             </div>
         </div>
         </div>
@@ -3128,8 +2556,306 @@ Call log:
             </div>
         </div>
     </div>
-    <div class="test-item test-group" data-status="skipped" data-all-statuses="skipped skipped" data-testid="group-1778552699274-n4zroqfu3">
-        <div class="test-header" onclick="toggleTest('group-1778552699274-n4zroqfu3')">
+    <div class="test-item test-group" data-status="passed" data-all-statuses="passed passed" data-testid="group-1778554759720-wm4qrilun">
+        <div class="test-header" onclick="toggleTest('group-1778554759720-wm4qrilun')">
+            <div class="test-header-left">
+                <span class="status-icon status-passed">✓</span>
+                <div class="test-info">
+                    <div class="test-title">should fail intentionally - missing element<span class="tool-badge" style="background: #2EAD33; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">playwright</span></div>
+                    <div class="test-meta">
+                        <span class="test-location">📁 chromium &gt; example.spec.ts &gt; Playwright Website Tests &gt; should fail intentionally - missing element</span>
+                        <span style="margin-left: 1rem;"><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">chromium</span><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="test-header-right">
+                <span class="test-duration">⏱️ 1.66s</span>
+                <span class="expand-icon">▼</span>
+            </div>
+        </div>
+
+        <div class="test-details" id="details-group-1778554759720-wm4qrilun">
+            <div class="test-details-content">
+                <div class="browser-results">
+                    
+    <div class="browser-test-item" data-testid="1778554759720-wm4qrilun" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554759720-wm4qrilun')">
+            <div class="test-header-left">
+                <span class="status-icon status-passed">✓</span>
+                <div class="test-info">
+                    <div class="test-title" style="font-weight: 500;">chromium</div>
+                    <div class="test-meta">
+                        <span class="test-duration">⏱️ 707ms</span>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="test-header-right">
+                <span class="expand-icon browser-expand-icon-1778554759720-wm4qrilun">▼</span>
+            </div>
+        </div>
+        <div class="browser-test-details" id="browser-details-1778554759720-wm4qrilun" style="display: none; margin-top: 1rem;">
+            <div class="test-details-content">
+        <div class="details-section steps-section">
+            <h3 class="section-title">📋 Test Steps</h3>
+            <div class="steps-list">
+                
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Before Hooks</span>
+                <span class="step-duration">74ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;context&quot;</span>
+                <span class="step-duration">22ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Create context</span>
+                <span class="step-duration">12ms</span>
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;page&quot;</span>
+                <span class="step-duration">41ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Create page</span>
+                <span class="step-duration">40ms</span>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Go to homepage</span>
+                <span class="step-duration">252ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Navigate to &quot;/&quot;</span>
+                <span class="step-duration">249ms</span>
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Try to find non-existent element</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">After Hooks</span>
+                <span class="step-duration">399ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;page&quot;</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;context&quot;</span>
+                <span class="step-duration">193ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Close context</span>
+                <span class="step-duration">111ms</span>
+            </div>
+        </div>
+        </div>
+        </div>
+            </div>
+        </div>
+        <div class="details-section attachments-section">
+            <h3 class="section-title">📎 Attachments</h3>
+            <div class="attachments-grid">
+                <div class="attachment-item">
+            <a href="attachments/test-finished-1.png" target="_blank" title="Click to open in new tab">
+                <img src="attachments/test-finished-1.png" alt="screenshot" class="attachment-image">
+            </a>
+            <div class="attachment-name">screenshot</div>
+        </div><div class="attachment-item">
+            <video src="attachments/video.webm" controls class="attachment-video"></video>
+            <div class="attachment-name">video</div>
+        </div><div class="attachment-item">
+            <a href="https://trace.playwright.dev/?trace=attachments/trace.zip" target="_blank" class="attachment-link">
+                🔍 View Trace
+            </a>
+            <div class="attachment-name">trace</div>
+        </div>
+            </div>
+        </div>
+        <div class="details-section tool-specific-section">
+            <h3 class="section-title">🎭 Playwright Details</h3>
+            <div class="tool-info">
+                <div><strong>Browser:</strong> chromium</div>
+                <div><strong>Project:</strong> chromium</div>
+            </div>
+        </div></div>
+        </div>
+    </div>
+    <div class="browser-test-item" data-testid="1778554769016-m3lshu5rv" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554769016-m3lshu5rv')">
+            <div class="test-header-left">
+                <span class="status-icon status-passed">✓</span>
+                <div class="test-info">
+                    <div class="test-title" style="font-weight: 500;">firefox</div>
+                    <div class="test-meta">
+                        <span class="test-duration">⏱️ 950ms</span>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="test-header-right">
+                <span class="expand-icon browser-expand-icon-1778554769016-m3lshu5rv">▼</span>
+            </div>
+        </div>
+        <div class="browser-test-details" id="browser-details-1778554769016-m3lshu5rv" style="display: none; margin-top: 1rem;">
+            <div class="test-details-content">
+        <div class="details-section steps-section">
+            <h3 class="section-title">📋 Test Steps</h3>
+            <div class="steps-list">
+                
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Before Hooks</span>
+                <span class="step-duration">174ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;context&quot;</span>
+                <span class="step-duration">18ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Create context</span>
+                <span class="step-duration">15ms</span>
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;page&quot;</span>
+                <span class="step-duration">150ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Create page</span>
+                <span class="step-duration">149ms</span>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Go to homepage</span>
+                <span class="step-duration">242ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Navigate to &quot;/&quot;</span>
+                <span class="step-duration">241ms</span>
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Try to find non-existent element</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">After Hooks</span>
+                <span class="step-duration">542ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;page&quot;</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;context&quot;</span>
+                <span class="step-duration">444ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Close context</span>
+                <span class="step-duration">84ms</span>
+            </div>
+        </div>
+        </div>
+        </div>
+            </div>
+        </div>
+        <div class="details-section attachments-section">
+            <h3 class="section-title">📎 Attachments</h3>
+            <div class="attachments-grid">
+                <div class="attachment-item">
+            <a href="attachments/test-finished-1.png" target="_blank" title="Click to open in new tab">
+                <img src="attachments/test-finished-1.png" alt="screenshot" class="attachment-image">
+            </a>
+            <div class="attachment-name">screenshot</div>
+        </div><div class="attachment-item">
+            <video src="attachments/video.webm" controls class="attachment-video"></video>
+            <div class="attachment-name">video</div>
+        </div><div class="attachment-item">
+            <a href="https://trace.playwright.dev/?trace=attachments/trace.zip" target="_blank" class="attachment-link">
+                🔍 View Trace
+            </a>
+            <div class="attachment-name">trace</div>
+        </div>
+            </div>
+        </div>
+        <div class="details-section tool-specific-section">
+            <h3 class="section-title">🎭 Playwright Details</h3>
+            <div class="tool-info">
+                <div><strong>Browser:</strong> firefox</div>
+                <div><strong>Project:</strong> firefox</div>
+            </div>
+        </div></div>
+        </div>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="test-item test-group" data-status="skipped" data-all-statuses="skipped skipped" data-testid="group-1778554759720-5twrwild6">
+        <div class="test-header" onclick="toggleTest('group-1778554759720-5twrwild6')">
             <div class="test-header-left">
                 <span class="status-icon status-skipped">○</span>
                 <div class="test-info">
@@ -3146,12 +2872,12 @@ Call log:
             </div>
         </div>
 
-        <div class="test-details" id="details-group-1778552699274-n4zroqfu3">
+        <div class="test-details" id="details-group-1778554759720-5twrwild6">
             <div class="test-details-content">
                 <div class="browser-results">
                     
-    <div class="browser-test-item" data-testid="1778552699274-n4zroqfu3" style="margin-bottom: 1rem; border-left: 3px solid var(--color-skipped); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552699274-n4zroqfu3')">
+    <div class="browser-test-item" data-testid="1778554759720-5twrwild6" style="margin-bottom: 1rem; border-left: 3px solid var(--color-skipped); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554759720-5twrwild6')">
             <div class="test-header-left">
                 <span class="status-icon status-skipped">○</span>
                 <div class="test-info">
@@ -3163,10 +2889,10 @@ Call log:
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552699274-n4zroqfu3">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554759720-5twrwild6">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552699274-n4zroqfu3" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554759720-5twrwild6" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section tool-specific-section">
             <h3 class="section-title">🎭 Playwright Details</h3>
@@ -3177,8 +2903,8 @@ Call log:
         </div></div>
         </div>
     </div>
-    <div class="browser-test-item" data-testid="1778552713000-hvcgc8c5b" style="margin-bottom: 1rem; border-left: 3px solid var(--color-skipped); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552713000-hvcgc8c5b')">
+    <div class="browser-test-item" data-testid="1778554769049-m6j5kyzrp" style="margin-bottom: 1rem; border-left: 3px solid var(--color-skipped); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554769049-m6j5kyzrp')">
             <div class="test-header-left">
                 <span class="status-icon status-skipped">○</span>
                 <div class="test-info">
@@ -3190,10 +2916,10 @@ Call log:
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552713000-hvcgc8c5b">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554769049-m6j5kyzrp">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552713000-hvcgc8c5b" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554769049-m6j5kyzrp" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section tool-specific-section">
             <h3 class="section-title">🎭 Playwright Details</h3>
@@ -3208,8 +2934,8 @@ Call log:
             </div>
         </div>
     </div>
-    <div class="test-item test-group" data-status="passed" data-all-statuses="passed passed" data-testid="group-1778552700045-qrjz56md7">
-        <div class="test-header" onclick="toggleTest('group-1778552700045-qrjz56md7')">
+    <div class="test-item test-group" data-status="passed" data-all-statuses="passed passed" data-testid="group-1778554760507-zen20povw">
+        <div class="test-header" onclick="toggleTest('group-1778554760507-zen20povw')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
@@ -3221,32 +2947,32 @@ Call log:
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 2.18s</span>
+                <span class="test-duration">⏱️ 1.60s</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-group-1778552700045-qrjz56md7">
+        <div class="test-details" id="details-group-1778554760507-zen20povw">
             <div class="test-details-content">
                 <div class="browser-results">
                     
-    <div class="browser-test-item" data-testid="1778552700045-qrjz56md7" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552700045-qrjz56md7')">
+    <div class="browser-test-item" data-testid="1778554760507-zen20povw" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554760507-zen20povw')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
                     <div class="test-title" style="font-weight: 500;">chromium</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 988ms</span>
+                        <span class="test-duration">⏱️ 743ms</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552700045-qrjz56md7">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554760507-zen20povw">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552700045-qrjz56md7" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554760507-zen20povw" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -3256,19 +2982,19 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">51ms</span>
+                <span class="step-duration">41ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">5ms</span>
+                <span class="step-duration">3ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create context</span>
-                <span class="step-duration">3ms</span>
+                <span class="step-duration">2ms</span>
             </div>
         </div>
         </div>
@@ -3276,13 +3002,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">37ms</span>
+                <span class="step-duration">32ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">36ms</span>
+                <span class="step-duration">32ms</span>
             </div>
         </div>
         </div>
@@ -3291,13 +3017,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to docs</span>
-                <span class="step-duration">293ms</span>
+                <span class="step-duration">238ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to &quot;/docs/intro&quot;</span>
-                <span class="step-duration">292ms</span>
+                <span class="step-duration">237ms</span>
             </div>
         </div>
         </div>
@@ -3305,14 +3031,14 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Wait for element</span>
-                <span class="step-duration">1ms</span>
+                <span class="step-duration">0ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">658ms</span>
+                <span class="step-duration">475ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -3325,13 +3051,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">414ms</span>
+                <span class="step-duration">270ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">184ms</span>
+                <span class="step-duration">140ms</span>
             </div>
         </div>
         </div>
@@ -3366,23 +3092,23 @@ Call log:
         </div></div>
         </div>
     </div>
-    <div class="browser-test-item" data-testid="1778552713637-euqpgdm8x" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552713637-euqpgdm8x')">
+    <div class="browser-test-item" data-testid="1778554769961-qq2pt9ibz" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554769961-qq2pt9ibz')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
                     <div class="test-title" style="font-weight: 500;">firefox</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 1.19s</span>
+                        <span class="test-duration">⏱️ 862ms</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552713637-euqpgdm8x">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554769961-qq2pt9ibz">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552713637-euqpgdm8x" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554769961-qq2pt9ibz" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -3392,7 +3118,7 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">205ms</span>
+                <span class="step-duration">167ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -3412,13 +3138,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">190ms</span>
+                <span class="step-duration">154ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">189ms</span>
+                <span class="step-duration">153ms</span>
             </div>
         </div>
         </div>
@@ -3427,13 +3153,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to docs</span>
-                <span class="step-duration">547ms</span>
+                <span class="step-duration">309ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to &quot;/docs/intro&quot;</span>
-                <span class="step-duration">543ms</span>
+                <span class="step-duration">308ms</span>
             </div>
         </div>
         </div>
@@ -3448,7 +3174,7 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">455ms</span>
+                <span class="step-duration">395ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -3461,13 +3187,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">261ms</span>
+                <span class="step-duration">271ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">171ms</span>
+                <span class="step-duration">152ms</span>
             </div>
         </div>
         </div>
@@ -3506,45 +3232,45 @@ Call log:
             </div>
         </div>
     </div>
-    <div class="test-item test-group" data-status="failed" data-all-statuses="passed failed failed" data-testid="group-1778552700380-edqn3c3hu">
-        <div class="test-header" onclick="toggleTest('group-1778552700380-edqn3c3hu')">
+    <div class="test-item test-group" data-status="failed" data-all-statuses="failed failed passed" data-testid="group-1778554760694-8ywd6cewb">
+        <div class="test-header" onclick="toggleTest('group-1778554760694-8ywd6cewb')">
             <div class="test-header-left">
                 <span class="status-icon status-failed">✗</span>
                 <div class="test-info">
                     <div class="test-title">should be flaky<span class="tool-badge" style="background: #2EAD33; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">playwright</span></div>
                     <div class="test-meta">
                         <span class="test-location">📁 chromium &gt; example.spec.ts &gt; Playwright Website Tests &gt; should be flaky</span>
-                        <span style="margin-left: 1rem;"><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">chromium</span><span class="browser-badge" style="background: var(--color-failed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span><span class="browser-badge" style="background: var(--color-failed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span></span>
+                        <span style="margin-left: 1rem;"><span class="browser-badge" style="background: var(--color-failed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">chromium</span><span class="browser-badge" style="background: var(--color-failed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">chromium</span><span class="browser-badge" style="background: var(--color-passed); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">firefox</span></span>
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 3.67s</span>
+                <span class="test-duration">⏱️ 3.12s</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-group-1778552700380-edqn3c3hu">
+        <div class="test-details" id="details-group-1778554760694-8ywd6cewb">
             <div class="test-details-content">
                 <div class="browser-results">
                     
-    <div class="browser-test-item" data-testid="1778552700380-edqn3c3hu" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552700380-edqn3c3hu')">
+    <div class="browser-test-item" data-testid="1778554760694-8ywd6cewb" style="margin-bottom: 1rem; border-left: 3px solid var(--color-failed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554760694-8ywd6cewb')">
             <div class="test-header-left">
-                <span class="status-icon status-passed">✓</span>
+                <span class="status-icon status-failed">✗</span>
                 <div class="test-info">
                     <div class="test-title" style="font-weight: 500;">chromium</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 968ms</span>
+                        <span class="test-duration">⏱️ 846ms</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552700380-edqn3c3hu">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554760694-8ywd6cewb">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552700380-edqn3c3hu" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554760694-8ywd6cewb" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -3554,19 +3280,19 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">59ms</span>
+                <span class="step-duration">46ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">6ms</span>
+                <span class="step-duration">5ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create context</span>
-                <span class="step-duration">5ms</span>
+                <span class="step-duration">3ms</span>
             </div>
         </div>
         </div>
@@ -3574,13 +3300,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">42ms</span>
+                <span class="step-duration">35ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">41ms</span>
+                <span class="step-duration">35ms</span>
             </div>
         </div>
         </div>
@@ -3589,73 +3315,85 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to homepage</span>
-                <span class="step-duration">396ms</span>
+                <span class="step-duration">253ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">395ms</span>
+                <span class="step-duration">252ms</span>
             </div>
         </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
-                <span class="step-status status-passed">✓</span>
+                <span class="step-status status-failed">✗</span>
                 <span class="step-title">Flaky assertion</span>
-                <span class="step-duration">0ms</span>
+                <span class="step-duration">1ms</span>
             </div>
-        </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Verify title</span>
-                <span class="step-duration">58ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Expect &quot;toHaveTitle&quot;</span>
-                <span class="step-duration">57ms</span>
-            </div>
-        </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">472ms</span>
+                <span class="step-duration">557ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">1ms</span>
+                <span class="step-duration">0ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">228ms</span>
+                <span class="step-duration">256ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">130ms</span>
+                <span class="step-duration">114ms</span>
             </div>
         </div>
         </div>
         </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Worker Cleanup</span>
+                <span class="step-duration">25ms</span>
             </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;browser&quot;</span>
+                <span class="step-duration">22ms</span>
+            </div>
+        </div>
+        </div>
+            </div>
+        </div>
+        <div class="details-section error-section">
+            <h3 class="section-title">❌ Error</h3>
+            <div class="error-message">Error: Flaky test failure</div>
+            
+                <details class="stack-trace">
+                    <summary>Stack Trace</summary>
+                    <pre>Error: Flaky test failure
+    at /home/runner/work/sarva-varadi/sarva-varadi/demo-playwright/tests/example.spec.ts:125:15
+    at /home/runner/work/sarva-varadi/sarva-varadi/demo-playwright/tests/example.spec.ts:122:5</pre>
+                </details>
+            
         </div>
         <div class="details-section attachments-section">
             <h3 class="section-title">📎 Attachments</h3>
             <div class="attachments-grid">
                 <div class="attachment-item">
-            <a href="attachments/test-finished-1.png" target="_blank" title="Click to open in new tab">
-                <img src="attachments/test-finished-1.png" alt="screenshot" class="attachment-image">
+            <a href="attachments/test-failed-1.png" target="_blank" title="Click to open in new tab">
+                <img src="attachments/test-failed-1.png" alt="screenshot" class="attachment-image">
             </a>
             <div class="attachment-name">screenshot</div>
         </div><div class="attachment-item">
@@ -3678,23 +3416,23 @@ Call log:
         </div></div>
         </div>
     </div>
-    <div class="browser-test-item" data-testid="1778552717069-svafqbynv" style="margin-bottom: 1rem; border-left: 3px solid var(--color-failed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552717069-svafqbynv')">
+    <div class="browser-test-item" data-testid="1778554762461-be8c5w1rt" style="margin-bottom: 1rem; border-left: 3px solid var(--color-failed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554762461-be8c5w1rt')">
             <div class="test-header-left">
                 <span class="status-icon status-failed">✗</span>
                 <div class="test-info">
-                    <div class="test-title" style="font-weight: 500;">firefox</div>
+                    <div class="test-title" style="font-weight: 500;">chromium</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 1.77s</span>
-                        
+                        <span class="test-duration">⏱️ 944ms</span>
+                        <span class="test-retries" style="margin-left: 1rem;">🔄 1 retry</span>
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552717069-svafqbynv">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554762461-be8c5w1rt">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552717069-svafqbynv" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554762461-be8c5w1rt" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -3704,19 +3442,19 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">1.09s</span>
+                <span class="step-duration">265ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">383ms</span>
+                <span class="step-duration">74ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Launch browser</span>
-                <span class="step-duration">377ms</span>
+                <span class="step-duration">71ms</span>
             </div>
         </div>
         </div>
@@ -3724,13 +3462,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">98ms</span>
+                <span class="step-duration">16ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create context</span>
-                <span class="step-duration">75ms</span>
+                <span class="step-duration">8ms</span>
             </div>
         </div>
         </div>
@@ -3738,13 +3476,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">585ms</span>
+                <span class="step-duration">155ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">583ms</span>
+                <span class="step-duration">154ms</span>
             </div>
         </div>
         </div>
@@ -3753,13 +3491,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to homepage</span>
-                <span class="step-duration">604ms</span>
+                <span class="step-duration">262ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">600ms</span>
+                <span class="step-duration">260ms</span>
             </div>
         </div>
         </div>
@@ -3767,14 +3505,14 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-failed">✗</span>
                 <span class="step-title">Flaky assertion</span>
-                <span class="step-duration">1ms</span>
+                <span class="step-duration">0ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">485ms</span>
+                <span class="step-duration">517ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -3787,13 +3525,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">320ms</span>
+                <span class="step-duration">284ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">82ms</span>
+                <span class="step-duration">145ms</span>
             </div>
         </div>
         </div>
@@ -3802,13 +3540,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Worker Cleanup</span>
-                <span class="step-duration">916ms</span>
+                <span class="step-duration">38ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">912ms</span>
+                <span class="step-duration">34ms</span>
             </div>
         </div>
         </div>
@@ -3848,29 +3586,29 @@ Call log:
         <div class="details-section tool-specific-section">
             <h3 class="section-title">🎭 Playwright Details</h3>
             <div class="tool-info">
-                <div><strong>Browser:</strong> firefox</div>
-                <div><strong>Project:</strong> firefox</div>
+                <div><strong>Browser:</strong> chromium</div>
+                <div><strong>Project:</strong> chromium</div>
             </div>
         </div></div>
         </div>
     </div>
-    <div class="browser-test-item" data-testid="1778552718709-7rrm245ep" style="margin-bottom: 1rem; border-left: 3px solid var(--color-failed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
-        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778552718709-7rrm245ep')">
+    <div class="browser-test-item" data-testid="1778554771557-iq5udelp2" style="margin-bottom: 1rem; border-left: 3px solid var(--color-passed); padding-left: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border);">
+        <div class="test-header" style="cursor: pointer;" onclick="toggleBrowserTest('1778554771557-iq5udelp2')">
             <div class="test-header-left">
-                <span class="status-icon status-failed">✗</span>
+                <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
                     <div class="test-title" style="font-weight: 500;">firefox</div>
                     <div class="test-meta">
-                        <span class="test-duration">⏱️ 925ms</span>
-                        <span class="test-retries" style="margin-left: 1rem;">🔄 1 retry</span>
+                        <span class="test-duration">⏱️ 1.33s</span>
+                        
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="expand-icon browser-expand-icon-1778552718709-7rrm245ep">▼</span>
+                <span class="expand-icon browser-expand-icon-1778554771557-iq5udelp2">▼</span>
             </div>
         </div>
-        <div class="browser-test-details" id="browser-details-1778552718709-7rrm245ep" style="display: none; margin-top: 1rem;">
+        <div class="browser-test-details" id="browser-details-1778554771557-iq5udelp2" style="display: none; margin-top: 1rem;">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -3880,19 +3618,33 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Before Hooks</span>
-                <span class="step-duration">183ms</span>
+                <span class="step-duration">963ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
+                <span class="step-title">Fixture &quot;browser&quot;</span>
+                <span class="step-duration">425ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Launch browser</span>
+                <span class="step-duration">416ms</span>
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">11ms</span>
+                <span class="step-duration">72ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create context</span>
-                <span class="step-duration">6ms</span>
+                <span class="step-duration">61ms</span>
             </div>
         </div>
         </div>
@@ -3900,13 +3652,13 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;page&quot;</span>
-                <span class="step-duration">165ms</span>
+                <span class="step-duration">437ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Create page</span>
-                <span class="step-duration">164ms</span>
+                <span class="step-duration">436ms</span>
             </div>
         </div>
         </div>
@@ -3915,28 +3667,42 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to homepage</span>
-                <span class="step-duration">326ms</span>
+                <span class="step-duration">484ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Navigate to &quot;/&quot;</span>
-                <span class="step-duration">323ms</span>
+                <span class="step-duration">482ms</span>
             </div>
         </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
-                <span class="step-status status-failed">✗</span>
+                <span class="step-status status-passed">✓</span>
                 <span class="step-title">Flaky assertion</span>
-                <span class="step-duration">0ms</span>
+                <span class="step-duration">1ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
+                <span class="step-title">Verify title</span>
+                <span class="step-duration">78ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Expect &quot;toHaveTitle&quot;</span>
+                <span class="step-duration">75ms</span>
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
                 <span class="step-title">After Hooks</span>
-                <span class="step-duration">437ms</span>
+                <span class="step-duration">256ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -3949,51 +3715,25 @@ Call log:
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Fixture &quot;context&quot;</span>
-                <span class="step-duration">285ms</span>
+                <span class="step-duration">193ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
                 <span class="step-title">Close context</span>
-                <span class="step-duration">110ms</span>
+                <span class="step-duration">79ms</span>
             </div>
         </div>
         </div>
         </div>
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Worker Cleanup</span>
-                <span class="step-duration">579ms</span>
             </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Fixture &quot;browser&quot;</span>
-                <span class="step-duration">575ms</span>
-            </div>
-        </div>
-        </div>
-            </div>
-        </div>
-        <div class="details-section error-section">
-            <h3 class="section-title">❌ Error</h3>
-            <div class="error-message">Error: Flaky test failure</div>
-            
-                <details class="stack-trace">
-                    <summary>Stack Trace</summary>
-                    <pre>Error: Flaky test failure
-    at /home/runner/work/sarva-varadi/sarva-varadi/demo-playwright/tests/example.spec.ts:125:15
-    at /home/runner/work/sarva-varadi/sarva-varadi/demo-playwright/tests/example.spec.ts:122:5</pre>
-                </details>
-            
         </div>
         <div class="details-section attachments-section">
             <h3 class="section-title">📎 Attachments</h3>
             <div class="attachments-grid">
                 <div class="attachment-item">
-            <a href="attachments/test-failed-1.png" target="_blank" title="Click to open in new tab">
-                <img src="attachments/test-failed-1.png" alt="screenshot" class="attachment-image">
+            <a href="attachments/test-finished-1.png" target="_blank" title="Click to open in new tab">
+                <img src="attachments/test-finished-1.png" alt="screenshot" class="attachment-image">
             </a>
             <div class="attachment-name">screenshot</div>
         </div><div class="attachment-item">
@@ -4070,6 +3810,58 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.onclick = closeModal;
     modal.innerHTML = '<img id="modalImage" onclick="event.stopPropagation()">';
     document.body.appendChild(modal);
+
+    // Dynamic tooltip positioning to prevent edge trimming
+    document.querySelectorAll('.info-tooltip').forEach(tooltip => {
+        tooltip.addEventListener('mouseenter', function() {
+            const tooltipText = this.querySelector('.tooltip-text');
+            if (!tooltipText) return;
+
+            // Reset position classes
+            tooltipText.style.cssText = '';
+
+            const iconRect = this.getBoundingClientRect();
+            const tooltipWidth = 450; // From CSS
+            const tooltipHeight = tooltipText.offsetHeight || 100;
+            const margin = 8; // spacing from icon
+
+            const viewport = {
+                width: window.innerWidth,
+                height: window.innerHeight
+            };
+
+            // Calculate available space in each direction
+            const spaceTop = iconRect.top;
+            const spaceBottom = viewport.height - iconRect.bottom;
+            const spaceLeft = iconRect.left;
+            const spaceRight = viewport.width - iconRect.right;
+
+            // Determine best vertical position (above or below)
+            const preferAbove = spaceTop > spaceBottom && spaceTop > tooltipHeight + margin;
+
+            // Determine best horizontal alignment
+            let position = '';
+            if (preferAbove) {
+                position = 'bottom: 100%; margin-bottom: ' + margin + 'px;';
+            } else {
+                position = 'top: 100%; margin-top: ' + margin + 'px;';
+            }
+
+            // Horizontal alignment: try right-align first, then left-align if not enough space
+            if (iconRect.right >= tooltipWidth) {
+                // Right-align tooltip (tooltip extends left from icon)
+                position += ' right: 0;';
+            } else if (spaceRight >= tooltipWidth) {
+                // Left-align tooltip (tooltip extends right from icon)
+                position += ' left: 0;';
+            } else {
+                // Center on icon if neither side has full space
+                position += ' left: 50%; transform: translateX(-50%);';
+            }
+
+            tooltipText.style.cssText = position;
+        });
+    });
 
     // Theme toggle functionality
     const themeToggle = document.getElementById('themeToggle');

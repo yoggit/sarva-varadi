@@ -622,9 +622,6 @@
         visibility: hidden;
         opacity: 0;
         position: absolute;
-        right: 0;
-        top: 100%;
-        margin-top: 0.5rem;
         background-color: var(--color-surface);
         color: var(--color-text);
         padding: 0.75rem 1rem;
@@ -640,6 +637,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
+        /* Position is dynamically set by JavaScript */
     }
 
     .info-tooltip:hover .tooltip-text {
@@ -1050,7 +1048,7 @@
                         </label>
                     </div>
                     <div class="subtitle">
-                        Last Run on <span id="timestamp" data-time="2026-05-12T02:24:06.216Z"></span>
+                        Last Run on <span id="timestamp" data-time="2026-05-12T02:59:32.739Z"></span>
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 1rem;">
@@ -1187,8 +1185,8 @@
     <section class="tests-section">
         <div class="tests-list">
             
-    <div class="test-item" data-status="passed" data-testid="0c2ea4d0-b3e0-4d46-a900-211864241aaa">
-        <div class="test-header" onclick="toggleTest('0c2ea4d0-b3e0-4d46-a900-211864241aaa')">
+    <div class="test-item" data-status="passed" data-testid="3ceeec60-6fc3-4e78-90b1-c9122077fd19">
+        <div class="test-header" onclick="toggleTest('3ceeec60-6fc3-4e78-90b1-c9122077fd19')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
@@ -1205,7 +1203,7 @@
             </div>
         </div>
 
-        <div class="test-details" id="details-0c2ea4d0-b3e0-4d46-a900-211864241aaa">
+        <div class="test-details" id="details-3ceeec60-6fc3-4e78-90b1-c9122077fd19">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1281,8 +1279,8 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="a1c39ecb-0a21-44d6-90f7-607856535a12">
-        <div class="test-header" onclick="toggleTest('a1c39ecb-0a21-44d6-90f7-607856535a12')">
+    <div class="test-item" data-status="passed" data-testid="acb83691-d902-4d24-8d64-bc93bea8c019">
+        <div class="test-header" onclick="toggleTest('acb83691-d902-4d24-8d64-bc93bea8c019')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
@@ -1299,7 +1297,7 @@ Accept: application/json
             </div>
         </div>
 
-        <div class="test-details" id="details-a1c39ecb-0a21-44d6-90f7-607856535a12">
+        <div class="test-details" id="details-acb83691-d902-4d24-8d64-bc93bea8c019">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1375,8 +1373,8 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="ee532a59-f9c7-4019-b3fd-b8cba0d54eb1">
-        <div class="test-header" onclick="toggleTest('ee532a59-f9c7-4019-b3fd-b8cba0d54eb1')">
+    <div class="test-item" data-status="passed" data-testid="88c187b0-da93-4631-95b1-454335d794e6">
+        <div class="test-header" onclick="toggleTest('88c187b0-da93-4631-95b1-454335d794e6')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
@@ -1393,7 +1391,7 @@ Accept: application/json
             </div>
         </div>
 
-        <div class="test-details" id="details-ee532a59-f9c7-4019-b3fd-b8cba0d54eb1">
+        <div class="test-details" id="details-88c187b0-da93-4631-95b1-454335d794e6">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1479,8 +1477,8 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="9a3b57fb-ae46-4f08-8910-2b9e785820da">
-        <div class="test-header" onclick="toggleTest('9a3b57fb-ae46-4f08-8910-2b9e785820da')">
+    <div class="test-item" data-status="passed" data-testid="8d4fb074-c531-4713-8ed5-184c9e0d734b">
+        <div class="test-header" onclick="toggleTest('8d4fb074-c531-4713-8ed5-184c9e0d734b')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
@@ -1497,7 +1495,7 @@ Accept: application/json
             </div>
         </div>
 
-        <div class="test-details" id="details-9a3b57fb-ae46-4f08-8910-2b9e785820da">
+        <div class="test-details" id="details-8d4fb074-c531-4713-8ed5-184c9e0d734b">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1583,8 +1581,8 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="skipped" data-testid="4da4ee0a-d050-4ced-a00c-46f1c75bc2e7">
-        <div class="test-header" onclick="toggleTest('4da4ee0a-d050-4ced-a00c-46f1c75bc2e7')">
+    <div class="test-item" data-status="skipped" data-testid="36f38612-5a07-48e9-98a5-6470882ec7fa">
+        <div class="test-header" onclick="toggleTest('36f38612-5a07-48e9-98a5-6470882ec7fa')">
             <div class="test-header-left">
                 <span class="status-icon status-skipped">○</span>
                 <div class="test-info">
@@ -1601,7 +1599,7 @@ Accept: application/json
             </div>
         </div>
 
-        <div class="test-details" id="details-4da4ee0a-d050-4ced-a00c-46f1c75bc2e7">
+        <div class="test-details" id="details-36f38612-5a07-48e9-98a5-6470882ec7fa">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1677,8 +1675,8 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="98a133e9-9a5e-47e1-af93-e51bccf04f13">
-        <div class="test-header" onclick="toggleTest('98a133e9-9a5e-47e1-af93-e51bccf04f13')">
+    <div class="test-item" data-status="passed" data-testid="7c1308bd-f092-4e90-bd74-ce989356e45a">
+        <div class="test-header" onclick="toggleTest('7c1308bd-f092-4e90-bd74-ce989356e45a')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
@@ -1695,7 +1693,7 @@ Accept: application/json
             </div>
         </div>
 
-        <div class="test-details" id="details-98a133e9-9a5e-47e1-af93-e51bccf04f13">
+        <div class="test-details" id="details-7c1308bd-f092-4e90-bd74-ce989356e45a">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1771,8 +1769,8 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="d842e607-baae-4c0c-a644-d8f2963cfe34">
-        <div class="test-header" onclick="toggleTest('d842e607-baae-4c0c-a644-d8f2963cfe34')">
+    <div class="test-item" data-status="passed" data-testid="9e2083ab-7e78-4d9b-98a8-f50d7809e1f6">
+        <div class="test-header" onclick="toggleTest('9e2083ab-7e78-4d9b-98a8-f50d7809e1f6')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
@@ -1789,7 +1787,7 @@ Accept: application/json
             </div>
         </div>
 
-        <div class="test-details" id="details-d842e607-baae-4c0c-a644-d8f2963cfe34">
+        <div class="test-details" id="details-9e2083ab-7e78-4d9b-98a8-f50d7809e1f6">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1875,8 +1873,8 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="16ba6a9f-3daa-4b47-836a-dfc8652a6a2e">
-        <div class="test-header" onclick="toggleTest('16ba6a9f-3daa-4b47-836a-dfc8652a6a2e')">
+    <div class="test-item" data-status="passed" data-testid="6f6a738c-65e9-4048-b552-3c772b1d7766">
+        <div class="test-header" onclick="toggleTest('6f6a738c-65e9-4048-b552-3c772b1d7766')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
@@ -1893,7 +1891,7 @@ Accept: application/json
             </div>
         </div>
 
-        <div class="test-details" id="details-16ba6a9f-3daa-4b47-836a-dfc8652a6a2e">
+        <div class="test-details" id="details-6f6a738c-65e9-4048-b552-3c772b1d7766">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1969,8 +1967,8 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="skipped" data-testid="59a46406-f3a0-4d06-8cad-aac2cbdf2321">
-        <div class="test-header" onclick="toggleTest('59a46406-f3a0-4d06-8cad-aac2cbdf2321')">
+    <div class="test-item" data-status="skipped" data-testid="54d3bc1f-3a15-4d48-8389-7abe803d1469">
+        <div class="test-header" onclick="toggleTest('54d3bc1f-3a15-4d48-8389-7abe803d1469')">
             <div class="test-header-left">
                 <span class="status-icon status-skipped">○</span>
                 <div class="test-info">
@@ -1987,7 +1985,7 @@ Accept: application/json
             </div>
         </div>
 
-        <div class="test-details" id="details-59a46406-f3a0-4d06-8cad-aac2cbdf2321">
+        <div class="test-details" id="details-54d3bc1f-3a15-4d48-8389-7abe803d1469">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -2063,8 +2061,8 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="d2844707-2805-4541-baf8-f08d852208a0">
-        <div class="test-header" onclick="toggleTest('d2844707-2805-4541-baf8-f08d852208a0')">
+    <div class="test-item" data-status="passed" data-testid="3c1150d7-c920-4a7d-aecb-298be397ffef">
+        <div class="test-header" onclick="toggleTest('3c1150d7-c920-4a7d-aecb-298be397ffef')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
@@ -2081,7 +2079,7 @@ Accept: application/json
             </div>
         </div>
 
-        <div class="test-details" id="details-d2844707-2805-4541-baf8-f08d852208a0">
+        <div class="test-details" id="details-3c1150d7-c920-4a7d-aecb-298be397ffef">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -2207,6 +2205,58 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.onclick = closeModal;
     modal.innerHTML = '<img id="modalImage" onclick="event.stopPropagation()">';
     document.body.appendChild(modal);
+
+    // Dynamic tooltip positioning to prevent edge trimming
+    document.querySelectorAll('.info-tooltip').forEach(tooltip => {
+        tooltip.addEventListener('mouseenter', function() {
+            const tooltipText = this.querySelector('.tooltip-text');
+            if (!tooltipText) return;
+
+            // Reset position classes
+            tooltipText.style.cssText = '';
+
+            const iconRect = this.getBoundingClientRect();
+            const tooltipWidth = 450; // From CSS
+            const tooltipHeight = tooltipText.offsetHeight || 100;
+            const margin = 8; // spacing from icon
+
+            const viewport = {
+                width: window.innerWidth,
+                height: window.innerHeight
+            };
+
+            // Calculate available space in each direction
+            const spaceTop = iconRect.top;
+            const spaceBottom = viewport.height - iconRect.bottom;
+            const spaceLeft = iconRect.left;
+            const spaceRight = viewport.width - iconRect.right;
+
+            // Determine best vertical position (above or below)
+            const preferAbove = spaceTop > spaceBottom && spaceTop > tooltipHeight + margin;
+
+            // Determine best horizontal alignment
+            let position = '';
+            if (preferAbove) {
+                position = 'bottom: 100%; margin-bottom: ' + margin + 'px;';
+            } else {
+                position = 'top: 100%; margin-top: ' + margin + 'px;';
+            }
+
+            // Horizontal alignment: try right-align first, then left-align if not enough space
+            if (iconRect.right >= tooltipWidth) {
+                // Right-align tooltip (tooltip extends left from icon)
+                position += ' right: 0;';
+            } else if (spaceRight >= tooltipWidth) {
+                // Left-align tooltip (tooltip extends right from icon)
+                position += ' left: 0;';
+            } else {
+                // Center on icon if neither side has full space
+                position += ' left: 50%; transform: translateX(-50%);';
+            }
+
+            tooltipText.style.cssText = position;
+        });
+    });
 
     // Theme toggle functionality
     const themeToggle = document.getElementById('themeToggle');
