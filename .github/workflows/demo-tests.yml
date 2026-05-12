@@ -128,9 +128,15 @@ jobs:
             rm -rf gh-pages-old
 
             # Delete runs.json files to force rebuild from merged folders
-            rm -f demo-playwright/sarva-report/runs.json 2>/dev/null || true
-            rm -f demo-selenium/sarva-report/runs.json 2>/dev/null || true
-            rm -f demo-restassured/sarva-report/runs.json 2>/dev/null || true
+            echo "🗑️  Deleting runs.json files to force rebuild..."
+            for dir in demo-playwright demo-selenium demo-restassured; do
+              if [ -f "$dir/sarva-report/runs.json" ]; then
+                rm -f "$dir/sarva-report/runs.json"
+                echo "  ✓ Deleted $dir/sarva-report/runs.json"
+              else
+                echo "  ℹ️  $dir/sarva-report/runs.json not found"
+              fi
+            done
 
             echo "✅ History merge complete"
           else
