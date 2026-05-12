@@ -130,11 +130,11 @@ jobs:
             # Delete runs.json files to force rebuild from merged folders
             echo "🗑️  Deleting runs.json files to force rebuild..."
             for dir in demo-playwright demo-selenium demo-restassured; do
-              if [ -f "$dir/sarva-report/runs.json" ]; then
-                rm -f "$dir/sarva-report/runs.json"
-                echo "  ✓ Deleted $dir/sarva-report/runs.json"
+              if [ -f "$dir/sarva-report/history/runs.json" ]; then
+                rm -f "$dir/sarva-report/history/runs.json"
+                echo "  ✓ Deleted $dir/sarva-report/history/runs.json"
               else
-                echo "  ℹ️  $dir/sarva-report/runs.json not found"
+                echo "  ℹ️  $dir/sarva-report/history/runs.json not found"
               fi
             done
 
