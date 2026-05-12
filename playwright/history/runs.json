@@ -1,15 +1,15 @@
 {
   "runs": [
     {
-      "id": "2026-05-12-002648",
-      "timestamp": 1778545592897,
-      "duration": 16457,
+      "id": "2026-05-12-004251",
+      "timestamp": 1778546556110,
+      "duration": 14402,
       "total": 14,
-      "passed": 10,
+      "passed": 8,
       "failed": 1,
       "skipped": 2,
-      "flaky": 1,
-      "passRate": 71.4,
+      "flaky": 3,
+      "passRate": 57.1,
       "environment": {
         "ci": "false"
       }
@@ -21,41 +21,43 @@
       "testName": "should load homepage successfully",
       "history": [
         {
-          "runId": "2026-05-12-002648",
-          "status": "passed",
-          "duration": 1153,
-          "retries": 0,
-          "wasFlaky": false
+          "runId": "2026-05-12-004251",
+          "status": "failed",
+          "duration": 1035,
+          "retries": 1,
+          "wasFlaky": true
         }
       ],
       "flakyScore": 0,
-      "lastStatus": "passed",
-      "wasEverFlaky": false
+      "lastStatus": "failed",
+      "wasEverFlaky": true,
+      "lastFlakyRunId": "2026-05-12-004251"
     },
     {
       "testId": "playwright:chromium > example.spec.ts > Playwright Website Tests > should navigate to Getting Started",
       "testName": "should navigate to Getting Started",
       "history": [
         {
-          "runId": "2026-05-12-002648",
+          "runId": "2026-05-12-004251",
           "status": "failed",
-          "duration": 1662,
+          "duration": 1352,
           "retries": 1,
-          "wasFlaky": false
+          "wasFlaky": true
         }
       ],
       "flakyScore": 0,
       "lastStatus": "failed",
-      "wasEverFlaky": false
+      "wasEverFlaky": true,
+      "lastFlakyRunId": "2026-05-12-004251"
     },
     {
       "testId": "playwright:chromium > example.spec.ts > Playwright Website Tests > should search documentation",
       "testName": "should search documentation",
       "history": [
         {
-          "runId": "2026-05-12-002648",
+          "runId": "2026-05-12-004251",
           "status": "passed",
-          "duration": 1053,
+          "duration": 866,
           "retries": 0,
           "wasFlaky": false
         }
@@ -69,25 +71,9 @@
       "testName": "should fail intentionally - missing element",
       "history": [
         {
-          "runId": "2026-05-12-002648",
+          "runId": "2026-05-12-004251",
           "status": "passed",
-          "duration": 833,
-          "retries": 0,
-          "wasFlaky": false
-        }
-      ],
-      "flakyScore": 0,
-      "lastStatus": "passed",
-      "wasEverFlaky": false
-    },
-    {
-      "testId": "playwright:chromium > example.spec.ts > Playwright Website Tests > should fail with timeout",
-      "testName": "should fail with timeout",
-      "history": [
-        {
-          "runId": "2026-05-12-002648",
-          "status": "passed",
-          "duration": 922,
+          "duration": 627,
           "retries": 0,
           "wasFlaky": false
         }
@@ -101,7 +87,7 @@
       "testName": "should be skipped",
       "history": [
         {
-          "runId": "2026-05-12-002648",
+          "runId": "2026-05-12-004251",
           "status": "skipped",
           "duration": 0,
           "retries": 0,
@@ -113,13 +99,13 @@
       "wasEverFlaky": false
     },
     {
-      "testId": "playwright:chromium > example.spec.ts > Playwright Website Tests > should be flaky",
-      "testName": "should be flaky",
+      "testId": "playwright:chromium > example.spec.ts > Playwright Website Tests > should fail with timeout",
+      "testName": "should fail with timeout",
       "history": [
         {
-          "runId": "2026-05-12-002648",
+          "runId": "2026-05-12-004251",
           "status": "passed",
-          "duration": 778,
+          "duration": 728,
           "retries": 0,
           "wasFlaky": false
         }
@@ -129,19 +115,36 @@
       "wasEverFlaky": false
     },
     {
+      "testId": "playwright:chromium > example.spec.ts > Playwright Website Tests > should be flaky",
+      "testName": "should be flaky",
+      "history": [
+        {
+          "runId": "2026-05-12-004251",
+          "status": "failed",
+          "duration": 1066,
+          "retries": 1,
+          "wasFlaky": true
+        }
+      ],
+      "flakyScore": 0,
+      "lastStatus": "failed",
+      "wasEverFlaky": true,
+      "lastFlakyRunId": "2026-05-12-004251"
+    },
+    {
       "testId": "playwright:firefox > example.spec.ts > Playwright Website Tests > should load homepage successfully",
       "testName": "should load homepage successfully",
       "history": [
         {
-          "runId": "2026-05-12-002648",
-          "status": "passed",
-          "duration": 2335,
-          "retries": 0,
+          "runId": "2026-05-12-004251",
+          "status": "failed",
+          "duration": 2074,
+          "retries": 1,
           "wasFlaky": false
         }
       ],
       "flakyScore": 0,
-      "lastStatus": "passed",
+      "lastStatus": "failed",
       "wasEverFlaky": false
     },
     {
@@ -149,9 +152,9 @@
       "testName": "should navigate to Getting Started",
       "history": [
         {
-          "runId": "2026-05-12-002648",
+          "runId": "2026-05-12-004251",
           "status": "passed",
-          "duration": 3036,
+          "duration": 2029,
           "retries": 0,
           "wasFlaky": false
         }
@@ -165,9 +168,9 @@
       "testName": "should search documentation",
       "history": [
         {
-          "runId": "2026-05-12-002648",
+          "runId": "2026-05-12-004251",
           "status": "passed",
-          "duration": 1653,
+          "duration": 1295,
           "retries": 0,
           "wasFlaky": false
         }
@@ -181,9 +184,9 @@
       "testName": "should fail intentionally - missing element",
       "history": [
         {
-          "runId": "2026-05-12-002648",
+          "runId": "2026-05-12-004251",
           "status": "passed",
-          "duration": 1167,
+          "duration": 735,
           "retries": 0,
           "wasFlaky": false
         }
@@ -197,7 +200,7 @@
       "testName": "should be skipped",
       "history": [
         {
-          "runId": "2026-05-12-002648",
+          "runId": "2026-05-12-004251",
           "status": "skipped",
           "duration": 0,
           "retries": 0,
@@ -209,13 +212,13 @@
       "wasEverFlaky": false
     },
     {
-      "testId": "playwright:firefox > example.spec.ts > Playwright Website Tests > should fail with timeout",
-      "testName": "should fail with timeout",
+      "testId": "playwright:firefox > example.spec.ts > Playwright Website Tests > should be flaky",
+      "testName": "should be flaky",
       "history": [
         {
-          "runId": "2026-05-12-002648",
+          "runId": "2026-05-12-004251",
           "status": "passed",
-          "duration": 1048,
+          "duration": 1124,
           "retries": 0,
           "wasFlaky": false
         }
@@ -225,21 +228,20 @@
       "wasEverFlaky": false
     },
     {
-      "testId": "playwright:firefox > example.spec.ts > Playwright Website Tests > should be flaky",
-      "testName": "should be flaky",
+      "testId": "playwright:firefox > example.spec.ts > Playwright Website Tests > should fail with timeout",
+      "testName": "should fail with timeout",
       "history": [
         {
-          "runId": "2026-05-12-002648",
-          "status": "failed",
-          "duration": 817,
-          "retries": 1,
-          "wasFlaky": true
+          "runId": "2026-05-12-004251",
+          "status": "passed",
+          "duration": 1471,
+          "retries": 0,
+          "wasFlaky": false
         }
       ],
       "flakyScore": 0,
-      "lastStatus": "failed",
-      "wasEverFlaky": true,
-      "lastFlakyRunId": "2026-05-12-002648"
+      "lastStatus": "passed",
+      "wasEverFlaky": false
     }
   ],
   "migrationVersion": 1
