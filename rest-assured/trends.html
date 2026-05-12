@@ -1052,7 +1052,7 @@
             <div class="header-right" style="display: flex; flex-direction: column; align-items: flex-end; gap: 0;">
                 
                 <div class="subtitle">
-                    Latest Run on <span id="timestamp" data-time="2026-05-12T00:17:56.188Z"></span>
+                    Latest Run on <span id="timestamp" data-time="2026-05-12T00:26:48.407Z"></span>
                 </div>
                 
                 <div style="display: flex; align-items: center; gap: 1rem;">
@@ -1208,7 +1208,7 @@
                   <tbody>
                       
         <tr>
-            <td><span class="activity-date" data-time="2026-05-12T00:17:56.188Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-12T00:26:48.407Z">Loading...</span></td>
             <td style="color: var(--color-flaky); font-weight: 600;">80%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 8</span>
@@ -1451,7 +1451,7 @@ function closeModal() {
         if (passRateCtx) {
             passRateChart = new Chart(passRateCtx, {
                 type: 'line',
-                data: {"labels":[["05/08/2026","23:10"],["05/09/2026","23:10"],["05/10/2026","23:10"],["05/12/2026","00:17"]],"datasets":[{"label":"Pass Rate %","data":[70,60,60,80],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","tension":0.3,"fill":true}]},
+                data: {"labels":[["05/08/2026","23:10"],["05/09/2026","23:10"],["05/10/2026","23:10"],["05/12/2026","00:26"]],"datasets":[{"label":"Pass Rate %","data":[70,60,60,80],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","tension":0.3,"fill":true}]},
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -1501,7 +1501,7 @@ function closeModal() {
         if (distributionCtx) {
             distributionChart = new Chart(distributionCtx, {
                 type: 'bar',
-                data: {"labels":[["05/08/2026","23:10"],["05/09/2026","23:10"],["05/10/2026","23:10"],["05/12/2026","00:17"]],"datasets":[{"label":"Passed","data":[7,6,6,8],"backgroundColor":"#10b981"},{"label":"Failed","data":[1,2,0,0],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[0,0,0,0],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,4,2],"backgroundColor":"#6b7280"}]},
+                data: {"labels":[["05/08/2026","23:10"],["05/09/2026","23:10"],["05/10/2026","23:10"],["05/12/2026","00:26"]],"datasets":[{"label":"Passed","data":[7,6,6,8],"backgroundColor":"#10b981"},{"label":"Failed","data":[1,2,0,0],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[0,0,0,0],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,4,2],"backgroundColor":"#6b7280"}]},
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -1608,7 +1608,7 @@ function closeModal() {
         }
 
         // Date range filter function
-        const allRuns = [{"id":"demo-1778541007740-0","timestamp":1778281807740,"duration":9650,"total":10,"passed":7,"failed":1,"skipped":2,"flaky":0,"passRate":70,"environment":{"ci":"false"}},{"id":"demo-1778541007754-1","timestamp":1778368207740,"duration":9650,"total":10,"passed":6,"failed":2,"skipped":2,"flaky":0,"passRate":60,"environment":{"ci":"false"}},{"id":"demo-1778541007762-2","timestamp":1778454607740,"duration":9650,"total":10,"passed":6,"failed":0,"skipped":4,"flaky":0,"passRate":60,"environment":{"ci":"false"}},{"id":"cli-1778545076188","timestamp":1778545076188,"duration":9650,"total":10,"passed":8,"failed":0,"skipped":2,"flaky":0,"passRate":80,"environment":{"ci":"false"}}];
+        const allRuns = [{"id":"demo-1778541007740-0","timestamp":1778281807740,"duration":9650,"total":10,"passed":7,"failed":1,"skipped":2,"flaky":0,"passRate":70,"environment":{"ci":"false"}},{"id":"demo-1778541007754-1","timestamp":1778368207740,"duration":9650,"total":10,"passed":6,"failed":2,"skipped":2,"flaky":0,"passRate":60,"environment":{"ci":"false"}},{"id":"demo-1778541007762-2","timestamp":1778454607740,"duration":9650,"total":10,"passed":6,"failed":0,"skipped":4,"flaky":0,"passRate":60,"environment":{"ci":"false"}},{"id":"cli-1778545608407","timestamp":1778545608407,"duration":9650,"total":10,"passed":8,"failed":0,"skipped":2,"flaky":0,"passRate":80,"environment":{"ci":"false"}}];
         let currentFilter = 'last20';
 
         function filterByDateRange(filter) {
