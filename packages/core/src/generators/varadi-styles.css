@@ -616,9 +616,6 @@
         visibility: hidden;
         opacity: 0;
         position: absolute;
-        right: 0;
-        top: 100%;
-        margin-top: 0.5rem;
         background-color: var(--color-surface);
         color: var(--color-text);
         padding: 0.75rem 1rem;
@@ -634,6 +631,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
+        /* Position is dynamically set by JavaScript */
     }
 
     .info-tooltip:hover .tooltip-text {

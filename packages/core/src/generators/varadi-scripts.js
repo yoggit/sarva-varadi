@@ -46,6 +46,58 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.innerHTML = '<img id="modalImage" onclick="event.stopPropagation()">';
     document.body.appendChild(modal);
 
+    // Dynamic tooltip positioning to prevent edge trimming
+    document.querySelectorAll('.info-tooltip').forEach(tooltip => {
+        tooltip.addEventListener('mouseenter', function() {
+            const tooltipText = this.querySelector('.tooltip-text');
+            if (!tooltipText) return;
+
+            // Reset position classes
+            tooltipText.style.cssText = '';
+
+            const iconRect = this.getBoundingClientRect();
+            const tooltipWidth = 450; // From CSS
+            const tooltipHeight = tooltipText.offsetHeight || 100;
+            const margin = 8; // spacing from icon
+
+            const viewport = {
+                width: window.innerWidth,
+                height: window.innerHeight
+            };
+
+            // Calculate available space in each direction
+            const spaceTop = iconRect.top;
+            const spaceBottom = viewport.height - iconRect.bottom;
+            const spaceLeft = iconRect.left;
+            const spaceRight = viewport.width - iconRect.right;
+
+            // Determine best vertical position (above or below)
+            const preferAbove = spaceTop > spaceBottom && spaceTop > tooltipHeight + margin;
+
+            // Determine best horizontal alignment
+            let position = '';
+            if (preferAbove) {
+                position = 'bottom: 100%; margin-bottom: ' + margin + 'px;';
+            } else {
+                position = 'top: 100%; margin-top: ' + margin + 'px;';
+            }
+
+            // Horizontal alignment: try right-align first, then left-align if not enough space
+            if (iconRect.right >= tooltipWidth) {
+                // Right-align tooltip (tooltip extends left from icon)
+                position += ' right: 0;';
+            } else if (spaceRight >= tooltipWidth) {
+                // Left-align tooltip (tooltip extends right from icon)
+                position += ' left: 0;';
+            } else {
+                // Center on icon if neither side has full space
+                position += ' left: 50%; transform: translateX(-50%);';
+            }
+
+            tooltipText.style.cssText = position;
+        });
+    });
+
     // Theme toggle functionality
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
