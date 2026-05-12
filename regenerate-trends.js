@@ -40,6 +40,7 @@ function regenerateTrends(reportDir, title) {
   }
 
   console.log(`  ✓ Found ${history.runs.length} historical runs`);
+  console.log(`  📊 Run IDs: ${history.runs.map(r => r.id).slice(0, 5).join(', ')}${history.runs.length > 5 ? '...' : ''}`);
 
   // Get the latest run metadata
   const latestRun = history.runs.reduce((latest, run) =>
