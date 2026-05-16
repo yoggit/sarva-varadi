@@ -451,6 +451,167 @@ Add to `pom.xml`:
 </details>
 
 <details>
+<summary>🔌 RestAssured + Maven Integration Guide</summary>
+
+<br>
+
+### Prerequisites
+- Java 11+
+- Maven 3.6+
+- Node.js (install from https://nodejs.org)
+- Sarva-Varadi cloned locally:
+```bash
+  git clone https://github.com/yoggit/sarva-varadi.git
+  cd sarva-varadi
+  npm install
+  npm run build
+```
+
+---
+
+### Step 1 — Copy the Java Listener into your project
+
+Create `src/test/java/SarvaVaradiListener.java` and copy the listener code from [`packages/rest-assured/README.md`](packages/rest-assured/README.md).
+
+---
+
+### Step 2 — Add dependencies to `pom.xml`
+
+```xml
+
+    
+        io.rest-assured
+        rest-assured
+        5.3.2
+        test
+    
+    
+        org.testng
+        testng
+        7.8.0
+        test
+    
+    
+        com.google.code.gson
+        gson
+        2.10.1
+        test
+    
+
+```
+
+---
+
+### Step 3 — Add plugins to `pom.xml`
+
+```xml
+
+    
+
+        
+        
+            org.apache.maven.plugins
+            maven-surefire-plugin
+            3.5.4
+            
+                true
+            
+        
+
+        
+        
+            org.codehaus.mojo
+            exec-maven-plugin
+            3.1.0
+            
+                
+                    generate-sarva-report
+                    test
+                    
+                        exec
+                    
+                    
+                        node
+                        
+                            ${user.home}/<local_repo_path>/sarva-varadi/packages/core/dist/cli.js
+                            generate
+                            --input
+                            ${project.basedir}/sarva-varadi-results/test-results.json
+                            --output
+                            ${project.basedir}/sarva-report
+                        
+                    
+                
+            
+        
+
+    
+
+```
+
+> ⚠️ Update the first `<argument>` to match where you cloned sarva-varadi on your machine:
+> - **macOS/Linux:** `/<local_repo_path>/sarva-varadi/packages/core/dist/cli.js`
+> - **Windows:** `C:\<local_repo_path>\sarva-varadi\packages\core\dist\cli.js`
+
+---
+
+### Step 4 — Add listener to `testng.xml`
+
+```xml
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+    
+        
+    
+    
+        
+            
+        
+    
+
+```
+
+---
+
+### Step 5 — Run tests
+
+```bash
+mvn test
+```
+
+This will:
+1. ✅ Run all TestNG tests
+2. ✅ Write results to `sarva-varadi-results/test-results.json`
+3. ✅ Auto-generate the HTML report at `sarva-report/index.html`
+
+---
+
+### Step 6 — Open the report
+
+```bash
+# macOS
+open sarva-report/index.html
+
+# Windows
+start sarva-report/index.html
+
+# Linux
+xdg-open sarva-report/index.html
+```
+
+---
+
+### Project structure after running
+your-project/
+├── sarva-varadi-results/
+│   └── test-results.json     ← raw test data collected by listener
+└── sarva-report/
+├── index.html             ← latest run report  ✅ open this
+└── trends.html            ← historical trends dashboard
+
+</details>
+
+<details>
 <summary><b>🌐 Selenium Configuration (WebDriver + TestNG)</b></summary>
 
 ### Installation
