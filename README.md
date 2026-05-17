@@ -226,66 +226,29 @@ npm install --save-dev @sarva-varadi/core @sarva-varadi/playwright
 
 ### Setup
 
-Add to your `playwright.config.ts`:
+In your existing `playwright.config.ts`, add `@sarva-varadi/playwright` to the `reporter` array — keep any existing reporters you already have:
 
 ```typescript
-import { defineConfig, devices } from '@playwright/test';
-
-export default defineConfig({
-  reporter: [
-    ['list'],
-    ['@sarva-varadi/playwright', {
-      outputFolder: 'sarva-report',
-      title: 'My Test Report',
-      maskSensitiveData: false,   // set true to mask passwords/tokens in step titles
-      history: {
-        enabled: true,
-        maxRuns: 30,
-        retentionDays: 90,
-      },
-      trends: {
-        enabled: true,
-        showInMainReport: true,
-      },
-    }]
-  ],
-  use: {
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    trace: 'on-first-retry',
-  },
-  // Configure browsers for parallel execution
-  projects: [
-    {
-      name: 'chromium',
-      use: { browserName: 'chromium' },
+reporter: [
+  ['html'],                        // keep your existing reporters
+  ['allure-playwright'],           // keep your existing reporters
+  ['@sarva-varadi/playwright', {
+    outputFolder: 'sarva-report',
+    title: 'My Test Report',
+    maskSensitiveData: false,      // set true to mask passwords/tokens in step titles
+    history: {
+      enabled: true,
+      maxRuns: 30,
+      retentionDays: 90,
     },
-    {
-      name: 'firefox',
-      use: { browserName: 'firefox' },
+    trends: {
+      enabled: true,
     },
-    // Uncomment to enable additional browsers
-    // {
-    //   name: 'webkit',
-    //   use: { browserName: 'webkit' },
-    // },
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     browserName: 'chromium',
-    //     ...devices['Pixel 5'],
-    //   },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: {
-    //     browserName: 'webkit',
-    //     ...devices['iPhone 12'],
-    //   },
-    // },
-  ],
-});
+  }],
+],
 ```
+
+> 💡 `@sarva-varadi/playwright` works alongside other reporters such as `html`, `allure-playwright`, or `playwright-html-reporter` — all reporters in the array run together.
 
 ### Features
 
@@ -308,6 +271,8 @@ export default defineConfig({
 ```bash
 npx playwright test
 ```
+
+> ⚠️ **Do not pass `--reporter` on the command line** — doing so overrides all reporters in `playwright.config.ts`, which means only that one reporter runs and sarva-varadi is skipped. Always run without `--reporter` to use your full config.
 
 ### Open Report
 
