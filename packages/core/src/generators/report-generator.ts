@@ -117,7 +117,7 @@ export class ReportGenerator {
   }
 
   private copyLogo(outputDir: string): void {
-    const logoSource = path.join(__dirname, '../../screenshots/logo.svg');
+    const logoSource = path.join(__dirname, '../screenshots/logo.svg');
     const logoDest = path.join(outputDir, 'logo.svg');
 
     if (fs.existsSync(logoSource)) {

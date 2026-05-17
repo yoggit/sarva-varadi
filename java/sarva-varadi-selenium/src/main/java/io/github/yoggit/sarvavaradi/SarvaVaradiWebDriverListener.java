@@ -33,6 +33,7 @@ public class SarvaVaradiWebDriverListener implements WebDriverListener {
         this.maskSensitive = SarvaVaradiConfig.isMaskSensitiveData();
         this.screenshotMode = SarvaVaradiConfig.getScreenshotMode();
         createScreenshotDirectory();
+        SarvaVaradiContext.setListener(this);
     }
 
     private void createScreenshotDirectory() {

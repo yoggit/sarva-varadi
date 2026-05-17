@@ -166,16 +166,27 @@ public class SarvaVaradiSeleniumListener implements ITestListener {
     }
 
     private SarvaVaradiWebDriverListener extractWebDriverListener(Object instance) {
+        // Thread-local registry: works regardless of driver factory pattern
+        SarvaVaradiWebDriverListener fromContext = SarvaVaradiContext.getListener();
+        if (fromContext != null) return fromContext;
+
+        // Fallback: search instance and superclass fields (simple per-test pattern)
         if (instance == null) return null;
         try {
-            for (java.lang.reflect.Field field : instance.getClass().getDeclaredFields()) {
-                if (SarvaVaradiWebDriverListener.class.isAssignableFrom(field.getType())) {
-                    field.setAccessible(true);
-                    Object val = field.get(instance);
-                    if (val instanceof SarvaVaradiWebDriverListener) {
-                        return (SarvaVaradiWebDriverListener) val;
+            Class<?> clazz = instance.getClass();
+            while (clazz != null && clazz != Object.class) {
+                for (java.lang.reflect.Field field : clazz.getDeclaredFields()) {
+                    if (SarvaVaradiWebDriverListener.class.isAssignableFrom(field.getType())) {
+                        field.setAccessible(true);
+                        Object val = java.lang.reflect.Modifier.isStatic(field.getModifiers())
+                            ? field.get(null)
+                            : field.get(instance);
+                        if (val instanceof SarvaVaradiWebDriverListener) {
+                            return (SarvaVaradiWebDriverListener) val;
+                        }
                     }
                 }
+                clazz = clazz.getSuperclass();
             }
         } catch (Exception ignored) {}
         return null;
