@@ -171,6 +171,18 @@ After execution, the core generator creates beautiful HTML reports from the coll
 
 > 🚀 **New to Sarva-Varadi?** Check out the [QUICKSTART.md](QUICKSTART.md) guide!
 
+### Compatibility
+
+| Tool | Minimum Version |
+|------|----------------|
+| Java | 11+ |
+| Maven | 3.6+ |
+| Node.js | 16+ (required for all Java integrations — used to generate the HTML report) |
+| RestAssured | 5.x+ |
+| Selenium | 4.x+ (uses `EventFiringDecorator` — not available in Selenium 3) |
+| TestNG | 7.x+ |
+| Playwright | 1.20+ |
+
 ### For Playwright
 
 ```bash
@@ -184,6 +196,20 @@ Add to your `pom.xml` — see the [RestAssured + Maven Integration Guide](#resta
 ### For Selenium (WebDriver + TestNG)
 
 Add to your `pom.xml` — see the [Selenium + Maven Integration Guide](#selenium-maven-guide) below.
+
+---
+
+## 📋 What Gets Captured
+
+Understanding what is automatic vs what requires an extra setup step saves a lot of confusion:
+
+| | Automatic (Steps 1–3) | Requires Step 4 |
+|---|---|---|
+| **RestAssured** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection | HTTP request/response details shown as test steps |
+| **Selenium** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection | Browser actions (clicks, navigation, inputs) + screenshots shown as test steps |
+| **Playwright** | Everything — steps, screenshots, video, trace captured natively | Nothing extra needed |
+
+> Steps 1–3 give you a working report. Step 4 is what adds the rich detail inside each test.
 
 ---
 
@@ -425,6 +451,8 @@ mvn test -Dsarva.maskSensitiveData=true
 
 ### Step 1 — Add repository & dependency to `pom.xml`
 
+Pulls the sarva-varadi library from JitPack so Maven can resolve it at compile time.
+
 ```xml
 <repositories>
     <repository>
@@ -461,6 +489,10 @@ mvn test -Dsarva.maskSensitiveData=true
 ---
 
 ### Step 2 — Add report generation plugin to `pom.xml`
+
+Automatically generates the HTML report after every `mvn test` run — no manual step needed.
+
+> **Node.js required:** This plugin runs `npx @sarva-varadi/core generate` after tests to produce the HTML report. Node.js must be installed on the machine running `mvn test`. [Download Node.js](https://nodejs.org)
 
 ```xml
 <build>
@@ -511,6 +543,8 @@ mvn test -Dsarva.maskSensitiveData=true
 
 ### Step 3 — Add listener to `testng.xml`
 
+Hooks into TestNG so every test start, pass, fail, and skip is recorded to the results file.
+
 ```xml
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="API Test Suite">
@@ -528,6 +562,12 @@ mvn test -Dsarva.maskSensitiveData=true
 ---
 
 ### Step 4 — Add request capture filter to your test setup
+
+Captures HTTP request/response details as test steps — without this, tests appear in the report with no detail inside them. Add this to your `@BeforeClass` or `@BeforeSuite` setup method — typically in your base test class (e.g. `BaseTest.java`).
+
+| Without Step 4 | With Step 4 |
+|---|---|
+| Test listed as pass/fail, no detail | Each test shows full HTTP request URL, method, headers, body, response status & body |
 
 ```java
 import io.github.yoggit.sarvavaradi.RestAssuredRequestCapture;
@@ -691,6 +731,8 @@ mvn test
 
 ### Step 1 — Add repository & dependency to `pom.xml`
 
+Pulls the sarva-varadi library from JitPack so Maven can resolve it at compile time.
+
 ```xml
 <repositories>
     <repository>
@@ -726,6 +768,10 @@ mvn test
 ---
 
 ### Step 2 — Add report generation plugin to `pom.xml`
+
+Automatically generates the HTML report after every `mvn test` run — no manual step needed.
+
+> **Node.js required:** This plugin runs `npx @sarva-varadi/core generate` after tests to produce the HTML report. Node.js must be installed on the machine running `mvn test`. [Download Node.js](https://nodejs.org)
 
 ```xml
 <build>
@@ -776,6 +822,8 @@ mvn test
 
 ### Step 3 — Add listener to `testng.xml`
 
+Hooks into TestNG so every test start, pass, fail, and skip is recorded to the results file.
+
 ```xml
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Selenium Test Suite">
@@ -793,6 +841,12 @@ mvn test
 ---
 
 ### Step 4 — Wrap your WebDriver in test setup
+
+Intercepts browser actions (clicks, navigation, form inputs) as test steps — without this, tests appear in the report with no action detail inside them. Add this to whichever class creates your `WebDriver` — typically a base test class (e.g. `BaseTest.java`) or a centralized driver factory (e.g. `DriverManager.java`, `BrowserManager.java`).
+
+| Without Step 4 | With Step 4 |
+|---|---|
+| Test listed as pass/fail, no detail | Each test shows browser actions: navigations, clicks, element finds, inputs, and failure screenshots |
 
 Pass the **raw/unwrapped** driver to both the listener and `.decorate()` — both must receive the same unwrapped instance. Always use a separate `baseDriver` variable to keep the raw and decorated instances distinct.
 
@@ -861,30 +915,6 @@ That's it. This will:
 open sarva-report/index.html       # macOS
 start sarva-report/index.html      # Windows
 xdg-open sarva-report/index.html   # Linux
-```
-
-### Optional — `sarva-varadi.properties`
-
-Drop a `sarva-varadi.properties` file in your project root to configure behaviour:
-
-```properties
-# ── Collection ──────────────────────────────────────────────────────────
-sarva.outputDir=sarva-varadi-results          # where test-results.json is written
-sarva.screenshotDir=sarva-varadi-results/screenshots  # where screenshot files are saved
-sarva.screenshot=on-failure                   # always | on-failure | never
-sarva.maskSensitiveData=false                 # true to mask passwords/tokens in logs
-sarva.maxRetryCount=2                         # retries before marking a test as failed
-
-# ── Report display ───────────────────────────────────────────────────────
-sarva.report.title=My Test Suite              # title shown in the HTML report header
-sarva.report.showStackTrace=true              # show full stack traces in the report
-sarva.report.embedAttachments=true            # embed screenshots inline in the report
-
-# ── History & trends ────────────────────────────────────────────────────
-sarva.report.maxRuns=20                       # max past runs to keep (oldest deleted first)
-sarva.report.retentionDays=90                 # max age in days (whichever limit hits first wins)
-sarva.report.history=true                     # enable historical run tracking
-sarva.report.trends=true                      # enable trend analysis across runs
 ```
 
 📂 **Demo project:** [`demo-selenium/`](demo-selenium/)
@@ -1083,6 +1113,8 @@ Navigation between views via header buttons.
 
 ## ⚙️ Configuration Options
 
+### Node.js / Playwright
+
 <details>
 <summary><b>View all configuration options</b></summary>
 
@@ -1129,6 +1161,53 @@ Navigation between views via header buttons.
 | `notifications.email` | object | - | SMTP email configuration |
 
 **📖 See [NOTIFICATIONS.md](NOTIFICATIONS.md) for detailed setup guide**
+
+</details>
+
+### Java (RestAssured / Selenium) — `sarva-varadi.properties`
+
+<details>
+<summary><b>View all configuration properties</b></summary>
+
+<br>
+
+Drop a `sarva-varadi.properties` file in your project root to configure behaviour. System properties (`-D` flags) always override file values.
+
+```properties
+# ── Output ──────────────────────────────────────────────────────────────
+sarva.outputDir=sarva-varadi-results          # [RestAssured, Selenium] where test-results.json is written
+
+# ── Sensitive data masking ───────────────────────────────────────────────
+sarva.maskSensitiveData=false                 # [RestAssured, Selenium] mask passwords/tokens/API keys with ***
+                                              # [Playwright] set maskSensitiveData: true in playwright.config.ts
+
+# ── Screenshots ─────────────────────────────────────────────────────────
+sarva.screenshot=on-failure                   # [Selenium] always | on-failure | never
+sarva.screenshotDir=sarva-varadi-results/screenshots  # [Selenium] where screenshot files are saved
+                                              # [Playwright] use: { screenshot: 'on' | 'only-on-failure' | 'off' } in playwright.config.ts
+
+# ── Video recording ─────────────────────────────────────────────────────
+                                              # [Playwright] use: { video: 'on' | 'retain-on-failure' | 'on-first-retry' | 'off' } in playwright.config.ts
+
+# ── Trace recording ─────────────────────────────────────────────────────
+                                              # [Playwright] use: { trace: 'on' | 'retain-on-failure' | 'on-first-retry' | 'off' } in playwright.config.ts
+
+# ── Flaky test detection & retry ─────────────────────────────────────────
+sarva.maxRetryCount=2                         # [RestAssured, Selenium] retries before marking a test failed
+                                              # Requires @Test(retryAnalyzer = SarvaVaradiRetryAnalyzer.class) on the method
+                                              # [Playwright] set retries: 2 in playwright.config.ts
+
+# ── Report: display ─────────────────────────────────────────────────────
+sarva.report.title=My Test Suite              # [All tools] title shown in the HTML report header
+sarva.report.showStackTrace=true              # [All tools] show full stack traces in the report
+sarva.report.embedAttachments=true            # [All tools] embed screenshots/videos inline in the report
+
+# ── Report: history & trends ────────────────────────────────────────────
+sarva.report.history=true                     # [All tools] enable historical run tracking
+sarva.report.trends=true                      # [All tools] enable trend analysis across runs
+sarva.report.maxRuns=20                       # [All tools] max past runs to keep (oldest deleted first)
+sarva.report.retentionDays=90                 # [All tools] max age in days (whichever limit hits first wins)
+```
 
 </details>
 
@@ -1419,6 +1498,59 @@ cd ../playwright && npm link @sarva-varadi/core && npm link
 # In your test project
 npm link @sarva-varadi/core @sarva-varadi/playwright
 ```
+
+## 🔧 Troubleshooting
+
+<details>
+<summary><b>Report not generated — Node.js not found / npx command fails</b></summary>
+
+The `exec-maven-plugin` runs `npx @sarva-varadi/core generate` after tests to produce the HTML report. This requires Node.js to be installed on the machine running `mvn test`.
+
+Install Node.js from [nodejs.org](https://nodejs.org), then verify with:
+```bash
+npx --version
+```
+
+</details>
+
+<details>
+<summary><b>Tests appear in the report but with no steps or detail inside them</b></summary>
+
+Step 4 is missing or not wired correctly:
+
+- **RestAssured:** `RestAssured.filters(new RestAssuredRequestCapture())` must be called in your `@BeforeClass` / `@BeforeSuite` setup method (e.g. `BaseTest.java`).
+- **Selenium:** Your `WebDriver` must be wrapped with `EventFiringDecorator` + `SarvaVaradiWebDriverListener` before being used in tests. See Step 4 in the [Selenium + Maven Integration Guide](#selenium-maven-guide).
+
+</details>
+
+<details>
+<summary><b>Cannot resolve io.github.yoggit.sarvavaradi.* — import not found in IDE</b></summary>
+
+This happens when the dependency has `<scope>test</scope>` but the class using it is in `src/main/java`. Test-scoped dependencies are invisible to main source files.
+
+Fix: remove `<scope>test</scope>` from the sarva-varadi dependency in `pom.xml` so it defaults to compile scope.
+
+</details>
+
+<details>
+<summary><b>Report not generated when some tests fail</b></summary>
+
+By default, Maven stops the build on test failure before the report generation plugin runs. Set `testFailureIgnore` to `true` in the `maven-surefire-plugin` configuration:
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.0.0</version>
+    <configuration>
+        <testFailureIgnore>true</testFailureIgnore>
+    </configuration>
+</plugin>
+```
+
+</details>
+
+---
 
 ## 🤝 Contributing
 
