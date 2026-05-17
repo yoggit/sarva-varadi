@@ -1,6 +1,6 @@
 package com.example.selenium.tests;
 
-import io.github.yoggit.SarvaVaradiWebDriverListener;
+import io.github.yoggit.sarvavaradi.SarvaVaradiWebDriverListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +12,6 @@ import org.testng.annotations.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class DemoTests {
     private WebDriver driver;
@@ -69,96 +68,83 @@ public class DemoTests {
     }
 
     @Test(priority = 1)
-    public void testSuccessfulLogin() {
-        driver.get("https://example.com");
-        driver.findElement(By.id("username")).sendKeys("testuser");
-        driver.findElement(By.id("password")).sendKeys("password123");
-        driver.findElement(By.id("login-btn")).click();
+    public void testHomepageLoads() {
+        driver.get("https://www.selenium.dev/");
 
         // Fail in 'half-fail' mode, occasionally in 'quarter-fail'
         if (RUN_MODE.equals("half-fail") || (RUN_MODE.equals("quarter-fail") && Math.random() < 0.3)) {
             Assert.fail("Demo failure for trend variation");
         }
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("dashboard"));
+        Assert.assertTrue(driver.getTitle().contains("Selenium"), "Page title should contain Selenium");
     }
 
     @Test(priority = 2)
-    public void testLogout() {
-        driver.get("https://example.com/dashboard");
-        driver.findElement(By.id("logout-link")).click();
+    public void testDocumentationPageLoads() {
+        driver.get("https://www.selenium.dev/documentation/");
 
         // Pass in 'all-pass' mode, fail otherwise
         if (!RUN_MODE.equals("all-pass")) {
-            Assert.fail("Logout verification failed");
+            Assert.fail("Documentation page verification failed");
         }
 
-        Assert.assertTrue(driver.findElement(By.id("login-form")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.tagName("h1")).isDisplayed(),
+                "Documentation heading should be visible");
     }
 
     @Test(priority = 3)
-    public void testAddToCart() {
-        driver.get("https://example.com/products");
-        driver.findElement(By.className("add-to-cart")).click();
+    public void testDownloadsPageLoads() {
+        driver.get("https://www.selenium.dev/downloads/");
 
-        // Pass in 'all-pass' and 'quarter-fail', timeout in 'half-fail'
+        // Pass in 'all-pass' and 'quarter-fail', fail in 'half-fail'
         if (RUN_MODE.equals("half-fail")) {
-            try {
-                Thread.sleep(100);
-                driver.findElement(By.id("element-that-never-appears"));
-                Assert.fail("Element should not exist");
-            } catch (Exception e) {
-                throw new RuntimeException("Demo timeout failure", e);
-            }
+            Assert.fail("Downloads page failed to load expected content");
         }
 
-        Assert.assertTrue(driver.findElement(By.className("cart-count")).isDisplayed());
+        Assert.assertTrue(driver.getTitle().length() > 0, "Downloads page should have a title");
     }
 
     @Test(priority = 4)
-    public void testSearchProducts() {
-        driver.get("https://example.com/products");
-        driver.findElement(By.name("search")).sendKeys("laptop");
-        driver.findElement(By.id("search-btn")).click();
+    public void testWebDriverDocsContent() {
+        driver.get("https://www.selenium.dev/documentation/webdriver/");
 
         // Pass in 'all-pass' and 'quarter-fail', fail in 'half-fail'
         if (RUN_MODE.equals("all-pass") || RUN_MODE.equals("quarter-fail")) {
-            Assert.assertTrue(true); // Pass
+            Assert.assertTrue(driver.findElement(By.tagName("h1")).isDisplayed(),
+                    "WebDriver docs heading should be visible");
         } else {
-            Assert.fail("Search results not found");
+            Assert.fail("WebDriver docs content not found");
         }
     }
 
     @Test(priority = 5)
-    public void testCheckoutFlow() {
-        driver.get("https://example.com/checkout");
-        driver.findElement(By.id("card-number")).sendKeys("4111111111111111");
-        driver.findElement(By.id("confirm-order")).click();
+    public void testEcosystemPageLoads() {
+        driver.get("https://www.selenium.dev/ecosystem/");
 
         // Pass in 'all-pass', fail in 'half-fail', pass in 'quarter-fail'
         if (RUN_MODE.equals("all-pass") || RUN_MODE.equals("quarter-fail")) {
-            Assert.assertTrue(true); // Pass
+            Assert.assertTrue(driver.getTitle().length() > 0, "Ecosystem page should have a title");
         } else {
-            Assert.fail("Checkout failed");
+            Assert.fail("Ecosystem page failed to load");
         }
     }
 
     @Test(priority = 6, enabled = false)
-    public void testSkippedFeature() {
+    public void testBlogPagePagination() {
         // This test is always skipped
-        driver.get("https://example.com/new-feature");
+        driver.get("https://www.selenium.dev/blog/");
         Assert.assertTrue(false, "This should be skipped");
     }
 
     @Test(priority = 7, invocationCount = 2, successPercentage = 50)
-    public void testFlakyBehavior() {
-        driver.get("https://example.com/api/status");
+    public void testFlakyPageTitle() {
+        driver.get("https://www.selenium.dev/");
 
         // Flaky: fails randomly 50% of the time
         if (Math.random() < 0.5) {
             Assert.fail("Flaky test failed");
         }
 
-        Assert.assertTrue(driver.getTitle().length() > 0);
+        Assert.assertTrue(driver.getTitle().length() > 0, "Page title should not be empty");
     }
 }

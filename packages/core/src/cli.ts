@@ -32,8 +32,28 @@ async function main() {
   }
 }
 
+function loadPropertiesFile(): Record<string, string> {
+  const locations = ['sarva-varadi.properties', 'src/test/resources/sarva-varadi.properties', '../sarva-varadi.properties'];
+  for (const loc of locations) {
+    if (fs.existsSync(loc)) {
+      const props: Record<string, string> = {};
+      fs.readFileSync(loc, 'utf-8').split('\n').forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) return;
+        const eq = trimmed.indexOf('=');
+        if (eq === -1) return;
+        props[trimmed.slice(0, eq).trim()] = trimmed.slice(eq + 1).trim();
+      });
+      console.log(`✅ Sarva-Varadi: Loaded config from ${loc}`);
+      return props;
+    }
+  }
+  return {};
+}
+
 async function handleGenerate(args: string[]) {
   const options = parseArgs(args);
+  const props = loadPropertiesFile();
 
   if (!options.input) {
     console.error('Error: --input is required');
@@ -103,15 +123,18 @@ async function handleGenerate(args: string[]) {
 
     const generator = new ReportGenerator({
       outputFolder: options.output,
-      title: options.title || 'Sarva-Varadi Test Report',
+      title: options.title || props['sarva.report.title'] || 'Sarva-Varadi Test Report',
+      showStackTrace: props['sarva.report.showStackTrace'] !== 'false',
+      embedAttachments: props['sarva.report.embedAttachments'] !== 'false',
+      maskSensitiveData: props['sarva.report.maskSensitiveData'] === 'true',
       history: {
-        enabled: true,
-        maxRuns: 20,
-        retentionDays: 90,
+        enabled: props['sarva.report.history'] !== 'false',
+        maxRuns: props['sarva.report.maxRuns'] ? parseInt(props['sarva.report.maxRuns']) : 20,
+        retentionDays: props['sarva.report.retentionDays'] ? parseInt(props['sarva.report.retentionDays']) : 90,
         trackPerTest: true,
       },
       trends: {
-        enabled: true,
+        enabled: props['sarva.report.trends'] !== 'false',
         showInMainReport: true,
       },
     });

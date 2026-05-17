@@ -8,43 +8,44 @@
     <artifactId>sarva-varadi-demo-selenium</artifactId>
     <version>1.0.0</version>
     <name>Sarva-Varadi Selenium Demo</name>
-    <description>Demo project for Sarva-Varadi Selenium reporter integration</description>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <selenium.version>4.16.1</selenium.version>
-        <testng.version>7.8.0</testng.version>
-        <jackson.version>2.15.2</jackson.version>
     </properties>
 
     <dependencies>
-        <!-- Selenium WebDriver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
+            <version>4.16.1</version>
         </dependency>
-
-        <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
+            <version>7.8.0</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Jackson for JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>2.15.2</version>
+        </dependency>
+
+        <!-- Sarva-Varadi Selenium listener (local install: mvn install -f java/pom.xml -DskipTests) -->
+        <!-- JitPack users: add jitpack.io repository and change version to the GitHub release tag -->
+        <dependency>
+            <groupId>io.github.yoggit</groupId>
+            <artifactId>sarva-varadi-selenium</artifactId>
+            <version>1.0.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!-- Run TestNG tests, continue build even if tests fail -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -53,7 +54,37 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
+            </plugin>
+
+            <!-- Generate Sarva-Varadi HTML report after tests -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-sarva-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Requires Node.js — install from https://nodejs.org -->
+                            <!-- End users: replace 'node .../cli.js' with: npx @sarva-varadi/core generate -->
+                            <executable>node</executable>
+                            <arguments>
+                                <argument>${project.basedir}/../packages/core/dist/cli.js</argument>
+                                <argument>generate</argument>
+                                <argument>--input</argument>
+                                <argument>${project.basedir}/sarva-varadi-results/test-results.json</argument>
+                                <argument>--output</argument>
+                                <argument>${project.basedir}/sarva-report</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

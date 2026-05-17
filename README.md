@@ -179,15 +179,11 @@ npm install --save-dev @sarva-varadi/core @sarva-varadi/playwright
 
 ### For RestAssured (API Testing)
 
-```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/rest-assured
-```
+Add to your `pom.xml` — see the [RestAssured + Maven Integration Guide](#restassured-maven-guide) below.
 
 ### For Selenium (WebDriver + TestNG)
 
-```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/selenium
-```
+Add to your `pom.xml` — see the [Selenium + Maven Integration Guide](#selenium-maven-guide) below.
 
 ---
 
@@ -215,6 +211,7 @@ export default defineConfig({
     ['@sarva-varadi/playwright', {
       outputFolder: 'sarva-report',
       title: 'My Test Report',
+      maskSensitiveData: false,   // set true to mask passwords/tokens in step titles
       history: {
         enabled: true,
         maxRuns: 30,
@@ -306,23 +303,33 @@ xdg-open sarva-report/index.html
 
 ### Installation
 
-```bash
-npm install @sarva-varadi/rest-assured @sarva-varadi/core
+Add to your `pom.xml`:
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>io.github.yoggit</groupId>
+    <artifactId>sarva-varadi-restassured</artifactId>
+    <version>v1.0.0</version>
+    <scope>test</scope>
+</dependency>
 ```
 
 ### Setup
 
-**1. Copy the TestNG Listener**
-
-Create `src/test/java/SarvaVaradiListener.java` and `src/test/java/SarvaVaradiRetryAnalyzer.java` from the [package documentation](packages/rest-assured/README.md).
-
-**2. Add to testng.xml**
+**1. Add listener to `testng.xml`**
 
 ```xml
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="API Test Suite">
     <listeners>
-        <listener class-name="SarvaVaradiListener"/>
+        <listener class-name="io.github.yoggit.sarvavaradi.SarvaVaradiListener"/>
     </listeners>
     <test name="API Tests">
         <classes>
@@ -332,62 +339,53 @@ Create `src/test/java/SarvaVaradiListener.java` and `src/test/java/SarvaVaradiRe
 </suite>
 ```
 
-**3. Configure Request Capture**
-
-Add the RestAssured filter to your test setup:
+**2. Add request capture filter to your test setup**
 
 ```java
+import io.github.yoggit.sarvavaradi.RestAssuredRequestCapture;
+import io.github.yoggit.sarvavaradi.SarvaVaradiRetryAnalyzer;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
 
 public class UserApiTest {
-    
+
     @BeforeClass
     public void setup() {
         RestAssured.baseURI = "https://api.example.com";
-        RestAssured.filters(new RestAssuredRequestCapture());
+        RestAssured.filters(new RestAssuredRequestCapture()); // captures req/response details
     }
 
     @Test
     public void testGetUser() {
-        given()
-            .when()
-            .get("/users/1")
-            .then()
-            .statusCode(200)
-            .body("name", notNullValue());
+        given().when().get("/users/1").then().statusCode(200);
     }
 
     // Enable retry for flaky test detection
     @Test(retryAnalyzer = SarvaVaradiRetryAnalyzer.class)
     public void testFlakyEndpoint() {
-        given()
-            .when()
-            .get("/users/status")
-            .then()
-            .statusCode(200);
+        given().when().get("/users/status").then().statusCode(200);
     }
 }
 ```
 
-**4. Run Tests & Generate Report**
+**3. Run Tests — report auto-generates**
 
 ```bash
-# Run tests
 mvn test
-
-# Generate report
-npx sarva-varadi generate --input sarva-varadi-results/test-results.json --output sarva-report
+# Report opens at: sarva-report/index.html
 ```
+
+> 📖 Full setup guide: see the [RestAssured + Maven Integration Guide](#restassured-maven-guide) below.
 
 ### Features
 
 - ✅ Detailed request/response capture (method, URL, headers, body)
 - ✅ Hierarchical test steps with parent-child structure
 - ✅ Automatic flaky test detection with retry tracking
-- ✅ Sensitive data masking (opt-in with `-Dsarva.maskSensitiveData=true`)
+- ✅ Detailed request/response capture (method, URL, headers, body)
+- ✅ Sensitive data masking (via `sarva-varadi.properties` or `-D` flag)
 - ✅ Historical trends and pass rate analysis
 - ✅ Works with any TestNG-based API tests
 
@@ -395,7 +393,13 @@ npx sarva-varadi generate --input sarva-varadi-results/test-results.json --outpu
 
 By default, all request/response data is captured as-is. Enable masking when needed:
 
+```properties
+# sarva-varadi.properties (persistent — recommended)
+sarva.maskSensitiveData=true
+```
+
 ```bash
+# Or as a one-off system property
 mvn test -Dsarva.maskSensitiveData=true
 ```
 
@@ -403,26 +407,34 @@ mvn test -Dsarva.maskSensitiveData=true
 - Headers: Authorization, X-API-Key, Cookie, Set-Cookie
 - Body fields: password, token, secret, apikey, credit_card, ssn
 
-### Configuration
+📂 **Demo project:** [`demo-restassured/`](demo-restassured/)
 
-Add to `package.json` for convenience:
+</details>
 
-```json
-{
-  "scripts": {
-    "test": "mvn test",
-    "report": "npx sarva-varadi generate --input sarva-varadi-results/test-results.json --output sarva-report",
-    "test:report": "npm run test && npm run report"
-  }
-}
-```
+<a id="restassured-maven-guide"></a>
+<details>
+<summary>🔌 RestAssured + Maven Integration Guide</summary>
 
-### Maven Dependencies
+<br>
 
-Add to `pom.xml`:
+> ✅ **Seamless setup** — No cloning, no hardcoded paths. Just Maven + Node.js.
+>
+> **Prerequisites:** Java 11+, Maven 3.6+, [Node.js](https://nodejs.org)
+
+---
+
+### Step 1 — Add repository & dependency to `pom.xml`
 
 ```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
 <dependencies>
+    <!-- Your existing RestAssured + TestNG dependencies -->
     <dependency>
         <groupId>io.rest-assured</groupId>
         <artifactId>rest-assured</artifactId>
@@ -435,140 +447,105 @@ Add to `pom.xml`:
         <version>7.8.0</version>
         <scope>test</scope>
     </dependency>
+
+    <!-- Sarva-Varadi: TestNG listener + RestAssured request capture -->
     <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.10.1</version>
+        <groupId>io.github.yoggit</groupId>
+        <artifactId>sarva-varadi-restassured</artifactId>
+        <version>v1.0.0</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
 ```
 
-📖 **Full documentation:** [`packages/rest-assured/README.md`](packages/rest-assured/README.md)
-
-📂 **Demo project:** [`demo-restassured/`](demo-restassured/)
-
-</details>
-
-<details>
-<summary>🔌 RestAssured + Maven Integration Guide</summary>
-
-<br>
-
-### Prerequisites
-- Java 11+
-- Maven 3.6+
-- Node.js (install from https://nodejs.org)
-- Sarva-Varadi cloned locally:
-```bash
-  git clone https://github.com/yoggit/sarva-varadi.git
-  cd sarva-varadi
-  npm install
-  npm run build
-```
-
 ---
 
-### Step 1 — Copy the Java Listener into your project
-
-Create `src/test/java/SarvaVaradiListener.java` and copy the listener code from [`packages/rest-assured/README.md`](packages/rest-assured/README.md).
-
----
-
-### Step 2 — Add dependencies to `pom.xml`
+### Step 2 — Add report generation plugin to `pom.xml`
 
 ```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0</version>
+            <configuration>
+                <suiteXmlFiles>
+                    <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                <testFailureIgnore>true</testFailureIgnore>
+            </configuration>
+        </plugin>
 
-    
-        io.rest-assured
-        rest-assured
-        5.3.2
-        test
-    
-    
-        org.testng
-        testng
-        7.8.0
-        test
-    
-    
-        com.google.code.gson
-        gson
-        2.10.1
-        test
-    
-
+        <!-- Auto-generates the HTML report after mvn test -->
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+                <execution>
+                    <id>generate-sarva-report</id>
+                    <phase>test</phase>
+                    <goals><goal>exec</goal></goals>
+                    <configuration>
+                        <!-- Windows users: change npx to npx.cmd -->
+                        <executable>npx</executable>
+                        <arguments>
+                            <argument>--yes</argument>
+                            <argument>@sarva-varadi/core</argument>
+                            <argument>generate</argument>
+                            <argument>--input</argument>
+                            <argument>${project.basedir}/sarva-varadi-results/test-results.json</argument>
+                            <argument>--output</argument>
+                            <argument>${project.basedir}/sarva-report</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 ---
 
-### Step 3 — Add plugins to `pom.xml`
-
-```xml
-
-    
-
-        
-        
-            org.apache.maven.plugins
-            maven-surefire-plugin
-            3.5.4
-            
-                true
-            
-        
-
-        
-        
-            org.codehaus.mojo
-            exec-maven-plugin
-            3.1.0
-            
-                
-                    generate-sarva-report
-                    test
-                    
-                        exec
-                    
-                    
-                        node
-                        
-                            ${user.home}/<local_repo_path>/sarva-varadi/packages/core/dist/cli.js
-                            generate
-                            --input
-                            ${project.basedir}/sarva-varadi-results/test-results.json
-                            --output
-                            ${project.basedir}/sarva-report
-                        
-                    
-                
-            
-        
-
-    
-
-```
-
-> ⚠️ Update the first `<argument>` to match where you cloned sarva-varadi on your machine:
-> - **macOS/Linux:** `/<local_repo_path>/sarva-varadi/packages/core/dist/cli.js`
-> - **Windows:** `C:\<local_repo_path>\sarva-varadi\packages\core\dist\cli.js`
-
----
-
-### Step 4 — Add listener to `testng.xml`
+### Step 3 — Add listener to `testng.xml`
 
 ```xml
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="API Test Suite">
+    <listeners>
+        <listener class-name="io.github.yoggit.sarvavaradi.SarvaVaradiListener"/>
+    </listeners>
+    <test name="API Tests">
+        <classes>
+            <class name="com.example.tests.UserApiTest"/>
+        </classes>
+    </test>
+</suite>
+```
 
-    
-        
-    
-    
-        
-            
-        
-    
+---
 
+### Step 4 — Add request capture filter to your test setup
+
+```java
+import io.github.yoggit.sarvavaradi.RestAssuredRequestCapture;
+import io.restassured.RestAssured;
+
+public class UserApiTest {
+
+    @BeforeClass
+    public void setup() {
+        RestAssured.baseURI = "https://api.example.com";
+        RestAssured.filters(new RestAssuredRequestCapture()); // captures req/response in report
+    }
+
+    @Test
+    public void testGetUser() {
+        given().when().get("/users/1").then().statusCode(200);
+    }
+}
 ```
 
 ---
@@ -579,35 +556,19 @@ Create `src/test/java/SarvaVaradiListener.java` and copy the listener code from 
 mvn test
 ```
 
-This will:
+That's it. This will:
 1. ✅ Run all TestNG tests
-2. ✅ Write results to `sarva-varadi-results/test-results.json`
-3. ✅ Auto-generate the HTML report at `sarva-report/index.html`
-
----
-
-### Step 6 — Open the report
+2. ✅ Collect results → `sarva-varadi-results/test-results.json`
+3. ✅ Auto-generate the HTML report → `sarva-report/index.html`
 
 ```bash
-# macOS
-open sarva-report/index.html
-
-# Windows
-start sarva-report/index.html
-
-# Linux
-xdg-open sarva-report/index.html
+# Open the report
+open sarva-report/index.html       # macOS
+start sarva-report/index.html      # Windows
+xdg-open sarva-report/index.html   # Linux
 ```
 
----
-
-### Project structure after running
-your-project/
-├── sarva-varadi-results/
-│   └── test-results.json     ← raw test data collected by listener
-└── sarva-report/
-├── index.html             ← latest run report  ✅ open this
-└── trends.html            ← historical trends dashboard
+📂 **Demo project:** [`demo-restassured/`](demo-restassured/)
 
 </details>
 
@@ -616,16 +577,25 @@ your-project/
 
 ### Installation
 
-```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/selenium
+Add to `pom.xml` (see the [Selenium + Maven Integration Guide](#selenium-maven-guide) below for full `pom.xml`):
+
+```xml
+<!-- JitPack repository -->
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<!-- Sarva-Varadi Selenium listener -->
+<dependency>
+    <groupId>io.github.yoggit</groupId>
+    <artifactId>sarva-varadi-selenium</artifactId>
+    <version>v1.0.0</version>
+    <scope>test</scope>
+</dependency>
 ```
-
-### Add TestNG Listener
-
-Copy the Sarva-Varadi listener files to your test project:
-- `SarvaVaradiSeleniumListener.java`
-- `SarvaVaradiWebDriverListener.java`
-- `SarvaVaradiRetryAnalyzer.java`
 
 ### Configure testng.xml
 
@@ -681,15 +651,11 @@ public class LoginTest {
 ### Run Tests & Generate Report
 
 ```bash
-# Run tests
-mvn clean test
-
-# Generate Sarva-Varadi report
-npx sarva-varadi convert \
-  --input sarva-varadi-results/test-results.json \
-  --output sarva-report \
-  --format testng-selenium
+mvn test
+# Report auto-generates at: sarva-report/index.html
 ```
+
+> The `exec-maven-plugin` in `pom.xml` generates the report automatically after tests. See the full setup in the [Selenium + Maven Integration Guide](#selenium-maven-guide) below.
 
 ### Features
 
@@ -697,9 +663,205 @@ npx sarva-varadi convert \
 - ✅ Screenshots on test failure
 - ✅ Browser information (Chrome, Firefox, Edge)
 - ✅ Flaky test detection with retry tracking
-- ✅ Sensitive data masking (opt-in with `-Dsarva.maskSensitiveData=true`)
+- ✅ Sensitive data masking (via `sarva-varadi.properties` or `-D` flag)
 
 📖 **Full documentation:** [`packages/selenium/README.md`](packages/selenium/README.md)
+
+📂 **Demo project:** [`demo-selenium/`](demo-selenium/)
+
+</details>
+
+<a id="selenium-maven-guide"></a>
+<details>
+<summary>🌐 Selenium + Maven Integration Guide</summary>
+
+<br>
+
+> ✅ **Seamless setup** — No cloning, no hardcoded paths. Just Maven + Node.js.
+>
+> **Prerequisites:** Java 11+, Maven 3.6+, [Node.js](https://nodejs.org), ChromeDriver (or your browser driver)
+
+---
+
+### Step 1 — Add repository & dependency to `pom.xml`
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <!-- Selenium + TestNG (or your existing dependencies) -->
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>4.16.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>7.8.0</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Sarva-Varadi: TestNG listener + WebDriver event listener -->
+    <dependency>
+        <groupId>io.github.yoggit</groupId>
+        <artifactId>sarva-varadi-selenium</artifactId>
+        <version>v1.0.0</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+---
+
+### Step 2 — Add report generation plugin to `pom.xml`
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.2</version>
+            <configuration>
+                <suiteXmlFiles>
+                    <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                <testFailureIgnore>true</testFailureIgnore>
+            </configuration>
+        </plugin>
+
+        <!-- Auto-generates the HTML report after mvn test -->
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+                <execution>
+                    <id>generate-sarva-report</id>
+                    <phase>test</phase>
+                    <goals><goal>exec</goal></goals>
+                    <configuration>
+                        <!-- Windows users: change npx to npx.cmd -->
+                        <executable>npx</executable>
+                        <arguments>
+                            <argument>--yes</argument>
+                            <argument>@sarva-varadi/core</argument>
+                            <argument>generate</argument>
+                            <argument>--input</argument>
+                            <argument>${project.basedir}/sarva-varadi-results/test-results.json</argument>
+                            <argument>--output</argument>
+                            <argument>${project.basedir}/sarva-report</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
+---
+
+### Step 3 — Add listener to `testng.xml`
+
+```xml
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Selenium Test Suite">
+    <listeners>
+        <listener class-name="io.github.yoggit.sarvavaradi.SarvaVaradiSeleniumListener"/>
+    </listeners>
+    <test name="Selenium Tests">
+        <classes>
+            <class name="com.example.selenium.tests.LoginTest"/>
+        </classes>
+    </test>
+</suite>
+```
+
+---
+
+### Step 4 — Wrap your WebDriver in test setup
+
+```java
+import io.github.yoggit.sarvavaradi.SarvaVaradiWebDriverListener;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.testng.annotations.*;
+
+public class LoginTest {
+    private WebDriver driver;
+
+    @BeforeMethod
+    public void setup() {
+        WebDriver baseDriver = new ChromeDriver();
+        SarvaVaradiWebDriverListener listener = new SarvaVaradiWebDriverListener(baseDriver);
+        driver = new EventFiringDecorator<>(listener).decorate(baseDriver);
+    }
+
+    @Test
+    public void testLogin() {
+        driver.get("https://example.com/login");
+        // Your test code
+    }
+
+    @AfterMethod
+    public void teardown() {
+        if (driver != null) driver.quit();
+    }
+}
+```
+
+---
+
+### Step 5 — Run tests
+
+```bash
+mvn test
+# Report auto-generates at: sarva-report/index.html
+```
+
+That's it. This will:
+1. ✅ Run all TestNG + Selenium tests
+2. ✅ Capture browser actions, screenshots, and flaky retries
+3. ✅ Auto-generate the HTML report → `sarva-report/index.html`
+
+```bash
+# Open the report
+open sarva-report/index.html       # macOS
+start sarva-report/index.html      # Windows
+xdg-open sarva-report/index.html   # Linux
+```
+
+### Optional — `sarva-varadi.properties`
+
+Drop a `sarva-varadi.properties` file in your project root to configure behaviour:
+
+```properties
+# ── Collection ──────────────────────────────────────────────────────────
+sarva.outputDir=sarva-varadi-results          # where test-results.json is written
+sarva.screenshotDir=sarva-varadi-results/screenshots  # where screenshot files are saved
+sarva.screenshot=on-failure                   # always | on-failure | never
+sarva.maskSensitiveData=false                 # true to mask passwords/tokens in logs
+sarva.maxRetryCount=2                         # retries before marking a test as failed
+
+# ── Report display ───────────────────────────────────────────────────────
+sarva.report.title=My Test Suite              # title shown in the HTML report header
+sarva.report.showStackTrace=true              # show full stack traces in the report
+sarva.report.embedAttachments=true            # embed screenshots inline in the report
+
+# ── History & trends ────────────────────────────────────────────────────
+sarva.report.maxRuns=20                       # max past runs to keep (oldest deleted first)
+sarva.report.retentionDays=90                 # max age in days (whichever limit hits first wins)
+sarva.report.history=true                     # enable historical run tracking
+sarva.report.trends=true                      # enable trend analysis across runs
+```
 
 📂 **Demo project:** [`demo-selenium/`](demo-selenium/)
 
@@ -916,7 +1078,7 @@ Navigation between views via header buttons.
 |--------|------|---------|-------------|
 | `history.enabled` | boolean | `true` | Enable historical tracking |
 | `history.maxRuns` | number | `20` | Keep last N runs (no hard limit, can be set to 100+ for extensive history) |
-| `history.retentionDays` | number | `180` | Auto-cleanup after N days (6 months default, can be set to 365+ for longer retention) |
+| `history.retentionDays` | number | `90` | Auto-cleanup after N days (3 months default, can be set to 365+ for longer retention) |
 | `history.trackPerTest` | boolean | `true` | Track per-test flakiness |
 
 **Storage & Performance:**
@@ -1000,12 +1162,66 @@ Score = (Status Changes / Total Runs × 100) + (Flaky Retries / Total Runs × 20
 
 ### Automatic Cleanup
 
-Old test runs are automatically cleaned up based on **dual criteria**:
-- Runs are deleted only when they exceed **BOTH** limits (if both configured)
-- OR when they exceed the single configured limit
+Old test runs are automatically cleaned up using a **"whichever comes first"** policy — a run is deleted the moment it exceeds **either** limit:
 
-1. **maxRuns**: Keeps last N runs (default: 20, can be 100+)
-2. **retentionDays**: Removes runs older than N days (default: 180)
+1. **`maxRuns`** — keeps the last N runs. In normal sequential use, exactly **1 oldest run** is deleted each time a new run is added. (default: 20)
+2. **`retentionDays`** — removes runs older than N days. Deletes **all** runs past the age threshold in one pass — so if you pause testing for weeks and multiple runs age out, they are all removed when the next run triggers cleanup. (default: 90)
+
+<details>
+<summary><b>Corner case examples (maxRuns=20, retentionDays=90)</b></summary>
+
+<br>
+
+**Case 1 — Heavy CI usage (maxRuns triggers first)**
+
+You run tests 3× a day for 8 days = 24 runs, all less than 8 days old.
+
+| Limit hit | What happens |
+|---|---|
+| Run #21 arrives | Run #1 deleted — it's only 7 days old but `maxRuns` triggered first |
+
+---
+
+**Case 2 — Paused testing (retentionDays deletes multiple at once)**
+
+You run tests once a week, then pause for 3 months. When you resume, 13 old runs are now past 90 days.
+
+| Limit hit | What happens |
+|---|---|
+| Next run arrives | All 13 stale runs deleted in one pass — `retentionDays` does not wait to remove them one at a time |
+
+This is intentional — stale runs past the age threshold are all cleaned up immediately, not incrementally.
+
+---
+
+**Case 3 — The tricky one: burst after slow start**
+
+26 old weekly runs (100–90 days old), then 100 new runs in 2 weeks. Total = 126 runs.
+
+| Limit hit | What happens |
+|---|---|
+| `maxRuns=20` | Runs beyond position #20 are deleted — the old weekly runs are purged |
+| `retentionDays=90` | Any run older than 90 days also deleted independently |
+
+With the old AND logic, runs within 90 days would have survived even if beyond position #20 — `maxRuns` would have been completely ignored.
+
+---
+
+**Case 4 — Both limits hit simultaneously**
+
+Run #21 arrives AND it's from 95 days ago (slow project, 21 runs over 3+ months).
+
+Both limits exceeded at the same time — run is deleted regardless.
+
+---
+
+**Case 5 — Exactly at the boundary**
+
+You have exactly 20 runs, all exactly 90 days old today. Run #21 comes in.
+
+Both `maxRuns` and `retentionDays` trigger simultaneously — the oldest run is deleted.
+
+</details>
 
 </details>
 

@@ -13,46 +13,47 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <rest-assured.version>5.3.2</rest-assured.version>
-        <testng.version>7.8.0</testng.version>
     </properties>
 
     <dependencies>
-        <!-- RestAssured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>${rest-assured.version}</version>
+            <version>5.3.2</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
+            <version>7.8.0</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Gson for JSON serialization -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Hamcrest for assertions -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Sarva-Varadi RestAssured listener (local install: mvn install -f java/pom.xml -DskipTests) -->
+        <!-- JitPack users: add jitpack.io repository and change version to the GitHub release tag -->
+        <dependency>
+            <groupId>io.github.yoggit</groupId>
+            <artifactId>sarva-varadi-restassured</artifactId>
+            <version>1.0.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!-- Run TestNG tests, continue build even if tests fail -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -61,7 +62,37 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
+            </plugin>
+
+            <!-- Generate Sarva-Varadi HTML report after tests -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-sarva-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Requires Node.js — install from https://nodejs.org -->
+                            <!-- End users: replace 'node .../cli.js' with: npx @sarva-varadi/core generate -->
+                            <executable>node</executable>
+                            <arguments>
+                                <argument>${project.basedir}/../packages/core/dist/cli.js</argument>
+                                <argument>generate</argument>
+                                <argument>--input</argument>
+                                <argument>${project.basedir}/sarva-varadi-results/test-results.json</argument>
+                                <argument>--output</argument>
+                                <argument>${project.basedir}/sarva-report</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

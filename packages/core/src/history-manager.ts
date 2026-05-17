@@ -7,7 +7,7 @@ export class HistoryManager {
   private runsFile: string;
 
   constructor(
-    private outputFolder: string,
+    outputFolder: string,
     private options: HistoryOptions
   ) {
     this.historyDir = path.join(outputFolder, 'history');
@@ -114,10 +114,7 @@ export class HistoryManager {
 
     history.runs.unshift(runSummary);
 
-    // Cleanup logic: Keep runs that meet EITHER criteria
-    // 1. Within last N runs (maxRuns)
-    // 2. Within last N days (retentionDays)
-    // Only delete runs that exceed BOTH limits
+    // Cleanup: delete a run the moment it exceeds EITHER limit (whichever comes first)
     const runsToDelete: RunSummary[] = [];
 
     if (this.options.maxRuns > 0 || this.options.retentionDays > 0) {
@@ -129,13 +126,7 @@ export class HistoryManager {
         const exceedsMaxRuns = this.options.maxRuns > 0 && index >= this.options.maxRuns;
         const exceedsRetentionDays = this.options.retentionDays > 0 && run.timestamp < cutoffTime;
 
-        // Delete only if BOTH conditions are true (if both are configured)
-        // Or if the single configured condition is true
-        const shouldDelete = this.options.maxRuns > 0 && this.options.retentionDays > 0
-          ? exceedsMaxRuns && exceedsRetentionDays
-          : exceedsMaxRuns || exceedsRetentionDays;
-
-        if (shouldDelete) {
+        if (exceedsMaxRuns || exceedsRetentionDays) {
           runsToDelete.push(run);
         }
       });
@@ -201,7 +192,7 @@ export class HistoryManager {
         }
 
         trend.history.unshift(outcome);
-        trend.history = trend.history.slice(0, 10);
+        trend.history = trend.history.slice(0, this.options.maxRuns);
         trend.lastStatus = outcome.status;
         trend.flakyScore = this.calculateFlakyScore(trend.history);
       } else {
@@ -379,9 +370,8 @@ export class HistoryManager {
 
           // Since we're processing runs from newest to oldest, push (not unshift) to maintain order
           testTrend.history.push(outcome);
-          // Keep only the 10 most recent (which are at the beginning of the array)
-          if (testTrend.history.length > 10) {
-            testTrend.history = testTrend.history.slice(0, 10);
+          if (testTrend.history.length > this.options.maxRuns) {
+            testTrend.history = testTrend.history.slice(0, this.options.maxRuns);
           }
           testTrend.lastStatus = outcome.status;
           testTrend.flakyScore = this.calculateFlakyScore(testTrend.history);

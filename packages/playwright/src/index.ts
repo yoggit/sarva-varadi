@@ -1,10 +1,10 @@
 import type {
   Reporter,
   FullConfig,
+  FullResult,
   Suite,
   TestCase,
   TestResult,
-  FullResult,
 } from '@playwright/test/reporter';
 import { ReportGenerator, SarvaTestResult, RunMetadata, SarvaReporterOptions } from '@sarva-varadi/core';
 import { PlaywrightAdapter } from './playwright-adapter';
@@ -13,16 +13,14 @@ export default class SarvaPlaywrightReporter implements Reporter {
   private adapter: PlaywrightAdapter;
   private reportGenerator: ReportGenerator;
   private tests: SarvaTestResult[] = [];
-  private config: FullConfig | undefined;
   private startTime: number = 0;
 
   constructor(options: SarvaReporterOptions = {}) {
-    this.adapter = new PlaywrightAdapter();
+    this.adapter = new PlaywrightAdapter(options.maskSensitiveData ?? false);
     this.reportGenerator = new ReportGenerator(options);
   }
 
-  onBegin(config: FullConfig, suite: Suite): void {
-    this.config = config;
+  onBegin(_config: FullConfig, suite: Suite): void {
     this.startTime = Date.now();
     console.log(`\n🎯 Sarva-Varadi: Starting test run with ${suite.allTests().length} tests`);
   }
@@ -33,7 +31,7 @@ export default class SarvaPlaywrightReporter implements Reporter {
     this.tests.push(sarvaTest);
   }
 
-  async onEnd(result: FullResult): Promise<void> {
+  async onEnd(_result: FullResult): Promise<void> {
     const duration = Date.now() - this.startTime;
 
     const metadata: RunMetadata = {

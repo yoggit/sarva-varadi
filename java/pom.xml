@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.yoggit</groupId>
+    <artifactId>sarva-varadi-java</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>Sarva-Varadi Java</name>
+    <description>Java listener modules for Sarva-Varadi test reporter (RestAssured and Selenium)</description>
+    <url>https://github.com/yoggit/sarva-varadi</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>yoggit</id>
+            <name>Yogi</name>
+            <url>https://github.com/yoggit</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/yoggit/sarva-varadi.git</connection>
+        <developerConnection>scm:git:ssh://github.com:yoggit/sarva-varadi.git</developerConnection>
+        <url>https://github.com/yoggit/sarva-varadi/tree/main</url>
+    </scm>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>sarva-varadi-restassured</module>
+        <module>sarva-varadi-selenium</module>
+    </modules>
+</project>

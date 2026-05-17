@@ -1,0 +1,34 @@
+package io.github.yoggit.sarvavaradi;
+
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
+
+/**
+ * Retry analyzer for flaky test detection.
+ *
+ * Use on individual tests:
+ *   @Test(retryAnalyzer = SarvaVaradiRetryAnalyzer.class)
+ *
+ * Max retries configurable via sarva-varadi.properties or: -Dsarva.maxRetryCount=2
+ */
+public class SarvaVaradiRetryAnalyzer implements IRetryAnalyzer {
+
+    private final int maxRetryCount = SarvaVaradiConfig.getMaxRetryCount();
+    private int retryCount = 0;
+
+    @Override
+    public boolean retry(ITestResult result) {
+        if (retryCount < maxRetryCount) {
+            retryCount++;
+            result.setAttribute("retryCount", retryCount);
+            System.out.println("⚠️  Retrying: " + result.getName() +
+                               " (attempt " + (retryCount + 1) + " of " + (maxRetryCount + 1) + ")");
+            return true;
+        }
+        return false;
+    }
+
+    public int getRetryCount() {
+        return retryCount;
+    }
+}

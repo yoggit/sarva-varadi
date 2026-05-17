@@ -1,5 +1,6 @@
 package com.example.tests;
 
+import io.github.yoggit.sarvavaradi.RestAssuredRequestCapture;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.testng.annotations.BeforeClass;

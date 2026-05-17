@@ -6,6 +6,7 @@ export interface SarvaReporterOptions {
   title?: string;
   showStackTrace?: boolean;
   embedAttachments?: boolean;
+  maskSensitiveData?: boolean;
 
   history?: HistoryOptions;
   trends?: TrendsOptions;
@@ -30,10 +31,11 @@ export const DEFAULT_OPTIONS: Required<SarvaReporterOptions> = {
   title: 'Sarva-Varadi Test Report',
   showStackTrace: true,
   embedAttachments: true,
+  maskSensitiveData: false,
   history: {
     enabled: true,
     maxRuns: 20,
-    retentionDays: 180,
+    retentionDays: 90,
     trackPerTest: true,
   },
   trends: {

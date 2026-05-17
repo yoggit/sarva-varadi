@@ -71,7 +71,10 @@ export class HTMLGenerator {
 
   private generateHeader(stats: any, metadata: RunMetadata, toolName: string): string {
     const statusClass = stats.failed > 0 ? 'failed' : stats.flaky > 0 ? 'flaky' : 'passed';
-    const titleText = toolName ? `Sarva-Varadi → ${toolName} Report` : this.options.title;
+    const DEFAULT_TITLE = 'Sarva-Varadi Test Report';
+    const titleText = (this.options.title && this.options.title !== DEFAULT_TITLE)
+      ? this.options.title
+      : (toolName ? `Sarva-Varadi → ${toolName} Report` : DEFAULT_TITLE);
 
     return `
     <header class="header">

@@ -11,7 +11,7 @@ export default defineConfig({
     ['../packages/playwright/dist/index.js', {
       outputFolder: 'sarva-report',
       outputFile: 'index.html',
-      title: 'Sarva-Varadi - Demo Report',
+      title: 'Sarva-Varadi - Playwright Report',
       history: {
         enabled: true,
         maxRuns: 180,
