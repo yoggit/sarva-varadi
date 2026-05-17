@@ -625,7 +625,7 @@ export class TrendsGenerator {
             let filteredRuns = allRuns;
 
             if (filter === 'last20') {
-                filteredRuns = allRuns.slice(0, 20);
+                filteredRuns = allRuns.slice(-20);
             } else if (filter === 'last30days') {
                 const cutoff = Date.now() - (30 * 24 * 60 * 60 * 1000);
                 filteredRuns = allRuns.filter(run => run.timestamp >= cutoff);

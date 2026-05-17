@@ -314,9 +314,9 @@ Add to your `pom.xml`:
 </repositories>
 
 <dependency>
-    <groupId>io.github.yoggit</groupId>
+    <groupId>com.github.yoggit.sarva-varadi</groupId>
     <artifactId>sarva-varadi-restassured</artifactId>
-    <version>v1.0.0</version>
+    <version>v2.0.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -450,9 +450,9 @@ mvn test -Dsarva.maskSensitiveData=true
 
     <!-- Sarva-Varadi: TestNG listener + RestAssured request capture -->
     <dependency>
-        <groupId>io.github.yoggit</groupId>
+        <groupId>com.github.yoggit.sarva-varadi</groupId>
         <artifactId>sarva-varadi-restassured</artifactId>
-        <version>v1.0.0</version>
+        <version>v2.0.1</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
@@ -590,9 +590,9 @@ Add to `pom.xml` (see the [Selenium + Maven Integration Guide](#selenium-maven-g
 
 <!-- Sarva-Varadi Selenium listener -->
 <dependency>
-    <groupId>io.github.yoggit</groupId>
+    <groupId>com.github.yoggit.sarva-varadi</groupId>
     <artifactId>sarva-varadi-selenium</artifactId>
-    <version>v1.0.0</version>
+    <version>v2.0.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -630,9 +630,15 @@ public class LoginTest {
     
     @BeforeMethod
     public void setup() {
+        // Step 1: create the raw driver as usual
         WebDriver baseDriver = new ChromeDriver();
+
+        // Step 2: pass the raw driver to the listener AND to decorate()
+        // Both must receive the same unwrapped instance — use a separate baseDriver variable
         SarvaVaradiWebDriverListener listener = new SarvaVaradiWebDriverListener(baseDriver);
-        driver = new EventFiringDecorator(listener).decorate(baseDriver);
+        driver = new EventFiringDecorator<>(listener).decorate(baseDriver);
+
+        // 'driver' is now the decorated version — use this in all your tests
     }
     
     @Test(retryAnalyzer = SarvaVaradiRetryAnalyzer.class)
@@ -709,9 +715,9 @@ mvn test
 
     <!-- Sarva-Varadi: TestNG listener + WebDriver event listener -->
     <dependency>
-        <groupId>io.github.yoggit</groupId>
+        <groupId>com.github.yoggit.sarva-varadi</groupId>
         <artifactId>sarva-varadi-selenium</artifactId>
-        <version>v1.0.0</version>
+        <version>v2.0.1</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
@@ -788,6 +794,8 @@ mvn test
 
 ### Step 4 — Wrap your WebDriver in test setup
 
+Pass the **raw/unwrapped** driver to both the listener and `.decorate()` — both must receive the same unwrapped instance. Always use a separate `baseDriver` variable to keep the raw and decorated instances distinct.
+
 ```java
 import io.github.yoggit.sarvavaradi.SarvaVaradiWebDriverListener;
 import org.openqa.selenium.WebDriver;
@@ -800,9 +808,14 @@ public class LoginTest {
 
     @BeforeMethod
     public void setup() {
+        // Step 1: create the raw driver as usual
         WebDriver baseDriver = new ChromeDriver();
+
+        // Step 2: pass the raw driver to the listener AND to decorate()
         SarvaVaradiWebDriverListener listener = new SarvaVaradiWebDriverListener(baseDriver);
         driver = new EventFiringDecorator<>(listener).decorate(baseDriver);
+
+        // 'driver' is now the decorated version — use this in all your tests
     }
 
     @Test
@@ -817,6 +830,17 @@ public class LoginTest {
     }
 }
 ```
+
+> **If you use a centralized `DriverManager` / `BrowserManager` class**, add the wrapping there — right after creating the driver, before returning it:
+> ```java
+> WebDriver baseDriver = new ChromeDriver(options);
+> SarvaVaradiWebDriverListener listener = new SarvaVaradiWebDriverListener(baseDriver);
+> driver = new EventFiringDecorator<>(listener).decorate(baseDriver);
+> return driver;
+> ```
+> Do **not** reuse the same field variable on both sides of the same line — always use a separate `baseDriver` reference to keep the raw and decorated instances distinct.
+>
+> The listener **automatically registers itself** when created, so test step capture works regardless of whether it is created in a test class or a centralized factory — you do not need to store or pass the listener anywhere else.
 
 ---
 
