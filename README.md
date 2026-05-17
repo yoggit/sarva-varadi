@@ -272,8 +272,6 @@ reporter: [
 npx playwright test
 ```
 
-> ⚠️ **Do not pass `--reporter` on the command line** — doing so overrides all reporters in `playwright.config.ts`, which means only that one reporter runs and sarva-varadi is skipped. Always run without `--reporter` to use your full config.
-
 ### Open Report
 
 ```bash
