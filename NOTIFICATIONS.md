@@ -11,36 +11,38 @@ The notification system is **fully integrated** and ready to use:
 - ✅ Automatic triggering after test runs
 - ✅ Supports all frameworks (Playwright, Selenium, RestAssured TestNG, RestAssured JUnit 5)
 
+---
+
 ## ⚙️ How to Configure — by Framework
 
 | Framework | Where to configure |
 |---|---|
-| **Playwright** | `playwright.config.ts` reporter options (see below) |
-| **Selenium** | `sarva-varadi.properties` in project root (see below) |
-| **RestAssured (TestNG)** | `sarva-varadi.properties` in project root (see below) |
-| **RestAssured (JUnit 5)** | `sarva-varadi.properties` in project root (see below) |
+| **Playwright** | `playwright.config.ts` reporter options |
+| **Selenium** | `sarva-varadi.properties` in project root |
+| **RestAssured (TestNG & JUnit 5)** | `sarva-varadi.properties` in project root |
 
 ---
 
-## 🚀 Quick Start (Pick One)
+## ✨ Framework-Specific Setup
 
-<details open>
-<summary><b>Option 1: Slack (Fastest)</b></summary>
+### Playwright
 
-### Step 1: Get Webhook URL
+Add a `notifications` block inside the `@sarva-varadi/playwright` reporter options in `playwright.config.ts`. Pick a channel:
+
+<details>
+<summary><b>Option 1: Slack</b></summary>
+
+#### Step 1: Get Webhook URL
 
 1. Go to https://api.slack.com/apps
 2. Click "Create New App" → "From scratch"
-3. Name it "Sarva-Varadi"
-4. Select your workspace
-5. Click "Incoming Webhooks" → Toggle ON
-6. Click "Add New Webhook to Workspace"
-7. Select channel → Copy the webhook URL
+3. Name it "Sarva-Varadi" and select your workspace
+4. Click "Incoming Webhooks" → Toggle ON
+5. Click "Add New Webhook to Workspace" → Select channel → Copy the webhook URL
 
-### Step 2: Add to Your Config
+#### Step 2: Add to `playwright.config.ts`
 
 ```typescript
-// playwright.config.ts
 export default defineConfig({
   reporter: [
     ['@sarva-varadi/playwright', {
@@ -49,8 +51,8 @@ export default defineConfig({
         slack: {
           enabled: true,
           webhookUrl: process.env.SLACK_WEBHOOK_URL,
-          channel: '#test-results', // Optional: override default channel
-          mentionOnFailure: ['john.doe', 'jane.smith'], // Optional: @mention on failures
+          channel: '#test-results',
+          mentionOnFailure: ['john.doe', 'jane.smith'], // Optional
         },
       },
     }]
@@ -58,30 +60,25 @@ export default defineConfig({
 });
 ```
 
-### Step 3: Set Environment Variable
+#### Step 3: Set Environment Variable
 
 ```bash
-# .env file
+# .env
 SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
 ```
-
-**Done!** Run your tests and check Slack 🎉
 
 </details>
 
 <details>
 <summary><b>Option 2: Microsoft Teams</b></summary>
 
-### Step 1: Get Webhook URL
+#### Step 1: Get Webhook URL
 
-1. Open Microsoft Teams
-2. Go to your desired channel
-3. Click "..." → "Connectors"
-4. Search "Incoming Webhook" → Configure
-5. Name it "Sarva-Varadi" → Create
-6. Copy the webhook URL
+1. Open Microsoft Teams → go to your desired channel
+2. Click "..." → "Connectors" → Search "Incoming Webhook" → Configure
+3. Name it "Sarva-Varadi" → Create → Copy the webhook URL
 
-### Step 2: Add to Config
+#### Step 2: Add to `playwright.config.ts`
 
 ```typescript
 export default defineConfig({
@@ -99,28 +96,25 @@ export default defineConfig({
 });
 ```
 
-### Step 3: Set Environment Variable
+#### Step 3: Set Environment Variable
 
 ```bash
 # .env
 TEAMS_WEBHOOK_URL=https://outlook.office.com/webhook/YOUR-WEBHOOK-URL
 ```
 
-**Done!** Run tests and check Teams 🎉
-
 </details>
 
 <details>
 <summary><b>Option 3: Email (Gmail Example)</b></summary>
 
-### Step 1: Generate App Password
+#### Step 1: Generate App Password
 
 1. Enable 2FA: https://myaccount.google.com/signinoptions/two-step-verification
 2. Generate App Password: https://myaccount.google.com/apppasswords
-3. Select "Mail" → "Other" → Name it "Sarva-Varadi"
-4. Copy the 16-character password
+3. Select "Mail" → "Other" → Name it "Sarva-Varadi" → Copy the 16-character password
 
-### Step 2: Add to Config
+#### Step 2: Add to `playwright.config.ts`
 
 ```typescript
 export default defineConfig({
@@ -136,7 +130,7 @@ export default defineConfig({
             secure: false,
             auth: {
               user: process.env.EMAIL_USER,
-              pass: process.env.EMAIL_PASS, // App password
+              pass: process.env.EMAIL_PASS,
             },
           },
           from: 'noreply@yourcompany.com',
@@ -149,7 +143,7 @@ export default defineConfig({
 });
 ```
 
-### Step 3: Set Environment Variables
+#### Step 3: Set Environment Variables
 
 ```bash
 # .env
@@ -157,13 +151,10 @@ EMAIL_USER=your-email@gmail.com
 EMAIL_PASS=your-app-password-here
 ```
 
-**Done!** Run tests and check your inbox 🎉
-
 </details>
 
----
-
-## 🔥 Enable All Three at Once
+<details>
+<summary><b>Enable all three at once</b></summary>
 
 ```typescript
 export default defineConfig({
@@ -171,18 +162,15 @@ export default defineConfig({
     ['@sarva-varadi/playwright', {
       notifications: {
         enabled: true,
-        
         slack: {
           enabled: true,
           webhookUrl: process.env.SLACK_WEBHOOK_URL,
           channel: '#test-results',
         },
-        
         teams: {
           enabled: true,
           webhookUrl: process.env.TEAMS_WEBHOOK_URL,
         },
-        
         email: {
           enabled: true,
           smtp: {
@@ -201,6 +189,79 @@ export default defineConfig({
   ],
 });
 ```
+
+</details>
+
+---
+
+### Selenium
+
+Notifications are configured via `sarva-varadi.properties` in your project root. The CLI reads this file automatically when generating the report — no code changes needed.
+
+**Step 1 — add to `sarva-varadi.properties`:**
+
+```properties
+sarva.notifications.enabled=true
+sarva.notifications.slack.enabled=true
+sarva.notifications.slack.webhookUrl=${SLACK_WEBHOOK_URL}
+sarva.notifications.slack.channel=#test-results
+```
+
+**Step 2 — set environment variables:**
+
+```bash
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+```
+
+**Step 3 — run as normal:**
+
+```bash
+mvn clean test
+```
+
+> `${ENV_VAR}` values are resolved from environment variables at runtime — secrets never live in the file.
+
+---
+
+### RestAssured (TestNG & JUnit 5)
+
+Same approach as Selenium — configure via `sarva-varadi.properties`:
+
+**Step 1 — add to `sarva-varadi.properties`:**
+
+```properties
+sarva.notifications.enabled=true
+sarva.notifications.slack.enabled=true
+sarva.notifications.slack.webhookUrl=${SLACK_WEBHOOK_URL}
+sarva.notifications.slack.channel=#test-results
+
+# Teams (optional)
+# sarva.notifications.teams.enabled=true
+# sarva.notifications.teams.webhookUrl=${TEAMS_WEBHOOK_URL}
+
+# Email (optional)
+# sarva.notifications.email.enabled=true
+# sarva.notifications.email.smtp.host=smtp.gmail.com
+# sarva.notifications.email.smtp.port=587
+# sarva.notifications.email.smtp.user=${EMAIL_USER}
+# sarva.notifications.email.smtp.pass=${EMAIL_PASS}
+# sarva.notifications.email.from=tests@company.com
+# sarva.notifications.email.to=qa@company.com,dev@company.com
+```
+
+**Step 2 — set environment variables:**
+
+```bash
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+```
+
+**Step 3 — run as normal:**
+
+```bash
+mvn clean test
+```
+
+> `${ENV_VAR}` values are resolved from environment variables at runtime — secrets never live in the file.
 
 ---
 
@@ -238,16 +299,14 @@ Failed Tests:
 
 ---
 
-## 🎯 Advanced Configuration
+## 🎯 Advanced Configuration (Playwright)
 
 ### Conditional Notifications
 
 **Only notify on failures:**
 ```typescript
-const hasFailures = process.env.FAILURES === 'true';
-
 notifications: {
-  enabled: hasFailures,
+  enabled: process.env.FAILURES === 'true',
   slack: { ... },
 }
 ```
@@ -262,14 +321,10 @@ notifications: {
 
 **Different channels per environment:**
 ```typescript
-const channel = process.env.NODE_ENV === 'production' 
-  ? '#prod-alerts' 
-  : '#test-results';
-
 slack: {
   enabled: true,
   webhookUrl: process.env.SLACK_WEBHOOK_URL,
-  channel,
+  channel: process.env.NODE_ENV === 'production' ? '#prod-alerts' : '#test-results',
 }
 ```
 
@@ -294,7 +349,7 @@ smtp: {
 </details>
 
 <details>
-<summary><b>Outlook/Office 365</b></summary>
+<summary><b>Outlook / Office 365</b></summary>
 
 ```typescript
 smtp: {
@@ -389,60 +444,10 @@ Add each secret using exactly these names:
 - ✅ Check SMTP host/port are correct
 
 ### Not receiving any notifications?
-- ✅ Check `notifications.enabled: true`
-- ✅ Verify environment variables loaded (`console.log(process.env.SLACK_WEBHOOK_URL)`)
-- ✅ Look for errors in terminal output
-- ✅ Check notification config is inside reporter config
-
----
-
-## ✨ Framework-Specific Setup
-
-### Selenium / RestAssured (TestNG & JUnit 5)
-
-Notifications are configured via `sarva-varadi.properties` in your project root. The CLI reads this file automatically when generating the report — no code changes needed.
-
-**Step 1 — add to `sarva-varadi.properties`:**
-
-```properties
-# Master switch
-sarva.notifications.enabled=true
-
-# Slack
-sarva.notifications.slack.enabled=true
-sarva.notifications.slack.webhookUrl=${SLACK_WEBHOOK_URL}
-sarva.notifications.slack.channel=#test-results
-
-# Teams (optional)
-# sarva.notifications.teams.enabled=true
-# sarva.notifications.teams.webhookUrl=${TEAMS_WEBHOOK_URL}
-
-# Email (optional)
-# sarva.notifications.email.enabled=true
-# sarva.notifications.email.smtp.host=smtp.gmail.com
-# sarva.notifications.email.smtp.port=587
-# sarva.notifications.email.smtp.user=${EMAIL_USER}
-# sarva.notifications.email.smtp.pass=${EMAIL_PASS}
-# sarva.notifications.email.from=tests@company.com
-# sarva.notifications.email.to=qa@company.com,dev@company.com
-```
-
-**Step 2 — set environment variables (never commit secrets):**
-
-```bash
-# .env / CI secrets
-SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
-```
-
-**Step 3 — run as normal:**
-
-```bash
-mvn clean test   # report generation (and notification) fires automatically
-```
-
-Notifications fire at the end of report generation — the same moment the HTML report is written. No extra steps required.
-
-> `${ENV_VAR}` values in `sarva-varadi.properties` are resolved from environment variables at runtime, so secrets never live in the file itself.
+- ✅ **Playwright**: check `notifications.enabled: true` is inside the reporter options
+- ✅ **Selenium/RestAssured**: check `sarva.notifications.enabled=true` in `sarva-varadi.properties`
+- ✅ Verify environment variables are set (`echo $SLACK_WEBHOOK_URL`)
+- ✅ Look for errors in terminal output after the test run
 
 ---
 
