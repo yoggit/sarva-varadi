@@ -83,8 +83,9 @@ console.log('\n🔄 Regenerating trends from merged history...\n');
 
 const frameworks = [
   { dir: 'demo-playwright/sarva-report', title: 'Playwright Test Trends' },
-  { dir: 'demo-selenium/sarva-report', title: 'Selenium Test Trends' },
-  { dir: 'demo-restassured/sarva-report', title: 'RestAssured API Test Trends' }
+  { dir: 'demo-selenium/sarva-report', title: 'Selenium (TestNG) Test Trends' },
+  { dir: 'demo-restassured/sarva-report', title: 'RestAssured (TestNG) API Test Trends' },
+  { dir: 'demo-restassured-junit/sarva-report', title: 'RestAssured (JUnit 5) API Test Trends' },
 ];
 
 frameworks.forEach(({ dir, title }) => {

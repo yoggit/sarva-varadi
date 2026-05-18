@@ -1,0 +1,400 @@
+[
+  {
+    "duration": 74,
+    "retryCount": 0,
+    "methodName": "getAllPosts",
+    "startTime": 1779067358209,
+    "endTime": 1779067358283,
+    "apiCalls": [
+      {
+        "duration": 53,
+        "request": {
+          "headers": "[Accept\u003d*/*]",
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/posts"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:38 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Transfer-Encoding\u003dchunked, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dmax-age\u003d43200, Content-Encoding\u003dgzip, etag\u003dW/\"6b80-Ybsq/K6GwwqrYkAsFxqDXGC7DoM\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003dEe2TzQ9f9wEz72VI4uSP7CAZj%2BnhfJLNWqcHUZydjkU%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1778551595\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003dEe2TzQ9f9wEz72VI4uSP7CAZj%2BnhfJLNWqcHUZydjkU%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1778551595\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d999, x-ratelimit-reset\u003d1778551638, Age\u003d25436, cf-cache-status\u003dHIT, CF-RAY\u003d9fd70d4d2e775e57-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "53ms",
+          "body": "[\n  {\n    \"userId\": 1,\n    \"id\": 1,\n    \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n    \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 2,\n    \"title\": \"qui est esse\",\n    \"body\": \"est rerum tempore vitae\\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\\nqui aperiam non debitis possimus qui neque nisi nulla\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 3,\n    \"title\": \"ea molestias quasi exercitationem repellat qui ipsa sit aut\",\n    \"body\": \"et iusto sed quo iure\\nvoluptatem occaecati omnis eligendi aut ad\\nvoluptatem doloribus vel accusantium quis pariatur\\nmolestiae porro eius odio et labore et velit aut\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 4,\n    \"title\": \"eum et est occaecati\",\n    \"body\": \"ullam et saepe reic... (truncated)",
+          "statusCode": 200
+        },
+        "name": "GET https://jsonplaceholder.typicode.com/posts",
+        "startTime": 1779067358211,
+        "endTime": 1779067358264,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.PostApiTest.getAllPosts",
+    "status": "PASS"
+  },
+  {
+    "duration": 66,
+    "retryCount": 0,
+    "methodName": "stableEndpointTest",
+    "startTime": 1779067358005,
+    "endTime": 1779067358071,
+    "apiCalls": [
+      {
+        "duration": 58,
+        "request": {
+          "headers": "[Accept\u003d*/*]",
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/users/2"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:38 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Transfer-Encoding\u003dchunked, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dmax-age\u003d43200, etag\u003dW/\"1fd-XTG63SYhaP/Uo6/vgmARnL3rpBk\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003dJkocaItob6JD7JpUQbcAqI0N97wUW7aORIuxjnQlO8Q%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1778961410\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003dJkocaItob6JD7JpUQbcAqI0N97wUW7aORIuxjnQlO8Q%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1778961410\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d955, x-ratelimit-reset\u003d1778961457, Age\u003d10024, cf-cache-status\u003dHIT, Content-Encoding\u003dgzip, CF-RAY\u003d9fd70d4bdf3ce7aa-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "57ms",
+          "body": "{\n  \"id\": 2,\n  \"name\": \"Ervin Howell\",\n  \"username\": \"Antonette\",\n  \"email\": \"Shanna@melissa.tv\",\n  \"address\": {\n    \"street\": \"Victor Plains\",\n    \"suite\": \"Suite 879\",\n    \"city\": \"Wisokyburgh\",\n    \"zipcode\": \"90566-7771\",\n    \"geo\": {\n      \"lat\": \"-43.9509\",\n      \"lng\": \"-34.4618\"\n    }\n  },\n  \"phone\": \"010-692-6593 x09125\",\n  \"website\": \"anastasia.net\",\n  \"company\": {\n    \"name\": \"Deckow-Crist\",\n    \"catchPhrase\": \"Proactive didactic contingency\",\n    \"bs\": \"synergize scalable supply-chains\"\n  }\n}",
+          "statusCode": 200
+        },
+        "name": "GET https://jsonplaceholder.typicode.com/users/2",
+        "startTime": 1779067358006,
+        "endTime": 1779067358064,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.FlakyApiTest.stableEndpointTest",
+    "status": "PASS"
+  },
+  {
+    "duration": 101,
+    "retryCount": 0,
+    "methodName": "createUser",
+    "startTime": 1779067357745,
+    "endTime": 1779067357846,
+    "apiCalls": [
+      {
+        "duration": 89,
+        "request": {
+          "headers": "[Accept\u003d*/*, Content-Type\u003dapplication/json]",
+          "method": "POST",
+          "body": "{ \"name\": \"John Doe\", \"email\": \"john@example.com\" }",
+          "uri": "https://jsonplaceholder.typicode.com/users"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:37 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Content-Length\u003d67, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, access-control-expose-headers\u003dLocation, Cache-Control\u003dno-cache, etag\u003dW/\"43-iv+zGbP9dMgXHuo+euFZMKacl6Q\", expires\u003d-1, location\u003dhttps://jsonplaceholder.typicode.com/users/11, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003d69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1779067357\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003d69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1779067357\", Server\u003dcloudflare, vary\u003dOrigin, X-HTTP-Method-Override, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d998, x-ratelimit-reset\u003d1779067403, cf-cache-status\u003dDYNAMIC, CF-RAY\u003d9fd70d4a499690ff-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 201 Created",
+          "responseTime": "88ms",
+          "body": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"id\": 11\n}",
+          "statusCode": 201
+        },
+        "name": "POST https://jsonplaceholder.typicode.com/users",
+        "startTime": 1779067357746,
+        "endTime": 1779067357835,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.UserApiTest.createUser",
+    "status": "PASS"
+  },
+  {
+    "duration": 164,
+    "retryCount": 0,
+    "methodName": "updateUser",
+    "startTime": 1779067357579,
+    "endTime": 1779067357743,
+    "apiCalls": [
+      {
+        "duration": 153,
+        "request": {
+          "headers": "[Accept\u003d*/*, Content-Type\u003dapplication/json]",
+          "method": "PUT",
+          "body": "{ \"name\": \"Jane Updated\", \"email\": \"jane.updated@example.com\" }",
+          "uri": "https://jsonplaceholder.typicode.com/users/1"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:37 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Transfer-Encoding\u003dchunked, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dno-cache, etag\u003dW/\"4e-Syg+x9VT+BWBQW/eGxeI8/PFkX4\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003d69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1779067357\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003d69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1779067357\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d999, x-ratelimit-reset\u003d1779067403, cf-cache-status\u003dDYNAMIC, Content-Encoding\u003dgzip, CF-RAY\u003d9fd70d492e1a6778-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "152ms",
+          "body": "{\n  \"name\": \"Jane Updated\",\n  \"email\": \"jane.updated@example.com\",\n  \"id\": 1\n}",
+          "statusCode": 200
+        },
+        "name": "PUT https://jsonplaceholder.typicode.com/users/1",
+        "startTime": 1779067357583,
+        "endTime": 1779067357736,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.UserApiTest.updateUser",
+    "status": "PASS"
+  },
+  {
+    "duration": 88,
+    "retryCount": 0,
+    "methodName": "deleteUser",
+    "startTime": 1779067357848,
+    "endTime": 1779067357936,
+    "apiCalls": [
+      {
+        "duration": 85,
+        "request": {
+          "headers": "[Accept\u003d*/*]",
+          "method": "DELETE",
+          "uri": "https://jsonplaceholder.typicode.com/users/1"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:37 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Content-Length\u003d2, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dno-cache, etag\u003dW/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003d69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1779067357\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003d69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1779067357\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d997, x-ratelimit-reset\u003d1779067403, cf-cache-status\u003dDYNAMIC, CF-RAY\u003d9fd70d4adb94686c-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "85ms",
+          "body": "{}",
+          "statusCode": 200
+        },
+        "name": "DELETE https://jsonplaceholder.typicode.com/users/1",
+        "startTime": 1779067357850,
+        "endTime": 1779067357935,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.UserApiTest.deleteUser",
+    "status": "PASS"
+  },
+  {
+    "duration": 60,
+    "retryCount": 0,
+    "methodName": "getPostsByUserId",
+    "startTime": 1779067358284,
+    "endTime": 1779067358344,
+    "apiCalls": [
+      {
+        "duration": 44,
+        "request": {
+          "headers": "[Accept\u003d*/*]",
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/posts?userId\u003d1"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:38 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Content-Length\u003d1002, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dmax-age\u003d43200, Content-Encoding\u003dgzip, etag\u003dW/\"aa6-j2NSH739l9uq40OywFMn7Y0C/iY\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003dDimHfPySHlu%2Fk5DEJ7IeiVafnh8lpbIDU5fa13JMqqY%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1778703428\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003dDimHfPySHlu%2Fk5DEJ7IeiVafnh8lpbIDU5fa13JMqqY%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1778703428\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d996, x-ratelimit-reset\u003d1778703447, Age\u003d4443, Accept-Ranges\u003dbytes, cf-cache-status\u003dHIT, CF-RAY\u003d9fd70d4d98b56719-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "44ms",
+          "body": "[\n  {\n    \"userId\": 1,\n    \"id\": 1,\n    \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n    \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 2,\n    \"title\": \"qui est esse\",\n    \"body\": \"est rerum tempore vitae\\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\\nqui aperiam non debitis possimus qui neque nisi nulla\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 3,\n    \"title\": \"ea molestias quasi exercitationem repellat qui ipsa sit aut\",\n    \"body\": \"et iusto sed quo iure\\nvoluptatem occaecati omnis eligendi aut ad\\nvoluptatem doloribus vel accusantium quis pariatur\\nmolestiae porro eius odio et labore et velit aut\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 4,\n    \"title\": \"eum et est occaecati\",\n    \"body\": \"ullam et saepe reic... (truncated)",
+          "statusCode": 200
+        },
+        "name": "GET https://jsonplaceholder.typicode.com/posts?userId\u003d1",
+        "startTime": 1779067358290,
+        "endTime": 1779067358334,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.PostApiTest.getPostsByUserId",
+    "status": "PASS"
+  },
+  {
+    "duration": 663,
+    "retryCount": 0,
+    "methodName": "getUserNotFound",
+    "startTime": 1779067356633,
+    "endTime": 1779067357296,
+    "apiCalls": [
+      {
+        "duration": 428,
+        "request": {
+          "headers": "[Accept\u003d*/*]",
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/users/999999"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:37 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Content-Length\u003d2, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dmax-age\u003d43200, etag\u003dW/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003doWJc0qPspUCT2PiqRvNfICWjuLxBaracuFzegxaz8WM%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1779067157\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003doWJc0qPspUCT2PiqRvNfICWjuLxBaracuFzegxaz8WM%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1779067157\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d999, x-ratelimit-reset\u003d1779067163, Age\u003d199, cf-cache-status\u003dHIT, CF-RAY\u003d9fd70d46eb6d4403-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 404 Not Found",
+          "responseTime": "426ms",
+          "body": "{}",
+          "statusCode": 404
+        },
+        "name": "GET https://jsonplaceholder.typicode.com/users/999999",
+        "startTime": 1779067356850,
+        "endTime": 1779067357278,
+        "status": "failed"
+      }
+    ],
+    "testName": "com.example.tests.UserApiTest.getUserNotFound",
+    "status": "PASS"
+  },
+  {
+    "duration": 272,
+    "retryCount": 0,
+    "methodName": "getAllUsers",
+    "startTime": 1779067357305,
+    "endTime": 1779067357577,
+    "apiCalls": [
+      {
+        "duration": 53,
+        "request": {
+          "headers": "[Accept\u003d*/*]",
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/users"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:37 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Content-Length\u003d1847, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dmax-age\u003d43200, Content-Encoding\u003dgzip, etag\u003dW/\"160d-1eMSsxeJRfnVLRBmYJSbCiJZ1qQ\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003dwUfMTgt5imK6bV74N4nfmNt95%2B4BMjLJYtFmPVErqCc%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1775694193\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003dwUfMTgt5imK6bV74N4nfmNt95%2B4BMjLJYtFmPVErqCc%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1775694193\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d999, x-ratelimit-reset\u003d1775694233, Age\u003d15850, Accept-Ranges\u003dbytes, cf-cache-status\u003dHIT, CF-RAY\u003d9fd70d477dc36f98-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "53ms",
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Leanne Graham\",\n    \"username\": \"Bret\",\n    \"email\": \"Sincere@april.biz\",\n    \"address\": {\n      \"street\": \"Kulas Light\",\n      \"suite\": \"Apt. 556\",\n      \"city\": \"Gwenborough\",\n      \"zipcode\": \"92998-3874\",\n      \"geo\": {\n        \"lat\": \"-37.3159\",\n        \"lng\": \"81.1496\"\n      }\n    },\n    \"phone\": \"1-770-736-8031 x56442\",\n    \"website\": \"hildegard.org\",\n    \"company\": {\n      \"name\": \"Romaguera-Crona\",\n      \"catchPhrase\": \"Multi-layered client-server neural-net\",\n      \"bs\": \"harness real-time e-markets\"\n    }\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Ervin Howell\",\n    \"username\": \"Antonette\",\n    \"email\": \"Shanna@melissa.tv\",\n    \"address\": {\n      \"street\": \"Victor Plains\",\n      \"suite\": \"Suite 879\",\n      \"city\": \"Wisokyburgh\",\n      \"zipcode\": \"90566-7771\",\n      \"geo\": {\n        \"lat\": \"-43.9509\",\n        \"lng\": \"-34.4618\"\n      }\n    },\n    \"phone\": \"010-692-6593 x09125\",\n    \"website\": \"anastasia.net\",\n    \"company\": {\n      \"name\": \"Deckow-Crist... (truncated)",
+          "statusCode": 200
+        },
+        "name": "GET https://jsonplaceholder.typicode.com/users",
+        "startTime": 1779067357307,
+        "endTime": 1779067357360,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.UserApiTest.getAllUsers",
+    "status": "PASS"
+  },
+  {
+    "duration": 74,
+    "retryCount": 0,
+    "methodName": "getPostById",
+    "startTime": 1779067358133,
+    "endTime": 1779067358207,
+    "apiCalls": [
+      {
+        "duration": 52,
+        "request": {
+          "headers": "[Accept\u003d*/*]",
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:38 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Transfer-Encoding\u003dchunked, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dmax-age\u003d43200, etag\u003dW/\"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003drbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1778425763\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003drbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1778425763\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d999, x-ratelimit-reset\u003d1778425771, Age\u003d4957, cf-cache-status\u003dHIT, Content-Encoding\u003dgzip, CF-RAY\u003d9fd70d4cac1a478b-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "51ms",
+          "body": "{\n  \"userId\": 1,\n  \"id\": 1,\n  \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n  \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n}",
+          "statusCode": 200
+        },
+        "name": "GET https://jsonplaceholder.typicode.com/posts/1",
+        "startTime": 1779067358136,
+        "endTime": 1779067358188,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.PostApiTest.getPostById",
+    "status": "PASS"
+  },
+  {
+    "duration": 53,
+    "retryCount": 1,
+    "methodName": "flakyEndpointTest",
+    "startTime": 1779067358508,
+    "endTime": 1779067358561,
+    "apiCalls": [
+      {
+        "duration": 47,
+        "request": {
+          "headers": "[Accept\u003d*/*]",
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/users/1"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:38 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Transfer-Encoding\u003dchunked, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dmax-age\u003d43200, etag\u003dW/\"1fd-+2Y3G3w049iSZtw5t1mzSnunngE\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003dM2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1779058723\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003dM2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1779058723\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d896, x-ratelimit-reset\u003d1779058761, Age\u003d8635, cf-cache-status\u003dHIT, Content-Encoding\u003dgzip, CF-RAY\u003d9fd70d4efeb6dc2d-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "47ms",
+          "body": "{\n  \"id\": 1,\n  \"name\": \"Leanne Graham\",\n  \"username\": \"Bret\",\n  \"email\": \"Sincere@april.biz\",\n  \"address\": {\n    \"street\": \"Kulas Light\",\n    \"suite\": \"Apt. 556\",\n    \"city\": \"Gwenborough\",\n    \"zipcode\": \"92998-3874\",\n    \"geo\": {\n      \"lat\": \"-37.3159\",\n      \"lng\": \"81.1496\"\n    }\n  },\n  \"phone\": \"1-770-736-8031 x56442\",\n  \"website\": \"hildegard.org\",\n  \"company\": {\n    \"name\": \"Romaguera-Crona\",\n    \"catchPhrase\": \"Multi-layered client-server neural-net\",\n    \"bs\": \"harness real-time e-markets\"\n  }\n}",
+          "statusCode": 200
+        },
+        "name": "GET https://jsonplaceholder.typicode.com/users/1",
+        "startTime": 1779067358509,
+        "endTime": 1779067358556,
+        "status": "passed"
+      }
+    ],
+    "flakyReason": "Test passed after 1 retry attempt(s)",
+    "testName": "com.example.tests.FlakyApiTest.flakyEndpointTest",
+    "status": "FLAKY"
+  },
+  {
+    "duration": 63,
+    "retryCount": 0,
+    "methodName": "getUserById",
+    "startTime": 1779067357937,
+    "endTime": 1779067358000,
+    "apiCalls": [
+      {
+        "duration": 46,
+        "request": {
+          "headers": "[Accept\u003d*/*]",
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/users/1"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:37 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Transfer-Encoding\u003dchunked, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dmax-age\u003d43200, etag\u003dW/\"1fd-+2Y3G3w049iSZtw5t1mzSnunngE\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003dM2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1779058723\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003dM2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1779058723\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d896, x-ratelimit-reset\u003d1779058761, Age\u003d8634, cf-cache-status\u003dHIT, Content-Encoding\u003dgzip, CF-RAY\u003d9fd70d4b6bea2d38-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "46ms",
+          "body": "{\n  \"id\": 1,\n  \"name\": \"Leanne Graham\",\n  \"username\": \"Bret\",\n  \"email\": \"Sincere@april.biz\",\n  \"address\": {\n    \"street\": \"Kulas Light\",\n    \"suite\": \"Apt. 556\",\n    \"city\": \"Gwenborough\",\n    \"zipcode\": \"92998-3874\",\n    \"geo\": {\n      \"lat\": \"-37.3159\",\n      \"lng\": \"81.1496\"\n    }\n  },\n  \"phone\": \"1-770-736-8031 x56442\",\n  \"website\": \"hildegard.org\",\n  \"company\": {\n    \"name\": \"Romaguera-Crona\",\n    \"catchPhrase\": \"Multi-layered client-server neural-net\",\n    \"bs\": \"harness real-time e-markets\"\n  }\n}",
+          "statusCode": 200
+        },
+        "name": "GET https://jsonplaceholder.typicode.com/users/1",
+        "startTime": 1779067357939,
+        "endTime": 1779067357985,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.UserApiTest.getUserById",
+    "status": "PASS"
+  },
+  {
+    "duration": 68,
+    "retryCount": 1,
+    "methodName": "failedAssertionDemo",
+    "startTime": 1779067358563,
+    "endTime": 1779067358631,
+    "error": {
+      "stackTrace": "java.lang.AssertionError: 1 expectation failed.\nJSON path title doesn\u0027t match.\nExpected: This title will never match\n  Actual: sunt aut facere repellat provident occaecati excepturi optio reprehenderit\n\n\tat java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)\n\tat java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)\n\tat java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)\n\tat org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)\n\tat org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)\n\tat org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)\n\tat io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)\n\tat io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)\n\tat io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)\n\tat io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)\n\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)\n\tat org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)\n\tat org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)\n\tat org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)\n\tat io.restassured.internal.ResponseSpecificationImpl.body(ResponseSpecificationImpl.groovy:270)\n\tat io....",
+      "message": "1 expectation failed.\nJSON path title doesn\u0027t match.\nExpected: This title will never match\n  Actual: sunt aut facere repellat provident occaecati excepturi optio reprehenderit\n"
+    },
+    "apiCalls": [
+      {
+        "duration": 53,
+        "request": {
+          "headers": "[Accept\u003d*/*]",
+          "method": "GET",
+          "uri": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:38 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Transfer-Encoding\u003dchunked, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, Cache-Control\u003dmax-age\u003d43200, etag\u003dW/\"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU\", expires\u003d-1, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003drbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1778425763\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003drbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1778425763\", Server\u003dcloudflare, vary\u003dOrigin, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d999, x-ratelimit-reset\u003d1778425771, Age\u003d4957, cf-cache-status\u003dHIT, Content-Encoding\u003dgzip, CF-RAY\u003d9fd70d4f5acb4f40-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 200 OK",
+          "responseTime": "52ms",
+          "body": "{\n  \"userId\": 1,\n  \"id\": 1,\n  \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n  \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n}",
+          "statusCode": 200
+        },
+        "name": "GET https://jsonplaceholder.typicode.com/posts/1",
+        "startTime": 1779067358566,
+        "endTime": 1779067358619,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.PostApiTest.failedAssertionDemo",
+    "status": "FAIL"
+  },
+  {
+    "duration": 92,
+    "retryCount": 0,
+    "methodName": "createPost",
+    "startTime": 1779067358409,
+    "endTime": 1779067358501,
+    "apiCalls": [
+      {
+        "duration": 81,
+        "request": {
+          "headers": "[Accept\u003d*/*, Content-Type\u003dapplication/json]",
+          "method": "POST",
+          "body": "{ \"title\": \"Test Post\", \"body\": \"This is a test post\", \"userId\": 1 }",
+          "uri": "https://jsonplaceholder.typicode.com/posts"
+        },
+        "response": {
+          "headers": "[Date\u003dMon, 18 May 2026 01:22:38 GMT, Content-Type\u003dapplication/json; charset\u003dutf-8, Content-Length\u003d87, Connection\u003dkeep-alive, access-control-allow-credentials\u003dtrue, access-control-expose-headers\u003dLocation, Cache-Control\u003dno-cache, etag\u003dW/\"57-tb2JEXLtqvlYgkxd1vS0t5try68\", expires\u003d-1, location\u003dhttps://jsonplaceholder.typicode.com/posts/101, nel\u003d{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma\u003dno-cache, report-to\u003d{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s\u003dT5iZ%2BTXbO1MjABonK1Ho5yokkOdCrx6lCGQqXFxFltk%3D\\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts\u003d1779067358\"}],\"max_age\":3600}, reporting-endpoints\u003dheroku-nel\u003d\"https://nel.heroku.com/reports?s\u003dT5iZ%2BTXbO1MjABonK1Ho5yokkOdCrx6lCGQqXFxFltk%3D\u0026sid\u003de11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts\u003d1779067358\", Server\u003dcloudflare, vary\u003dOrigin, X-HTTP-Method-Override, Accept-Encoding, via\u003d2.0 heroku-router, x-content-type-options\u003dnosniff, x-powered-by\u003dExpress, x-ratelimit-limit\u003d1000, x-ratelimit-remaining\u003d996, x-ratelimit-reset\u003d1779067403, cf-cache-status\u003dDYNAMIC, CF-RAY\u003d9fd70d4e5f1426c3-DFW, alt-svc\u003dh3\u003d\":443\"; ma\u003d86400]",
+          "statusLine": "HTTP/1.1 201 Created",
+          "responseTime": "81ms",
+          "body": "{\n  \"title\": \"Test Post\",\n  \"body\": \"This is a test post\",\n  \"userId\": 1,\n  \"id\": 101\n}",
+          "statusCode": 201
+        },
+        "name": "POST https://jsonplaceholder.typicode.com/posts",
+        "startTime": 1779067358410,
+        "endTime": 1779067358491,
+        "status": "passed"
+      }
+    ],
+    "testName": "com.example.tests.PostApiTest.createPost",
+    "status": "PASS"
+  }
+]

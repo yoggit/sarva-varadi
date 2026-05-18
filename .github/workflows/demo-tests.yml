@@ -14,8 +14,9 @@ on:
         options:
           - ''
           - playwright
-          - restassured
-          - selenium
+          - restassured-testng
+          - restassured-junit
+          - selenium-testng
 
 permissions:
   contents: write
@@ -60,10 +61,9 @@ jobs:
         working-directory: demo-playwright
         continue-on-error: true
 
-      - name: Generate Selenium report from static data
-        if: ${{ inputs.test_framework == 'selenium' || inputs.test_framework == '' }}
+      - name: Generate Selenium (TestNG) report from static data
+        if: ${{ inputs.test_framework == 'selenium-testng' || inputs.test_framework == '' }}
         run: |
-          # Use static test data for Selenium demo
           node packages/core/dist/cli.js convert \
             --input demo-selenium/testng-source/data.json \
             --output demo-selenium/sarva-report \
@@ -71,13 +71,22 @@ jobs:
             --use-current-timestamp
         continue-on-error: true
 
-      - name: Generate RestAssured report from static data
-        if: ${{ inputs.test_framework == 'restassured' || inputs.test_framework == '' }}
+      - name: Generate RestAssured (TestNG) report from static data
+        if: ${{ inputs.test_framework == 'restassured-testng' || inputs.test_framework == '' }}
         run: |
-          # Use static test data for RestAssured demo
           node packages/core/dist/cli.js convert \
             --input demo-restassured/testng-source/data.json \
             --output demo-restassured/sarva-report \
+            --format testng-listener \
+            --use-current-timestamp
+        continue-on-error: true
+
+      - name: Generate RestAssured (JUnit 5) report from static data
+        if: ${{ inputs.test_framework == 'restassured-junit' || inputs.test_framework == '' }}
+        run: |
+          node packages/core/dist/cli.js convert \
+            --input demo-restassured-junit/junit5-source/data.json \
+            --output demo-restassured-junit/sarva-report \
             --format testng-listener \
             --use-current-timestamp
         continue-on-error: true
@@ -95,7 +104,7 @@ jobs:
             echo "✅ Found existing gh-pages branch"
 
             # Merge existing history for each framework
-            for framework in playwright:demo-playwright selenium:demo-selenium rest-assured:demo-restassured; do
+            for framework in playwright:demo-playwright selenium:demo-selenium rest-assured:demo-restassured rest-assured-junit:demo-restassured-junit; do
               IFS=':' read -r gh_name local_name <<< "$framework"
 
               echo "  📊 Processing $gh_name..."
@@ -129,7 +138,7 @@ jobs:
 
             # Delete runs.json files to force rebuild from merged folders
             echo "🗑️  Deleting runs.json files to force rebuild..."
-            for dir in demo-playwright demo-selenium demo-restassured; do
+            for dir in demo-playwright demo-selenium demo-restassured demo-restassured-junit; do
               if [ -f "$dir/sarva-report/history/runs.json" ]; then
                 rm -f "$dir/sarva-report/history/runs.json"
                 echo "  ✓ Deleted $dir/sarva-report/history/runs.json"
@@ -159,6 +168,9 @@ jobs:
           fi
           if [ -d "demo-restassured/sarva-report" ]; then
             cp -r demo-restassured/sarva-report gh-pages-deploy/rest-assured
+          fi
+          if [ -d "demo-restassured-junit/sarva-report" ]; then
+            cp -r demo-restassured-junit/sarva-report gh-pages-deploy/rest-assured-junit
           fi
 
       - name: Create landing page
