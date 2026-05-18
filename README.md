@@ -33,7 +33,8 @@
 <p align="center">
   <strong>🎭 <a href="https://yoggit.github.io/sarva-varadi/playwright/trends.html">Playwright Demo</a></strong> • 
   <strong>🌐 <a href="https://yoggit.github.io/sarva-varadi/selenium/trends.html">Selenium Demo</a></strong> • 
-  <strong>🔌 <a href="https://yoggit.github.io/sarva-varadi/rest-assured/trends.html">RestAssured Demo</a></strong>
+  <strong>🔌 <a href="https://yoggit.github.io/sarva-varadi/rest-assured/trends.html">RestAssured (TestNG) Demo</a></strong> •
+  <strong>🧪 <a href="https://yoggit.github.io/sarva-varadi/rest-assured-junit/trends.html">RestAssured (JUnit 5) Demo</a></strong>
 </p>
 
 ---
@@ -42,10 +43,11 @@
 
 <table>
 <tr>
-<td width="25%" align="center"><strong>🎭 Playwright</strong><br/>Web automation<br/>TypeScript/JavaScript</td>
-<td width="25%" align="center"><strong>🔌 RestAssured</strong><br/>API testing<br/>Java/TestNG</td>
-<td width="25%" align="center"><strong>🌐 Selenium</strong><br/>WebDriver browser tests<br/>Java/TestNG</td>
-<td width="25%" align="center"><strong>🚧 Cypress</strong><br/>Modern web testing<br/><em>(Coming soon)</em></td>
+<td width="20%" align="center"><strong>🎭 Playwright</strong><br/>Web automation<br/>TypeScript/JavaScript</td>
+<td width="20%" align="center"><strong>🔌 RestAssured (TestNG)</strong><br/>API testing<br/>Java/TestNG</td>
+<td width="20%" align="center"><strong>🧪 RestAssured (JUnit 5)</strong><br/>API testing<br/>Java/JUnit 5</td>
+<td width="20%" align="center"><strong>🌐 Selenium</strong><br/>WebDriver browser tests<br/>Java/TestNG</td>
+<td width="20%" align="center"><strong>🚧 Cypress</strong><br/>Modern web testing<br/><em>(Coming soon)</em></td>
 </tr>
 </table>
 
@@ -181,6 +183,7 @@ After execution, the core generator creates beautiful HTML reports from the coll
 | RestAssured | 5.x+ |
 | Selenium | 4.x+ (uses `EventFiringDecorator` — not available in Selenium 3) |
 | TestNG | 7.x+ |
+| JUnit Jupiter | 5.8+ |
 | Playwright | 1.20+ |
 
 ### For Playwright
@@ -189,9 +192,13 @@ After execution, the core generator creates beautiful HTML reports from the coll
 npm install --save-dev @sarva-varadi/core @sarva-varadi/playwright
 ```
 
-### For RestAssured (API Testing)
+### For RestAssured + TestNG
 
-Add to your `pom.xml` — see the [RestAssured + Maven Integration Guide](#restassured-maven-guide) below.
+Add to your `pom.xml` — see the [RestAssured (TestNG) + Maven Integration Guide](#restassured-maven-guide) below.
+
+### For RestAssured + JUnit 5
+
+Add to your `pom.xml` — see the [RestAssured (JUnit 5) + Maven Integration Guide](#restassured-junit-maven-guide) below.
 
 ### For Selenium (WebDriver + TestNG)
 
@@ -203,13 +210,15 @@ Add to your `pom.xml` — see the [Selenium + Maven Integration Guide](#selenium
 
 Understanding what is automatic vs what requires an extra setup step saves a lot of confusion:
 
-| | Automatic (Steps 1–3) | Requires Step 4 |
+| | Automatic (Steps 1–3 or 1–2) | Requires extra step |
 |---|---|---|
-| **RestAssured** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection | HTTP request/response details shown as test steps |
-| **Selenium** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection | Browser actions (clicks, navigation, inputs) + screenshots shown as test steps |
+| **RestAssured (TestNG)** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection | HTTP request/response details shown as test steps (Step 4) |
+| **RestAssured (JUnit 5)** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection, **HTTP steps auto-captured** | Nothing extra needed — the extension auto-registers the request capture filter |
+| **Selenium** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection | Browser actions (clicks, navigation, inputs) + screenshots shown as test steps (Step 4) |
 | **Playwright** | Everything — steps, screenshots, video, trace captured natively | Nothing extra needed |
 
-> Steps 1–3 give you a working report. Step 4 is what adds the rich detail inside each test.
+> For RestAssured + JUnit 5, Steps 1–3 give you a fully detailed report including HTTP steps — no extra wiring needed.
+> For RestAssured + TestNG and Selenium, Step 4 adds the rich detail inside each test.
 
 ---
 
@@ -289,7 +298,7 @@ xdg-open sarva-report/index.html
 
 <a id="restassured-maven-guide"></a>
 <details>
-<summary>🔌 RestAssured + Maven Integration Guide</summary>
+<summary>🔌 RestAssured (TestNG) + Maven Integration Guide</summary>
 
 <br>
 
@@ -459,6 +468,182 @@ xdg-open sarva-report/index.html   # Linux
 ```
 
 📂 **Demo project:** [`demo-restassured/`](demo-restassured/)
+
+</details>
+
+<a id="restassured-junit-maven-guide"></a>
+<details>
+<summary>🧪 RestAssured (JUnit 5) + Maven Integration Guide</summary>
+
+<br>
+
+> ✅ **Easiest setup of all Java integrations** — No `testng.xml`, no manual filter registration. Just annotate your base test and run.
+>
+> **Prerequisites:** Java 11+, Maven 3.6+, [Node.js](https://nodejs.org)
+
+---
+
+### Step 1 — Add repository & dependency to `pom.xml`
+
+Pulls the sarva-varadi library from JitPack so Maven can resolve it at compile time.
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <!-- Your existing RestAssured + JUnit 5 dependencies -->
+    <dependency>
+        <groupId>io.rest-assured</groupId>
+        <artifactId>rest-assured</artifactId>
+        <version>5.3.2</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>5.10.0</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Sarva-Varadi: JUnit 5 extension + RestAssured request capture -->
+    <dependency>
+        <groupId>com.github.yoggit.sarva-varadi</groupId>
+        <artifactId>sarva-varadi-restassured-junit</artifactId>
+        <version>v2.1.0</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+---
+
+### Step 2 — Add Surefire plugin + report generation to `pom.xml`
+
+Runs tests with JUnit 5 support, enables flaky test retry, and auto-generates the HTML report after every `mvn test`.
+
+> **Node.js required:** This plugin runs `npx @sarva-varadi/core generate` after tests to produce the HTML report. Node.js must be installed on the machine running `mvn test`. [Download Node.js](https://nodejs.org)
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.5</version>
+            <configuration>
+                <!-- Continue build so report always generates even on failures -->
+                <testFailureIgnore>true</testFailureIgnore>
+                <!-- Retry failing tests once — enables flaky test detection -->
+                <rerunFailingTestsCount>1</rerunFailingTestsCount>
+            </configuration>
+        </plugin>
+
+        <!-- Auto-generates the HTML report after mvn test -->
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+                <execution>
+                    <id>generate-sarva-report</id>
+                    <phase>test</phase>
+                    <goals><goal>exec</goal></goals>
+                    <configuration>
+                        <!-- Windows users: change npx to npx.cmd -->
+                        <executable>npx</executable>
+                        <arguments>
+                            <argument>--yes</argument>
+                            <argument>@sarva-varadi/core</argument>
+                            <argument>generate</argument>
+                            <argument>--input</argument>
+                            <argument>${project.basedir}/sarva-varadi-results/test-results.json</argument>
+                            <argument>--output</argument>
+                            <argument>${project.basedir}/sarva-report</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
+---
+
+### Step 3 — Add `@ExtendWith` to your base test class
+
+This is the only wiring needed. The extension automatically:
+- Records every test start, pass, fail, skip, and retry
+- Registers the HTTP request/response capture filter (no `RestAssured.filters()` call needed)
+- Detects flaky tests when `rerunFailingTestsCount` is set in Surefire
+- Writes results to `sarva-varadi-results/test-results.json` on JVM exit
+
+```java
+import io.github.yoggit.sarvavaradi.SarvaVaradiJUnit5Extension;
+import io.restassured.RestAssured;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+@ExtendWith(SarvaVaradiJUnit5Extension.class)
+public class BaseTest {
+
+    @BeforeAll
+    static void setup() {
+        RestAssured.baseURI = "https://api.example.com";
+        // No RestAssured.filters() call needed — captured automatically
+    }
+}
+```
+
+All test classes extend `BaseTest`:
+
+```java
+public class UserApiTest extends BaseTest {
+
+    @Test
+    void getUserById() {
+        given()
+            .when().get("/users/1")
+            .then().statusCode(200);
+    }
+}
+```
+
+---
+
+### Step 4 — Run tests
+
+```bash
+mvn test
+```
+
+That's it. This will:
+1. ✅ Run all JUnit 5 tests
+2. ✅ Auto-capture HTTP request/response details per test
+3. ✅ Collect results → `sarva-varadi-results/test-results.json`
+4. ✅ Auto-generate the HTML report → `sarva-report/index.html`
+
+```bash
+# Open the report
+open sarva-report/index.html       # macOS
+start sarva-report/index.html      # Windows
+xdg-open sarva-report/index.html   # Linux
+```
+
+### Flaky Test Detection
+
+The extension detects flaky tests automatically when `rerunFailingTestsCount` is set in Surefire. A test is marked **flaky** when it fails on the first attempt but passes on retry — no extra configuration needed.
+
+| Without `rerunFailingTestsCount` | With `rerunFailingTestsCount=1` |
+|---|---|
+| Intermittently failing test marked as `failed` | Intermittently failing test marked as `flaky` with retry count |
+
+📂 **Demo project:** [`demo-restassured-junit/`](demo-restassured-junit/)
 
 </details>
 
@@ -1195,19 +1380,25 @@ Failed Tests:
 
 ```
 packages/
-├── core/              # @sarva-varadi/core
-│   ├── types/        # Common interfaces
-│   ├── adapters/     # Base adapter class
-│   ├── converters/   # Format converters (JUnit, TestNG, Cucumber)
-│   ├── generators/   # HTML report generation
+├── core/                  # @sarva-varadi/core
+│   ├── types/            # Common interfaces
+│   ├── adapters/         # Base adapter class
+│   ├── converters/       # Format converters (JUnit, TestNG, Cucumber)
+│   ├── generators/       # HTML report generation
 │   └── history-manager.ts
 │
-├── playwright/        # @sarva-varadi/playwright
-│   └── adapter.ts    # Playwright-specific adapter
+├── playwright/            # @sarva-varadi/playwright
+│   └── adapter.ts        # Playwright-specific adapter
 │
-├── rest-assured/      # @sarva-varadi/rest-assured
-    ├── adapter.ts    # RestAssured adapter
-    └── testng/       # TestNG listener & retry analyzer
+├── rest-assured-junit/    # @sarva-varadi/rest-assured-junit
+│   └── junit5-extension.ts  # JUnit 5 adapter
+│
+java/
+├── sarva-varadi-restassured/       # JitPack: sarva-varadi-restassured
+│   └── SarvaVaradiListener         # TestNG listener + RestAssured filter
+│
+└── sarva-varadi-restassured-junit/ # JitPack: sarva-varadi-restassured-junit
+    └── SarvaVaradiJUnit5Extension  # JUnit 5 extension + RestAssured filter
 ```
 
 ---
@@ -1261,9 +1452,10 @@ npx --version
 <details>
 <summary><b>Tests appear in the report but with no steps or detail inside them</b></summary>
 
-Step 4 is missing or not wired correctly:
+Step 4 (or Step 3 for JUnit 5) is missing or not wired correctly:
 
-- **RestAssured:** `RestAssured.filters(new RestAssuredRequestCapture())` must be called in your `@BeforeClass` / `@BeforeSuite` setup method (e.g. `BaseTest.java`).
+- **RestAssured + TestNG:** `RestAssured.filters(new RestAssuredRequestCapture())` must be called in your `@BeforeClass` / `@BeforeSuite` setup method (e.g. `BaseTest.java`).
+- **RestAssured + JUnit 5:** Ensure `@ExtendWith(SarvaVaradiJUnit5Extension.class)` is on your base test class. The extension auto-registers the filter — no `RestAssured.filters()` call is needed.
 - **Selenium:** Your `WebDriver` must be wrapped with `EventFiringDecorator` + `SarvaVaradiWebDriverListener` before being used in tests. See Step 4 in the [Selenium + Maven Integration Guide](#selenium-maven-guide).
 
 </details>
