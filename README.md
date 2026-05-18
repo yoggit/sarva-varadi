@@ -342,7 +342,7 @@ Pulls the sarva-varadi library from JitPack so Maven can resolve it at compile t
     <dependency>
         <groupId>com.github.yoggit.sarva-varadi</groupId>
         <artifactId>sarva-varadi-restassured</artifactId>
-        <version>v2.0.1</version>
+        <version>v2.1.1</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
@@ -692,7 +692,7 @@ Pulls the sarva-varadi library from JitPack so Maven can resolve it at compile t
     <dependency>
         <groupId>com.github.yoggit.sarva-varadi</groupId>
         <artifactId>sarva-varadi-selenium</artifactId>
-        <version>v2.0.1</version>
+        <version>v2.1.1</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
