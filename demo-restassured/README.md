@@ -12,20 +12,22 @@ Demo project showing how to integrate RestAssured API tests with Sarva-Varadi re
 
 ```
 demo-restassured/
-├── pom.xml                           # Maven configuration
+├── pom.xml                           # Maven configuration (JitPack dependency + exec plugin)
 ├── package.json                      # npm scripts for reporting
 ├── src/
 │   └── test/
 │       ├── java/
-│       │   ├── SarvaVaradiListener.java          # TestNG listener
 │       │   └── com/example/tests/
 │       │       ├── UserApiTest.java              # User API tests
-│       │       └── PostApiTest.java              # Post API tests
+│       │       ├── PostApiTest.java              # Post API tests
+│       │       └── FlakyApiTest.java             # Flaky test demo
 │       └── resources/
 │           └── testng.xml                        # TestNG configuration
 └── sarva-varadi-results/             # Test results (generated)
     └── test-results.json
 ```
+
+> The TestNG listener and request capture filter come from the `sarva-varadi-restassured` Maven dependency — no listener files to copy.
 
 ## Quick Start
 
