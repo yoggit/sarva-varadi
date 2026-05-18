@@ -1048,15 +1048,15 @@
                         </label>
                     </div>
                     <div class="subtitle">
-                        Last Run on <span id="timestamp" data-time="2026-05-18T02:34:46.720Z"></span>
+                        Last Run on <span id="timestamp" data-time="2026-05-18T02:34:46.823Z"></span>
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 1rem;">
-                    <div class="status-badge status-passed">
-                        PASSED
+                    <div class="status-badge status-failed">
+                        FAILED
                     </div>
                     <div class="duration">
-                        ⏱️ 9.65s
+                        ⏱️ 1.84s
                     </div>
                 </div>
             </div>
@@ -1077,7 +1077,7 @@
                         </svg>
                     </div>
                     <div class="card-content">
-                        <div class="card-value">10</div>
+                        <div class="card-value">13</div>
                         <div class="card-label">Total Tests</div>
                     </div>
                 </div>
@@ -1090,7 +1090,7 @@
                         </svg>
                     </div>
                     <div class="card-content">
-                        <div class="card-value">8</div>
+                        <div class="card-value">11</div>
                         <div class="card-label">Passed</div>
                     </div>
                 </div>
@@ -1104,7 +1104,7 @@
                         </svg>
                     </div>
                     <div class="card-content">
-                        <div class="card-value">0</div>
+                        <div class="card-value">1</div>
                         <div class="card-label">Failed</div>
                     </div>
                 </div>
@@ -1118,7 +1118,7 @@
                         </svg>
                     </div>
                     <div class="card-content">
-                        <div class="card-value">0</div>
+                        <div class="card-value">1</div>
                         <div class="card-label">Flaky</div>
                     </div>
                 </div>
@@ -1131,7 +1131,7 @@
                         </svg>
                     </div>
                     <div class="card-content">
-                        <div class="card-value">2</div>
+                        <div class="card-value">0</div>
                         <div class="card-label">Skipped</div>
                     </div>
                 </div>
@@ -1143,7 +1143,7 @@
                         </svg>
                     </div>
                     <div class="card-content">
-                        <div class="card-value">80.0%
+                        <div class="card-value">84.6%
                             <span class="info-tooltip" style="position: relative; display: inline-flex; cursor: help; margin-left: 0.25rem; vertical-align: super; font-size: 0.5em;">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2">
                                     <circle cx="12" cy="12" r="10"></circle>
@@ -1159,7 +1159,7 @@
             </div>
 
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 80.0%"></div>
+                <div class="progress-fill" style="width: 84.6%"></div>
             </div>
         </div>
 
@@ -1185,25 +1185,25 @@
     <section class="tests-section">
         <div class="tests-list">
             
-    <div class="test-item" data-status="passed" data-testid="3e3ae929-7092-4aef-bc35-a9d2e97bdd5f">
-        <div class="test-header" onclick="toggleTest('3e3ae929-7092-4aef-bc35-a9d2e97bdd5f')">
+    <div class="test-item" data-status="passed" data-testid="8e84fd8c-3826-42a0-a706-cc6007d88dd6">
+        <div class="test-header" onclick="toggleTest('8e84fd8c-3826-42a0-a706-cc6007d88dd6')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
-                    <div class="test-title">GET /users - List all users<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-title">getAllPosts<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
                     <div class="test-meta">
-                        <span class="test-location">📁 com.example.restassured.tests.ApiTests.GET /users - List all users</span>
+                        <span class="test-location">📁 com.example.tests.PostApiTest.getAllPosts</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 1.20s</span>
+                <span class="test-duration">⏱️ 74ms</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-3e3ae929-7092-4aef-bc35-a9d2e97bdd5f">
+        <div class="test-details" id="details-8e84fd8c-3826-42a0-a706-cc6007d88dd6">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1212,8 +1212,8 @@
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">GET /users - List all users</span>
-                <span class="step-duration">960ms</span>
+                <span class="step-title">GET https://jsonplaceholder.typicode.com/posts</span>
+                <span class="step-duration">53ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -1224,7 +1224,7 @@
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Method: GET | URL: /users</span>
+                <span class="step-title">Method: GET | URL: https://jsonplaceholder.typicode.com/posts</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1235,8 +1235,7 @@
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-Accept: application/json
+                [Accept=*/*]
             </div>
         </div>
         </div>
@@ -1249,7 +1248,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Status: 200 OK | Response Time: 960ms</span>
+                <span class="step-title">Status: 200 HTTP/1.1 200 OK | Response Time: 53ms</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1260,7 +1259,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
+                [Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, Content-Encoding=gzip, etag=W/&quot;6b80-Ybsq/K6GwwqrYkAsFxqDXGC7DoM&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=Ee2TzQ9f9wEz72VI4uSP7CAZj%2BnhfJLNWqcHUZydjkU%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1778551595&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=Ee2TzQ9f9wEz72VI4uSP7CAZj%2BnhfJLNWqcHUZydjkU%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1778551595&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1778551638, Age=25436, cf-cache-status=HIT, CF-RAY=9fd70d4d2e775e57-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
@@ -1270,7 +1269,30 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;success&quot;:true,&quot;data&quot;:{&quot;id&quot;:123}}
+                [
+  {
+    &quot;userId&quot;: 1,
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;sunt aut facere repellat provident occaecati excepturi optio reprehenderit&quot;,
+    &quot;body&quot;: &quot;quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto&quot;
+  },
+  {
+    &quot;userId&quot;: 1,
+    &quot;id&quot;: 2,
+    &quot;title&quot;: &quot;qui est esse&quot;,
+    &quot;body&quot;: &quot;est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla&quot;
+  },
+  {
+    &quot;userId&quot;: 1,
+    &quot;id&quot;: 3,
+    &quot;title&quot;: &quot;ea molestias quasi exercitationem repellat qui ipsa sit aut&quot;,
+    &quot;body&quot;: &quot;et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut&quot;
+  },
+  {
+    &quot;userId&quot;: 1,
+    &quot;id&quot;: 4,
+    &quot;title&quot;: &quot;eum et est occaecati&quot;,
+    &quot;body&quot;: &quot;ullam et saepe reic... (truncated)
             </div>
         </div>
         </div>
@@ -1279,25 +1301,25 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="6278f608-4cad-4a9f-8f51-8aaf2fc16983">
-        <div class="test-header" onclick="toggleTest('6278f608-4cad-4a9f-8f51-8aaf2fc16983')">
+    <div class="test-item" data-status="passed" data-testid="51771b36-da58-4b6b-b5ba-ab1dd0c70043">
+        <div class="test-header" onclick="toggleTest('51771b36-da58-4b6b-b5ba-ab1dd0c70043')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
-                    <div class="test-title">GET /users/{id} - Get user by ID<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-title">stableEndpointTest<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
                     <div class="test-meta">
-                        <span class="test-location">📁 com.example.restassured.tests.ApiTests.GET /users/{id} - Get user by ID</span>
+                        <span class="test-location">📁 com.example.tests.FlakyApiTest.stableEndpointTest</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 800ms</span>
+                <span class="test-duration">⏱️ 66ms</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-6278f608-4cad-4a9f-8f51-8aaf2fc16983">
+        <div class="test-details" id="details-51771b36-da58-4b6b-b5ba-ab1dd0c70043">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1306,8 +1328,8 @@ Accept: application/json
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">GET /users/{id} - Get user by ID</span>
-                <span class="step-duration">640ms</span>
+                <span class="step-title">GET https://jsonplaceholder.typicode.com/users/2</span>
+                <span class="step-duration">58ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -1318,7 +1340,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Method: GET | URL: /users/{id}</span>
+                <span class="step-title">Method: GET | URL: https://jsonplaceholder.typicode.com/users/2</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1329,8 +1351,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-Accept: application/json
+                [Accept=*/*]
             </div>
         </div>
         </div>
@@ -1343,7 +1364,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Status: 200 OK | Response Time: 640ms</span>
+                <span class="step-title">Status: 200 HTTP/1.1 200 OK | Response Time: 57ms</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1354,7 +1375,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
+                [Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/&quot;1fd-XTG63SYhaP/Uo6/vgmARnL3rpBk&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=JkocaItob6JD7JpUQbcAqI0N97wUW7aORIuxjnQlO8Q%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1778961410&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=JkocaItob6JD7JpUQbcAqI0N97wUW7aORIuxjnQlO8Q%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1778961410&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=955, x-ratelimit-reset=1778961457, Age=10024, cf-cache-status=HIT, Content-Encoding=gzip, CF-RAY=9fd70d4bdf3ce7aa-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
@@ -1364,7 +1385,29 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;success&quot;:true,&quot;data&quot;:{&quot;id&quot;:123}}
+                {
+  &quot;id&quot;: 2,
+  &quot;name&quot;: &quot;Ervin Howell&quot;,
+  &quot;username&quot;: &quot;Antonette&quot;,
+  &quot;email&quot;: &quot;Shanna@melissa.tv&quot;,
+  &quot;address&quot;: {
+    &quot;street&quot;: &quot;Victor Plains&quot;,
+    &quot;suite&quot;: &quot;Suite 879&quot;,
+    &quot;city&quot;: &quot;Wisokyburgh&quot;,
+    &quot;zipcode&quot;: &quot;90566-7771&quot;,
+    &quot;geo&quot;: {
+      &quot;lat&quot;: &quot;-43.9509&quot;,
+      &quot;lng&quot;: &quot;-34.4618&quot;
+    }
+  },
+  &quot;phone&quot;: &quot;010-692-6593 x09125&quot;,
+  &quot;website&quot;: &quot;anastasia.net&quot;,
+  &quot;company&quot;: {
+    &quot;name&quot;: &quot;Deckow-Crist&quot;,
+    &quot;catchPhrase&quot;: &quot;Proactive didactic contingency&quot;,
+    &quot;bs&quot;: &quot;synergize scalable supply-chains&quot;
+  }
+}
             </div>
         </div>
         </div>
@@ -1373,25 +1416,25 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="6ec28727-be20-452c-91fc-03580abfcabe">
-        <div class="test-header" onclick="toggleTest('6ec28727-be20-452c-91fc-03580abfcabe')">
+    <div class="test-item" data-status="passed" data-testid="94b71331-b56d-4bb2-bf8b-be59959c983a">
+        <div class="test-header" onclick="toggleTest('94b71331-b56d-4bb2-bf8b-be59959c983a')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
-                    <div class="test-title">POST /users - Create new user<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-title">createUser<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
                     <div class="test-meta">
-                        <span class="test-location">📁 com.example.restassured.tests.ApiTests.POST /users - Create new user</span>
+                        <span class="test-location">📁 com.example.tests.UserApiTest.createUser</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 1.50s</span>
+                <span class="test-duration">⏱️ 101ms</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-6ec28727-be20-452c-91fc-03580abfcabe">
+        <div class="test-details" id="details-94b71331-b56d-4bb2-bf8b-be59959c983a">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1400,8 +1443,8 @@ Accept: application/json
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">POST /users - Create new user</span>
-                <span class="step-duration">1.20s</span>
+                <span class="step-title">POST https://jsonplaceholder.typicode.com/users</span>
+                <span class="step-duration">89ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -1412,7 +1455,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Method: POST | URL: /users</span>
+                <span class="step-title">Method: POST | URL: https://jsonplaceholder.typicode.com/users</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1423,8 +1466,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-Accept: application/json
+                [Accept=*/*, Content-Type=application/json]
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
@@ -1434,7 +1476,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;name&quot;:&quot;test&quot;,&quot;email&quot;:&quot;test@example.com&quot;}
+                { &quot;name&quot;: &quot;John Doe&quot;, &quot;email&quot;: &quot;john@example.com&quot; }
             </div>
         </div>
         </div>
@@ -1447,7 +1489,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Status: 200 OK | Response Time: 1200ms</span>
+                <span class="step-title">Status: 201 HTTP/1.1 201 Created | Response Time: 88ms</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1458,7 +1500,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
+                [Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Content-Length=67, Connection=keep-alive, access-control-allow-credentials=true, access-control-expose-headers=Location, Cache-Control=no-cache, etag=W/&quot;43-iv+zGbP9dMgXHuo+euFZMKacl6Q&quot;, expires=-1, location=https://jsonplaceholder.typicode.com/users/11, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1779067357&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1779067357&quot;, Server=cloudflare, vary=Origin, X-HTTP-Method-Override, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=998, x-ratelimit-reset=1779067403, cf-cache-status=DYNAMIC, CF-RAY=9fd70d4a499690ff-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
@@ -1468,7 +1510,11 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;success&quot;:true,&quot;data&quot;:{&quot;id&quot;:123}}
+                {
+  &quot;name&quot;: &quot;John Doe&quot;,
+  &quot;email&quot;: &quot;john@example.com&quot;,
+  &quot;id&quot;: 11
+}
             </div>
         </div>
         </div>
@@ -1477,25 +1523,25 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="2eac8868-a7b5-429a-9032-662d154345ff">
-        <div class="test-header" onclick="toggleTest('2eac8868-a7b5-429a-9032-662d154345ff')">
+    <div class="test-item" data-status="passed" data-testid="6ed854a9-25fc-4f0d-a6ef-b48c8d474ccc">
+        <div class="test-header" onclick="toggleTest('6ed854a9-25fc-4f0d-a6ef-b48c8d474ccc')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
-                    <div class="test-title">PUT /users/{id} - Update user<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-title">updateUser<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
                     <div class="test-meta">
-                        <span class="test-location">📁 com.example.restassured.tests.ApiTests.PUT /users/{id} - Update user</span>
+                        <span class="test-location">📁 com.example.tests.UserApiTest.updateUser</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 1.80s</span>
+                <span class="test-duration">⏱️ 164ms</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-2eac8868-a7b5-429a-9032-662d154345ff">
+        <div class="test-details" id="details-6ed854a9-25fc-4f0d-a6ef-b48c8d474ccc">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1504,8 +1550,8 @@ Accept: application/json
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">PUT /users/{id} - Update user</span>
-                <span class="step-duration">1.44s</span>
+                <span class="step-title">PUT https://jsonplaceholder.typicode.com/users/1</span>
+                <span class="step-duration">153ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -1516,7 +1562,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Method: PUT | URL: /users/{id}</span>
+                <span class="step-title">Method: PUT | URL: https://jsonplaceholder.typicode.com/users/1</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1527,8 +1573,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-Accept: application/json
+                [Accept=*/*, Content-Type=application/json]
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
@@ -1538,7 +1583,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;name&quot;:&quot;test&quot;,&quot;email&quot;:&quot;test@example.com&quot;}
+                { &quot;name&quot;: &quot;Jane Updated&quot;, &quot;email&quot;: &quot;jane.updated@example.com&quot; }
             </div>
         </div>
         </div>
@@ -1551,7 +1596,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Status: 200 OK | Response Time: 1440ms</span>
+                <span class="step-title">Status: 200 HTTP/1.1 200 OK | Response Time: 152ms</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1562,7 +1607,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
+                [Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=no-cache, etag=W/&quot;4e-Syg+x9VT+BWBQW/eGxeI8/PFkX4&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1779067357&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1779067357&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1779067403, cf-cache-status=DYNAMIC, Content-Encoding=gzip, CF-RAY=9fd70d492e1a6778-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
@@ -1572,7 +1617,11 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;success&quot;:true,&quot;data&quot;:{&quot;id&quot;:123}}
+                {
+  &quot;name&quot;: &quot;Jane Updated&quot;,
+  &quot;email&quot;: &quot;jane.updated@example.com&quot;,
+  &quot;id&quot;: 1
+}
             </div>
         </div>
         </div>
@@ -1581,119 +1630,25 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="skipped" data-testid="362b381c-5d6a-4d0e-a6d8-c3541e59eed5">
-        <div class="test-header" onclick="toggleTest('362b381c-5d6a-4d0e-a6d8-c3541e59eed5')">
-            <div class="test-header-left">
-                <span class="status-icon status-skipped">○</span>
-                <div class="test-info">
-                    <div class="test-title">DELETE /users/{id} - Delete user<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
-                    <div class="test-meta">
-                        <span class="test-location">📁 com.example.restassured.tests.ApiTests.DELETE /users/{id} - Delete user</span>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="test-header-right">
-                <span class="test-duration">⏱️ 0ms</span>
-                <span class="expand-icon">▼</span>
-            </div>
-        </div>
-
-        <div class="test-details" id="details-362b381c-5d6a-4d0e-a6d8-c3541e59eed5">
-            <div class="test-details-content">
-        <div class="details-section steps-section">
-            <h3 class="section-title">📋 Test Steps</h3>
-            <div class="steps-list">
-                
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">DELETE /users/{id} - Delete user</span>
-                <span class="step-duration">0ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">📤 Request</span>
-                <span class="step-duration">1ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Method: DELETE | URL: /users/{id}</span>
-                <span class="step-duration">0ms</span>
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Headers</span>
-                <span class="step-duration">0ms</span>
-            </div>
-            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-Accept: application/json
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">📥 Response</span>
-                <span class="step-duration">1ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Status: 200 OK | Response Time: 0ms</span>
-                <span class="step-duration">0ms</span>
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Headers</span>
-                <span class="step-duration">0ms</span>
-            </div>
-            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Body</span>
-                <span class="step-duration">0ms</span>
-            </div>
-            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;success&quot;:true,&quot;data&quot;:{&quot;id&quot;:123}}
-            </div>
-        </div>
-        </div>
-        </div>
-            </div>
-        </div></div>
-        </div>
-    </div>
-    <div class="test-item" data-status="passed" data-testid="4f0c8e23-d234-4fa7-afc3-2d5afb26de54">
-        <div class="test-header" onclick="toggleTest('4f0c8e23-d234-4fa7-afc3-2d5afb26de54')">
+    <div class="test-item" data-status="passed" data-testid="5d0c9164-cb36-4902-8894-872733e6538d">
+        <div class="test-header" onclick="toggleTest('5d0c9164-cb36-4902-8894-872733e6538d')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
-                    <div class="test-title">GET /posts - List all posts<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-title">deleteUser<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
                     <div class="test-meta">
-                        <span class="test-location">📁 com.example.restassured.tests.ApiTests.GET /posts - List all posts</span>
+                        <span class="test-location">📁 com.example.tests.UserApiTest.deleteUser</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 1.10s</span>
+                <span class="test-duration">⏱️ 88ms</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-4f0c8e23-d234-4fa7-afc3-2d5afb26de54">
+        <div class="test-details" id="details-5d0c9164-cb36-4902-8894-872733e6538d">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1702,8 +1657,8 @@ Accept: application/json
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">GET /posts - List all posts</span>
-                <span class="step-duration">880ms</span>
+                <span class="step-title">DELETE https://jsonplaceholder.typicode.com/users/1</span>
+                <span class="step-duration">85ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -1714,7 +1669,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Method: GET | URL: /posts</span>
+                <span class="step-title">Method: DELETE | URL: https://jsonplaceholder.typicode.com/users/1</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1725,8 +1680,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-Accept: application/json
+                [Accept=*/*]
             </div>
         </div>
         </div>
@@ -1739,7 +1693,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Status: 200 OK | Response Time: 880ms</span>
+                <span class="step-title">Status: 200 HTTP/1.1 200 OK | Response Time: 85ms</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1750,7 +1704,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
+                [Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Content-Length=2, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=no-cache, etag=W/&quot;2-vyGp6PvFo4RvsFtPoIWeCReyIC8&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1779067357&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1779067357&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=997, x-ratelimit-reset=1779067403, cf-cache-status=DYNAMIC, CF-RAY=9fd70d4adb94686c-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
@@ -1760,7 +1714,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;success&quot;:true,&quot;data&quot;:{&quot;id&quot;:123}}
+                {}
             </div>
         </div>
         </div>
@@ -1769,25 +1723,25 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="881f3786-4567-4b4e-817f-f331a202ed0d">
-        <div class="test-header" onclick="toggleTest('881f3786-4567-4b4e-817f-f331a202ed0d')">
+    <div class="test-item" data-status="passed" data-testid="47ec9210-aca6-4bed-b6eb-d1e67f8931d6">
+        <div class="test-header" onclick="toggleTest('47ec9210-aca6-4bed-b6eb-d1e67f8931d6')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
-                    <div class="test-title">POST /posts - Create new post<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-title">getPostsByUserId<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
                     <div class="test-meta">
-                        <span class="test-location">📁 com.example.restassured.tests.ApiTests.POST /posts - Create new post</span>
+                        <span class="test-location">📁 com.example.tests.PostApiTest.getPostsByUserId</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 1.40s</span>
+                <span class="test-duration">⏱️ 60ms</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-881f3786-4567-4b4e-817f-f331a202ed0d">
+        <div class="test-details" id="details-47ec9210-aca6-4bed-b6eb-d1e67f8931d6">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1796,8 +1750,8 @@ Accept: application/json
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">POST /posts - Create new post</span>
-                <span class="step-duration">1.12s</span>
+                <span class="step-title">GET https://jsonplaceholder.typicode.com/posts?userId=1</span>
+                <span class="step-duration">44ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -1808,7 +1762,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Method: POST | URL: /posts</span>
+                <span class="step-title">Method: GET | URL: https://jsonplaceholder.typicode.com/posts?userId=1</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1819,18 +1773,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-Accept: application/json
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Body</span>
-                <span class="step-duration">0ms</span>
-            </div>
-            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;name&quot;:&quot;test&quot;,&quot;email&quot;:&quot;test@example.com&quot;}
+                [Accept=*/*]
             </div>
         </div>
         </div>
@@ -1843,7 +1786,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Status: 200 OK | Response Time: 1120ms</span>
+                <span class="step-title">Status: 200 HTTP/1.1 200 OK | Response Time: 44ms</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1854,7 +1797,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
+                [Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Content-Length=1002, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, Content-Encoding=gzip, etag=W/&quot;aa6-j2NSH739l9uq40OywFMn7Y0C/iY&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=DimHfPySHlu%2Fk5DEJ7IeiVafnh8lpbIDU5fa13JMqqY%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1778703428&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=DimHfPySHlu%2Fk5DEJ7IeiVafnh8lpbIDU5fa13JMqqY%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1778703428&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=996, x-ratelimit-reset=1778703447, Age=4443, Accept-Ranges=bytes, cf-cache-status=HIT, CF-RAY=9fd70d4d98b56719-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
@@ -1864,7 +1807,30 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;success&quot;:true,&quot;data&quot;:{&quot;id&quot;:123}}
+                [
+  {
+    &quot;userId&quot;: 1,
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;sunt aut facere repellat provident occaecati excepturi optio reprehenderit&quot;,
+    &quot;body&quot;: &quot;quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto&quot;
+  },
+  {
+    &quot;userId&quot;: 1,
+    &quot;id&quot;: 2,
+    &quot;title&quot;: &quot;qui est esse&quot;,
+    &quot;body&quot;: &quot;est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla&quot;
+  },
+  {
+    &quot;userId&quot;: 1,
+    &quot;id&quot;: 3,
+    &quot;title&quot;: &quot;ea molestias quasi exercitationem repellat qui ipsa sit aut&quot;,
+    &quot;body&quot;: &quot;et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut&quot;
+  },
+  {
+    &quot;userId&quot;: 1,
+    &quot;id&quot;: 4,
+    &quot;title&quot;: &quot;eum et est occaecati&quot;,
+    &quot;body&quot;: &quot;ullam et saepe reic... (truncated)
             </div>
         </div>
         </div>
@@ -1873,25 +1839,25 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="passed" data-testid="ce1fad75-2c5f-48e4-b8f1-5247ab77b976">
-        <div class="test-header" onclick="toggleTest('ce1fad75-2c5f-48e4-b8f1-5247ab77b976')">
+    <div class="test-item" data-status="passed" data-testid="cb025dc1-3132-44e4-b294-62c6bca07c5e">
+        <div class="test-header" onclick="toggleTest('cb025dc1-3132-44e4-b294-62c6bca07c5e')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
-                    <div class="test-title">GET /posts/{id}/comments - Get post comments<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-title">getUserNotFound<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
                     <div class="test-meta">
-                        <span class="test-location">📁 com.example.restassured.tests.ApiTests.GET /posts/{id}/comments - Get post comments</span>
+                        <span class="test-location">📁 com.example.tests.UserApiTest.getUserNotFound</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 900ms</span>
+                <span class="test-duration">⏱️ 663ms</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-ce1fad75-2c5f-48e4-b8f1-5247ab77b976">
+        <div class="test-details" id="details-cb025dc1-3132-44e4-b294-62c6bca07c5e">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -1899,9 +1865,9 @@ Accept: application/json
                 
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">GET /posts/{id}/comments - Get post comments</span>
-                <span class="step-duration">720ms</span>
+                <span class="step-status status-failed">✗</span>
+                <span class="step-title">GET https://jsonplaceholder.typicode.com/users/999999</span>
+                <span class="step-duration">428ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -1912,7 +1878,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Method: GET | URL: /posts/{id}/comments</span>
+                <span class="step-title">Method: GET | URL: https://jsonplaceholder.typicode.com/users/999999</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -1923,42 +1889,41 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-Accept: application/json
+                [Accept=*/*]
             </div>
         </div>
         </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
-                <span class="step-status status-passed">✓</span>
+                <span class="step-status status-failed">✗</span>
                 <span class="step-title">📥 Response</span>
                 <span class="step-duration">1ms</span>
             </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Status: 200 OK | Response Time: 720ms</span>
+                <span class="step-status status-failed">✗</span>
+                <span class="step-title">Status: 404 HTTP/1.1 404 Not Found | Response Time: 426ms</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
-                <span class="step-status status-passed">✓</span>
+                <span class="step-status status-failed">✗</span>
                 <span class="step-title">Headers</span>
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
+                [Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Content-Length=2, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/&quot;2-vyGp6PvFo4RvsFtPoIWeCReyIC8&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=oWJc0qPspUCT2PiqRvNfICWjuLxBaracuFzegxaz8WM%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1779067157&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=oWJc0qPspUCT2PiqRvNfICWjuLxBaracuFzegxaz8WM%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1779067157&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1779067163, Age=199, cf-cache-status=HIT, CF-RAY=9fd70d46eb6d4403-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
-                <span class="step-status status-passed">✓</span>
+                <span class="step-status status-failed">✗</span>
                 <span class="step-title">Body</span>
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;success&quot;:true,&quot;data&quot;:{&quot;id&quot;:123}}
+                {}
             </div>
         </div>
         </div>
@@ -1967,119 +1932,25 @@ Accept: application/json
         </div></div>
         </div>
     </div>
-    <div class="test-item" data-status="skipped" data-testid="83f067bc-80cf-4db3-ba4b-f3aa978c5345">
-        <div class="test-header" onclick="toggleTest('83f067bc-80cf-4db3-ba4b-f3aa978c5345')">
-            <div class="test-header-left">
-                <span class="status-icon status-skipped">○</span>
-                <div class="test-info">
-                    <div class="test-title">GET /users/{id}/posts - Get user posts<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
-                    <div class="test-meta">
-                        <span class="test-location">📁 com.example.restassured.tests.ApiTests.GET /users/{id}/posts - Get user posts</span>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="test-header-right">
-                <span class="test-duration">⏱️ 0ms</span>
-                <span class="expand-icon">▼</span>
-            </div>
-        </div>
-
-        <div class="test-details" id="details-83f067bc-80cf-4db3-ba4b-f3aa978c5345">
-            <div class="test-details-content">
-        <div class="details-section steps-section">
-            <h3 class="section-title">📋 Test Steps</h3>
-            <div class="steps-list">
-                
-        <div class="step-item" style="margin-left: 0px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">GET /users/{id}/posts - Get user posts</span>
-                <span class="step-duration">0ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">📤 Request</span>
-                <span class="step-duration">1ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Method: GET | URL: /users/{id}/posts</span>
-                <span class="step-duration">0ms</span>
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Headers</span>
-                <span class="step-duration">0ms</span>
-            </div>
-            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-Accept: application/json
-            </div>
-        </div>
-        </div>
-        <div class="step-item" style="margin-left: 20px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">📥 Response</span>
-                <span class="step-duration">1ms</span>
-            </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Status: 200 OK | Response Time: 0ms</span>
-                <span class="step-duration">0ms</span>
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Headers</span>
-                <span class="step-duration">0ms</span>
-            </div>
-            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-            </div>
-        </div>
-        <div class="step-item" style="margin-left: 40px;">
-            <div class="step-header">
-                <span class="step-status status-passed">✓</span>
-                <span class="step-title">Body</span>
-                <span class="step-duration">0ms</span>
-            </div>
-            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;success&quot;:true,&quot;data&quot;:{&quot;id&quot;:123}}
-            </div>
-        </div>
-        </div>
-        </div>
-            </div>
-        </div></div>
-        </div>
-    </div>
-    <div class="test-item" data-status="passed" data-testid="fd3f49d2-f0f4-4cfe-b1ee-0c0d4a7cbc4b">
-        <div class="test-header" onclick="toggleTest('fd3f49d2-f0f4-4cfe-b1ee-0c0d4a7cbc4b')">
+    <div class="test-item" data-status="passed" data-testid="9fba3a7d-b724-42c3-ab42-4258e671d604">
+        <div class="test-header" onclick="toggleTest('9fba3a7d-b724-42c3-ab42-4258e671d604')">
             <div class="test-header-left">
                 <span class="status-icon status-passed">✓</span>
                 <div class="test-info">
-                    <div class="test-title">PATCH /users/{id} - Partial update<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-title">getAllUsers<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
                     <div class="test-meta">
-                        <span class="test-location">📁 com.example.restassured.tests.ApiTests.PATCH /users/{id} - Partial update</span>
+                        <span class="test-location">📁 com.example.tests.UserApiTest.getAllUsers</span>
                         
                     </div>
                 </div>
             </div>
             <div class="test-header-right">
-                <span class="test-duration">⏱️ 950ms</span>
+                <span class="test-duration">⏱️ 272ms</span>
                 <span class="expand-icon">▼</span>
             </div>
         </div>
 
-        <div class="test-details" id="details-fd3f49d2-f0f4-4cfe-b1ee-0c0d4a7cbc4b">
+        <div class="test-details" id="details-9fba3a7d-b724-42c3-ab42-4258e671d604">
             <div class="test-details-content">
         <div class="details-section steps-section">
             <h3 class="section-title">📋 Test Steps</h3>
@@ -2088,8 +1959,8 @@ Accept: application/json
         <div class="step-item" style="margin-left: 0px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">PATCH /users/{id} - Partial update</span>
-                <span class="step-duration">760ms</span>
+                <span class="step-title">GET https://jsonplaceholder.typicode.com/users</span>
+                <span class="step-duration">53ms</span>
             </div>
         <div class="step-item" style="margin-left: 20px;">
             <div class="step-header">
@@ -2100,7 +1971,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Method: PATCH | URL: /users/{id}</span>
+                <span class="step-title">Method: GET | URL: https://jsonplaceholder.typicode.com/users</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -2111,8 +1982,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
-Accept: application/json
+                [Accept=*/*]
             </div>
         </div>
         </div>
@@ -2125,7 +1995,7 @@ Accept: application/json
         <div class="step-item" style="margin-left: 40px;">
             <div class="step-header">
                 <span class="step-status status-passed">✓</span>
-                <span class="step-title">Status: 200 OK | Response Time: 760ms</span>
+                <span class="step-title">Status: 200 HTTP/1.1 200 OK | Response Time: 53ms</span>
                 <span class="step-duration">0ms</span>
             </div>
         </div>
@@ -2136,7 +2006,7 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                Content-Type: application/json
+                [Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Content-Length=1847, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, Content-Encoding=gzip, etag=W/&quot;160d-1eMSsxeJRfnVLRBmYJSbCiJZ1qQ&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=wUfMTgt5imK6bV74N4nfmNt95%2B4BMjLJYtFmPVErqCc%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1775694193&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=wUfMTgt5imK6bV74N4nfmNt95%2B4BMjLJYtFmPVErqCc%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1775694193&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1775694233, Age=15850, Accept-Ranges=bytes, cf-cache-status=HIT, CF-RAY=9fd70d477dc36f98-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
             </div>
         </div>
         <div class="step-item" style="margin-left: 40px;">
@@ -2146,7 +2016,619 @@ Accept: application/json
                 <span class="step-duration">0ms</span>
             </div>
             <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
-                {&quot;success&quot;:true,&quot;data&quot;:{&quot;id&quot;:123}}
+                [
+  {
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Leanne Graham&quot;,
+    &quot;username&quot;: &quot;Bret&quot;,
+    &quot;email&quot;: &quot;Sincere@april.biz&quot;,
+    &quot;address&quot;: {
+      &quot;street&quot;: &quot;Kulas Light&quot;,
+      &quot;suite&quot;: &quot;Apt. 556&quot;,
+      &quot;city&quot;: &quot;Gwenborough&quot;,
+      &quot;zipcode&quot;: &quot;92998-3874&quot;,
+      &quot;geo&quot;: {
+        &quot;lat&quot;: &quot;-37.3159&quot;,
+        &quot;lng&quot;: &quot;81.1496&quot;
+      }
+    },
+    &quot;phone&quot;: &quot;1-770-736-8031 x56442&quot;,
+    &quot;website&quot;: &quot;hildegard.org&quot;,
+    &quot;company&quot;: {
+      &quot;name&quot;: &quot;Romaguera-Crona&quot;,
+      &quot;catchPhrase&quot;: &quot;Multi-layered client-server neural-net&quot;,
+      &quot;bs&quot;: &quot;harness real-time e-markets&quot;
+    }
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;name&quot;: &quot;Ervin Howell&quot;,
+    &quot;username&quot;: &quot;Antonette&quot;,
+    &quot;email&quot;: &quot;Shanna@melissa.tv&quot;,
+    &quot;address&quot;: {
+      &quot;street&quot;: &quot;Victor Plains&quot;,
+      &quot;suite&quot;: &quot;Suite 879&quot;,
+      &quot;city&quot;: &quot;Wisokyburgh&quot;,
+      &quot;zipcode&quot;: &quot;90566-7771&quot;,
+      &quot;geo&quot;: {
+        &quot;lat&quot;: &quot;-43.9509&quot;,
+        &quot;lng&quot;: &quot;-34.4618&quot;
+      }
+    },
+    &quot;phone&quot;: &quot;010-692-6593 x09125&quot;,
+    &quot;website&quot;: &quot;anastasia.net&quot;,
+    &quot;company&quot;: {
+      &quot;name&quot;: &quot;Deckow-Crist... (truncated)
+            </div>
+        </div>
+        </div>
+        </div>
+            </div>
+        </div></div>
+        </div>
+    </div>
+    <div class="test-item" data-status="passed" data-testid="6b7d076d-4a4f-43ed-80f5-596ffcaba1e7">
+        <div class="test-header" onclick="toggleTest('6b7d076d-4a4f-43ed-80f5-596ffcaba1e7')">
+            <div class="test-header-left">
+                <span class="status-icon status-passed">✓</span>
+                <div class="test-info">
+                    <div class="test-title">getPostById<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-meta">
+                        <span class="test-location">📁 com.example.tests.PostApiTest.getPostById</span>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="test-header-right">
+                <span class="test-duration">⏱️ 74ms</span>
+                <span class="expand-icon">▼</span>
+            </div>
+        </div>
+
+        <div class="test-details" id="details-6b7d076d-4a4f-43ed-80f5-596ffcaba1e7">
+            <div class="test-details-content">
+        <div class="details-section steps-section">
+            <h3 class="section-title">📋 Test Steps</h3>
+            <div class="steps-list">
+                
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">GET https://jsonplaceholder.typicode.com/posts/1</span>
+                <span class="step-duration">52ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">📤 Request</span>
+                <span class="step-duration">1ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Method: GET | URL: https://jsonplaceholder.typicode.com/posts/1</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Headers</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                [Accept=*/*]
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">📥 Response</span>
+                <span class="step-duration">1ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Status: 200 HTTP/1.1 200 OK | Response Time: 51ms</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Headers</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                [Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/&quot;124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=rbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1778425763&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=rbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1778425763&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1778425771, Age=4957, cf-cache-status=HIT, Content-Encoding=gzip, CF-RAY=9fd70d4cac1a478b-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Body</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                {
+  &quot;userId&quot;: 1,
+  &quot;id&quot;: 1,
+  &quot;title&quot;: &quot;sunt aut facere repellat provident occaecati excepturi optio reprehenderit&quot;,
+  &quot;body&quot;: &quot;quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto&quot;
+}
+            </div>
+        </div>
+        </div>
+        </div>
+            </div>
+        </div></div>
+        </div>
+    </div>
+    <div class="test-item" data-status="flaky" data-testid="ce0c387c-bbc4-42b5-b8fe-05ec75a4e5d5">
+        <div class="test-header" onclick="toggleTest('ce0c387c-bbc4-42b5-b8fe-05ec75a4e5d5')">
+            <div class="test-header-left">
+                <span class="status-icon status-flaky">~</span>
+                <div class="test-info">
+                    <div class="test-title">flakyEndpointTest<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-meta">
+                        <span class="test-location">📁 com.example.tests.FlakyApiTest.flakyEndpointTest</span>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="test-header-right">
+                <span class="test-duration">⏱️ 53ms</span>
+                <span class="expand-icon">▼</span>
+            </div>
+        </div>
+
+        <div class="test-details" id="details-ce0c387c-bbc4-42b5-b8fe-05ec75a4e5d5">
+            <div class="test-details-content">
+        <div class="details-section steps-section">
+            <h3 class="section-title">📋 Test Steps</h3>
+            <div class="steps-list">
+                
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">GET https://jsonplaceholder.typicode.com/users/1</span>
+                <span class="step-duration">47ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">📤 Request</span>
+                <span class="step-duration">1ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Method: GET | URL: https://jsonplaceholder.typicode.com/users/1</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Headers</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                [Accept=*/*]
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">📥 Response</span>
+                <span class="step-duration">1ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Status: 200 HTTP/1.1 200 OK | Response Time: 47ms</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Headers</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                [Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/&quot;1fd-+2Y3G3w049iSZtw5t1mzSnunngE&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=M2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1779058723&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=M2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1779058723&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=896, x-ratelimit-reset=1779058761, Age=8635, cf-cache-status=HIT, Content-Encoding=gzip, CF-RAY=9fd70d4efeb6dc2d-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Body</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                {
+  &quot;id&quot;: 1,
+  &quot;name&quot;: &quot;Leanne Graham&quot;,
+  &quot;username&quot;: &quot;Bret&quot;,
+  &quot;email&quot;: &quot;Sincere@april.biz&quot;,
+  &quot;address&quot;: {
+    &quot;street&quot;: &quot;Kulas Light&quot;,
+    &quot;suite&quot;: &quot;Apt. 556&quot;,
+    &quot;city&quot;: &quot;Gwenborough&quot;,
+    &quot;zipcode&quot;: &quot;92998-3874&quot;,
+    &quot;geo&quot;: {
+      &quot;lat&quot;: &quot;-37.3159&quot;,
+      &quot;lng&quot;: &quot;81.1496&quot;
+    }
+  },
+  &quot;phone&quot;: &quot;1-770-736-8031 x56442&quot;,
+  &quot;website&quot;: &quot;hildegard.org&quot;,
+  &quot;company&quot;: {
+    &quot;name&quot;: &quot;Romaguera-Crona&quot;,
+    &quot;catchPhrase&quot;: &quot;Multi-layered client-server neural-net&quot;,
+    &quot;bs&quot;: &quot;harness real-time e-markets&quot;
+  }
+}
+            </div>
+        </div>
+        </div>
+        </div>
+            </div>
+        </div></div>
+        </div>
+    </div>
+    <div class="test-item" data-status="passed" data-testid="8f4b334b-baf1-425e-868b-727b2f8e99d9">
+        <div class="test-header" onclick="toggleTest('8f4b334b-baf1-425e-868b-727b2f8e99d9')">
+            <div class="test-header-left">
+                <span class="status-icon status-passed">✓</span>
+                <div class="test-info">
+                    <div class="test-title">getUserById<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-meta">
+                        <span class="test-location">📁 com.example.tests.UserApiTest.getUserById</span>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="test-header-right">
+                <span class="test-duration">⏱️ 63ms</span>
+                <span class="expand-icon">▼</span>
+            </div>
+        </div>
+
+        <div class="test-details" id="details-8f4b334b-baf1-425e-868b-727b2f8e99d9">
+            <div class="test-details-content">
+        <div class="details-section steps-section">
+            <h3 class="section-title">📋 Test Steps</h3>
+            <div class="steps-list">
+                
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">GET https://jsonplaceholder.typicode.com/users/1</span>
+                <span class="step-duration">46ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">📤 Request</span>
+                <span class="step-duration">1ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Method: GET | URL: https://jsonplaceholder.typicode.com/users/1</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Headers</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                [Accept=*/*]
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">📥 Response</span>
+                <span class="step-duration">1ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Status: 200 HTTP/1.1 200 OK | Response Time: 46ms</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Headers</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                [Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/&quot;1fd-+2Y3G3w049iSZtw5t1mzSnunngE&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=M2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1779058723&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=M2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1779058723&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=896, x-ratelimit-reset=1779058761, Age=8634, cf-cache-status=HIT, Content-Encoding=gzip, CF-RAY=9fd70d4b6bea2d38-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Body</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                {
+  &quot;id&quot;: 1,
+  &quot;name&quot;: &quot;Leanne Graham&quot;,
+  &quot;username&quot;: &quot;Bret&quot;,
+  &quot;email&quot;: &quot;Sincere@april.biz&quot;,
+  &quot;address&quot;: {
+    &quot;street&quot;: &quot;Kulas Light&quot;,
+    &quot;suite&quot;: &quot;Apt. 556&quot;,
+    &quot;city&quot;: &quot;Gwenborough&quot;,
+    &quot;zipcode&quot;: &quot;92998-3874&quot;,
+    &quot;geo&quot;: {
+      &quot;lat&quot;: &quot;-37.3159&quot;,
+      &quot;lng&quot;: &quot;81.1496&quot;
+    }
+  },
+  &quot;phone&quot;: &quot;1-770-736-8031 x56442&quot;,
+  &quot;website&quot;: &quot;hildegard.org&quot;,
+  &quot;company&quot;: {
+    &quot;name&quot;: &quot;Romaguera-Crona&quot;,
+    &quot;catchPhrase&quot;: &quot;Multi-layered client-server neural-net&quot;,
+    &quot;bs&quot;: &quot;harness real-time e-markets&quot;
+  }
+}
+            </div>
+        </div>
+        </div>
+        </div>
+            </div>
+        </div></div>
+        </div>
+    </div>
+    <div class="test-item" data-status="broken" data-testid="2f4a154c-b1ad-4792-b302-9052bd52ea14">
+        <div class="test-header" onclick="toggleTest('2f4a154c-b1ad-4792-b302-9052bd52ea14')">
+            <div class="test-header-left">
+                <span class="status-icon status-broken">✗</span>
+                <div class="test-info">
+                    <div class="test-title">failedAssertionDemo<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-meta">
+                        <span class="test-location">📁 com.example.tests.PostApiTest.failedAssertionDemo</span>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="test-header-right">
+                <span class="test-duration">⏱️ 68ms</span>
+                <span class="expand-icon">▼</span>
+            </div>
+        </div>
+
+        <div class="test-details" id="details-2f4a154c-b1ad-4792-b302-9052bd52ea14">
+            <div class="test-details-content">
+        <div class="details-section steps-section">
+            <h3 class="section-title">📋 Test Steps</h3>
+            <div class="steps-list">
+                
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">GET https://jsonplaceholder.typicode.com/posts/1</span>
+                <span class="step-duration">53ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">📤 Request</span>
+                <span class="step-duration">1ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Method: GET | URL: https://jsonplaceholder.typicode.com/posts/1</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Headers</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                [Accept=*/*]
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">📥 Response</span>
+                <span class="step-duration">1ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Status: 200 HTTP/1.1 200 OK | Response Time: 52ms</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Headers</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                [Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/&quot;124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU&quot;, expires=-1, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=rbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1778425763&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=rbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1778425763&quot;, Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1778425771, Age=4957, cf-cache-status=HIT, Content-Encoding=gzip, CF-RAY=9fd70d4f5acb4f40-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Body</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                {
+  &quot;userId&quot;: 1,
+  &quot;id&quot;: 1,
+  &quot;title&quot;: &quot;sunt aut facere repellat provident occaecati excepturi optio reprehenderit&quot;,
+  &quot;body&quot;: &quot;quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto&quot;
+}
+            </div>
+        </div>
+        </div>
+        </div>
+            </div>
+        </div>
+        <div class="details-section error-section">
+            <h3 class="section-title">❌ Error</h3>
+            <div class="error-message">1 expectation failed.
+JSON path title doesn&#039;t match.
+Expected: This title will never match
+  Actual: sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+</div>
+            
+                <details class="stack-trace">
+                    <summary>Stack Trace</summary>
+                    <pre>java.lang.AssertionError: 1 expectation failed.
+JSON path title doesn&#039;t match.
+Expected: This title will never match
+  Actual: sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)
+	at io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at io.restassured.internal.ResponseSpecificationImpl.body(ResponseSpecificationImpl.groovy:270)
+	at io....</pre>
+                </details>
+            
+        </div></div>
+        </div>
+    </div>
+    <div class="test-item" data-status="passed" data-testid="edd94b59-73c1-4659-bb0d-aac3a63bfa19">
+        <div class="test-header" onclick="toggleTest('edd94b59-73c1-4659-bb0d-aac3a63bfa19')">
+            <div class="test-header-left">
+                <span class="status-icon status-passed">✓</span>
+                <div class="test-info">
+                    <div class="test-title">createPost<span class="tool-badge" style="background: #5B9BD5; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: white; margin-left: 0.5rem;">rest-assured</span></div>
+                    <div class="test-meta">
+                        <span class="test-location">📁 com.example.tests.PostApiTest.createPost</span>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="test-header-right">
+                <span class="test-duration">⏱️ 92ms</span>
+                <span class="expand-icon">▼</span>
+            </div>
+        </div>
+
+        <div class="test-details" id="details-edd94b59-73c1-4659-bb0d-aac3a63bfa19">
+            <div class="test-details-content">
+        <div class="details-section steps-section">
+            <h3 class="section-title">📋 Test Steps</h3>
+            <div class="steps-list">
+                
+        <div class="step-item" style="margin-left: 0px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">POST https://jsonplaceholder.typicode.com/posts</span>
+                <span class="step-duration">81ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">📤 Request</span>
+                <span class="step-duration">1ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Method: POST | URL: https://jsonplaceholder.typicode.com/posts</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Headers</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                [Accept=*/*, Content-Type=application/json]
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Body</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                { &quot;title&quot;: &quot;Test Post&quot;, &quot;body&quot;: &quot;This is a test post&quot;, &quot;userId&quot;: 1 }
+            </div>
+        </div>
+        </div>
+        <div class="step-item" style="margin-left: 20px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">📥 Response</span>
+                <span class="step-duration">1ms</span>
+            </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Status: 201 HTTP/1.1 201 Created | Response Time: 81ms</span>
+                <span class="step-duration">0ms</span>
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Headers</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                [Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Content-Length=87, Connection=keep-alive, access-control-allow-credentials=true, access-control-expose-headers=Location, Cache-Control=no-cache, etag=W/&quot;57-tb2JEXLtqvlYgkxd1vS0t5try68&quot;, expires=-1, location=https://jsonplaceholder.typicode.com/posts/101, nel={&quot;report_to&quot;:&quot;heroku-nel&quot;,&quot;response_headers&quot;:[&quot;Via&quot;],&quot;max_age&quot;:3600,&quot;success_fraction&quot;:0.01,&quot;failure_fraction&quot;:0.1}, pragma=no-cache, report-to={&quot;group&quot;:&quot;heroku-nel&quot;,&quot;endpoints&quot;:[{&quot;url&quot;:&quot;https://nel.heroku.com/reports?s=T5iZ%2BTXbO1MjABonK1Ho5yokkOdCrx6lCGQqXFxFltk%3D\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\u0026ts=1779067358&quot;}],&quot;max_age&quot;:3600}, reporting-endpoints=heroku-nel=&quot;https://nel.heroku.com/reports?s=T5iZ%2BTXbO1MjABonK1Ho5yokkOdCrx6lCGQqXFxFltk%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1779067358&quot;, Server=cloudflare, vary=Origin, X-HTTP-Method-Override, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=996, x-ratelimit-reset=1779067403, cf-cache-status=DYNAMIC, CF-RAY=9fd70d4e5f1426c3-DFW, alt-svc=h3=&quot;:443&quot;; ma=86400]
+            </div>
+        </div>
+        <div class="step-item" style="margin-left: 40px;">
+            <div class="step-header">
+                <span class="step-status status-passed">✓</span>
+                <span class="step-title">Body</span>
+                <span class="step-duration">0ms</span>
+            </div>
+            <div class="step-details" style="margin-left: 20px; margin-top: 8px; padding: 8px; background: rgba(100,100,100,0.1); border-radius: 4px; font-family: monospace; font-size: 0.85em; white-space: pre-wrap;">
+                {
+  &quot;title&quot;: &quot;Test Post&quot;,
+  &quot;body&quot;: &quot;This is a test post&quot;,
+  &quot;userId&quot;: 1,
+  &quot;id&quot;: 101
+}
             </div>
         </div>
         </div>
