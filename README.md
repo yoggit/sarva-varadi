@@ -514,7 +514,7 @@ Pulls the sarva-varadi library from JitPack so Maven can resolve it at compile t
     <dependency>
         <groupId>com.github.yoggit.sarva-varadi</groupId>
         <artifactId>sarva-varadi-restassured-junit</artifactId>
-        <version>v2.1.0</version>
+        <version>v2.1.1</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
