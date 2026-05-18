@@ -217,8 +217,11 @@ Understanding what is automatic vs what requires an extra setup step saves a lot
 | **Selenium** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection | Browser actions (clicks, navigation, inputs) + screenshots shown as test steps (Step 4) |
 | **Playwright** | Everything — steps, screenshots, video, trace captured natively | Nothing extra needed |
 
-> For RestAssured + JUnit 5, Steps 1–3 give you a fully detailed report including HTTP steps — no extra wiring needed.
-> For RestAssured + TestNG and Selenium, Step 4 adds the rich detail inside each test.
+> **RestAssured + JUnit 5** ([guide](#restassured-junit-maven-guide)): Steps 1–3 (dependency → Surefire plugin → `@ExtendWith`) give you a fully detailed report including HTTP steps — no extra wiring needed.
+>
+> **RestAssured + TestNG** ([guide](#restassured-maven-guide)): Steps 1–3 set up the dependency and listener; Step 4 adds the request capture filter for HTTP step detail.
+>
+> **Selenium** ([guide](#selenium-maven-guide)): Steps 1–3 set up the dependency and listener; Step 4 wraps WebDriver to capture browser actions and screenshots.
 
 ---
 
