@@ -1050,12 +1050,12 @@
             <div class="header-right" style="display: flex; flex-direction: column; align-items: flex-end; gap: 0;">
                 
                 <div class="subtitle">
-                    Latest Run on <span id="timestamp" data-time="2026-05-18T04:46:25.690Z"></span>
+                    Latest Run on <span id="timestamp" data-time="2026-05-18T05:01:32.790Z"></span>
                 </div>
                 
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <div class="subtitle">
-                        Historical analysis across 7 runs
+                        Historical analysis across 8 runs
                     </div>
                     <div class="theme-toggle">
                         <input type="checkbox" id="themeToggle" class="theme-toggle-checkbox">
@@ -1107,7 +1107,7 @@
                     </svg>
                     <span class="tooltip-text"><strong>Pass Rate Over Time:</strong><br>Tracks the percentage of passing tests across recent runs. Shows overall test suite stability and quality trends.</span>
                 </span>
-                <span id="passrate-runs-count" style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem; font-weight: normal;">(7 runs)</span>
+                <span id="passrate-runs-count" style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem; font-weight: normal;">(8 runs)</span>
                 <div style="display: flex; gap: 0.5rem; margin-left: auto;">
                     <button onclick="zoomPassRateChart('out')" class="control-btn" style="padding: 0.3rem 0.6rem; font-size: 0.875rem;">➖</button>
                     <button onclick="zoomPassRateChart('reset')" class="control-btn" style="padding: 0.3rem 0.6rem; font-size: 0.875rem;">↺</button>
@@ -1138,7 +1138,7 @@
                     </svg>
                     <span class="tooltip-text"><strong>Test Distribution Per Run:</strong><br>Breakdown of test outcomes (passed, failed, flaky, skipped) for each run. Helps identify patterns in test behavior.</span>
                 </span>
-                <span id="distribution-runs-count" style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem; font-weight: normal;">(7 runs)</span>
+                <span id="distribution-runs-count" style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem; font-weight: normal;">(8 runs)</span>
                 <div id="distribution-legend" style="display: flex; gap: 1rem; margin-left: auto; font-size: 0.875rem;">
                     <!-- Legend will be populated by JavaScript -->
                 </div>
@@ -1187,10 +1187,13 @@
                                 Flaky Score: 0%
                             </span>
                             <span style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem;">
-                                Last flaky: <span class="last-flaky-date" data-time="2026-05-18T04:46:25.690Z">Loading...</span>
+                                Last flaky: <span class="last-flaky-date" data-time="2026-05-18T05:01:32.790Z">Loading...</span>
                             </span>
                             <span style="margin-left: 1rem; font-family: monospace;">
                                 <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
+                  ~
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-18T05:01:32.790Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
                   ~
                   <span class="tooltip-text tooltip-date" data-time="2026-05-18T04:46:25.690Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
@@ -1267,6 +1270,17 @@
                   </thead>
                   <tbody>
                       
+        <tr>
+            <td><span class="activity-date" data-time="2026-05-18T05:01:32.790Z">Loading...</span></td>
+            <td style="color: var(--color-flaky); font-weight: 600;">84.6%</td>
+            <td>
+                <span style="color: var(--color-passed);">✓ 11</span>
+                <span style="color: var(--color-failed); margin-left: 0.5rem;">✗ 1</span>
+                <span style="color: var(--color-flaky); margin-left: 0.5rem;">~ 1</span>
+                <span style="color: var(--color-skipped); margin-left: 0.5rem;">○ 0</span>
+            </td>
+            <td>1s</td>
+        </tr>
         <tr>
             <td><span class="activity-date" data-time="2026-05-18T04:46:25.690Z">Loading...</span></td>
             <td style="color: var(--color-flaky); font-weight: 600;">84.6%</td>
@@ -1596,7 +1610,7 @@ function closeModal() {
         if (passRateCtx) {
             passRateChart = new Chart(passRateCtx, {
                 type: 'line',
-                data: {"labels":[["05/18/2026","02:34"],["05/18/2026","03:43"],["05/18/2026","03:55"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"]],"datasets":[{"label":"Pass Rate %","data":[84.6,84.6,84.6,84.6,84.6,84.6,84.6],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","tension":0.3,"fill":true}]},
+                data: {"labels":[["05/18/2026","02:34"],["05/18/2026","03:43"],["05/18/2026","03:55"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"],["05/18/2026","05:01"]],"datasets":[{"label":"Pass Rate %","data":[84.6,84.6,84.6,84.6,84.6,84.6,84.6,84.6],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","tension":0.3,"fill":true}]},
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -1642,11 +1656,11 @@ function closeModal() {
         let distributionChart;
         let currentDistributionTimestamps = [];
         const distributionCtx = document.getElementById('distribution-chart');
-        const distributionDatasets = [{"label":"Passed","data":[11,11,11,11,11,11,11],"backgroundColor":"#10b981"},{"label":"Failed","data":[1,1,1,1,1,1,1],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[1,1,1,1,1,1,1],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[0,0,0,0,0,0,0],"backgroundColor":"#6b7280"}];
+        const distributionDatasets = [{"label":"Passed","data":[11,11,11,11,11,11,11,11],"backgroundColor":"#10b981"},{"label":"Failed","data":[1,1,1,1,1,1,1,1],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[1,1,1,1,1,1,1,1],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[0,0,0,0,0,0,0,0],"backgroundColor":"#6b7280"}];
         if (distributionCtx) {
             distributionChart = new Chart(distributionCtx, {
                 type: 'bar',
-                data: {"labels":[["05/18/2026","02:34"],["05/18/2026","03:43"],["05/18/2026","03:55"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"]],"datasets":[{"label":"Passed","data":[11,11,11,11,11,11,11],"backgroundColor":"#10b981"},{"label":"Failed","data":[1,1,1,1,1,1,1],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[1,1,1,1,1,1,1],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[0,0,0,0,0,0,0],"backgroundColor":"#6b7280"}]},
+                data: {"labels":[["05/18/2026","02:34"],["05/18/2026","03:43"],["05/18/2026","03:55"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"],["05/18/2026","05:01"]],"datasets":[{"label":"Passed","data":[11,11,11,11,11,11,11,11],"backgroundColor":"#10b981"},{"label":"Failed","data":[1,1,1,1,1,1,1,1],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[1,1,1,1,1,1,1,1],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[0,0,0,0,0,0,0,0],"backgroundColor":"#6b7280"}]},
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -1753,7 +1767,7 @@ function closeModal() {
         }
 
         // Date range filter function
-        const allRuns = [{"id":"cli-1779071686823","timestamp":1779071686822,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779075793763","timestamp":1779075793762,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779076524123","timestamp":1779076524122,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779076627299","timestamp":1779076627299,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779076837982","timestamp":1779076837981,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779079048731","timestamp":1779079048731,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779079585690","timestamp":1779079585690,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}}];
+        const allRuns = [{"id":"cli-1779071686823","timestamp":1779071686822,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779075793763","timestamp":1779075793762,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779076524123","timestamp":1779076524122,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779076627299","timestamp":1779076627299,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779076837982","timestamp":1779076837981,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779079048731","timestamp":1779079048731,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779079585690","timestamp":1779079585690,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}},{"id":"cli-1779080492790","timestamp":1779080492790,"duration":1838,"total":13,"passed":11,"failed":1,"skipped":0,"flaky":1,"passRate":84.6,"environment":{"ci":"false"}}];
         let currentFilter = 'last20';
 
         function filterByDateRange(filter) {
