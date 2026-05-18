@@ -1105,10 +1105,10 @@ Drop a `sarva-varadi.properties` file in your project root to configure behaviou
 
 ```properties
 # ── Output ──────────────────────────────────────────────────────────────
-sarva.outputDir=sarva-varadi-results          # [RestAssured, Selenium] where test-results.json is written
+sarva.outputDir=sarva-varadi-results          # [RestAssured TestNG, RestAssured JUnit 5, Selenium] where test-results.json is written
 
 # ── Sensitive data masking ───────────────────────────────────────────────
-sarva.maskSensitiveData=false                 # [RestAssured, Selenium] mask passwords/tokens/API keys with ***
+sarva.maskSensitiveData=false                 # [RestAssured TestNG, RestAssured JUnit 5, Selenium] mask passwords/tokens/API keys with ***
                                               # [Playwright] set maskSensitiveData: true in playwright.config.ts
 
 # ── Screenshots ─────────────────────────────────────────────────────────
@@ -1123,8 +1123,9 @@ sarva.screenshotDir=sarva-varadi-results/screenshots  # [Selenium] where screens
                                               # [Playwright] use: { trace: 'on' | 'retain-on-failure' | 'on-first-retry' | 'off' } in playwright.config.ts
 
 # ── Flaky test detection & retry ─────────────────────────────────────────
-sarva.maxRetryCount=2                         # [RestAssured, Selenium] retries before marking a test failed
+sarva.maxRetryCount=2                         # [RestAssured TestNG, Selenium] retries before marking a test failed
                                               # Requires @Test(retryAnalyzer = SarvaVaradiRetryAnalyzer.class) on the method
+                                              # [RestAssured JUnit 5] use <rerunFailingTestsCount>1</rerunFailingTestsCount> in surefire instead
                                               # [Playwright] set retries: 2 in playwright.config.ts
 
 # ── Report: display ─────────────────────────────────────────────────────
