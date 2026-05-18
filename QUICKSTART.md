@@ -5,7 +5,8 @@ Get started with Sarva-Varadi in 2 minutes! Choose your framework below:
 **📑 Quick Navigation:**
 - [🎭 Playwright](#-playwright-quick-start)
 - [🌐 Selenium](#-selenium-quick-start)
-- [🔌 RestAssured](#-restassured-quick-start)
+- [🔌 RestAssured (TestNG)](#-restassured-testng-quick-start)
+- [🔌 RestAssured (JUnit 5)](#-restassured-junit-5-quick-start)
 
 ---
 
@@ -213,29 +214,39 @@ xdg-open sarva-report/index.html
 
 ---
 
-## 🔌 RestAssured Quick Start
+## 🔌 RestAssured (TestNG) Quick Start
 
 <details>
-<summary><b>Click to expand RestAssured setup</b></summary>
+<summary><b>Click to expand RestAssured (TestNG) setup</b></summary>
 
-### Installation
+> For the full step-by-step guide see [RestAssured (TestNG) + Maven Integration Guide](README.md#restassured-maven-guide).
 
-```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/rest-assured
-```
-
-### Copy TestNG Listener Files
-
-1. Create `src/test/java/SarvaVaradiListener.java` and `SarvaVaradiRetryAnalyzer.java`
-2. Copy the listener code from [`packages/rest-assured/README.md`](packages/rest-assured/README.md)
-
-### Configure testng.xml
+### Step 1 — Add JitPack repo + dependency to `pom.xml`
 
 ```xml
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <dependency>
+        <groupId>com.github.yoggit.sarva-varadi</groupId>
+        <artifactId>sarva-varadi-restassured</artifactId>
+        <version>v2.1.1</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+### Step 2 — Add listener to `testng.xml`
+
+```xml
 <suite name="API Test Suite">
     <listeners>
-        <listener class-name="SarvaVaradiListener"/>
+        <listener class-name="io.github.yoggit.sarvavaradi.SarvaVaradiListener"/>
     </listeners>
     <test name="API Tests">
         <classes>
@@ -245,114 +256,91 @@ npm install --save-dev @sarva-varadi/core @sarva-varadi/rest-assured
 </suite>
 ```
 
-### Configure Request Capture
-
-Add the RestAssured filter to your test setup:
+### Step 3 — Add request capture filter to your test setup
 
 ```java
-import io.restassured.RestAssured;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import static io.restassured.RestAssured.*;
-
-public class UserApiTest {
-    
-    @BeforeClass
-    public void setup() {
-        RestAssured.baseURI = "https://api.example.com";
-        RestAssured.filters(new RestAssuredRequestCapture());
-    }
-
-    @Test
-    public void testGetUser() {
-        given()
-            .when()
-            .get("/users/1")
-            .then()
-            .statusCode(200)
-            .body("name", notNullValue());
-    }
-
-    // Enable retry for flaky test detection
-    @Test(retryAnalyzer = SarvaVaradiRetryAnalyzer.class)
-    public void testFlakyEndpoint() {
-        given()
-            .when()
-            .get("/users/status")
-            .then()
-            .statusCode(200);
-    }
+@BeforeClass
+public void setup() {
+    RestAssured.baseURI = "https://api.example.com";
+    RestAssured.filters(new RestAssuredRequestCapture());
 }
 ```
 
-### Maven Dependencies
+### Step 4 — Run tests
 
-Add to `pom.xml`:
+```bash
+mvn clean test
+```
+
+Report generated at `sarva-report/index.html`.
+
+```bash
+open sarva-report/index.html   # macOS
+start sarva-report/index.html  # Windows
+xdg-open sarva-report/index.html  # Linux
+```
+
+</details>
+
+---
+
+## 🔌 RestAssured (JUnit 5) Quick Start
+
+<details>
+<summary><b>Click to expand RestAssured (JUnit 5) setup</b></summary>
+
+> For the full step-by-step guide see [RestAssured (JUnit 5) + Maven Integration Guide](README.md#restassured-junit-maven-guide).
+>
+> HTTP steps are captured **automatically** — no extra wiring beyond Step 3.
+
+### Step 1 — Add JitPack repo + dependency to `pom.xml`
 
 ```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
 <dependencies>
     <dependency>
-        <groupId>io.rest-assured</groupId>
-        <artifactId>rest-assured</artifactId>
-        <version>5.3.2</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.testng</groupId>
-        <artifactId>testng</artifactId>
-        <version>7.8.0</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.10.1</version>
+        <groupId>com.github.yoggit.sarva-varadi</groupId>
+        <artifactId>sarva-varadi-restassured-junit</artifactId>
+        <version>v2.1.1</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
 ```
 
-### Run Tests & Generate Report
+### Step 2 — Add Surefire plugin + report generation to `pom.xml`
 
-```bash
-# Run tests
-mvn test
+See the [full guide](README.md#restassured-junit-maven-guide) for the complete plugin configuration.
 
-# Generate Sarva-Varadi report
-npx sarva-varadi generate \
-  --input sarva-varadi-results/test-results.json \
-  --output sarva-report
+### Step 3 — Add `@ExtendWith` to your base test class
+
+```java
+import io.github.yoggit.sarvavaradi.SarvaVaradiJUnit5Extension;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+@ExtendWith(SarvaVaradiJUnit5Extension.class)
+public abstract class BaseTest { }
 ```
 
-### View Report
+That's it — HTTP request/response steps are captured automatically for every test that extends `BaseTest`.
+
+### Run tests
 
 ```bash
-# Windows
-start sarva-report/index.html
-
-# macOS
-open sarva-report/index.html
-
-# Linux
-xdg-open sarva-report/index.html
+mvn clean test
 ```
 
-### Add to package.json (Optional)
-
-```json
-{
-  "scripts": {
-    "test": "mvn test",
-    "report": "npx sarva-varadi generate --input sarva-varadi-results/test-results.json --output sarva-report",
-    "test:report": "npm run test && npm run report"
-  }
-}
-```
-
-### Enable Sensitive Data Masking (Optional)
+Report generated at `sarva-report/index.html`.
 
 ```bash
-mvn test -Dsarva.maskSensitiveData=true
+open sarva-report/index.html   # macOS
+start sarva-report/index.html  # Windows
+xdg-open sarva-report/index.html  # Linux
 ```
 
 </details>

@@ -13,6 +13,57 @@ interface CLIOptions {
   useCurrentTimestamp?: boolean;
 }
 
+function resolveEnvVar(value: string): string {
+  return value.replace(/\$\{([^}]+)\}/g, (_, name) => process.env[name] || '');
+}
+
+function buildNotificationOptions(props: Record<string, string>) {
+  if (props['sarva.notifications.enabled'] !== 'true') return undefined;
+
+  const options: any = { enabled: true };
+
+  if (props['sarva.notifications.slack.enabled'] === 'true') {
+    const webhookUrl = resolveEnvVar(props['sarva.notifications.slack.webhookUrl'] || '');
+    if (webhookUrl) {
+      options.slack = {
+        enabled: true,
+        webhookUrl,
+        channel: props['sarva.notifications.slack.channel'] || undefined,
+        mentionOnFailure: props['sarva.notifications.slack.mentionOnFailure']
+          ? props['sarva.notifications.slack.mentionOnFailure'].split(',').map(s => s.trim())
+          : undefined,
+      };
+    }
+  }
+
+  if (props['sarva.notifications.teams.enabled'] === 'true') {
+    const webhookUrl = resolveEnvVar(props['sarva.notifications.teams.webhookUrl'] || '');
+    if (webhookUrl) {
+      options.teams = { enabled: true, webhookUrl };
+    }
+  }
+
+  if (props['sarva.notifications.email.enabled'] === 'true') {
+    options.email = {
+      enabled: true,
+      smtp: {
+        host: props['sarva.notifications.email.smtp.host'] || '',
+        port: parseInt(props['sarva.notifications.email.smtp.port'] || '587'),
+        secure: props['sarva.notifications.email.smtp.secure'] === 'true',
+        auth: {
+          user: resolveEnvVar(props['sarva.notifications.email.smtp.user'] || ''),
+          pass: resolveEnvVar(props['sarva.notifications.email.smtp.pass'] || ''),
+        },
+      },
+      from: props['sarva.notifications.email.from'] || '',
+      to: (props['sarva.notifications.email.to'] || '').split(',').map(s => s.trim()).filter(Boolean),
+      subject: props['sarva.notifications.email.subject'] || undefined,
+    };
+  }
+
+  return options;
+}
+
 async function main() {
   const args = process.argv.slice(2);
 
@@ -137,6 +188,7 @@ async function handleGenerate(args: string[]) {
         enabled: props['sarva.report.trends'] !== 'false',
         showInMainReport: true,
       },
+      notifications: buildNotificationOptions(props),
     });
 
     const metadata = {

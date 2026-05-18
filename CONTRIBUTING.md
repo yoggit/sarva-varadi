@@ -42,6 +42,7 @@ Want to add support for Cypress or another framework? Here's how:
 - ✅ Playwright (TypeScript/JavaScript)
 - ✅ Selenium (Java/TestNG)
 - ✅ RestAssured (Java/TestNG)
+- ✅ RestAssured (Java/JUnit 5)
 
 **To Be Added:**
 - 🚧 Cypress (community contributions welcome!)

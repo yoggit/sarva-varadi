@@ -147,13 +147,18 @@ abstract class BaseAdapter {
 - Converts TestNG results → `SarvaTestResult`
 - Handles flaky test detection with retry analyzer
 
-#### RestAssured Adapter (✅ Implemented)
-- Hooks into RestAssured filters via `RestAssuredRequestCapture`
+#### RestAssured Adapter — TestNG (✅ Implemented)
+- Hooks into RestAssured filters via `RestAssuredRequestCapture` (registered manually in test setup)
 - Captures full request/response data (method, URL, headers, body)
 - Hierarchical test steps with parent-child structure
 - Sensitive data masking (opt-in)
-- Converts TestNG listener data → `SarvaTestResult`
-- Works with any TestNG-based API tests
+- Converts TestNG `ITestListener` data → `SarvaTestResult`
+
+#### RestAssured Adapter — JUnit 5 (✅ Implemented)
+- Implements `BeforeTestExecutionCallback` + `AfterTestExecutionCallback` via `SarvaVaradiJUnit5Extension`
+- Auto-registers `RestAssuredRequestCapture` filter after all `@BeforeEach` callbacks — no manual wiring
+- Same request/response capture, step structure, and masking as TestNG adapter
+- Integrates with Surefire's `rerunFailingTestsCount` for flaky test detection
 
 #### Cypress Adapter (🚧 Future)
 - Uses Cypress reporter API
@@ -239,11 +244,15 @@ sarva-varadi/
 │   ├── core/                      # @sarva-varadi/core
 │   ├── playwright/                # @sarva-varadi/playwright ✅
 │   ├── selenium/                  # @sarva-varadi/selenium ✅
-│   ├── rest-assured/              # @sarva-varadi/rest-assured ✅
+│   ├── rest-assured/              # @sarva-varadi/rest-assured (TestNG) ✅
+│   ├── rest-assured-junit/        # @sarva-varadi/rest-assured-junit (JUnit 5) ✅
 │   └── cypress/                   # @sarva-varadi/cypress 🚧 (future)
+├── java/
+│   └── sarva-varadi-restassured-junit/  # Java extension (Maven/JitPack) ✅
 ├── demo-playwright/
 ├── demo-selenium/
 ├── demo-restassured/
+├── demo-restassured-junit/
 └── docs/
 ```
 
@@ -283,7 +292,7 @@ The HTML report detects the test tool from `test.tool` field and shows/hides rel
 - Screenshots on failure
 - Selenium version
 
-**RestAssured-specific** (✅ Implemented):
+**RestAssured-specific** (✅ Implemented — TestNG & JUnit 5):
 - Request/response JSON viewers
 - HTTP method + endpoint (GET, POST, PUT, etc.)
 - Status code badges

@@ -9,7 +9,16 @@ The notification system is **fully integrated** and ready to use:
 - ✅ Microsoft Teams adaptive cards
 - ✅ Email with HTML templates
 - ✅ Automatic triggering after test runs
-- ✅ Supports all frameworks (Playwright, Selenium, RestAssured)
+- ✅ Supports all frameworks (Playwright, Selenium, RestAssured TestNG, RestAssured JUnit 5)
+
+## ⚙️ How to Configure — by Framework
+
+| Framework | Where to configure |
+|---|---|
+| **Playwright** | `playwright.config.ts` reporter options (see below) |
+| **Selenium** | `sarva-varadi.properties` in project root (see below) |
+| **RestAssured (TestNG)** | `sarva-varadi.properties` in project root (see below) |
+| **RestAssured (JUnit 5)** | `sarva-varadi.properties` in project root (see below) |
 
 ---
 
@@ -368,33 +377,51 @@ smtp: {
 
 ## ✨ Framework-Specific Setup
 
-### Selenium/RestAssured Projects
+### Selenium / RestAssured (TestNG & JUnit 5)
 
-Notifications work the same way! Just configure in your test runner:
+Notifications are configured via `sarva-varadi.properties` in your project root. The CLI reads this file automatically when generating the report — no code changes needed.
 
-```javascript
-// After generating report with CLI
-const { NotificationService } = require('@sarva-varadi/core');
+**Step 1 — add to `sarva-varadi.properties`:**
 
-const notifier = new NotificationService({
-  slack: {
-    enabled: true,
-    webhookUrl: process.env.SLACK_WEBHOOK_URL,
-  },
-});
+```properties
+# Master switch
+sarva.notifications.enabled=true
 
-// Send notification after test run
-await notifier.sendAll({
-  total: 50,
-  passed: 45,
-  failed: 3,
-  skipped: 1,
-  flaky: 1,
-  passRate: 90,
-  duration: 125000, // ms
-  failedTests: ['Login Test', 'Checkout Test'],
-});
+# Slack
+sarva.notifications.slack.enabled=true
+sarva.notifications.slack.webhookUrl=${SLACK_WEBHOOK_URL}
+sarva.notifications.slack.channel=#test-results
+
+# Teams (optional)
+# sarva.notifications.teams.enabled=true
+# sarva.notifications.teams.webhookUrl=${TEAMS_WEBHOOK_URL}
+
+# Email (optional)
+# sarva.notifications.email.enabled=true
+# sarva.notifications.email.smtp.host=smtp.gmail.com
+# sarva.notifications.email.smtp.port=587
+# sarva.notifications.email.smtp.user=${EMAIL_USER}
+# sarva.notifications.email.smtp.pass=${EMAIL_PASS}
+# sarva.notifications.email.from=tests@company.com
+# sarva.notifications.email.to=qa@company.com,dev@company.com
 ```
+
+**Step 2 — set environment variables (never commit secrets):**
+
+```bash
+# .env / CI secrets
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+```
+
+**Step 3 — run as normal:**
+
+```bash
+mvn clean test   # report generation (and notification) fires automatically
+```
+
+Notifications fire at the end of report generation — the same moment the HTML report is written. No extra steps required.
+
+> `${ENV_VAR}` values in `sarva-varadi.properties` are resolved from environment variables at runtime, so secrets never live in the file itself.
 
 ---
 
