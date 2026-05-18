@@ -339,8 +339,20 @@ smtp: {
 
 ### Use CI/CD Secrets
 
+**Step 1 — Add secrets in GitHub:**
+
+Go to your repo → **Settings → Secrets and variables → Actions → New repository secret**
+
+Add each secret using exactly these names:
+- `SLACK_WEBHOOK_URL`
+- `TEAMS_WEBHOOK_URL`
+- `EMAIL_USER`
+- `EMAIL_PASS`
+
+**Step 2 — Expose them in your workflow:**
+
 ```yaml
-# GitHub Actions
+# GitHub Actions — Playwright
 - name: Run tests
   env:
     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -348,6 +360,15 @@ smtp: {
     EMAIL_USER: ${{ secrets.EMAIL_USER }}
     EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
   run: npx playwright test
+
+# GitHub Actions — Selenium / RestAssured (TestNG or JUnit 5)
+- name: Run tests
+  env:
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+    EMAIL_USER: ${{ secrets.EMAIL_USER }}
+    EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+  run: mvn clean test
 ```
 
 ---

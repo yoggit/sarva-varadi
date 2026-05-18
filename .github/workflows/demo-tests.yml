@@ -60,6 +60,11 @@ jobs:
         run: npm test
         working-directory: demo-playwright
         continue-on-error: true
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
 
       - name: Generate Selenium (TestNG) report from static data
         if: ${{ inputs.test_framework == 'selenium-testng' || inputs.test_framework == '' }}
@@ -70,6 +75,11 @@ jobs:
             --format testng-selenium \
             --use-current-timestamp
         continue-on-error: true
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
 
       - name: Generate RestAssured (TestNG) report from static data
         if: ${{ inputs.test_framework == 'restassured-testng' || inputs.test_framework == '' }}
@@ -80,6 +90,11 @@ jobs:
             --format testng-listener \
             --use-current-timestamp
         continue-on-error: true
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
 
       - name: Generate RestAssured (JUnit 5) report from static data
         if: ${{ inputs.test_framework == 'restassured-junit' || inputs.test_framework == '' }}
@@ -90,6 +105,11 @@ jobs:
             --format testng-listener \
             --use-current-timestamp
         continue-on-error: true
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
 
       - name: Fetch and merge existing history from GitHub Pages
         if: always()
