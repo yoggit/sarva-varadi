@@ -24,10 +24,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *   2. Create src/test/resources/META-INF/services/org.junit.jupiter.api.extension.Extension
  *      containing: io.github.yoggit.sarvavaradi.SarvaVaradiJUnit5Extension
  *
- * The RestAssured request/response filter is registered automatically —
- * no manual RestAssured.filters() call is needed.
+ * The RestAssured request/response filter is registered automatically before each test —
+ * no manual RestAssured.filters() call is needed. Works alongside other JUnit 5 extensions
+ * that may replace filters in their own beforeEach (e.g. ExtentReports).
  */
-public class SarvaVaradiJUnit5Extension implements BeforeAllCallback, BeforeEachCallback, TestWatcher {
+public class SarvaVaradiJUnit5Extension implements BeforeAllCallback, BeforeEachCallback, BeforeTestExecutionCallback, TestWatcher {
 
     private static final String OUTPUT_FILE = "test-results.json";
     private static final String outputDir   = SarvaVaradiConfig.getOutputDir();
@@ -36,8 +37,7 @@ public class SarvaVaradiJUnit5Extension implements BeforeAllCallback, BeforeEach
     private static final Map<String, Map<String, Object>> resultsByTest  = new ConcurrentHashMap<>();
     private static final Map<String, TestAttemptTracker>  attemptTrackers = new ConcurrentHashMap<>();
 
-    private static final AtomicBoolean initialized      = new AtomicBoolean(false);
-    private static final AtomicBoolean filterRegistered = new AtomicBoolean(false);
+    private static final AtomicBoolean initialized = new AtomicBoolean(false);
 
     // Per-thread start time so duration is accurate
     private static final ThreadLocal<Long> testStartTime = new ThreadLocal<>();
@@ -62,16 +62,25 @@ public class SarvaVaradiJUnit5Extension implements BeforeAllCallback, BeforeEach
 
     @Override
     public void beforeEach(ExtensionContext context) {
-        // Auto-register the capture filter once per JVM — no manual setup needed
-        if (filterRegistered.compareAndSet(false, true)) {
-            io.restassured.RestAssured.filters(new RestAssuredRequestCapture());
-        }
         RestAssuredRequestCapture.clearApiCalls();
 
         String testId = testId(context);
         attemptTrackers.putIfAbsent(testId, new TestAttemptTracker());
         attemptTrackers.get(testId).recordAttemptStart();
         testStartTime.set(System.currentTimeMillis());
+    }
+
+    @Override
+    public void beforeTestExecution(ExtensionContext context) {
+        // Register the filter right before the test method runs — after all BeforeEachCallbacks.
+        // This guarantees our filter is present even when another extension (e.g. ExtentReports)
+        // calls RestAssured.replaceFiltersWith() in its own beforeEach, which would wipe any
+        // filter registered earlier in the beforeEach phase.
+        boolean alreadyPresent = io.restassured.RestAssured.filters().stream()
+                .anyMatch(f -> f instanceof RestAssuredRequestCapture);
+        if (!alreadyPresent) {
+            io.restassured.RestAssured.filters(new RestAssuredRequestCapture());
+        }
     }
 
     @Override
