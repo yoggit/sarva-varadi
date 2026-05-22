@@ -197,6 +197,7 @@ async function handleGenerate(args: string[]) {
       timestamp: Date.now(),
       duration: results.reduce((sum, r) => sum + r.duration, 0),
       environment: {
+        name: props['sarva.environment'] || process.env.SARVA_ENVIRONMENT || undefined,
         ci: process.env.CI || 'false',
         branch: process.env.BRANCH || '',
         commit: process.env.COMMIT || '',

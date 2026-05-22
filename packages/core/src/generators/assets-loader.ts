@@ -8,16 +8,28 @@ export class AssetsLoader {
   static getStyles(): string {
     if (this.stylesCache) return this.stylesCache;
 
-    const stylesPath = path.join(__dirname, 'varadi-styles.css');
-    this.stylesCache = fs.readFileSync(stylesPath, 'utf-8');
+    const parts = [
+      path.join(__dirname, 'shell', 'shell.css'),
+      path.join(__dirname, 'micro-apps', 'test-list', 'test-list.css'),
+    ];
+    this.stylesCache = parts.map(p => fs.readFileSync(p, 'utf-8')).join('\n');
     return this.stylesCache;
   }
 
   static getScripts(): string {
     if (this.scriptsCache) return this.scriptsCache;
 
-    const scriptsPath = path.join(__dirname, 'varadi-scripts.js');
-    this.scriptsCache = fs.readFileSync(scriptsPath, 'utf-8');
+    const parts = [
+      path.join(__dirname, 'shared', 'event-bus.js'),
+      path.join(__dirname, 'shared', 'state-store.js'),
+      path.join(__dirname, 'shell', 'shell.js'),
+      path.join(__dirname, 'micro-apps', 'overview', 'overview.js'),
+      path.join(__dirname, 'micro-apps', 'test-list', 'test-list.js'),
+      path.join(__dirname, 'micro-apps', 'test-detail', 'test-detail.js'),
+      path.join(__dirname, 'micro-apps', 'trends', 'trends.js'),
+      path.join(__dirname, 'micro-apps', 'timeline', 'timeline.js'),
+    ];
+    this.scriptsCache = parts.map(p => fs.readFileSync(p, 'utf-8')).join('\n');
     return this.scriptsCache;
   }
 }

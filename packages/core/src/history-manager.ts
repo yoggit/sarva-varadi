@@ -79,6 +79,12 @@ export class HistoryManager {
 
     const dataFile = path.join(runDir, 'data.json');
     fs.writeFileSync(dataFile, JSON.stringify(tests, null, 2));
+
+    // data.js allows the report to load run data via <script> tag (works with file:// protocol)
+    const jsFile = path.join(runDir, 'data.js');
+    fs.writeFileSync(jsFile,
+      `window.SarvaRunData=window.SarvaRunData||{};window.SarvaRunData[${JSON.stringify(runId)}]=${JSON.stringify(tests)};`
+    );
   }
 
   private getUniqueFinalTests(tests: SarvaTestResult[]): SarvaTestResult[] {

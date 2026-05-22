@@ -4,6 +4,7 @@ export interface SarvaReporterOptions {
   outputFolder?: string;
   outputFile?: string;
   title?: string;
+  environment?: string;   // e.g. "QA", "Staging", "Production" — shown as a badge in the report
   showStackTrace?: boolean;
   embedAttachments?: boolean;
   maskSensitiveData?: boolean;
@@ -29,6 +30,7 @@ export const DEFAULT_OPTIONS: Required<SarvaReporterOptions> = {
   outputFolder: 'sarva-report',
   outputFile: 'index.html',
   title: 'Sarva-Varadi Test Report',
+  environment: '',
   showStackTrace: true,
   embedAttachments: true,
   maskSensitiveData: false,
