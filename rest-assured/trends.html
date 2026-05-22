@@ -141,14 +141,20 @@ body::before {
 }
 
 .sv-sidebar-brand-name {
-  font-size: 1.15rem;
+  font-family: 'Syne', system-ui, sans-serif;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
+  background: linear-gradient(125deg, var(--text-primary) 20%, var(--accent-hover) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   white-space: nowrap;
+  overflow: hidden;
 }
 
 .sv-sidebar-brand-version {
+  font-family: 'Syne', system-ui, sans-serif;
   font-size: 0.68rem;
   color: var(--text-muted);
   margin-top: 1px;
@@ -163,6 +169,7 @@ body::before {
 }
 
 .sv-nav-section {
+  font-family: 'Syne', system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -179,6 +186,7 @@ body::before {
   border-radius: var(--radius-sm);
   cursor: pointer;
   color: var(--text-secondary);
+  font-family: 'Syne', system-ui, sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   transition: background var(--t-fast), color var(--t-fast);
@@ -285,8 +293,9 @@ body.light-mode .sv-topbar {
 }
 
 .sv-topbar-title {
+  font-family: 'Syne', system-ui, sans-serif;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
@@ -929,10 +938,14 @@ body.light-mode .sv-tip-popup {
   }
   .sv-print-toc-inner { max-width: 500px; width: 100%; }
   .sv-print-toc-brand {
+    font-family: 'Syne', system-ui, sans-serif;
     font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.12em; color: #6366f1; margin-bottom: 1.75rem;
+    display: flex; align-items: center; gap: 0.5rem; justify-content: center;
   }
-  .sv-print-toc-brand span { font-weight: 400; color: #9ca3af; margin-left: 0.2rem; }
+  .sv-print-toc-logo { height: 36px; width: auto; }
+  .sv-print-toc-brand-name { color: #6366f1; }
+  .sv-print-toc-brand-name span { font-weight: 400; color: #9ca3af; margin-left: 0.2rem; }
   .sv-print-toc-title {
     font-size: 2.4rem; font-weight: 800; color: #111827;
     margin: 0 0 0.3rem; letter-spacing: -0.03em; line-height: 1.1;
@@ -1147,7 +1160,7 @@ body.light-mode .sv-tip-popup {
             <div class="header-right" style="display: flex; flex-direction: column; align-items: flex-end; gap: 0;">
                 
                 <div class="subtitle">
-                    Latest Run on <span id="timestamp" data-time="2026-05-22T12:52:37.311Z"></span>
+                    Latest Run on <span id="timestamp" data-time="2026-05-22T15:07:35.232Z"></span>
                 </div>
                 
                 <div style="display: flex; align-items: center; gap: 1rem;">
@@ -1284,39 +1297,39 @@ body.light-mode .sv-tip-popup {
                                 Flaky Score: 38%
                             </span>
                             <span style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem;">
-                                Last flaky: <span class="last-flaky-date" data-time="2026-05-22T12:52:36.362Z">Loading...</span>
+                                Last flaky: <span class="last-flaky-date" data-time="2026-05-22T15:07:34.259Z">Loading...</span>
                             </span>
                             <span style="margin-left: 1rem; font-family: monospace;">
                                 <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
                   ✗
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:37.311Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:35.232Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
                   ✗
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.996Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.903Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
                   ✗
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.684Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.583Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
                   ~
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.362Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.259Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.055Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.936Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.747Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.616Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.441Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.295Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
                   ✗
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.135Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.979Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:34.830Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.661Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:34.525Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.323Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span>
                                 <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--color-text-secondary); font-style: italic; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">(hover for details)</span>
                             </span>
@@ -1336,39 +1349,39 @@ body.light-mode .sv-tip-popup {
                                 Flaky Score: 38%
                             </span>
                             <span style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem;">
-                                Last flaky: <span class="last-flaky-date" data-time="2026-05-22T12:52:32.691Z">Loading...</span>
+                                Last flaky: <span class="last-flaky-date" data-time="2026-05-22T15:07:30.065Z">Loading...</span>
                             </span>
                             <span style="margin-left: 1rem; font-family: monospace;">
                                 <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
                   ✗
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:37.311Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:35.232Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.996Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.903Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.684Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.583Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.362Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.259Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
                   ✗
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.055Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.936Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.747Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.616Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.441Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.295Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.135Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.979Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:34.830Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.661Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:34.525Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.323Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span>
                                 <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--color-text-secondary); font-style: italic; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">(hover for details)</span>
                             </span>
@@ -1388,39 +1401,39 @@ body.light-mode .sv-tip-popup {
                                 Flaky Score: 33%
                             </span>
                             <span style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem;">
-                                Last flaky: <span class="last-flaky-date" data-time="2026-05-22T12:52:37.311Z">Loading...</span>
+                                Last flaky: <span class="last-flaky-date" data-time="2026-05-22T15:07:35.232Z">Loading...</span>
                             </span>
                             <span style="margin-left: 1rem; font-family: monospace;">
                                 <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
                   ~
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:37.311Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:35.232Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
                   ~
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.996Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.903Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
                   ~
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.684Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.583Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
                   ~
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.362Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.259Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
                   ~
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.055Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.936Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
                   ~
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.747Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.616Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.441Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.295Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.135Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.979Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
                   ~
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:34.830Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.661Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:34.525Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.323Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span>
                                 <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--color-text-secondary); font-style: italic; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">(hover for details)</span>
                             </span>
@@ -1440,39 +1453,39 @@ body.light-mode .sv-tip-popup {
                                 Flaky Score: 8%
                             </span>
                             <span style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem;">
-                                Last flaky: <span class="last-flaky-date" data-time="2026-05-22T12:52:32.385Z">Loading...</span>
+                                Last flaky: <span class="last-flaky-date" data-time="2026-05-22T15:07:29.751Z">Loading...</span>
                             </span>
                             <span style="margin-left: 1rem; font-family: monospace;">
                                 <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:37.311Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:35.232Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.996Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.903Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.684Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.583Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.362Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:34.259Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:36.055Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.936Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.747Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.616Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.441Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:33.295Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:35.135Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.979Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:34.830Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.661Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:34.525Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:32.323Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span>
                                 <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--color-text-secondary); font-style: italic; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">(hover for details)</span>
                             </span>
@@ -1530,7 +1543,7 @@ body.light-mode .sv-tip-popup {
                   <tbody>
                       
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:37.311Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:35.232Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">50%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 5</span>
@@ -1541,7 +1554,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:36.996Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:34.903Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">60%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 6</span>
@@ -1552,7 +1565,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:36.684Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:34.583Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">50%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 5</span>
@@ -1563,7 +1576,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:36.362Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:34.259Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">60%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 6</span>
@@ -1574,7 +1587,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:36.055Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:33.936Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">60%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 6</span>
@@ -1585,7 +1598,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:35.747Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:33.616Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">70%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 7</span>
@@ -1596,7 +1609,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:35.441Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:33.295Z">Loading...</span></td>
             <td style="color: var(--color-flaky); font-weight: 600;">80%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 8</span>
@@ -1607,7 +1620,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:35.135Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:32.979Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">70%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 7</span>
@@ -1618,7 +1631,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:34.830Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:32.661Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">70%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 7</span>
@@ -1629,7 +1642,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:34.525Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:32.323Z">Loading...</span></td>
             <td style="color: var(--color-flaky); font-weight: 600;">80%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 8</span>
@@ -1640,7 +1653,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:34.219Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:31.990Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">70%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 7</span>
@@ -1651,7 +1664,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:33.909Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:31.672Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">60%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 6</span>
@@ -1662,7 +1675,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:33.605Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:31.346Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">60%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 6</span>
@@ -1673,7 +1686,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:33.303Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:31.017Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">60%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 6</span>
@@ -1684,7 +1697,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:32.996Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:30.693Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">60%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 6</span>
@@ -1695,7 +1708,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:32.691Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:30.065Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">50%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 5</span>
@@ -1706,7 +1719,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:32.385Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:29.751Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">40%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 4</span>
@@ -1717,7 +1730,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:32.079Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:29.430Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">30%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 3</span>
@@ -1728,7 +1741,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:31.773Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:29.082Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">40%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 4</span>
@@ -1739,7 +1752,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:31.468Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:28.763Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">50%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 5</span>
@@ -1750,7 +1763,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:31.167Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:28.441Z">Loading...</span></td>
             <td style="color: var(--color-flaky); font-weight: 600;">80%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 8</span>
@@ -1761,7 +1774,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:30.872Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:28.109Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">60%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 6</span>
@@ -1772,7 +1785,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:30.560Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:27.786Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">60%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 6</span>
@@ -1783,7 +1796,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-05-22T12:52:30.257Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-05-22T15:07:27.457Z">Loading...</span></td>
             <td style="color: var(--color-flaky); font-weight: 600;">80%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 8</span>
@@ -1794,7 +1807,7 @@ body.light-mode .sv-tip-popup {
             <td>9s</td>
         </tr>
         <tr>
-            <td><span class="activity-date" data-time="2026-04-27T21:52:29.769Z">Loading...</span></td>
+            <td><span class="activity-date" data-time="2026-04-28T00:07:26.956Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">70%</td>
             <td>
                 <span style="color: var(--color-passed);">✓ 7</span>
@@ -3278,9 +3291,17 @@ const SarvaOverview = (() => {
         ctx.fillStyle = cardBg;
         ctx.fillRect(0, 0, cv.width, cv.height);
 
+        let titleX = pad;
+        const sidebarLogo = document.getElementById('sv-logo-img');
+        if (sidebarLogo && sidebarLogo.complete && sidebarLogo.naturalWidth > 0) {
+          const logoH = hdrH * 0.6;
+          const logoW = logoH * (424.5 / 330.75);
+          ctx.drawImage(sidebarLogo, pad, (hdrH - logoH) / 2, logoW, logoH);
+          titleX = pad + logoW + 7 * scale;
+        }
         ctx.fillStyle = mutedClr;
         ctx.font = `bold ${10 * scale}px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
-        ctx.fillText('DISTRIBUTION', pad, hdrH * 0.72);
+        ctx.fillText('DISTRIBUTION', titleX, hdrH * 0.72);
 
         ctx.drawImage(img, pad, hdrH);
 
@@ -5479,7 +5500,7 @@ window.SarvaTimeline = SarvaTimeline;
         if (passRateCtx) {
             passRateChart = new Chart(passRateCtx, {
                 type: 'line',
-                data: {"labels":[["04/27/2026","21:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"]],"datasets":[{"label":"Pass Rate %","data":[70,80,60,60,80,50,40,30,40,50,60,60,60,60,70,80,70,70,80,70,60,60,50,60,50],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","tension":0.3,"fill":true}]},
+                data: {"labels":[["04/28/2026","00:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"]],"datasets":[{"label":"Pass Rate %","data":[70,80,60,60,80,50,40,30,40,50,60,60,60,60,70,80,70,70,80,70,60,60,50,60,50],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","tension":0.3,"fill":true}]},
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -5529,7 +5550,7 @@ window.SarvaTimeline = SarvaTimeline;
         if (distributionCtx) {
             distributionChart = new Chart(distributionCtx, {
                 type: 'bar',
-                data: {"labels":[["04/27/2026","21:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"],["05/22/2026","12:52"]],"datasets":[{"label":"Passed","data":[7,8,6,6,8,5,4,3,4,5,6,6,6,6,7,8,7,7,8,7,6,6,5,6,5],"backgroundColor":"#10b981"},{"label":"Failed","data":[0,0,1,0,0,2,3,3,2,1,1,1,0,1,0,0,0,1,0,0,1,0,2,1,2],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[1,0,1,2,0,1,1,2,2,2,1,1,2,1,1,0,1,0,0,1,1,2,1,1,1],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"backgroundColor":"#6b7280"}]},
+                data: {"labels":[["04/28/2026","00:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"],["05/22/2026","15:07"]],"datasets":[{"label":"Passed","data":[7,8,6,6,8,5,4,3,4,5,6,6,6,6,7,8,7,7,8,7,6,6,5,6,5],"backgroundColor":"#10b981"},{"label":"Failed","data":[0,0,1,0,0,2,3,3,2,1,1,1,0,1,0,0,0,1,0,0,1,0,2,1,2],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[1,0,1,2,0,1,1,2,2,2,1,1,2,1,1,0,1,0,0,1,1,2,1,1,1],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"backgroundColor":"#6b7280"}]},
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -5636,7 +5657,7 @@ window.SarvaTimeline = SarvaTimeline;
         }
 
         // Date range filter function
-        const allRuns = [{"id":"cli-1779454349954","timestamp":1777326749769,"duration":9650,"total":10,"passed":7,"failed":0,"skipped":2,"flaky":1,"passRate":70,"environment":{"ci":"false"}},{"id":"cli-1779454350257","timestamp":1779454350257,"duration":9650,"total":10,"passed":8,"failed":0,"skipped":2,"flaky":0,"passRate":80,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454350560","timestamp":1779454350560,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454350872","timestamp":1779454350872,"duration":9650,"total":10,"passed":6,"failed":0,"skipped":2,"flaky":2,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454351167","timestamp":1779454351167,"duration":9650,"total":10,"passed":8,"failed":0,"skipped":2,"flaky":0,"passRate":80,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454351468","timestamp":1779454351468,"duration":9650,"total":10,"passed":5,"failed":2,"skipped":2,"flaky":1,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454351773","timestamp":1779454351773,"duration":9650,"total":10,"passed":4,"failed":3,"skipped":2,"flaky":1,"passRate":40,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454352079","timestamp":1779454352079,"duration":9650,"total":10,"passed":3,"failed":3,"skipped":2,"flaky":2,"passRate":30,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454352385","timestamp":1779454352385,"duration":9650,"total":10,"passed":4,"failed":2,"skipped":2,"flaky":2,"passRate":40,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454352691","timestamp":1779454352691,"duration":9650,"total":10,"passed":5,"failed":1,"skipped":2,"flaky":2,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454352996","timestamp":1779454352996,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454353303","timestamp":1779454353303,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454353605","timestamp":1779454353605,"duration":9650,"total":10,"passed":6,"failed":0,"skipped":2,"flaky":2,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454353909","timestamp":1779454353909,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454354219","timestamp":1779454354219,"duration":9650,"total":10,"passed":7,"failed":0,"skipped":2,"flaky":1,"passRate":70,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454354525","timestamp":1779454354525,"duration":9650,"total":10,"passed":8,"failed":0,"skipped":2,"flaky":0,"passRate":80,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454354830","timestamp":1779454354830,"duration":9650,"total":10,"passed":7,"failed":0,"skipped":2,"flaky":1,"passRate":70,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454355135","timestamp":1779454355135,"duration":9650,"total":10,"passed":7,"failed":1,"skipped":2,"flaky":0,"passRate":70,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454355441","timestamp":1779454355441,"duration":9650,"total":10,"passed":8,"failed":0,"skipped":2,"flaky":0,"passRate":80,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454355747","timestamp":1779454355747,"duration":9650,"total":10,"passed":7,"failed":0,"skipped":2,"flaky":1,"passRate":70,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454356055","timestamp":1779454356055,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454356362","timestamp":1779454356362,"duration":9650,"total":10,"passed":6,"failed":0,"skipped":2,"flaky":2,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454356684","timestamp":1779454356684,"duration":9650,"total":10,"passed":5,"failed":2,"skipped":2,"flaky":1,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454356996","timestamp":1779454356996,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779454357311","timestamp":1779454357311,"duration":9650,"total":10,"passed":5,"failed":2,"skipped":2,"flaky":1,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""}}];
+        const allRuns = [{"id":"cli-1779462447140","timestamp":1777334846956,"duration":9650,"total":10,"passed":7,"failed":0,"skipped":2,"flaky":1,"passRate":70,"environment":{"ci":"false"}},{"id":"cli-1779462447457","timestamp":1779462447457,"duration":9650,"total":10,"passed":8,"failed":0,"skipped":2,"flaky":0,"passRate":80,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462447786","timestamp":1779462447786,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462448109","timestamp":1779462448109,"duration":9650,"total":10,"passed":6,"failed":0,"skipped":2,"flaky":2,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462448441","timestamp":1779462448441,"duration":9650,"total":10,"passed":8,"failed":0,"skipped":2,"flaky":0,"passRate":80,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462448763","timestamp":1779462448763,"duration":9650,"total":10,"passed":5,"failed":2,"skipped":2,"flaky":1,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462449082","timestamp":1779462449082,"duration":9650,"total":10,"passed":4,"failed":3,"skipped":2,"flaky":1,"passRate":40,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462449430","timestamp":1779462449430,"duration":9650,"total":10,"passed":3,"failed":3,"skipped":2,"flaky":2,"passRate":30,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462449751","timestamp":1779462449751,"duration":9650,"total":10,"passed":4,"failed":2,"skipped":2,"flaky":2,"passRate":40,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462450065","timestamp":1779462450065,"duration":9650,"total":10,"passed":5,"failed":1,"skipped":2,"flaky":2,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462450693","timestamp":1779462450693,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462451017","timestamp":1779462451017,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462451345","timestamp":1779462451346,"duration":9650,"total":10,"passed":6,"failed":0,"skipped":2,"flaky":2,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462451672","timestamp":1779462451672,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462451990","timestamp":1779462451990,"duration":9650,"total":10,"passed":7,"failed":0,"skipped":2,"flaky":1,"passRate":70,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462452323","timestamp":1779462452323,"duration":9650,"total":10,"passed":8,"failed":0,"skipped":2,"flaky":0,"passRate":80,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462452661","timestamp":1779462452661,"duration":9650,"total":10,"passed":7,"failed":0,"skipped":2,"flaky":1,"passRate":70,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462452979","timestamp":1779462452979,"duration":9650,"total":10,"passed":7,"failed":1,"skipped":2,"flaky":0,"passRate":70,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462453295","timestamp":1779462453295,"duration":9650,"total":10,"passed":8,"failed":0,"skipped":2,"flaky":0,"passRate":80,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462453616","timestamp":1779462453616,"duration":9650,"total":10,"passed":7,"failed":0,"skipped":2,"flaky":1,"passRate":70,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462453936","timestamp":1779462453936,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462454259","timestamp":1779462454259,"duration":9650,"total":10,"passed":6,"failed":0,"skipped":2,"flaky":2,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462454583","timestamp":1779462454583,"duration":9650,"total":10,"passed":5,"failed":2,"skipped":2,"flaky":1,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462454903","timestamp":1779462454903,"duration":9650,"total":10,"passed":6,"failed":1,"skipped":2,"flaky":1,"passRate":60,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779462455232","timestamp":1779462455232,"duration":9650,"total":10,"passed":5,"failed":2,"skipped":2,"flaky":1,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""}}];
         let currentFilter = 'last20';
 
         function filterByDateRange(filter) {
