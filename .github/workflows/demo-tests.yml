@@ -118,7 +118,7 @@ jobs:
 
       - name: Create landing page
         if: always()
-        run: cp local-gh-pages-test/index.html gh-pages-deploy/index.html
+        run: cp local-gh-pages-test/index.html gh-pages-deploy/index.html && cp local-gh-pages-test/logo.svg gh-pages-deploy/logo.svg
 
       - name: Upload Sarva-Varadi Reports
         if: always()
