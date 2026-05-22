@@ -42,7 +42,7 @@ The converter auto-detects the format by analyzing the file structure:
 ### Phase 2: Conversion & Report Generation
 1. **Convert** test results to standardized Sarva-Varadi format
 2. **Archive** results in history folder for trend tracking
-3. **Generate** both `index.html` (latest) and `trends.html` (historical)
+3. **Generate** `index.html` — a single-page report with Overview, Tests, Trends, and Timeline tabs
 
 **Key Benefit:** If you're already using Sarva-Varadi adapters, the converter skips the conversion step entirely, making it efficient to re-generate reports from existing data.
 
@@ -482,7 +482,7 @@ module.exports = {
   },
   trends: {
     enabled: true,
-    showInMainReport: true,
+    showInMainReport: true,  // Embed trend data in index.html SPA
   },
 };
 ```

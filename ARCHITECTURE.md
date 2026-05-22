@@ -30,14 +30,14 @@ RestAssured Test → RestAssured Adapter → SarvaTestResult JSON
 ### Phase 2: Report Generation (After Test Execution)
 
 The core generator processes all JSON files and creates:
-1. **Current run report** (`index.html`) - Latest execution results
-2. **Trends dashboard** (`trends.html`) - Historical analysis
+1. **Single-page report** (`index.html`) - Interactive SPA with 4 sidebar tabs (Overview, Tests, Trends, Timeline)
+2. **Standalone trends** (`trends.html`) - Legacy standalone trends page
 3. **History archive** - Stores run data for trend calculation
 
 ```
 JSON Files → Report Generator → {
-  index.html,
-  trends.html,
+  index.html,        ← primary: SPA with sidebar
+  trends.html,       ← secondary: standalone trends
   attachments/,
   history/runs.json
 }
@@ -102,8 +102,8 @@ interface TestTrendData {
 
 ```
 sarva-report/
-├── index.html                     # Latest run report (View 1)
-├── trends.html                    # Historical trends (View 2)
+├── index.html                     # Primary SPA report (4 sidebar tabs)
+├── trends.html                    # Standalone trends page
 ├── attachments/                   # Media files
 │   ├── screenshot-1.png
 │   ├── video-1.webm
@@ -203,36 +203,26 @@ Cleanup runs automatically after each test execution.
 
 ## Report Generation
 
-### View 1: Latest Run (`index.html`)
+### Primary Report — `index.html` (Single-Page App)
 
-**Components**:
-- Header with logo, title, theme toggle
-- Navigation: [Latest Run] [Trends →] buttons
-- Mini-trend widget (last 7 runs line chart)
-- Summary cards (passed/failed/skipped/flaky counts)
-- Search and filter controls
-- Test list with expandable details
-- Attachments viewer (screenshots, videos, traces)
+The report is a self-contained SPA with a collapsible sidebar and four micro-app tabs. History data is embedded at generation time via `SarvaStore.init(tests, metadata, history)`.
 
-**Technology**:
-- Self-contained HTML with embedded CSS/JS
-- Chart.js for mini-trend visualization
-- Vanilla JS for interactivity (no frameworks)
-
-### View 2: Trends Dashboard (`trends.html`)
-
-**Components**:
-- Header with navigation: [← Latest Run] [Trends] buttons
-- Pass rate over time (line chart)
-- Test distribution per run (stacked bar chart)
-- Flakiest tests ranking (top 10 with scores)
-- Recent runs table with clickable links
-- Per-test history modal (show individual test trend)
+| Tab | Contents |
+|-----|---|
+| **Overview** | Pass rate summary, run metadata, environment badge, key stats |
+| **Tests** | Full test list — searchable, filterable, expandable step details, attachment viewer |
+| **Trends** | Pass rate over time, test distribution chart, flakiest tests leaderboard, run cadence |
+| **Timeline** | Gantt chart showing when each test started and finished across a run |
 
 **Technology**:
-- Chart.js for visualizations
-- Data loaded from `history/runs.json`
-- Responsive design with CSS Grid
+- Self-contained HTML with embedded CSS/JS — no external dependencies at runtime
+- ECharts for all charts (loaded async from CDN; `SarvaEventBus.emit('echarts:ready')` coordinates renders)
+- Micro-app architecture: `shell/`, `shared/`, `micro-apps/` folders under `src/generators/`
+- Dark/light theme toggle; PDF print, PNG download, CSV export
+
+### Standalone Trends — `trends.html`
+
+Legacy standalone trends page, kept as a secondary artifact alongside `index.html`. Contains the same Trends tab content in a standalone layout.
 
 ## Package Structure
 
@@ -322,23 +312,30 @@ The HTML report detects the test tool from `test.tool` field and shows/hides rel
   // Trends visualization
   trends: {
     enabled: true,
-    showInMainReport: true,  // Mini-trend widget
+    showInMainReport: true,  // Embed trend data in index.html SPA
   },
 }
 ```
 
 ## Future Enhancements (Phase 3+)
 
-### CLI Tool
+### Advanced CLI Commands
+
+Basic generation and format conversion (JUnit XML, TestNG XML, Cucumber JSON → Sarva-Varadi) is already supported:
+
 ```bash
-# Generate report from existing data
-npx sarva generate sarva-varadi-results/ -o sarva-report/
+# Existing: generate report from any format
+npx sarva-varadi generate --input test-results.xml --output sarva-report
+```
 
+Planned future additions:
+
+```bash
 # Merge parallel execution results
-npx sarva merge shard-1/results shard-2/results -o merged-report/
+npx sarva-varadi merge shard-1/results shard-2/results -o merged-report/
 
-# Compare two runs
-npx sarva compare run-1/ run-2/ -o comparison-report/
+# Compare two runs side by side
+npx sarva-varadi compare run-1/ run-2/ -o comparison-report/
 ```
 
 ### Real-Time Reporting
@@ -356,6 +353,10 @@ npx sarva compare run-1/ run-2/ -o comparison-report/
 - Slowest tests identification
 - CI/CD pipeline integration metrics
 - Cost analysis (execution time × worker cost)
+
+### Historical Per-Run Reports
+- Clickable links to full report for each historical run
+- Historical Gantt chart spanning multiple runs
 
 ## Performance Considerations
 
@@ -382,8 +383,9 @@ npx sarva compare run-1/ run-2/ -o comparison-report/
 
 Sarva-Varadi provides:
 - **Lightweight** universal reporter (no servers, no databases)
-- **Beautiful** modern UI with dark/light themes
-- **Historical** trend tracking with flaky test detection
+- **Beautiful** v3 SPA report with dark/light themes, sidebar navigation, and 4 analysis tabs
+- **Exports** — PDF print, PNG screenshot, CSV data export
+- **Historical** trend tracking with flaky test detection (file-based, up to 30 runs by default)
 - **Modular** installation (install only what you need)
-- **Framework agnostic** with consistent experience
-- **CI/CD friendly** static HTML artifacts
+- **Framework agnostic** with consistent experience across Playwright, Selenium, RestAssured (TestNG & JUnit 5)
+- **CI/CD friendly** static HTML artifacts — no external dependencies at runtime

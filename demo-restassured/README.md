@@ -155,15 +155,18 @@ Add your new test class:
 
 ## Report Features
 
-The generated Sarva-Varadi report includes:
+The generated Sarva-Varadi report (`sarva-report/index.html`) is a single-page app with four sidebar tabs:
 
-- 📊 Test execution summary with pass/fail/flaky breakdown
-- 📈 Historical trends (with multiple runs)
-- 🔍 Detailed API call steps with request/response data
-- ⚠️ Automatic flaky test detection with retry tracking
+- **Overview** — Pass/fail/flaky summary, run metadata
+- **Tests** — Detailed API call steps with request/response data, search and filter
+- **Trends** — Historical trends across multiple runs, flaky test leaderboard
+- **Timeline** — Gantt chart of when each test ran
+
+Additional features:
 - 📱 Dark/Light theme support
-- 🔎 Search and filter capabilities
+- 📤 PDF print, PNG download, CSV export
 - 🔒 Optional sensitive data masking
+- ⚠️ Automatic flaky test detection with retry tracking
 
 ## CI/CD Integration
 

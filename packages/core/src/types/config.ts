@@ -36,7 +36,7 @@ export const DEFAULT_OPTIONS: Required<SarvaReporterOptions> = {
   maskSensitiveData: false,
   history: {
     enabled: true,
-    maxRuns: 20,
+    maxRuns: 30,
     retentionDays: 90,
     trackPerTest: true,
   },

@@ -1174,17 +1174,17 @@ Old test runs are automatically cleaned up using a **"whichever comes first"** p
 2. **`retentionDays`** — removes runs older than N days. Deletes **all** runs past the age threshold in one pass — so if you pause testing for weeks and multiple runs age out, they are all removed when the next run triggers cleanup. (default: 90)
 
 <details>
-<summary><b>Corner case examples (maxRuns=20, retentionDays=90)</b></summary>
+<summary><b>Corner case examples (maxRuns=30, retentionDays=90)</b></summary>
 
 <br>
 
 **Case 1 — Heavy CI usage (maxRuns triggers first)**
 
-You run tests 3× a day for 8 days = 24 runs, all less than 8 days old.
+You run tests 3× a day for 11 days = 33 runs, all less than 11 days old.
 
 | Limit hit | What happens |
 |---|---|
-| Run #21 arrives | Run #1 deleted — it's only 7 days old but `maxRuns` triggered first |
+| Run #31 arrives | Run #1 deleted — it's only 10 days old but `maxRuns` triggered first |
 
 ---
 
@@ -1202,20 +1202,20 @@ This is intentional — stale runs past the age threshold are all cleaned up imm
 
 **Case 3 — The tricky one: burst after slow start**
 
-26 old weekly runs (100–90 days old), then 100 new runs in 2 weeks. Total = 126 runs.
+36 old weekly runs (100–90 days old), then 100 new runs in 2 weeks. Total = 136 runs.
 
 | Limit hit | What happens |
 |---|---|
-| `maxRuns=20` | Runs beyond position #20 are deleted — the old weekly runs are purged |
+| `maxRuns=30` | Runs beyond position #30 are deleted — the old weekly runs are purged |
 | `retentionDays=90` | Any run older than 90 days also deleted independently |
 
-With the old AND logic, runs within 90 days would have survived even if beyond position #20 — `maxRuns` would have been completely ignored.
+With the old AND logic, runs within 90 days would have survived even if beyond position #30 — `maxRuns` would have been completely ignored.
 
 ---
 
 **Case 4 — Both limits hit simultaneously**
 
-Run #21 arrives AND it's from 95 days ago (slow project, 21 runs over 3+ months).
+Run #31 arrives AND it's from 95 days ago (slow project, 31 runs over 3+ months).
 
 Both limits exceeded at the same time — run is deleted regardless.
 

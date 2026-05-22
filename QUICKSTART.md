@@ -80,8 +80,8 @@ export default defineConfig({
       },
       
       trends: {
-        enabled: true,                   // Generate trends.html
-        showInMainReport: true,          // Mini-trend widget in main report
+        enabled: true,                   // Include Trends tab in report
+        showInMainReport: true,          // Embed trend data in index.html SPA
       },
       
       notifications: {
@@ -347,12 +347,18 @@ xdg-open sarva-report/index.html  # Linux
 
 ---
 
-## 📊 You Get Two Reports
+## 📊 Your Report
 
-All frameworks generate the same beautiful reports:
+All frameworks generate the same interactive report at `sarva-report/index.html` — a single-page app with four sidebar tabs:
 
-1. **`index.html`** - Latest test run results
-2. **`trends.html`** - Historical trends dashboard
+| Tab | What you see |
+|-----|---|
+| **Overview** | Pass rate summary, run metadata, key stats |
+| **Tests** | Searchable/filterable test list with step details and attachments |
+| **Trends** | Pass rate over time, flaky test leaderboard, run cadence chart |
+| **Timeline** | Gantt chart — when each test ran and how long it took |
+
+Export options: PDF print, PNG screenshot, CSV data.
 
 ## 📖 Full Documentation
 

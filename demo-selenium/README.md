@@ -266,12 +266,12 @@ When enabled, fields matching these patterns are masked:
 
 ## 📈 Trend Analysis
 
-Sarva-Varadi automatically tracks test history across multiple runs:
+Sarva-Varadi automatically tracks test history across multiple runs. Open the **Trends** or **Timeline** tab in `index.html` to see:
 
-- Pass rate trends over time
-- Flaky test identification
-- Performance degradation detection
-- Test failure patterns
+- Pass rate trend over time
+- Flaky test identification and leaderboard
+- Run cadence chart
+- Per-run Gantt chart (Timeline tab)
 
 ## 🔧 Advanced Configuration
 

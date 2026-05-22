@@ -155,7 +155,7 @@ Examples:
 
 - Run demo tests before submitting PR
 - Verify reports generate correctly
-- Check both `index.html` and `trends.html`
+- Open `index.html` and check all four sidebar tabs (Overview, Tests, Trends, Timeline)
 - Test on different browsers if applicable
 
 ## Questions?
