@@ -31,10 +31,10 @@
 </p>
 
 <p align="center">
-  <strong>🎭 <a href="https://yoggit.github.io/sarva-varadi/playwright/trends.html">Playwright Demo</a></strong> • 
-  <strong>🌐 <a href="https://yoggit.github.io/sarva-varadi/selenium/trends.html">Selenium Demo</a></strong> • 
-  <strong>🔌 <a href="https://yoggit.github.io/sarva-varadi/rest-assured/trends.html">RestAssured (TestNG) Demo</a></strong> •
-  <strong>🧪 <a href="https://yoggit.github.io/sarva-varadi/rest-assured-junit/trends.html">RestAssured (JUnit 5) Demo</a></strong>
+  <strong>🎭 <a href="https://yoggit.github.io/sarva-varadi/playwright/index.html">Playwright Demo</a></strong> • 
+  <strong>🌐 <a href="https://yoggit.github.io/sarva-varadi/selenium/index.html">Selenium Demo</a></strong> • 
+  <strong>🔌 <a href="https://yoggit.github.io/sarva-varadi/rest-assured/index.html">RestAssured (TestNG) Demo</a></strong> •
+  <strong>🧪 <a href="https://yoggit.github.io/sarva-varadi/rest-assured-junit/index.html">RestAssured (JUnit 5) Demo</a></strong>
 </p>
 
 ---
@@ -60,23 +60,25 @@
 <td width="50%">
 
 **📊 Reporting & Analytics**
-- 🎨 Beautiful dark/light theme UI
-- 📈 Interactive trend charts with zoom
-- 🔥 Intelligent flaky test detection
-- 🎯 Top offenders leaderboard
-- 📅 Activity stream with filters
-- 📎 Rich attachments (screenshots/videos/traces)
+- 🎨 Dark/light theme with sidebar navigation
+- 📋 Overview: stat cards, pass rate donut, health pulse
+- 🔍 Tests: full list with filter/search/sort, per-test history
+- 📈 Trends: pass rate, failures, flakiness, duration over time
+- ⏱️ Timeline: run cadence and execution Gantt chart
+- 🔥 Intelligent flaky test detection with flaky score
+- 🎯 Top failing & top flaky leaderboards
 
 </td>
 <td width="50%">
 
 **⚡ Developer Experience**
-- ⚡ Zero config - works out of the box
-- 📁 File-based - no database needed
-- 🔄 Framework agnostic
-- 🎪 Multi-browser support
-- 🔍 Smart search & filtering
-- 📧 Slack/Teams/Email notifications
+- ⚡ Zero config — works out of the box
+- 📁 File-based — no database needed
+- 🔄 Framework agnostic (4 frameworks supported)
+- 📎 Rich attachments: screenshots, videos, traces
+- 🖨️ PDF print export (A4, with executive summary)
+- 📥 PNG chart download & CSV test export
+- 📧 Slack / Teams / Email notifications
 
 </td>
 </tr>
@@ -84,67 +86,30 @@
 
 ---
 
-## 📸 Visual Preview
+## 📸 Live Demos
 
-### Latest Report (`index.html`)
+The best way to explore Sarva-Varadi is to open one of the live demos — each has 25 historical runs pre-loaded so every chart has real data to show.
 
-<details>
-<summary><b>Summary Dashboard</b></summary>
-<br>
-<img src="screenshots/latest-report/summary.png" alt="Summary Dashboard" width="100%">
-<p><i>Overview of test execution with pass/fail/skip counts, duration, and mini trend widget</i></p>
-</details>
+| Framework | Demo |
+|-----------|------|
+| 🎭 Playwright | [yoggit.github.io/sarva-varadi/playwright/](https://yoggit.github.io/sarva-varadi/playwright/index.html) |
+| 🌐 Selenium (TestNG) | [yoggit.github.io/sarva-varadi/selenium/](https://yoggit.github.io/sarva-varadi/selenium/index.html) |
+| 🔌 RestAssured (TestNG) | [yoggit.github.io/sarva-varadi/rest-assured/](https://yoggit.github.io/sarva-varadi/rest-assured/index.html) |
+| 🧪 RestAssured (JUnit 5) | [yoggit.github.io/sarva-varadi/rest-assured-junit/](https://yoggit.github.io/sarva-varadi/rest-assured-junit/index.html) |
 
-<details>
-<summary><b>Retried Tests View</b></summary>
-<br>
-<img src="screenshots/latest-report/retried-tests.png" alt="Retried Tests" width="100%">
-<p><i>Dedicated section showing tests that were retried with their final status</i></p>
-</details>
+### What's in the report
 
-<details>
-<summary><b>Search & Filters</b></summary>
-<br>
-<img src="screenshots/latest-report/filters.png" alt="Search and Filters" width="100%">
-<p><i>Filter tests by status (passed/failed/skipped) and search by test name</i></p>
-</details>
+Each report is a single-page app with four sections reachable from the sidebar:
 
-<details>
-<summary><b>Test Details - Expanded View</b></summary>
-<br>
-<img src="screenshots/latest-report/test-details-expanded.png" alt="Test Details Expanded" width="100%">
-<p><i>Detailed test steps, error messages, stack traces, and attachments (screenshots, videos, traces)</i></p>
-</details>
+**Overview** — Pass rate donut, stat cards (total / passed / failed / flaky / skipped), Health Pulse trend indicator, run history table, top failing tests, top flaky tests, and a Needs Attention strip when things regress.
 
-### Trends Dashboard (`trends.html`)
+**Tests** — Full test list with filter by status, free-text search, and sort. Click any test to open a drawer showing the full step tree, error message, stack trace, attachments (screenshots / videos / traces), and a per-test history chart across the last 25 runs.
 
-<details>
-<summary><b>Health Pulse - Pass Rate Trends</b></summary>
-<br>
-<img src="screenshots/trends-report/health-pulse-with-filters.png" alt="Health Pulse with Filters" width="100%">
-<p><i>Interactive line chart showing pass rate over time with date range filters and zoom controls</i></p>
-</details>
+**Trends** — Six interactive ECharts charts across runs: pass rate over time, failures & flakiness, test count, run duration, top failing tests bar chart, and top flaky tests bar chart. All charts share a run-count filter (Last 10 / 20 / 50 / All).
 
-<details>
-<summary><b>Execution Breakdown</b></summary>
-<br>
-<img src="screenshots/trends-report/execution-breakdown.png" alt="Execution Breakdown" width="100%">
-<p><i>Stacked bar chart displaying test distribution (passed/failed/flaky/skipped) per run</i></p>
-</details>
+**Timeline** — Run Cadence bar chart showing how often and when runs happen, plus an Execution Gantt showing every test's start time and duration for the current run.
 
-<details>
-<summary><b>Top Offenders - Flaky Tests</b></summary>
-<br>
-<img src="screenshots/trends-report/top-offenders.png" alt="Top Offenders" width="100%">
-<p><i>Historically flaky tests with scores (0-100), last flaky date, and last 10 runs visualization with hover tooltips</i></p>
-</details>
-
-<details>
-<summary><b>Activity Stream</b></summary>
-<br>
-<img src="screenshots/trends-report/activity-stream.png" alt="Activity Stream" width="100%">
-<p><i>Filterable test run history (Last 20/50/100/All) with scrollable view showing date, pass rate, results, and duration</i></p>
-</details>
+**Export** — Every chart has a PNG download button. The Tests page has a CSV export. Print the full report to a structured PDF (A4 landscape, with an executive summary and page numbers) via the print button.
 
 ---
 
@@ -1021,26 +986,30 @@ Start using Sarva-Varadi with existing reports, then migrate to native adapters 
 
 ---
 
-## 📊 Two Views
+## 📊 Report Structure
 
-### View 1: Latest Run (`index.html`)
-- Current test execution results with summary dashboard
-- Pass/fail/skip counts with visual progress bars
-- Search and filter functionality (by status, test name, browser)
-- Individual test details with steps, errors, and attachments
-- Mini trend widget showing last 7 runs
+Each report is a single `index.html` — no server required, open it directly in a browser.
 
-### View 2: Trends Dashboard (`trends.html`)
-- **Health Pulse**: Pass rate over time with interactive line chart
-- **Execution Breakdown**: Test distribution per run (stacked bar chart)
-- **Top Offenders**: Historically flaky tests with scores (0-100) and last flaky date
-  - Shows only tests that actually passed after retry (intelligent detection)
-  - Grouped by test name (removes browser duplicates)
-  - Last 10 runs icons with hover tooltips showing date/time
-- **Activity Stream**: Filterable history (Last 20/50/100/All) with vertical scrolling
-- Date range filters and zoom controls on charts
+### Sidebar tabs
 
-Navigation between views via header buttons.
+| Tab | What's inside |
+|-----|---------------|
+| **Overview** | Pass rate donut · stat cards · Health Pulse trend · run history table · top failing & top flaky · Needs Attention strip |
+| **Tests** | Filterable test list · free-text search · sort by duration/status · test detail drawer with steps, attachments, and per-test history chart |
+| **Trends** | Pass rate trend · failures & flakiness · test count · run duration · top failing bar chart · top flaky bar chart — all with run-count filter |
+| **Timeline** | Run Cadence chart (when and how often runs happen) · Execution Gantt (per-test start time and duration) |
+
+### Export options
+
+| Format | Where |
+|--------|-------|
+| **PDF** | Print button — A4 landscape, executive summary, page numbers |
+| **PNG** | Download button on every chart (12 total) |
+| **CSV** | Tests page toolbar · Overview Top Failures & Top Flaky tables |
+
+### Standalone trends page
+
+`trends.html` is also generated alongside `index.html` — same Trends content, useful for direct linking in CI notifications or dashboards.
 
 ---
 
@@ -1066,7 +1035,7 @@ Navigation between views via header buttons.
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `history.enabled` | boolean | `true` | Enable historical tracking |
-| `history.maxRuns` | number | `20` | Keep last N runs (no hard limit, can be set to 100+ for extensive history) |
+| `history.maxRuns` | number | `30` | Keep last N runs (no hard limit, can be set to 100+ for extensive history) |
 | `history.retentionDays` | number | `90` | Auto-cleanup after N days (3 months default, can be set to 365+ for longer retention) |
 | `history.trackPerTest` | boolean | `true` | Track per-test flakiness |
 
@@ -1139,7 +1108,7 @@ sarva.report.embedAttachments=true            # [All tools] embed screenshots/vi
 # ── Report: history & trends ────────────────────────────────────────────
 sarva.report.history=true                     # [All tools] enable historical run tracking
 sarva.report.trends=true                      # [All tools] enable trend analysis across runs
-sarva.report.maxRuns=20                       # [All tools] max past runs to keep (oldest deleted first)
+sarva.report.maxRuns=30                       # [All tools] max past runs to keep (oldest deleted first)
 sarva.report.retentionDays=90                 # [All tools] max age in days (whichever limit hits first wins)
 ```
 
@@ -1201,7 +1170,7 @@ Score = (Status Changes / Total Runs × 100) + (Flaky Retries / Total Runs × 20
 
 Old test runs are automatically cleaned up using a **"whichever comes first"** policy — a run is deleted the moment it exceeds **either** limit:
 
-1. **`maxRuns`** — keeps the last N runs. In normal sequential use, exactly **1 oldest run** is deleted each time a new run is added. (default: 20)
+1. **`maxRuns`** — keeps the last N runs. In normal sequential use, exactly **1 oldest run** is deleted each time a new run is added. (default: 30)
 2. **`retentionDays`** — removes runs older than N days. Deletes **all** runs past the age threshold in one pass — so if you pause testing for weeks and multiple runs age out, they are all removed when the next run triggers cleanup. (default: 90)
 
 <details>
@@ -1368,12 +1337,13 @@ Failed Tests:
 
 | Feature | Allure | ReportPortal | Sarva-Varadi |
 |---------|--------|--------------|--------------|
-| Multi-framework | ✅ 30+ | ✅ Many | ✅ 2+ (growing) |
-| Modern UI | ⚠️ Dated | ⚠️ Complex | ✅ Beautiful |
+| Multi-framework | ✅ 30+ | ✅ Many | ✅ 4 (growing) |
+| Modern UI | ⚠️ Dated | ⚠️ Complex | ✅ Sidebar SPA, dark/light |
 | Zero config | ❌ CLI needed | ❌ Server setup | ✅ Yes |
 | File-based | ✅ Yes | ❌ DB required | ✅ Yes |
-| Historical trends | ✅ Basic | ✅ Advanced | ✅ File-based |
-| Flaky detection | ⚠️ Manual | ✅ ML-based | ✅ Score-based |
+| Historical trends | ✅ Basic | ✅ Advanced | ✅ File-based, 6 charts |
+| Flaky detection | ⚠️ Manual | ✅ ML-based | ✅ Score-based, per-test history |
+| PDF / PNG / CSV export | ⚠️ PDF only | ❌ No | ✅ All three |
 | Notifications | ❌ No | ✅ Yes | ✅ Slack/Teams/Email |
 | CI/CD friendly | ✅ Yes | ⚠️ Complex | ✅ Yes |
 | Setup time | 15 min | 1+ hour | < 2 min |
@@ -1384,25 +1354,35 @@ Failed Tests:
 
 ```
 packages/
-├── core/                  # @sarva-varadi/core
-│   ├── types/            # Common interfaces
-│   ├── adapters/         # Base adapter class
-│   ├── converters/       # Format converters (JUnit, TestNG, Cucumber)
-│   ├── generators/       # HTML report generation
-│   └── history-manager.ts
+├── core/                       # @sarva-varadi/core — report engine + CLI
+│   ├── src/
+│   │   ├── types/              # Common interfaces (SarvaTestResult, RunHistory, …)
+│   │   ├── adapters/           # Base adapter class
+│   │   ├── converters/         # Format converters (JUnit, TestNG, Cucumber)
+│   │   ├── generators/
+│   │   │   ├── shell/          # Sidebar shell, topbar, CSS, print styles
+│   │   │   ├── shared/         # SarvaStore state, EventBus, utilities
+│   │   │   └── micro-apps/
+│   │   │       ├── overview/   # Overview tab (stat cards, donut, health pulse, …)
+│   │   │       ├── test-list/  # Tests tab (list, filter, search, drawer)
+│   │   │       ├── test-detail/# Per-test history drawer chart
+│   │   │       ├── trends/     # Trends tab (6 ECharts charts)
+│   │   │       └── timeline/   # Timeline tab (run cadence + Gantt)
+│   │   ├── history-manager.ts  # File-based run history & flaky score
+│   │   └── cli.ts              # CLI entry point
 │
-├── playwright/            # @sarva-varadi/playwright
-│   └── adapter.ts        # Playwright-specific adapter
+├── playwright/                 # @sarva-varadi/playwright
+│   └── src/index.ts            # Playwright reporter adapter
 │
-├── rest-assured-junit/    # @sarva-varadi/rest-assured-junit
-│   └── junit5-extension.ts  # JUnit 5 adapter
-│
+└── rest-assured-junit/         # @sarva-varadi/rest-assured-junit (JitPack)
+    └── junit5-extension.ts     # JUnit 5 extension + RestAssured filter
+
 java/
-├── sarva-varadi-restassured/       # JitPack: sarva-varadi-restassured
-│   └── SarvaVaradiListener         # TestNG listener + RestAssured filter
+├── sarva-varadi-restassured/           # JitPack: sarva-varadi-restassured
+│   └── SarvaVaradiListener             # TestNG listener + RestAssured filter
 │
-└── sarva-varadi-restassured-junit/ # JitPack: sarva-varadi-restassured-junit
-    └── SarvaVaradiJUnit5Extension  # JUnit 5 extension + RestAssured filter
+└── sarva-varadi-restassured-junit/     # JitPack: sarva-varadi-restassured-junit
+    └── SarvaVaradiJUnit5Extension      # JUnit 5 extension + RestAssured filter
 ```
 
 ---
