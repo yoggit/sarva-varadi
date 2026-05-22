@@ -32,21 +32,26 @@ export class ReportGenerator {
 
     const runSummary = this.createRunSummary(metadata, tests);
 
-    this.copyAttachments(outputDir, tests);
+    this.copyAttachments(outputDir, tests, runSummary.id);
     this.copyLogo(outputDir);
 
-    const indexHtml = this.htmlGenerator.generate(tests, metadata);
-    const indexPath = path.join(outputDir, this.options.outputFile);
-    fs.writeFileSync(indexPath, indexHtml);
-
-    // Update history BEFORE generating trends so trends shows the current run
+    // Update history BEFORE generating report so per-test trends include current run
     if (this.options.history.enabled) {
       this.historyManager.archiveCurrentRun(runSummary.id, tests);
       this.historyManager.updateHistory(runSummary, tests);
     }
 
+    this.backfillDataJs(outputDir);
+
+    const history = this.historyManager.loadHistory();
+    const indexHtml = this.htmlGenerator.generate(tests, metadata, {
+      runs: history.runs || [],
+      testHistory: history.testHistory || [],
+    });
+    const indexPath = path.join(outputDir, this.options.outputFile);
+    fs.writeFileSync(indexPath, indexHtml);
+
     if (this.options.trends.enabled) {
-      const history = this.historyManager.loadHistory();
       const trendsHtml = this.trendsGenerator.generate(history, metadata);
       const trendsPath = path.join(outputDir, 'trends.html');
       fs.writeFileSync(trendsPath, trendsHtml);
@@ -116,6 +121,24 @@ export class ReportGenerator {
     };
   }
 
+  private backfillDataJs(outputDir: string): void {
+    const historyDir = path.join(outputDir, 'history');
+    if (!fs.existsSync(historyDir)) return;
+    fs.readdirSync(historyDir).forEach(runId => {
+      const runDir = path.join(historyDir, runId);
+      const jsonFile = path.join(runDir, 'data.json');
+      const jsFile   = path.join(runDir, 'data.js');
+      if (fs.existsSync(jsonFile) && !fs.existsSync(jsFile)) {
+        try {
+          const raw = fs.readFileSync(jsonFile, 'utf8');
+          fs.writeFileSync(jsFile,
+            `window.SarvaRunData=window.SarvaRunData||{};window.SarvaRunData[${JSON.stringify(runId)}]=${raw};`
+          );
+        } catch (_e) { /* skip corrupt runs */ }
+      }
+    });
+  }
+
   private copyLogo(outputDir: string): void {
     const logoSource = path.join(__dirname, '../screenshots/logo.svg');
     const logoDest = path.join(outputDir, 'logo.svg');
@@ -129,7 +152,7 @@ export class ReportGenerator {
     }
   }
 
-  private copyAttachments(outputDir: string, tests: SarvaTestResult[]): void {
+  private copyAttachments(outputDir: string, tests: SarvaTestResult[], runId: string): void {
     if (!this.options.embedAttachments) return;
 
     const attachmentsDir = path.join(outputDir, 'attachments');
@@ -138,16 +161,19 @@ export class ReportGenerator {
     }
 
     tests.forEach(test => {
-      this.copyTestAttachments(test, attachmentsDir);
+      // Prefix: runId + testUuid ensures uniqueness across runs AND across tests within a run.
+      // Without this, every run writes e.g. "video.webm" and overwrites the previous run's file,
+      // so historical drawer views always show the latest run's attachments instead of the selected one.
+      const prefix = `${runId}_${test.uuid}_`;
+      this.copyTestAttachments(test, attachmentsDir, prefix);
     });
   }
 
-  private copyTestAttachments(test: SarvaTestResult, attachmentsDir: string): void {
-    test.attachments.forEach(attachment => {
+  private copyTestAttachments(test: SarvaTestResult, attachmentsDir: string, prefix: string): void {
+    const copyOne = (attachment: { source?: string; [k: string]: any }): void => {
       if (attachment.source && fs.existsSync(attachment.source)) {
-        const fileName = path.basename(attachment.source);
+        const fileName = prefix + path.basename(attachment.source);
         const destPath = path.join(attachmentsDir, fileName);
-
         try {
           fs.copyFileSync(attachment.source, destPath);
           attachment.source = `attachments/${fileName}`;
@@ -155,44 +181,16 @@ export class ReportGenerator {
           console.warn(`Failed to copy attachment: ${attachment.source}`, error);
         }
       }
-    });
+    };
 
-    test.steps.forEach(step => {
-      if (step.attachments) {
-        step.attachments.forEach(attachment => {
-          if (attachment.source && fs.existsSync(attachment.source)) {
-            const fileName = path.basename(attachment.source);
-            const destPath = path.join(attachmentsDir, fileName);
+    test.attachments.forEach(copyOne);
 
-            try {
-              fs.copyFileSync(attachment.source, destPath);
-              attachment.source = `attachments/${fileName}`;
-            } catch (error) {
-              console.warn(`Failed to copy step attachment: ${attachment.source}`, error);
-            }
-          }
-        });
-      }
-
-      if (step.steps) {
-        step.steps.forEach(nestedStep => {
-          if (nestedStep.attachments) {
-            nestedStep.attachments.forEach(attachment => {
-              if (attachment.source && fs.existsSync(attachment.source)) {
-                const fileName = path.basename(attachment.source);
-                const destPath = path.join(attachmentsDir, fileName);
-
-                try {
-                  fs.copyFileSync(attachment.source, destPath);
-                  attachment.source = `attachments/${fileName}`;
-                } catch (error) {
-                  console.warn(`Failed to copy nested step attachment: ${attachment.source}`, error);
-                }
-              }
-            });
-          }
-        });
-      }
-    });
+    const walkSteps = (steps: any[]): void => {
+      steps.forEach(step => {
+        if (step.attachments) step.attachments.forEach(copyOne);
+        if (step.steps?.length) walkSteps(step.steps);
+      });
+    };
+    walkSteps(test.steps);
   }
 }

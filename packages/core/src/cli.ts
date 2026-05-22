@@ -174,7 +174,7 @@ async function handleGenerate(args: string[]) {
 
     const generator = new ReportGenerator({
       outputFolder: options.output,
-      title: options.title || props['sarva.report.title'] || 'Sarva-Varadi Test Report',
+      title: options.title || props['sarva.report.title'] || undefined,
       showStackTrace: props['sarva.report.showStackTrace'] !== 'false',
       embedAttachments: props['sarva.report.embedAttachments'] !== 'false',
       maskSensitiveData: props['sarva.report.maskSensitiveData'] === 'true',
@@ -197,6 +197,7 @@ async function handleGenerate(args: string[]) {
       timestamp: Date.now(),
       duration: results.reduce((sum, r) => sum + r.duration, 0),
       environment: {
+        name: props['sarva.environment'] || process.env.SARVA_ENVIRONMENT || undefined,
         ci: process.env.CI || 'false',
         branch: process.env.BRANCH || '',
         commit: process.env.COMMIT || '',

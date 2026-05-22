@@ -111,6 +111,7 @@ export interface RunMetadata {
   timestamp: number;
   duration: number;
   environment?: {
+    name?: string;    // e.g. "QA", "Staging", "Production"
     branch?: string;
     commit?: string;
     ci?: string;

@@ -1,0 +1,102 @@
+.sv-filter-btn {
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-surface-2);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+
+.sv-filter-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+.sv-filter-btn.active {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Test Row ───────────────────────────────────────────────────────────────── */
+.sv-test-row {
+  display: grid;
+  grid-template-columns: 2fr 110px 90px 90px 36px 80px 24px;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+}
+
+.sv-test-row:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+  transform: translateX(2px);
+}
+
+.sv-test-row.failed  { border-left: 3px solid var(--status-failed); }
+.sv-test-row.flaky   { border-left: 3px solid var(--status-flaky); }
+.sv-test-row.passed  { border-left: 3px solid transparent; }
+.sv-test-row.skipped { border-left: 3px solid var(--status-skipped); }
+
+.sv-test-name {
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sv-test-suite {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 1px;
+}
+
+.sv-test-duration {
+  text-align: right;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.sv-test-retries {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.sv-test-retries.has-retries { color: var(--status-flaky); font-weight: 600; }
+
+.sv-test-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: transform var(--t-fast);
+}
+
+.sv-test-row:hover .sv-test-chevron { transform: translateX(2px); color: var(--text-secondary); }
+
+.sv-browser-badge {
+  display: inline-block;
+  margin-left: 0.3rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  background: rgba(99,102,241,0.12);
+  color: var(--accent);
+  border: 1px solid rgba(99,102,241,0.25);
+  vertical-align: middle;
+}

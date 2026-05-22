@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc && npm run copy-assets",
-    "copy-assets": "node -e \"const fs=require('fs'); const path=require('path'); const src='src/generators'; const dst='dist/generators'; const dstScreenshots='dist/screenshots'; if(!fs.existsSync(dst)) fs.mkdirSync(dst, {recursive:true}); if(!fs.existsSync(dstScreenshots)) fs.mkdirSync(dstScreenshots, {recursive:true}); fs.copyFileSync(path.join(src,'varadi-styles.css'), path.join(dst,'varadi-styles.css')); fs.copyFileSync(path.join(src,'varadi-scripts.js'), path.join(dst,'varadi-scripts.js')); fs.copyFileSync('screenshots/logo.svg', path.join(dstScreenshots,'logo.svg'));\"",
+    "copy-assets": "node scripts/copy-assets.js",
     "clean": "rm -rf dist"
   },
   "keywords": [

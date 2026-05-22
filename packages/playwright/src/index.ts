@@ -12,10 +12,12 @@ import { PlaywrightAdapter } from './playwright-adapter';
 export default class SarvaPlaywrightReporter implements Reporter {
   private adapter: PlaywrightAdapter;
   private reportGenerator: ReportGenerator;
+  private options: SarvaReporterOptions;
   private tests: SarvaTestResult[] = [];
   private startTime: number = 0;
 
   constructor(options: SarvaReporterOptions = {}) {
+    this.options = options;
     this.adapter = new PlaywrightAdapter(options.maskSensitiveData ?? false);
     this.reportGenerator = new ReportGenerator(options);
   }
@@ -40,6 +42,7 @@ export default class SarvaPlaywrightReporter implements Reporter {
       timestamp: this.startTime,
       duration,
       environment: {
+        name: this.options.environment || process.env.SARVA_ENVIRONMENT || undefined,
         os: process.platform,
         node: process.version,
         branch: process.env.GITHUB_REF_NAME || process.env.GIT_BRANCH,
