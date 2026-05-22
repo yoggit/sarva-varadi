@@ -180,7 +180,7 @@ async function handleGenerate(args: string[]) {
       maskSensitiveData: props['sarva.report.maskSensitiveData'] === 'true',
       history: {
         enabled: props['sarva.report.history'] !== 'false',
-        maxRuns: props['sarva.report.maxRuns'] ? parseInt(props['sarva.report.maxRuns']) : 20,
+        maxRuns: props['sarva.report.maxRuns'] ? parseInt(props['sarva.report.maxRuns']) : 30,
         retentionDays: props['sarva.report.retentionDays'] ? parseInt(props['sarva.report.retentionDays']) : 90,
         trackPerTest: true,
       },

@@ -50,6 +50,30 @@ jobs:
       - name: Build all packages
         run: npm run build
 
+      - name: Pre-populate Playwright history from GitHub Pages
+        if: ${{ inputs.test_framework == 'playwright' || inputs.test_framework == '' }}
+        continue-on-error: true
+        run: |
+          echo "📦 Fetching existing Playwright history from GitHub Pages..."
+          git clone --depth 1 --branch gh-pages https://github.com/${{ github.repository }}.git gh-pages-old 2>/dev/null || echo "No gh-pages branch yet"
+          if [ -d "gh-pages-old/playwright/history" ]; then
+            mkdir -p demo-playwright/sarva-report/history/
+            # Copy individual run folders only (not runs.json — CLI will rebuild it from folders)
+            for dir in gh-pages-old/playwright/history/*/; do
+              if [ -d "$dir" ]; then
+                folder_name=$(basename "$dir")
+                dest="demo-playwright/sarva-report/history/$folder_name"
+                if [ ! -d "$dest" ]; then
+                  cp -r "$dir" "$dest"
+                fi
+              fi
+            done
+            echo "✅ Pre-populated Playwright history"
+          else
+            echo "ℹ️  No existing Playwright history found (first deployment)"
+          fi
+          rm -rf gh-pages-old
+
       - name: Install Playwright browsers
         if: ${{ inputs.test_framework == 'playwright' || inputs.test_framework == '' }}
         run: npx playwright install --with-deps
@@ -66,113 +90,12 @@ jobs:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
 
-      - name: Generate Selenium (TestNG) report from static data
-        if: ${{ inputs.test_framework == 'selenium-testng' || inputs.test_framework == '' }}
-        run: |
-          node packages/core/dist/cli.js convert \
-            --input demo-selenium/testng-source/data.json \
-            --output demo-selenium/sarva-report \
-            --format testng-selenium \
-            --use-current-timestamp
+      - name: Generate Selenium & REST Assured demo reports (25-run history)
+        if: ${{ inputs.test_framework == 'selenium-testng' || inputs.test_framework == 'restassured-testng' || inputs.test_framework == 'restassured-junit' || inputs.test_framework == '' }}
+        run: node scripts/generate-demo-history.js
         continue-on-error: true
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
 
-      - name: Generate RestAssured (TestNG) report from static data
-        if: ${{ inputs.test_framework == 'restassured-testng' || inputs.test_framework == '' }}
-        run: |
-          node packages/core/dist/cli.js convert \
-            --input demo-restassured/testng-source/data.json \
-            --output demo-restassured/sarva-report \
-            --format testng-listener \
-            --use-current-timestamp
-        continue-on-error: true
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-
-      - name: Generate RestAssured (JUnit 5) report from static data
-        if: ${{ inputs.test_framework == 'restassured-junit' || inputs.test_framework == '' }}
-        run: |
-          node packages/core/dist/cli.js convert \
-            --input demo-restassured-junit/junit5-source/data.json \
-            --output demo-restassured-junit/sarva-report \
-            --format testng-listener \
-            --use-current-timestamp
-        continue-on-error: true
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-
-      - name: Fetch and merge existing history from GitHub Pages
-        if: always()
-        continue-on-error: true
-        run: |
-          echo "📦 Fetching existing history from GitHub Pages..."
-
-          # Clone gh-pages branch to a temporary directory
-          git clone --depth 1 --branch gh-pages https://github.com/${{ github.repository }}.git gh-pages-old 2>/dev/null || echo "No gh-pages branch yet"
-
-          if [ -d "gh-pages-old" ]; then
-            echo "✅ Found existing gh-pages branch"
-
-            # Merge existing history for each framework
-            for framework in playwright:demo-playwright selenium:demo-selenium rest-assured:demo-restassured rest-assured-junit:demo-restassured-junit; do
-              IFS=':' read -r gh_name local_name <<< "$framework"
-
-              echo "  📊 Processing $gh_name..."
-              echo "    Looking for: gh-pages-old/$gh_name/history"
-              echo "    Target: $local_name/sarva-report/history"
-
-              if [ -d "gh-pages-old/$gh_name/history" ]; then
-                echo "    ✓ Found old history"
-                ls -la "gh-pages-old/$gh_name/history" | head -5
-
-                if [ -d "$local_name/sarva-report/history" ]; then
-                  echo "    ✓ Found new history directory"
-                  echo "    📋 Before merge:"
-                  ls -la "$local_name/sarva-report/history" | wc -l
-
-                  # Copy old history folders that don't exist in new report
-                  cp -rn gh-pages-old/$gh_name/history/* $local_name/sarva-report/history/ 2>/dev/null || true
-
-                  echo "    📋 After merge:"
-                  ls -la "$local_name/sarva-report/history" | wc -l
-                  echo "    ✅ Merged $gh_name history"
-                else
-                  echo "    ⚠️  New history directory doesn't exist yet"
-                fi
-              else
-                echo "    ⚠️  No old history found for $gh_name"
-              fi
-            done
-
-            rm -rf gh-pages-old
-
-            # Delete runs.json files to force rebuild from merged folders
-            echo "🗑️  Deleting runs.json files to force rebuild..."
-            for dir in demo-playwright demo-selenium demo-restassured demo-restassured-junit; do
-              if [ -f "$dir/sarva-report/history/runs.json" ]; then
-                rm -f "$dir/sarva-report/history/runs.json"
-                echo "  ✓ Deleted $dir/sarva-report/history/runs.json"
-              else
-                echo "  ℹ️  $dir/sarva-report/history/runs.json not found"
-              fi
-            done
-
-            echo "✅ History merge complete"
-          else
-            echo "ℹ️  No existing history to merge (first deployment)"
-          fi
-
-      - name: Regenerate trends with merged history
+      - name: Regenerate trends
         if: always()
         run: node regenerate-trends.js
 
