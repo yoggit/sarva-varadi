@@ -4,6 +4,19 @@ import * as path from 'path';
 export class AssetsLoader {
   private static stylesCache: string | null = null;
   private static scriptsCache: string | null = null;
+  private static logoDataUrlCache: string | null = null;
+
+  static getLogoDataUrl(): string {
+    if (this.logoDataUrlCache) return this.logoDataUrlCache;
+    const logoPath = path.join(__dirname, '..', 'screenshots', 'logo.svg');
+    try {
+      const svg = fs.readFileSync(logoPath, 'utf-8');
+      this.logoDataUrlCache = 'data:image/svg+xml;base64,' + Buffer.from(svg).toString('base64');
+    } catch {
+      this.logoDataUrlCache = '';
+    }
+    return this.logoDataUrlCache;
+  }
 
   static getStyles(): string {
     if (this.stylesCache) return this.stylesCache;

@@ -1252,9 +1252,17 @@ const SarvaOverview = (() => {
         ctx.fillStyle = cardBg;
         ctx.fillRect(0, 0, cv.width, cv.height);
 
+        let titleX = pad;
+        const sidebarLogo = document.getElementById('sv-logo-img');
+        if (sidebarLogo && sidebarLogo.complete && sidebarLogo.naturalWidth > 0) {
+          const logoH = hdrH * 0.6;
+          const logoW = logoH * (424.5 / 330.75);
+          ctx.drawImage(sidebarLogo, pad, (hdrH - logoH) / 2, logoW, logoH);
+          titleX = pad + logoW + 7 * scale;
+        }
         ctx.fillStyle = mutedClr;
         ctx.font = `bold ${10 * scale}px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
-        ctx.fillText('DISTRIBUTION', pad, hdrH * 0.72);
+        ctx.fillText('DISTRIBUTION', titleX, hdrH * 0.72);
 
         ctx.drawImage(img, pad, hdrH);
 

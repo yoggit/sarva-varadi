@@ -3,8 +3,9 @@ export function renderShellOpen(params: {
   toolName: string;
   version: string;
   styles: string;
+  logoDataUrl?: string;
 }): string {
-  const { title, toolName, version, styles } = params;
+  const { title, toolName, version, styles, logoDataUrl = '' } = params;
   const displayTitle = toolName ? `Sarva-Varadi → ${toolName}` : 'Sarva-Varadi';
 
   return `<!DOCTYPE html>
@@ -13,7 +14,11 @@ export function renderShellOpen(params: {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title || displayTitle}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <style>${styles}</style>
+  <script>window.SARVA_VERSION='${version}';window.SARVA_LOGO_DATA='${logoDataUrl}';</script>
 </head>
 <body>
 <div class="sv-app">
@@ -21,7 +26,7 @@ export function renderShellOpen(params: {
   <!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
   <aside class="sv-sidebar">
     <div class="sv-sidebar-brand">
-      <img src="./logo.svg" alt="Sarva-Varadi">
+      <img src="${logoDataUrl || './logo.svg'}" alt="Sarva-Varadi" id="sv-logo-img">
       <div>
         <div class="sv-sidebar-brand-name">Sarva-Varadi</div>
         <div class="sv-sidebar-brand-version">v${version}</div>
@@ -121,7 +126,10 @@ export function renderShellOpen(params: {
     <!-- Table of Contents — hidden in UI, printed as page 1 of the PDF -->
     <div class="sv-print-toc" id="sv-print-toc">
       <div class="sv-print-toc-inner">
-        <div class="sv-print-toc-brand">Sarva-Varadi <span>v${version}</span></div>
+        <div class="sv-print-toc-brand">
+          <img src="./logo.svg" alt="Sarva-Varadi" class="sv-print-toc-logo">
+          <span class="sv-print-toc-brand-name">Sarva-Varadi <span>v${version}</span></span>
+        </div>
         <h1 class="sv-print-toc-title">Test Report</h1>
         <p class="sv-print-toc-tool">${toolName || 'Multi-framework'}</p>
         <p class="sv-print-toc-meta" id="sv-toc-meta"></p>
@@ -242,29 +250,44 @@ window.SarvaDownloadChart = function(chartId, filename, title) {
   var chartBg = isLight ? '#ffffff' : '#161b27';
   var scale = 2;
 
-  // Composites a title header band above the chart image
+  // Composites a title header band (with logo) above the chart image
   function addHeader(dataUrl, cb) {
     if (!title) { cb(dataUrl); return; }
     var img = new Image();
     img.onload = function() {
-      var cardBg   = isLight ? '#f8fafc' : '#1a2030';
-      var hdrColor = isLight ? '#4b5268' : '#8b92a8';
-      var pad  = 20 * scale;
-      var hdrH = 38 * scale;
-      var cv   = document.createElement('canvas');
-      cv.width  = img.width  + pad * 2;
-      cv.height = img.height + hdrH + pad;
-      var ctx = cv.getContext('2d');
-      // Card background
-      ctx.fillStyle = cardBg;
-      ctx.fillRect(0, 0, cv.width, cv.height);
-      // Title text — uppercase, matching card header style
-      ctx.fillStyle = hdrColor;
-      ctx.font = 'bold ' + (10 * scale) + 'px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-      ctx.fillText(title.toUpperCase(), pad, hdrH * 0.72);
-      // Chart image
-      ctx.drawImage(img, pad, hdrH);
-      cb(cv.toDataURL('image/png'));
+      function compose(logo) {
+        var cardBg   = isLight ? '#f8fafc' : '#1a2030';
+        var hdrColor = isLight ? '#4b5268' : '#8b92a8';
+        var pad  = 20 * scale;
+        var hdrH = 44 * scale;
+        var cv   = document.createElement('canvas');
+        cv.width  = img.width  + pad * 2;
+        cv.height = img.height + hdrH + pad;
+        var ctx = cv.getContext('2d');
+        ctx.fillStyle = cardBg;
+        ctx.fillRect(0, 0, cv.width, cv.height);
+        var textX = pad;
+        if (logo) {
+          var logoH = hdrH * 0.6;
+          var logoW = logoH * (424.5 / 330.75);
+          ctx.drawImage(logo, pad, (hdrH - logoH) / 2, logoW, logoH);
+          textX = pad + logoW + 7 * scale;
+        }
+        ctx.fillStyle = hdrColor;
+        ctx.font = 'bold ' + (10 * scale) + 'px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText(title.toUpperCase(), textX, hdrH * 0.65);
+        ctx.drawImage(img, pad, hdrH);
+        cb(cv.toDataURL('image/png'));
+      }
+      // Draw the sidebar logo img (src is inline data URL, no file:// taint)
+      var sidebarLogo = document.getElementById('sv-logo-img');
+      if (sidebarLogo && sidebarLogo.complete && sidebarLogo.naturalWidth > 0) {
+        compose(sidebarLogo);
+      } else if (sidebarLogo) {
+        sidebarLogo.addEventListener('load', function() { compose(sidebarLogo); }, { once: true });
+      } else {
+        compose(null);
+      }
     };
     img.src = dataUrl;
   }
