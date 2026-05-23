@@ -1,7 +1,14 @@
-const { TrendsGenerator } = require('./packages/core/dist/generators/trends-generator');
-const { HistoryManager } = require('./packages/core/dist/history-manager');
-const fs = require('fs');
+const fs   = require('fs');
 const path = require('path');
+
+const trendsGenPath = path.join(__dirname, 'packages/core/dist/generators/trends-generator.js');
+if (!fs.existsSync(trendsGenPath)) {
+  console.warn('⚠️  Core package not built — skipping trends regeneration');
+  process.exit(0);
+}
+
+const { TrendsGenerator } = require('./packages/core/dist/generators/trends-generator');
+const { HistoryManager }  = require('./packages/core/dist/history-manager');
 
 /**
  * Regenerates trends.html from existing history without creating new runs
