@@ -86,6 +86,7 @@ const frameworks = [
   { dir: 'demo-selenium/sarva-report', title: 'Selenium (TestNG) Test Trends' },
   { dir: 'demo-restassured/sarva-report', title: 'RestAssured (TestNG) API Test Trends' },
   { dir: 'demo-restassured-junit/sarva-report', title: 'RestAssured (JUnit 5) API Test Trends' },
+  { dir: 'demo-cucumber/sarva-report', title: 'Cucumber BDD Test Trends' },
 ];
 
 frameworks.forEach(({ dir, title }) => {

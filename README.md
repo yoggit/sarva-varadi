@@ -34,7 +34,8 @@
   <strong>🎭 <a href="https://yoggit.github.io/sarva-varadi/playwright/index.html">Playwright Demo</a></strong> • 
   <strong>🌐 <a href="https://yoggit.github.io/sarva-varadi/selenium/index.html">Selenium Demo</a></strong> • 
   <strong>🔌 <a href="https://yoggit.github.io/sarva-varadi/rest-assured/index.html">RestAssured (TestNG) Demo</a></strong> •
-  <strong>🧪 <a href="https://yoggit.github.io/sarva-varadi/rest-assured-junit/index.html">RestAssured (JUnit 5) Demo</a></strong>
+  <strong>🧪 <a href="https://yoggit.github.io/sarva-varadi/rest-assured-junit/index.html">RestAssured (JUnit 5) Demo</a></strong> •
+  <strong>🥒 <a href="https://yoggit.github.io/sarva-varadi/cucumber/index.html">Cucumber BDD Demo</a></strong>
 </p>
 
 ---
@@ -43,10 +44,11 @@
 
 <table>
 <tr>
-<td width="20%" align="center"><strong>🎭 Playwright</strong><br/>Web automation<br/>TypeScript/JavaScript</td>
-<td width="20%" align="center"><strong>🔌 RestAssured (TestNG)</strong><br/>API testing<br/>Java/TestNG</td>
-<td width="20%" align="center"><strong>🧪 RestAssured (JUnit 5)</strong><br/>API testing<br/>Java/JUnit 5</td>
-<td width="20%" align="center"><strong>🌐 Selenium</strong><br/>WebDriver browser tests<br/>Java/TestNG</td>
+<td width="16%" align="center"><strong>🎭 Playwright</strong><br/>Web automation<br/>TypeScript/JavaScript</td>
+<td width="16%" align="center"><strong>🔌 RestAssured (TestNG)</strong><br/>API testing<br/>Java/TestNG</td>
+<td width="16%" align="center"><strong>🧪 RestAssured (JUnit 5)</strong><br/>API testing<br/>Java/JUnit 5</td>
+<td width="16%" align="center"><strong>🌐 Selenium</strong><br/>WebDriver browser tests<br/>Java/TestNG</td>
+<td width="16%" align="center"><strong>🥒 Cucumber BDD</strong><br/>BDD scenarios<br/>Java/Cucumber 7</td>
 <td width="20%" align="center"><strong>🚧 Cypress</strong><br/>Modern web testing<br/><em>(Coming soon)</em></td>
 </tr>
 </table>
@@ -74,7 +76,7 @@
 **⚡ Developer Experience**
 - ⚡ Zero config — works out of the box
 - 📁 File-based — no database needed
-- 🔄 Framework agnostic (4 frameworks supported)
+- 🔄 Framework agnostic (5 frameworks supported)
 - 📎 Rich attachments: screenshots, videos, traces
 - 🖨️ PDF print export (A4, with executive summary)
 - 📥 PNG chart download & CSV test export
@@ -1230,6 +1232,62 @@ Both `maxRuns` and `retentionDays` trigger simultaneously — the oldest run is 
 </details>
 
 </details>
+
+---
+
+## 🔗 Issue & Test Management Links
+
+Link individual test results to Jira, Xray, Zephyr, TestRail, GitHub Issues, or any other tracker. When configured, clickable badges appear in the test detail drawer.
+
+**1. Configure URL patterns in `sarva-varadi.properties`:**
+
+```properties
+sarva.links.issue=https://your-company.atlassian.net/browse/{id}
+sarva.links.tms=https://your-company.atlassian.net/browse/{id}
+```
+
+**2. Tag tests using your framework's native syntax:**
+
+| Framework | Issue tag | TMS tag |
+|---|---|---|
+| Cucumber | `@issue:PROJ-123` | `@tms:PROJ-456` |
+| JUnit 5 | `@Tag("issue:PROJ-123")` | `@Tag("tms:PROJ-456")` |
+| TestNG | `groups = {"issue:PROJ-123"}` | `groups = {"tms:PROJ-456"}` |
+| Playwright | `'my test @issue:PROJ-123'` (in title) | `'my test @tms:PROJ-456'` (in title) |
+
+**3. Report shows clickable badges:**
+> 🐛 PROJ-123 &nbsp;&nbsp; 🧪 PROJ-456
+
+📖 **[Full setup guide with examples for all frameworks →  ISSUE_LINKS.md](ISSUE_LINKS.md)**
+
+---
+
+## 🏷️ Severity & Labels
+
+Label individual tests with **severity**, **owner**, and **feature** to make failures actionable at a glance.
+
+**Severity describes the risk impact if a test fails — independent of pass/fail status:**
+
+| Level | Meaning |
+|---|---|
+| `critical` | Core flow broken — release blocker |
+| `high` | Major feature impact — fix before release |
+| `medium` | Noticeable failure — workaround exists |
+| `low` | Edge case or cosmetic — log a ticket |
+| `trivial` | Almost no user impact |
+
+**Tag tests using your framework's native syntax:**
+
+| Framework | Example |
+|---|---|
+| Cucumber | `@severity:critical @owner:payments-team` |
+| JUnit 5 | `@Tag("severity:critical")` `@Tag("owner:payments-team")` |
+| TestNG | `groups = {"severity:critical", "owner:payments-team"}` |
+| Playwright | `'my test @severity:critical @owner:payments-team'` (in title) |
+
+Severity appears as a coloured badge in the test list and detail drawer. Owner/feature appear as chips alongside issue/TMS link badges.
+
+📖 **[Full setup guide with examples for all frameworks → LABELS.md](LABELS.md)**
 
 ---
 

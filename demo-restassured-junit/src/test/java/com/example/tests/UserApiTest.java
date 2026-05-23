@@ -1,6 +1,7 @@
 package com.example.tests;
 
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
@@ -9,6 +10,7 @@ import static org.hamcrest.Matchers.*;
 public class UserApiTest extends BaseTest {
 
     @Test
+    @Tag("tms:10")
     void getUserById() {
         given()
             .when()
@@ -70,6 +72,7 @@ public class UserApiTest extends BaseTest {
     }
 
     @Test
+    @Tag("issue:11")
     void getUserNotFound() {
         given()
             .when()

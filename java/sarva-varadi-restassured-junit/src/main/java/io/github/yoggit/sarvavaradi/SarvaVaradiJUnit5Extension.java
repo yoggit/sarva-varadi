@@ -150,6 +150,12 @@ public class SarvaVaradiJUnit5Extension implements BeforeAllCallback, BeforeEach
             RestAssuredRequestCapture.saveApiCalls(testId + "-attempt" + tracker.getRetryCount());
         }
 
+        // Extract issue/tms labels from @Tag("issue:PROJ-123") / @Tag("tms:TC-456")
+        List<Map<String, String>> labels = extractLabels(context.getTags());
+        if (!labels.isEmpty()) {
+            data.put("labels", labels);
+        }
+
         // PUT overwrites any previous attempt — final call wins
         resultsByTest.put(testId, data);
     }
@@ -200,6 +206,24 @@ public class SarvaVaradiJUnit5Extension implements BeforeAllCallback, BeforeEach
         } catch (Exception e) {
             return context.getDisplayName();
         }
+    }
+
+    private List<Map<String, String>> extractLabels(Set<String> tags) {
+        List<Map<String, String>> labels = new ArrayList<>();
+        for (String tag : tags) {
+            if (tag.startsWith("issue:")) {
+                Map<String, String> lbl = new HashMap<>();
+                lbl.put("name",  "issue");
+                lbl.put("value", tag.substring(6).trim());
+                labels.add(lbl);
+            } else if (tag.startsWith("tms:")) {
+                Map<String, String> lbl = new HashMap<>();
+                lbl.put("name",  "tms");
+                lbl.put("value", tag.substring(4).trim());
+                labels.add(lbl);
+            }
+        }
+        return labels;
     }
 
     private String stackTrace(Throwable t) {

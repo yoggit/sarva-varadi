@@ -12,6 +12,12 @@ export interface SarvaReporterOptions {
   history?: HistoryOptions;
   trends?: TrendsOptions;
   notifications?: NotificationOptions;
+  links?: LinksOptions;
+}
+
+export interface LinksOptions {
+  issue?: string;   // URL pattern with {id} placeholder, e.g. "https://jira.company.com/browse/{id}"
+  tms?: string;     // URL pattern with {id} placeholder, e.g. "https://jira.company.com/browse/{id}"
 }
 
 export interface HistoryOptions {
@@ -47,4 +53,5 @@ export const DEFAULT_OPTIONS: Required<SarvaReporterOptions> = {
   notifications: {
     enabled: false,
   },
+  links: {},
 };

@@ -100,7 +100,7 @@ const SarvaTestList = (() => {
       <div class="sv-test-row ${status}" data-status="${status}" data-uuid="${t.uuid}"
            onclick="SarvaTestDetail.open('${t.uuid}')">
         <div style="overflow:hidden;">
-          <div class="sv-test-name sv-truncate" style="display:flex;align-items:center;gap:0;">${escHtml(t.name)}${toolBadge(t.tool)}${browserBadge(t)}${clockIcon}</div>
+          <div class="sv-test-name" style="display:flex;align-items:center;gap:0;min-width:0;"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1;">${escHtml(t.name)}</span>${severityBadge(t.labels)}${toolBadge(t.tool)}${browserBadge(t)}${clockIcon}</div>
           ${suite ? `<div class="sv-test-suite sv-truncate">${escHtml(suite)}</div>` : ''}
         </div>
         <div style="text-align:center;">
@@ -221,9 +221,18 @@ const SarvaTestList = (() => {
     return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  function severityBadge(labels) {
+    // Supports both {name:'severity', value:'high'} and Cucumber tag format {name:'tag', value:'severity:high'}
+    const direct = (labels || []).find(l => l.name === 'severity');
+    const tagged = !direct && (labels || []).find(l => l.name === 'tag' && (l.value || '').startsWith('severity:'));
+    const sev = direct ? (direct.value || '').toLowerCase() : tagged ? tagged.value.slice(9).toLowerCase() : '';
+    if (!sev) return '';
+    return `<span class="sv-severity-badge ${escHtml(sev)}">${escHtml(sev)}</span>`;
+  }
+
   function toolBadge(tool) {
     if (!tool) return '';
-    const map = { playwright:'playwright', selenium:'selenium', 'rest-assured':'rest-assured', cypress:'cypress' };
+    const map = { playwright:'playwright', selenium:'selenium', 'rest-assured':'rest-assured', cypress:'cypress', cucumber:'cucumber' };
     const cls = map[tool] || '';
     return `<span class="sv-tool-badge ${cls}">${tool}</span>`;
   }

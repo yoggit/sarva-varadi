@@ -5,6 +5,18 @@ export class AssetsLoader {
   private static stylesCache: string | null = null;
   private static scriptsCache: string | null = null;
   private static logoDataUrlCache: string | null = null;
+  private static syneFontBase64Cache: string | null = null;
+
+  static getSyneFontBase64(): string {
+    if (this.syneFontBase64Cache !== null) return this.syneFontBase64Cache;
+    const fontPath = path.join(__dirname, '..', 'screenshots', 'syne-latin.woff2');
+    try {
+      this.syneFontBase64Cache = fs.readFileSync(fontPath).toString('base64');
+    } catch {
+      this.syneFontBase64Cache = '';
+    }
+    return this.syneFontBase64Cache;
+  }
 
   static getLogoDataUrl(): string {
     if (this.logoDataUrlCache) return this.logoDataUrlCache;

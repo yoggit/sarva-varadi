@@ -53,6 +53,7 @@ export class TestNGSeleniumConverter extends BaseConverter {
       duration,
       steps,
       attachments: this.extractAttachments(test),
+      labels: test.labels?.length ? test.labels : undefined,
       extra: {
         selenium: {
           retries: test.retryCount || 0,

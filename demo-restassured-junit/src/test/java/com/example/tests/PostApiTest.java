@@ -1,6 +1,7 @@
 package com.example.tests;
 
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
@@ -21,6 +22,7 @@ public class PostApiTest extends BaseTest {
     }
 
     @Test
+    @Tag("tms:2")
     void getAllPosts() {
         given()
             .when()
@@ -43,6 +45,7 @@ public class PostApiTest extends BaseTest {
     }
 
     @Test
+    @Tag("tms:5")
     void createPost() {
         String body = "{ \"title\": \"Test Post\", \"body\": \"This is a test post\", \"userId\": 1 }";
 
@@ -58,6 +61,7 @@ public class PostApiTest extends BaseTest {
     }
 
     @Test
+    @Tag("issue:9")
     void failedAssertionDemo() {
         // Intentional failure — demonstrates how failures appear in the report
         given()

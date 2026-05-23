@@ -58,6 +58,7 @@ export class TestNGListenerConverter extends BaseConverter {
       duration,
       steps,
       attachments: [],
+      labels: test.labels?.length ? test.labels : undefined,
       extra: {
         restAssured: {
           retries: test.retryCount || 0,

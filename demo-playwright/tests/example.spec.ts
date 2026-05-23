@@ -20,7 +20,7 @@ function getRunMode(): 'all-pass' | 'half-fail' | 'quarter-fail' {
 const runMode = getRunMode();
 
 test.describe('Playwright Website Tests', () => {
-  test('should load homepage successfully', async ({ page }) => {
+  test('should load homepage successfully @tms:1 @severity:medium', async ({ page }) => {
     await test.step('Navigate to Playwright homepage', async () => {
       await page.goto('/');
     });
@@ -42,7 +42,7 @@ test.describe('Playwright Website Tests', () => {
     });
   });
 
-  test('should navigate to Getting Started', async ({ page }) => {
+  test('should navigate to Getting Started @severity:high', async ({ page }) => {
     await test.step('Go to homepage', async () => {
       await page.goto('/');
     });
@@ -63,7 +63,7 @@ test.describe('Playwright Website Tests', () => {
     });
   });
 
-  test('should search documentation', async ({ page }) => {
+  test('should search documentation @severity:low', async ({ page }) => {
     await test.step('Navigate to docs', async () => {
       await page.goto('/docs/intro');
     });
@@ -81,7 +81,7 @@ test.describe('Playwright Website Tests', () => {
     });
   });
 
-  test('should fail intentionally - missing element', async ({ page }) => {
+  test('should fail intentionally - missing element @issue:7 @severity:high', async ({ page }) => {
     await test.step('Go to homepage', async () => {
       await page.goto('/');
     });
@@ -95,7 +95,7 @@ test.describe('Playwright Website Tests', () => {
     });
   });
 
-  test('should fail with timeout', async ({ page }) => {
+  test('should fail with timeout @severity:critical', async ({ page }) => {
     await test.step('Navigate to docs', async () => {
       await page.goto('/docs/intro');
     });
@@ -114,7 +114,7 @@ test.describe('Playwright Website Tests', () => {
     await expect(page).toHaveTitle(/Test/);
   });
 
-  test('should be flaky', async ({ page }) => {
+  test('should be flaky @issue:12 @severity:medium', async ({ page }) => {
     await test.step('Navigate to homepage', async () => {
       await page.goto('/');
     });

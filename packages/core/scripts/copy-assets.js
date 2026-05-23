@@ -37,10 +37,12 @@ for (const f of legacyFiles) {
   if (fs.existsSync(from)) copyFile(from, path.join(dst, f));
 }
 
-// Logo
+// Logo + fonts
 const logoDst = path.join(__dirname, '..', 'dist', 'screenshots');
 ensureDir(logoDst);
 const logoSrc = path.join(__dirname, '..', 'screenshots', 'logo.svg');
 if (fs.existsSync(logoSrc)) copyFile(logoSrc, path.join(logoDst, 'logo.svg'));
+const syneSrc = path.join(__dirname, '..', 'screenshots', 'syne-latin.woff2');
+if (fs.existsSync(syneSrc)) copyFile(syneSrc, path.join(logoDst, 'syne-latin.woff2'));
 
 console.log('Assets copied to dist/generators');

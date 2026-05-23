@@ -8,7 +8,7 @@ public class SarvaVaradiContext {
         currentListener.set(listener);
     }
 
-    static SarvaVaradiWebDriverListener getListener() {
+    public static SarvaVaradiWebDriverListener getListener() {
         return currentListener.get();
     }
 

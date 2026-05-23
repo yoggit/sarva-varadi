@@ -4,9 +4,15 @@ export function renderShellOpen(params: {
   version: string;
   styles: string;
   logoDataUrl?: string;
+  syneFontB64?: string;
+  linkPatterns?: { issue?: string; tms?: string };
 }): string {
-  const { title, toolName, version, styles, logoDataUrl = '' } = params;
+  const { title, toolName, version, styles, logoDataUrl = '', syneFontB64 = '', linkPatterns = {} } = params;
   const displayTitle = toolName ? `Sarva-Varadi → ${toolName}` : 'Sarva-Varadi';
+
+  const fontBlock = syneFontB64
+    ? `<style>@font-face{font-family:'Syne';font-style:normal;font-weight:700 800;font-display:swap;src:url('data:font/woff2;base64,${syneFontB64}') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}</style>`
+    : `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -14,11 +20,9 @@ export function renderShellOpen(params: {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title || displayTitle}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  ${fontBlock}
   <style>${styles}</style>
-  <script>window.SARVA_VERSION='${version}';window.SARVA_LOGO_DATA='${logoDataUrl}';</script>
+  <script>window.SARVA_VERSION='${version}';window.SARVA_LOGO_DATA='${logoDataUrl}';window.SARVA_LINK_PATTERNS=${JSON.stringify(linkPatterns)};</script>
 </head>
 <body>
 <div class="sv-app">
@@ -127,7 +131,7 @@ export function renderShellOpen(params: {
     <div class="sv-print-toc" id="sv-print-toc">
       <div class="sv-print-toc-inner">
         <div class="sv-print-toc-brand">
-          <img src="./logo.svg" alt="Sarva-Varadi" class="sv-print-toc-logo">
+          <img src="${logoDataUrl || './logo.svg'}" alt="Sarva-Varadi" class="sv-print-toc-logo">
           <span class="sv-print-toc-brand-name">Sarva-Varadi <span>v${version}</span></span>
         </div>
         <h1 class="sv-print-toc-title">Test Report</h1>

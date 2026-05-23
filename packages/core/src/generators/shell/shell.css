@@ -464,6 +464,7 @@ body.light-mode .sv-topbar {
 .sv-tool-badge {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-sm);
   font-size: 0.68rem;
@@ -472,10 +473,30 @@ body.light-mode .sv-topbar {
   margin-left: 0.5rem;
 }
 
-.sv-tool-badge.playwright   { background: rgba(46,173,51,0.15);  color: #2ead33; }
-.sv-tool-badge.selenium     { background: rgba(67,176,42,0.15);  color: #43b02a; }
-.sv-tool-badge.rest-assured { background: rgba(91,155,213,0.15); color: #5b9bd5; }
-.sv-tool-badge.cypress      { background: rgba(23,32,44,0.30);   color: #94a3b8; }
+.sv-tool-badge.playwright   { background: rgba(46,173,51,0.15);   color: #2ead33; }
+.sv-tool-badge.selenium     { background: rgba(67,176,42,0.15);   color: #43b02a; }
+.sv-tool-badge.rest-assured { background: rgba(91,155,213,0.15);  color: #5b9bd5; }
+.sv-tool-badge.cypress      { background: rgba(23,32,44,0.30);    color: #94a3b8; }
+.sv-tool-badge.cucumber     { background: rgba(35,217,108,0.15);  color: #23d96c; }
+
+/* ─── Severity Badge ─────────────────────────────────────────────────────────── */
+.sv-severity-badge {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-left: 0.35rem;
+}
+.sv-severity-badge.critical { background: rgba(239,68,68,0.15);   color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+.sv-severity-badge.high     { background: rgba(249,115,22,0.15);  color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+.sv-severity-badge.medium   { background: rgba(245,158,11,0.15);  color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+.sv-severity-badge.low      { background: rgba(59,130,246,0.15);  color: #3b82f6; border: 1px solid rgba(59,130,246,0.3); }
+.sv-severity-badge.trivial  { background: rgba(100,116,139,0.12); color: var(--text-muted); border: 1px solid var(--border); }
 
 /* ─── Sparkline container ────────────────────────────────────────────────────── */
 .sv-sparkline {

@@ -92,7 +92,7 @@ public class DemoTests {
                 "Documentation heading should be visible");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, groups = {"tms:3"})
     public void testDownloadsPageLoads() {
         driver.get("https://www.selenium.dev/downloads/");
 
@@ -104,7 +104,7 @@ public class DemoTests {
         Assert.assertTrue(driver.getTitle().length() > 0, "Downloads page should have a title");
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, groups = {"issue:7", "tms:4"})
     public void testWebDriverDocsContent() {
         driver.get("https://www.selenium.dev/documentation/webdriver/");
 
@@ -136,7 +136,7 @@ public class DemoTests {
         Assert.assertTrue(false, "This should be skipped");
     }
 
-    @Test(priority = 7, invocationCount = 2, successPercentage = 50)
+    @Test(priority = 7, invocationCount = 2, successPercentage = 50, groups = {"issue:12"})
     public void testFlakyPageTitle() {
         driver.get("https://www.selenium.dev/");
 

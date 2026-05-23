@@ -30,6 +30,13 @@ export class PlaywrightAdapter extends BaseAdapter {
     const fullName = this.getFullTestName(testCase);
     const status = this.adaptStatus(result.status, result.retry);
 
+    // Collect labels from two sources:
+    // 1. @tag in test title: test('my test @issue:PROJ-123', ...) — zero code in test body
+    // 2. test.info().annotations.push() — for programmatic/dynamic values
+    const labelsFromTags        = this.adaptTags((testCase as any).tags || []);
+    const labelsFromAnnotations = this.adaptAnnotations(result.annotations || []);
+    const labels = [...labelsFromTags, ...labelsFromAnnotations];
+
     return {
       uuid,
       tool: 'playwright',
@@ -46,6 +53,7 @@ export class PlaywrightAdapter extends BaseAdapter {
       duration: result.duration,
       steps: this.adaptSteps(result.steps),
       attachments: this.adaptAttachments(result.attachments),
+      labels: labels.length ? labels : undefined,
       extra: {
         playwright: {
           project: projectName,
@@ -74,6 +82,33 @@ export class PlaywrightAdapter extends BaseAdapter {
       default:
         return 'broken';
     }
+  }
+
+  private readonly KNOWN_LABEL_PREFIXES = ['issue:', 'tms:', 'severity:', 'owner:', 'feature:', 'epic:', 'story:'];
+
+  private adaptTags(tags: string[]): { name: string; value: string }[] {
+    const labels: { name: string; value: string }[] = [];
+    for (const tag of tags) {
+      const t = tag.startsWith('@') ? tag.slice(1) : tag;
+      const match = this.KNOWN_LABEL_PREFIXES.find(p => t.startsWith(p));
+      if (match) {
+        labels.push({ name: match.slice(0, -1), value: t.slice(match.length).trim() });
+      }
+    }
+    return labels;
+  }
+
+  private adaptAnnotations(annotations: { type: string; description?: string }[]): { name: string; value: string }[] {
+    const KNOWN = new Set(['issue', 'tms', 'severity', 'owner', 'feature', 'epic', 'story', 'tag']);
+    const labels: { name: string; value: string }[] = [];
+    for (const ann of annotations) {
+      const type = ann.type?.toLowerCase();
+      const value = ann.description || '';
+      if (KNOWN.has(type)) {
+        labels.push({ name: type, value });
+      }
+    }
+    return labels;
   }
 
   private adaptSteps(steps: PWTestStep[]): TestStep[] {

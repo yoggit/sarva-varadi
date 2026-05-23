@@ -78,6 +78,28 @@ public class SarvaVaradiListener implements ITestListener {
             RestAssuredRequestCapture.clearApiCalls();
         }
 
+        // Extract issue/tms labels from groups = {"issue:PROJ-123", "tms:TC-456"}
+        String[] groups = result.getMethod().getGroups();
+        if (groups != null && groups.length > 0) {
+            List<Map<String, String>> labels = new ArrayList<>();
+            for (String group : groups) {
+                if (group.startsWith("issue:")) {
+                    Map<String, String> lbl = new HashMap<>();
+                    lbl.put("name",  "issue");
+                    lbl.put("value", group.substring(6).trim());
+                    labels.add(lbl);
+                } else if (group.startsWith("tms:")) {
+                    Map<String, String> lbl = new HashMap<>();
+                    lbl.put("name",  "tms");
+                    lbl.put("value", group.substring(4).trim());
+                    labels.add(lbl);
+                }
+            }
+            if (!labels.isEmpty()) {
+                testData.put("labels", labels);
+            }
+        }
+
         allAttempts.add(testData);
         tracker.latestResult = testData;
     }

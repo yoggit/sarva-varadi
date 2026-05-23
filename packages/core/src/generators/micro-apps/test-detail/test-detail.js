@@ -31,6 +31,8 @@ const SarvaTestDetail = (() => {
     updateNavUI();
 
     const status = test.status === 'broken' ? 'failed' : test.status;
+    const _sev = getSeverity(test.labels);
+    const _sevHtml = _sev ? ` <span class="sv-severity-badge ${escHtml(_sev)}" style="vertical-align:middle;">${escHtml(_sev)}</span>` : '';
 
     /* Latest run timestamp: newest entry in testHistory, fallback to SarvaStore.history[0] */
     const _th = SarvaStore.getTestHistory(test.tool, test.fullName);
@@ -43,7 +45,7 @@ const SarvaTestDetail = (() => {
 
     if (titleEl()) titleEl().textContent = test.name;
     if (subEl())   subEl().innerHTML = `
-      <span style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);">Latest Run</span>${latestDt ? `<span style="font-size:0.72rem;color:var(--text-muted);margin:0 0.35rem;">·</span><span style="font-size:0.72rem;color:var(--text-muted);">${latestDt}</span>` : ''}<span style="margin-left:0.6rem;"><span class="sv-pill ${status}">${status}</span></span><span style="margin-left:0.5rem;color:var(--text-muted);">${fmtDuration(test.duration)}</span>
+      <span style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);">Latest Run</span>${latestDt ? `<span style="font-size:0.72rem;color:var(--text-muted);margin:0 0.35rem;">·</span><span style="font-size:0.72rem;color:var(--text-muted);">${latestDt}</span>` : ''}<span style="margin-left:0.6rem;"><span class="sv-pill ${status}">${status}</span></span>${_sevHtml}<span style="margin-left:0.5rem;color:var(--text-muted);">${fmtDuration(test.duration)}</span>
     `;
 
     if (bodyEl()) bodyEl().innerHTML = renderBody(test);
@@ -167,6 +169,14 @@ const SarvaTestDetail = (() => {
           </span>
         </div>`;
     }
+
+    /* ── Issue / TMS links ───────────────────────────────────────────────── */
+    const _linkHtml = renderLinks(test);
+    if (_linkHtml) html += _linkHtml;
+
+    /* ── Owner / Feature / Tag labels ────────────────────────────────────── */
+    const _metaHtml = renderMetaLabels(test);
+    if (_metaHtml) html += _metaHtml;
 
     /* ── Flaky retry note ────────────────────────────────────────────────── */
     /* isRunFlaky is passed from selectRun (history entry status === 'flaky')
@@ -458,20 +468,116 @@ const SarvaTestDetail = (() => {
     }, () => {});
   }
 
+  /* ── Label helpers ───────────────────────────────────────────────────── */
+  function getSeverity(labels) {
+    const direct = (labels || []).find(l => l.name === 'severity');
+    if (direct) return (direct.value || '').toLowerCase();
+    const tagged = (labels || []).find(l => l.name === 'tag' && (l.value || '').startsWith('severity:'));
+    return tagged ? tagged.value.slice(9).toLowerCase() : '';
+  }
+
+  // Shows owner/feature/epic/story/plain-tag labels (everything that isn't severity/issue/tms)
+  function renderMetaLabels(test) {
+    const SKIP_PREFIX = ['issue:', 'tms:', 'severity:'];
+    const SKIP_NAME   = new Set(['severity', 'issue', 'tms']);
+    const result = [];
+    (test.labels || []).forEach(l => {
+      if (l.name === 'tag') {
+        const val = (l.value || '').trim();
+        if (!SKIP_PREFIX.some(p => val.startsWith(p))) result.push({ name: 'tag', value: val });
+      } else if (!SKIP_NAME.has(l.name) && l.value) {
+        result.push({ name: l.name, value: l.value });
+      }
+    });
+    if (!result.length) return '';
+    const chips = result.map(l => {
+      const isTag = l.name === 'tag';
+      const label = isTag ? '' : `<span style="font-size:0.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-right:0.25rem;">${escHtml(l.name)}</span>`;
+      return `<span style="display:inline-flex;align-items:center;padding:0.18rem 0.55rem;font-size:0.7rem;font-weight:600;border-radius:4px;background:var(--bg-surface-3);border:1px solid var(--border);color:var(--text-secondary);">${label}${escHtml(l.value)}</span>`;
+    }).join('');
+    return `<div style="display:flex;flex-wrap:wrap;gap:0.35rem;">${chips}</div>`;
+  }
+
+  /* ── Issue / TMS link badges ─────────────────────────────────────────── */
+  function renderLinks(test) {
+    const patterns = (typeof window !== 'undefined' && window.SARVA_LINK_PATTERNS) || {};
+
+    const labels = test.labels || [];
+    const found = { issue: [], tms: [] };
+
+    labels.forEach(lbl => {
+      const name = lbl.name || '';
+      const val  = lbl.value || '';
+      if (name === 'issue') {
+        found.issue.push(val);
+      } else if (name === 'tms') {
+        found.tms.push(val);
+      } else if (name === 'tag') {
+        if (val.startsWith('issue:')) found.issue.push(val.slice(6));
+        else if (val.startsWith('tms:')) found.tms.push(val.slice(4));
+      }
+    });
+
+    if (!found.issue.length && !found.tms.length) return '';
+
+    const issueBg  = 'background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:var(--status-failed);';
+    const tmsBg    = 'background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);color:var(--accent);';
+    const baseStyle = 'display:inline-flex;align-items:center;gap:0.3rem;padding:0.2rem 0.6rem;font-size:0.72rem;font-weight:600;border-radius:4px;text-decoration:none;';
+
+    const badges = [];
+
+    found.issue.forEach(id => {
+      if (patterns.issue) {
+        const url = patterns.issue.replace('{id}', encodeURIComponent(id));
+        badges.push(`<a href="${escHtml(url)}" target="_blank" rel="noopener noreferrer" style="${baseStyle}${issueBg}">🐛 ${escHtml(id)}</a>`);
+      } else {
+        badges.push(`<span style="${baseStyle}${issueBg}">🐛 ${escHtml(id)}</span>`);
+      }
+    });
+
+    found.tms.forEach(id => {
+      if (patterns.tms) {
+        const url = patterns.tms.replace('{id}', encodeURIComponent(id));
+        badges.push(`<a href="${escHtml(url)}" target="_blank" rel="noopener noreferrer" style="${baseStyle}${tmsBg}">🧪 ${escHtml(id)}</a>`);
+      } else {
+        badges.push(`<span style="${baseStyle}${tmsBg}">🧪 ${escHtml(id)}</span>`);
+      }
+    });
+
+    if (!badges.length) return '';
+    return `<div style="display:flex;flex-wrap:wrap;gap:0.4rem;">${badges.join('')}</div>`;
+  }
+
+  let _stepIdCounter = 0;
+
   function renderSteps(steps, level = 0) {
     return steps.map(step => {
-      const status = step.status === 'broken' ? 'failed' : (step.status || 'passed');
-      const icon   = status === 'passed' ? '✓' : status === 'failed' ? '✗' : status === 'skipped' ? '○' : '~';
-      const color  = `var(--status-${status})`;
-      const indent = level * 16;
+      const status      = step.status === 'broken' ? 'failed' : (step.status || 'passed');
+      const icon        = status === 'passed' ? '✓' : status === 'failed' ? '✗' : status === 'skipped' ? '○' : '~';
+      const color       = `var(--status-${status})`;
+      const indent      = level * 16;
+      const hasChildren = step.steps && step.steps.length > 0;
+      const childId     = hasChildren ? `sv-step-ch-${++_stepIdCounter}` : null;
+
+      const chevron = hasChildren
+        ? `<svg class="sv-step-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;transition:transform 0.18s;transform:rotate(0deg);color:var(--text-muted);margin-right:2px;"><polyline points="6 9 12 15 18 9"/></svg>`
+        : '';
+
+      const rowStyle = `display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0.5rem;
+                        margin-left:${indent}px;border-radius:var(--radius-sm);font-size:0.8rem;
+                        background:var(--bg-surface-2);border-left:2px solid ${color};
+                        ${hasChildren ? 'cursor:pointer;user-select:none;' : ''}`;
+
+      const toggleFn = hasChildren
+        ? `onclick="(function(row){var c=document.getElementById('${childId}');if(!c)return;var open=c.style.display!=='none';c.style.display=open?'none':'flex';row.querySelector('.sv-step-chevron').style.transform=open?'rotate(-90deg)':'rotate(0deg)';})(this)"`
+        : '';
 
       let html = `
-        <div style="display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0.5rem;
-                    margin-left:${indent}px;border-radius:var(--radius-sm);font-size:0.8rem;
-                    background:var(--bg-surface-2);border-left:2px solid ${color};">
-          <span style="color:${color};font-weight:700;flex-shrink:0;">${icon}</span>
+        <div style="${rowStyle}" ${toggleFn}>
+          <span style="color:${color};font-weight:700;flex-shrink:0;margin-top:1px;">${icon}</span>
           <span style="flex:1;color:var(--text-primary);">${escHtml(step.name)}</span>
-          <span style="color:var(--text-muted);font-size:0.72rem;flex-shrink:0;">${fmtDuration(step.duration)}</span>
+          ${chevron}
+          <span style="color:var(--text-muted);font-size:0.72rem;flex-shrink:0;white-space:nowrap;">${fmtDuration(step.duration)}</span>
         </div>`;
 
       if (step.statusDetails?.message) {
@@ -484,8 +590,8 @@ const SarvaTestDetail = (() => {
         </div>`;
       }
 
-      if (step.steps && step.steps.length > 0) {
-        html += `<div style="display:flex;flex-direction:column;gap:2px;margin-top:2px;">
+      if (hasChildren) {
+        html += `<div id="${childId}" style="display:flex;flex-direction:column;gap:2px;margin-top:2px;">
                    ${renderSteps(step.steps, level + 1)}
                  </div>`;
       }

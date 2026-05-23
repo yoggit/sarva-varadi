@@ -31,7 +31,7 @@ public class PostApiTest {
             .body("body", notNullValue());
     }
 
-    @Test
+    @Test(groups = {"tms:2"})
     public void testGetAllPosts() {
         given()
             .when()
@@ -53,7 +53,7 @@ public class PostApiTest {
             .body("[0].userId", equalTo(1));
     }
 
-    @Test
+    @Test(groups = {"tms:5"})
     public void testCreatePost() {
         String requestBody = "{ \"title\": \"Test Post\", \"body\": \"This is a test post\", \"userId\": 1 }";
 
@@ -68,7 +68,7 @@ public class PostApiTest {
             .body("userId", equalTo(1));
     }
 
-    @Test
+    @Test(groups = {"issue:9"})
     public void testFailedPost() {
         // This test intentionally fails to demonstrate failure reporting
         given()

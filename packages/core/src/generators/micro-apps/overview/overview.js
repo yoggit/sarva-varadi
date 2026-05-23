@@ -289,8 +289,8 @@ const SarvaOverview = (() => {
         const tip = `↑ Pass rate improved<br><span style='font-size:0.82em;opacity:0.85;'>${escHtml(prevLabel)} → ${escHtml(lastLabel)}<br>Change: +${diff}%</span>`;
         trendEl.innerHTML = `<span style="color:var(--status-passed);font-weight:600;cursor:default;" data-sv-tip="${tip}">↑ +${diff}%</span>`;
       } else if (diff < 0) {
-        const tip = `↓ Pass rate dropped<br><span style='font-size:0.82em;opacity:0.85;'>${escHtml(prevLabel)} → ${escHtml(lastLabel)}<br>Change: ${diff}%</span>`;
-        trendEl.innerHTML = `<span style="color:var(--status-failed);font-weight:600;cursor:default;" data-sv-tip="${tip}">↓ ${diff}%</span>`;
+        const tip = `↓ Pass rate dropped<br><span style='font-size:0.82em;opacity:0.85;'>${escHtml(prevLabel)} → ${escHtml(lastLabel)}<br>Change: −${Math.abs(diff)}%</span>`;
+        trendEl.innerHTML = `<span style="color:var(--status-failed);font-weight:600;cursor:default;" data-sv-tip="${tip}">↓ ${Math.abs(diff)}%</span>`;
       } else {
         const tip = `= No change<br><span style='font-size:0.82em;opacity:0.85;'>${escHtml(prevLabel)} → ${escHtml(lastLabel)}<br>Pass rate unchanged from previous run.</span>`;
         trendEl.innerHTML = `<span style="color:var(--text-muted);font-size:0.68rem;cursor:default;" data-sv-tip="${tip}">= stable</span>`;

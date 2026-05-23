@@ -15,9 +15,10 @@ export class HTMLGenerator {
   constructor(private options: Required<SarvaReporterOptions>) {}
 
   generate(tests: SarvaTestResult[], metadata: RunMetadata, history: { runs: any[]; testHistory: any[] } = { runs: [], testHistory: [] }): string {
-    const styles       = AssetsLoader.getStyles();
-    const scripts      = AssetsLoader.getScripts();
-    const logoDataUrl  = AssetsLoader.getLogoDataUrl();
+    const styles        = AssetsLoader.getStyles();
+    const scripts       = AssetsLoader.getScripts();
+    const logoDataUrl   = AssetsLoader.getLogoDataUrl();
+    const syneFontB64   = AssetsLoader.getSyneFontBase64();
     const toolName = this.getToolName(tests);
     const toolLabel = toolName ? toolName.charAt(0).toUpperCase() + toolName.slice(1) : 'Test';
     const title    = this.options.title || `Sarva-Varadi: ${toolLabel} Report`;
@@ -39,7 +40,7 @@ export class HTMLGenerator {
     `;
 
     return [
-      renderShellOpen({ title, toolName, version: PACKAGE_VERSION, styles, logoDataUrl }),
+      renderShellOpen({ title, toolName, version: PACKAGE_VERSION, styles, logoDataUrl, syneFontB64, linkPatterns: this.options.links }),
       renderOverview(),
       renderTestList(),
       renderTrends(),

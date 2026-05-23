@@ -189,6 +189,10 @@ async function handleGenerate(args: string[]) {
         showInMainReport: true,
       },
       notifications: buildNotificationOptions(props),
+      links: {
+        issue: props['sarva.links.issue'] || undefined,
+        tms:   props['sarva.links.tms']   || undefined,
+      },
     });
 
     const metadata = {

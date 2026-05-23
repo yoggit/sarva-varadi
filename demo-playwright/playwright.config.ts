@@ -23,6 +23,10 @@ export default defineConfig({
         enabled: true,
         showInMainReport: true,
       },
+      links: {
+        issue: 'https://github.com/yoggit/sarva-varadi/issues/{id}',
+        tms:   'https://github.com/yoggit/sarva-varadi/issues/{id}',
+      },
     }]
   ],
 

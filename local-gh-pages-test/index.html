@@ -57,9 +57,20 @@
             margin-top: 3rem;
         }
 
+        /* 5th card: span full row on its own */
+        .demo-card:last-child:nth-child(odd) {
+            grid-column: 1 / -1;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
         @media (max-width: 768px) {
             .demo-grid {
                 grid-template-columns: 1fr;
+            }
+            .demo-card:last-child:nth-child(odd) {
+                grid-column: auto;
+                max-width: none;
             }
         }
 
@@ -147,6 +158,12 @@
                 <div class="demo-icon">🧪</div>
                 <div class="demo-title">RestAssured (JUnit 5)</div>
                 <div class="demo-desc">Java API testing with JUnit 5 extension and request/response capture</div>
+            </a>
+
+            <a href="cucumber/index.html" class="demo-card">
+                <div class="demo-icon">🥒</div>
+                <div class="demo-title">Cucumber BDD</div>
+                <div class="demo-desc">Java BDD/Gherkin testing with Feature, Scenario and Step hierarchy</div>
             </a>
         </div>
 
