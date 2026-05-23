@@ -40,7 +40,7 @@ export class PlaywrightAdapter extends BaseAdapter {
     return {
       uuid,
       tool: 'playwright',
-      name: testCase.title,
+      name: this.stripLabelTags(testCase.title),
       fullName,
       status,
       statusDetails: result.error ? {
@@ -150,16 +150,20 @@ export class PlaywrightAdapter extends BaseAdapter {
     return trace?.path;
   }
 
+  private stripLabelTags(title: string): string {
+    return title.replace(/@(issue|tms|severity|owner|feature|epic|story):[^\s]+/gi, '').replace(/\s{2,}/g, ' ').trim();
+  }
+
   private getFullTestName(testCase: TestCase): string {
     const parts: string[] = [];
     let current: Suite | undefined = testCase.parent;
 
     while (current && current.title) {
-      parts.unshift(current.title);
+      parts.unshift(this.stripLabelTags(current.title));
       current = current.parent;
     }
 
-    parts.push(testCase.title);
+    parts.push(this.stripLabelTags(testCase.title));
     return parts.join(' > ');
   }
 }
