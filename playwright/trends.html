@@ -472,6 +472,7 @@ body.light-mode .sv-topbar {
 .sv-tool-badge {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-sm);
   font-size: 0.68rem;
@@ -480,10 +481,30 @@ body.light-mode .sv-topbar {
   margin-left: 0.5rem;
 }
 
-.sv-tool-badge.playwright   { background: rgba(46,173,51,0.15);  color: #2ead33; }
-.sv-tool-badge.selenium     { background: rgba(67,176,42,0.15);  color: #43b02a; }
-.sv-tool-badge.rest-assured { background: rgba(91,155,213,0.15); color: #5b9bd5; }
-.sv-tool-badge.cypress      { background: rgba(23,32,44,0.30);   color: #94a3b8; }
+.sv-tool-badge.playwright   { background: rgba(46,173,51,0.15);   color: #2ead33; }
+.sv-tool-badge.selenium     { background: rgba(67,176,42,0.15);   color: #43b02a; }
+.sv-tool-badge.rest-assured { background: rgba(91,155,213,0.15);  color: #5b9bd5; }
+.sv-tool-badge.cypress      { background: rgba(23,32,44,0.30);    color: #94a3b8; }
+.sv-tool-badge.cucumber     { background: rgba(35,217,108,0.15);  color: #23d96c; }
+
+/* ─── Severity Badge ─────────────────────────────────────────────────────────── */
+.sv-severity-badge {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-left: 0.35rem;
+}
+.sv-severity-badge.critical { background: rgba(239,68,68,0.15);   color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+.sv-severity-badge.high     { background: rgba(249,115,22,0.15);  color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+.sv-severity-badge.medium   { background: rgba(245,158,11,0.15);  color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+.sv-severity-badge.low      { background: rgba(59,130,246,0.15);  color: #3b82f6; border: 1px solid rgba(59,130,246,0.3); }
+.sv-severity-badge.trivial  { background: rgba(100,116,139,0.12); color: var(--text-muted); border: 1px solid var(--border); }
 
 /* ─── Sparkline container ────────────────────────────────────────────────────── */
 .sv-sparkline {
@@ -1122,6 +1143,7 @@ body.light-mode .sv-tip-popup {
 
 .sv-browser-badge {
   display: inline-block;
+  flex-shrink: 0;
   margin-left: 0.3rem;
   padding: 0.05rem 0.4rem;
   border-radius: 4px;
@@ -1160,12 +1182,12 @@ body.light-mode .sv-tip-popup {
             <div class="header-right" style="display: flex; flex-direction: column; align-items: flex-end; gap: 0;">
                 
                 <div class="subtitle">
-                    Latest Run on <span id="timestamp" data-time="2026-05-22T19:54:01.951Z"></span>
+                    Latest Run on <span id="timestamp" data-time="2026-05-23T04:02:04.940Z"></span>
                 </div>
                 
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <div class="subtitle">
-                        Historical analysis across 43 runs
+                        Historical analysis across 44 runs
                     </div>
                     <div class="theme-toggle">
                         <input type="checkbox" id="themeToggle" class="theme-toggle-checkbox">
@@ -1265,7 +1287,7 @@ body.light-mode .sv-tip-popup {
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
                   <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
               </svg>
-              Top Offenders (4)
+              Top Offenders (5)
               <span class="info-tooltip" style="position: relative; display: inline-flex; cursor: help; margin-left: 0.25rem; vertical-align: super; font-size: 0.7em;" onclick="event.stopPropagation();">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2">
                       <circle cx="12" cy="12" r="10"></circle>
@@ -1494,6 +1516,31 @@ body.light-mode .sv-tip-popup {
                 </div>
             </div>
         </div>
+        <div class="test-item" style="margin-bottom: 0.5rem;">
+            <div class="test-header" style="cursor: default;">
+                <div class="test-header-left">
+                    <span class="status-icon status-flaky">~</span>
+                    <div class="test-info">
+                        <div class="test-title">should be flaky @issue:12 @severity:medium</div>
+                        <div class="test-meta">
+                            <span class="test-tag" style="background: var(--color-flaky);">
+                                Flaky Score: 0%
+                            </span>
+                            <span style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem;">
+                                Last flaky: <span class="last-flaky-date" data-time="2026-05-23T04:02:04.940Z">Loading...</span>
+                            </span>
+                            <span style="margin-left: 1rem; font-family: monospace;">
+                                <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
+                  ~
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-23T04:02:04.940Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                </span>
+                                <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--color-text-secondary); font-style: italic; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">(hover for details)</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
               </div>
           </div>
       </div>
@@ -1542,6 +1589,17 @@ body.light-mode .sv-tip-popup {
                   </thead>
                   <tbody>
                       
+        <tr>
+            <td><span class="activity-date" data-time="2026-05-23T04:02:04.940Z">Loading...</span></td>
+            <td style="color: var(--color-failed); font-weight: 600;">64.3%</td>
+            <td>
+                <span style="color: var(--color-passed);">✓ 9</span>
+                <span style="color: var(--color-failed); margin-left: 0.5rem;">✗ 2</span>
+                <span style="color: var(--color-flaky); margin-left: 0.5rem;">~ 1</span>
+                <span style="color: var(--color-skipped); margin-left: 0.5rem;">○ 2</span>
+            </td>
+            <td>17s</td>
+        </tr>
         <tr>
             <td><span class="activity-date" data-time="2026-05-22T19:54:01.951Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">50%</td>
@@ -2526,8 +2584,8 @@ const SarvaOverview = (() => {
         const tip = `↑ Pass rate improved<br><span style='font-size:0.82em;opacity:0.85;'>${escHtml(prevLabel)} → ${escHtml(lastLabel)}<br>Change: +${diff}%</span>`;
         trendEl.innerHTML = `<span style="color:var(--status-passed);font-weight:600;cursor:default;" data-sv-tip="${tip}">↑ +${diff}%</span>`;
       } else if (diff < 0) {
-        const tip = `↓ Pass rate dropped<br><span style='font-size:0.82em;opacity:0.85;'>${escHtml(prevLabel)} → ${escHtml(lastLabel)}<br>Change: ${diff}%</span>`;
-        trendEl.innerHTML = `<span style="color:var(--status-failed);font-weight:600;cursor:default;" data-sv-tip="${tip}">↓ ${diff}%</span>`;
+        const tip = `↓ Pass rate dropped<br><span style='font-size:0.82em;opacity:0.85;'>${escHtml(prevLabel)} → ${escHtml(lastLabel)}<br>Change: −${Math.abs(diff)}%</span>`;
+        trendEl.innerHTML = `<span style="color:var(--status-failed);font-weight:600;cursor:default;" data-sv-tip="${tip}">↓ ${Math.abs(diff)}%</span>`;
       } else {
         const tip = `= No change<br><span style='font-size:0.82em;opacity:0.85;'>${escHtml(prevLabel)} → ${escHtml(lastLabel)}<br>Pass rate unchanged from previous run.</span>`;
         trendEl.innerHTML = `<span style="color:var(--text-muted);font-size:0.68rem;cursor:default;" data-sv-tip="${tip}">= stable</span>`;
@@ -3655,7 +3713,7 @@ const SarvaTestList = (() => {
       <div class="sv-test-row ${status}" data-status="${status}" data-uuid="${t.uuid}"
            onclick="SarvaTestDetail.open('${t.uuid}')">
         <div style="overflow:hidden;">
-          <div class="sv-test-name sv-truncate" style="display:flex;align-items:center;gap:0;">${escHtml(t.name)}${toolBadge(t.tool)}${browserBadge(t)}${clockIcon}</div>
+          <div class="sv-test-name" style="display:flex;align-items:center;gap:0;min-width:0;"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1;">${escHtml(t.name)}</span>${severityBadge(t.labels)}${toolBadge(t.tool)}${browserBadge(t)}${clockIcon}</div>
           ${suite ? `<div class="sv-test-suite sv-truncate">${escHtml(suite)}</div>` : ''}
         </div>
         <div style="text-align:center;">
@@ -3776,9 +3834,18 @@ const SarvaTestList = (() => {
     return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  function severityBadge(labels) {
+    // Supports both {name:'severity', value:'high'} and Cucumber tag format {name:'tag', value:'severity:high'}
+    const direct = (labels || []).find(l => l.name === 'severity');
+    const tagged = !direct && (labels || []).find(l => l.name === 'tag' && (l.value || '').startsWith('severity:'));
+    const sev = direct ? (direct.value || '').toLowerCase() : tagged ? tagged.value.slice(9).toLowerCase() : '';
+    if (!sev) return '';
+    return `<span class="sv-severity-badge ${escHtml(sev)}">${escHtml(sev)}</span>`;
+  }
+
   function toolBadge(tool) {
     if (!tool) return '';
-    const map = { playwright:'playwright', selenium:'selenium', 'rest-assured':'rest-assured', cypress:'cypress' };
+    const map = { playwright:'playwright', selenium:'selenium', 'rest-assured':'rest-assured', cypress:'cypress', cucumber:'cucumber' };
     const cls = map[tool] || '';
     return `<span class="sv-tool-badge ${cls}">${tool}</span>`;
   }
@@ -3866,6 +3933,8 @@ const SarvaTestDetail = (() => {
     updateNavUI();
 
     const status = test.status === 'broken' ? 'failed' : test.status;
+    const _sev = getSeverity(test.labels);
+    const _sevHtml = _sev ? ` <span class="sv-severity-badge ${escHtml(_sev)}" style="vertical-align:middle;">${escHtml(_sev)}</span>` : '';
 
     /* Latest run timestamp: newest entry in testHistory, fallback to SarvaStore.history[0] */
     const _th = SarvaStore.getTestHistory(test.tool, test.fullName);
@@ -3878,7 +3947,7 @@ const SarvaTestDetail = (() => {
 
     if (titleEl()) titleEl().textContent = test.name;
     if (subEl())   subEl().innerHTML = `
-      <span style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);">Latest Run</span>${latestDt ? `<span style="font-size:0.72rem;color:var(--text-muted);margin:0 0.35rem;">·</span><span style="font-size:0.72rem;color:var(--text-muted);">${latestDt}</span>` : ''}<span style="margin-left:0.6rem;"><span class="sv-pill ${status}">${status}</span></span><span style="margin-left:0.5rem;color:var(--text-muted);">${fmtDuration(test.duration)}</span>
+      <span style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);">Latest Run</span>${latestDt ? `<span style="font-size:0.72rem;color:var(--text-muted);margin:0 0.35rem;">·</span><span style="font-size:0.72rem;color:var(--text-muted);">${latestDt}</span>` : ''}<span style="margin-left:0.6rem;"><span class="sv-pill ${status}">${status}</span></span>${_sevHtml}<span style="margin-left:0.5rem;color:var(--text-muted);">${fmtDuration(test.duration)}</span>
     `;
 
     if (bodyEl()) bodyEl().innerHTML = renderBody(test);
@@ -4002,6 +4071,14 @@ const SarvaTestDetail = (() => {
           </span>
         </div>`;
     }
+
+    /* ── Issue / TMS links ───────────────────────────────────────────────── */
+    const _linkHtml = renderLinks(test);
+    if (_linkHtml) html += _linkHtml;
+
+    /* ── Owner / Feature / Tag labels ────────────────────────────────────── */
+    const _metaHtml = renderMetaLabels(test);
+    if (_metaHtml) html += _metaHtml;
 
     /* ── Flaky retry note ────────────────────────────────────────────────── */
     /* isRunFlaky is passed from selectRun (history entry status === 'flaky')
@@ -4293,20 +4370,116 @@ const SarvaTestDetail = (() => {
     }, () => {});
   }
 
+  /* ── Label helpers ───────────────────────────────────────────────────── */
+  function getSeverity(labels) {
+    const direct = (labels || []).find(l => l.name === 'severity');
+    if (direct) return (direct.value || '').toLowerCase();
+    const tagged = (labels || []).find(l => l.name === 'tag' && (l.value || '').startsWith('severity:'));
+    return tagged ? tagged.value.slice(9).toLowerCase() : '';
+  }
+
+  // Shows owner/feature/epic/story/plain-tag labels (everything that isn't severity/issue/tms)
+  function renderMetaLabels(test) {
+    const SKIP_PREFIX = ['issue:', 'tms:', 'severity:'];
+    const SKIP_NAME   = new Set(['severity', 'issue', 'tms']);
+    const result = [];
+    (test.labels || []).forEach(l => {
+      if (l.name === 'tag') {
+        const val = (l.value || '').trim();
+        if (!SKIP_PREFIX.some(p => val.startsWith(p))) result.push({ name: 'tag', value: val });
+      } else if (!SKIP_NAME.has(l.name) && l.value) {
+        result.push({ name: l.name, value: l.value });
+      }
+    });
+    if (!result.length) return '';
+    const chips = result.map(l => {
+      const isTag = l.name === 'tag';
+      const label = isTag ? '' : `<span style="font-size:0.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-right:0.25rem;">${escHtml(l.name)}</span>`;
+      return `<span style="display:inline-flex;align-items:center;padding:0.18rem 0.55rem;font-size:0.7rem;font-weight:600;border-radius:4px;background:var(--bg-surface-3);border:1px solid var(--border);color:var(--text-secondary);">${label}${escHtml(l.value)}</span>`;
+    }).join('');
+    return `<div style="display:flex;flex-wrap:wrap;gap:0.35rem;">${chips}</div>`;
+  }
+
+  /* ── Issue / TMS link badges ─────────────────────────────────────────── */
+  function renderLinks(test) {
+    const patterns = (typeof window !== 'undefined' && window.SARVA_LINK_PATTERNS) || {};
+
+    const labels = test.labels || [];
+    const found = { issue: [], tms: [] };
+
+    labels.forEach(lbl => {
+      const name = lbl.name || '';
+      const val  = lbl.value || '';
+      if (name === 'issue') {
+        found.issue.push(val);
+      } else if (name === 'tms') {
+        found.tms.push(val);
+      } else if (name === 'tag') {
+        if (val.startsWith('issue:')) found.issue.push(val.slice(6));
+        else if (val.startsWith('tms:')) found.tms.push(val.slice(4));
+      }
+    });
+
+    if (!found.issue.length && !found.tms.length) return '';
+
+    const issueBg  = 'background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:var(--status-failed);';
+    const tmsBg    = 'background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);color:var(--accent);';
+    const baseStyle = 'display:inline-flex;align-items:center;gap:0.3rem;padding:0.2rem 0.6rem;font-size:0.72rem;font-weight:600;border-radius:4px;text-decoration:none;';
+
+    const badges = [];
+
+    found.issue.forEach(id => {
+      if (patterns.issue) {
+        const url = patterns.issue.replace('{id}', encodeURIComponent(id));
+        badges.push(`<a href="${escHtml(url)}" target="_blank" rel="noopener noreferrer" style="${baseStyle}${issueBg}">🐛 ${escHtml(id)}</a>`);
+      } else {
+        badges.push(`<span style="${baseStyle}${issueBg}">🐛 ${escHtml(id)}</span>`);
+      }
+    });
+
+    found.tms.forEach(id => {
+      if (patterns.tms) {
+        const url = patterns.tms.replace('{id}', encodeURIComponent(id));
+        badges.push(`<a href="${escHtml(url)}" target="_blank" rel="noopener noreferrer" style="${baseStyle}${tmsBg}">🧪 ${escHtml(id)}</a>`);
+      } else {
+        badges.push(`<span style="${baseStyle}${tmsBg}">🧪 ${escHtml(id)}</span>`);
+      }
+    });
+
+    if (!badges.length) return '';
+    return `<div style="display:flex;flex-wrap:wrap;gap:0.4rem;">${badges.join('')}</div>`;
+  }
+
+  let _stepIdCounter = 0;
+
   function renderSteps(steps, level = 0) {
     return steps.map(step => {
-      const status = step.status === 'broken' ? 'failed' : (step.status || 'passed');
-      const icon   = status === 'passed' ? '✓' : status === 'failed' ? '✗' : status === 'skipped' ? '○' : '~';
-      const color  = `var(--status-${status})`;
-      const indent = level * 16;
+      const status      = step.status === 'broken' ? 'failed' : (step.status || 'passed');
+      const icon        = status === 'passed' ? '✓' : status === 'failed' ? '✗' : status === 'skipped' ? '○' : '~';
+      const color       = `var(--status-${status})`;
+      const indent      = level * 16;
+      const hasChildren = step.steps && step.steps.length > 0;
+      const childId     = hasChildren ? `sv-step-ch-${++_stepIdCounter}` : null;
+
+      const chevron = hasChildren
+        ? `<svg class="sv-step-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;transition:transform 0.18s;transform:rotate(0deg);color:var(--text-muted);margin-right:2px;"><polyline points="6 9 12 15 18 9"/></svg>`
+        : '';
+
+      const rowStyle = `display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0.5rem;
+                        margin-left:${indent}px;border-radius:var(--radius-sm);font-size:0.8rem;
+                        background:var(--bg-surface-2);border-left:2px solid ${color};
+                        ${hasChildren ? 'cursor:pointer;user-select:none;' : ''}`;
+
+      const toggleFn = hasChildren
+        ? `onclick="(function(row){var c=document.getElementById('${childId}');if(!c)return;var open=c.style.display!=='none';c.style.display=open?'none':'flex';row.querySelector('.sv-step-chevron').style.transform=open?'rotate(-90deg)':'rotate(0deg)';})(this)"`
+        : '';
 
       let html = `
-        <div style="display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0.5rem;
-                    margin-left:${indent}px;border-radius:var(--radius-sm);font-size:0.8rem;
-                    background:var(--bg-surface-2);border-left:2px solid ${color};">
-          <span style="color:${color};font-weight:700;flex-shrink:0;">${icon}</span>
+        <div style="${rowStyle}" ${toggleFn}>
+          <span style="color:${color};font-weight:700;flex-shrink:0;margin-top:1px;">${icon}</span>
           <span style="flex:1;color:var(--text-primary);">${escHtml(step.name)}</span>
-          <span style="color:var(--text-muted);font-size:0.72rem;flex-shrink:0;">${fmtDuration(step.duration)}</span>
+          ${chevron}
+          <span style="color:var(--text-muted);font-size:0.72rem;flex-shrink:0;white-space:nowrap;">${fmtDuration(step.duration)}</span>
         </div>`;
 
       if (step.statusDetails?.message) {
@@ -4319,8 +4492,8 @@ const SarvaTestDetail = (() => {
         </div>`;
       }
 
-      if (step.steps && step.steps.length > 0) {
-        html += `<div style="display:flex;flex-direction:column;gap:2px;margin-top:2px;">
+      if (hasChildren) {
+        html += `<div id="${childId}" style="display:flex;flex-direction:column;gap:2px;margin-top:2px;">
                    ${renderSteps(step.steps, level + 1)}
                  </div>`;
       }
@@ -5698,7 +5871,7 @@ window.SarvaTimeline = SarvaTimeline;
         if (passRateCtx) {
             passRateChart = new Chart(passRateCtx, {
                 type: 'line',
-                data: {"labels":[["05/12/2026","02:11"],["05/12/2026","02:18"],["05/12/2026","02:18"],["05/12/2026","02:24"],["05/12/2026","02:59"],["05/12/2026","03:47"],["05/16/2026","05:12"],["05/17/2026","15:27"],["05/17/2026","18:30"],["05/17/2026","20:20"],["05/17/2026","20:55"],["05/17/2026","21:34"],["05/18/2026","02:34"],["05/18/2026","03:42"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"],["05/18/2026","05:01"],["05/18/2026","05:07"],["05/18/2026","05:13"],["05/18/2026","05:26"],["05/18/2026","05:32"],["05/22/2026","05:58"],["05/22/2026","06:15"],["05/22/2026","12:12"],["05/22/2026","12:52"],["05/22/2026","15:07"],["05/22/2026","19:43"],["05/22/2026","19:54"]],"datasets":[{"label":"Pass Rate %","data":[57.1,64.3,57.1,64.3,71.4,71.4,64.3,71.4,64.3,57.1,57.1,71.4,50,57.1,64.3,78.6,64.3,50,78.6,57.1,71.4,64.3,71.4,64.3,57.1,71.4,71.4,71.4,50,50],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","tension":0.3,"fill":true}]},
+                data: {"labels":[["05/12/2026","02:18"],["05/12/2026","02:18"],["05/12/2026","02:24"],["05/12/2026","02:59"],["05/12/2026","03:47"],["05/16/2026","05:12"],["05/17/2026","15:27"],["05/17/2026","18:30"],["05/17/2026","20:20"],["05/17/2026","20:55"],["05/17/2026","21:34"],["05/18/2026","02:34"],["05/18/2026","03:42"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"],["05/18/2026","05:01"],["05/18/2026","05:07"],["05/18/2026","05:13"],["05/18/2026","05:26"],["05/18/2026","05:32"],["05/22/2026","05:58"],["05/22/2026","06:15"],["05/22/2026","12:12"],["05/22/2026","12:52"],["05/22/2026","15:07"],["05/22/2026","19:43"],["05/22/2026","19:54"],["05/23/2026","04:02"]],"datasets":[{"label":"Pass Rate %","data":[64.3,57.1,64.3,71.4,71.4,64.3,71.4,64.3,57.1,57.1,71.4,50,57.1,64.3,78.6,64.3,50,78.6,57.1,71.4,64.3,71.4,64.3,57.1,71.4,71.4,71.4,50,50,64.3],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","tension":0.3,"fill":true}]},
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -5744,11 +5917,11 @@ window.SarvaTimeline = SarvaTimeline;
         let distributionChart;
         let currentDistributionTimestamps = [];
         const distributionCtx = document.getElementById('distribution-chart');
-        const distributionDatasets = [{"label":"Passed","data":[8,9,8,9,10,10,9,10,9,8,8,10,7,8,9,11,9,7,11,8,10,9,10,9,8,10,10,10,7,7],"backgroundColor":"#10b981"},{"label":"Failed","data":[3,2,2,2,2,1,2,2,1,2,3,2,3,1,1,1,1,2,1,3,2,2,1,2,2,2,2,1,2,3],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[1,1,2,1,0,1,1,0,2,2,1,0,2,3,2,0,2,3,0,1,0,1,1,1,2,0,0,1,3,2],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"backgroundColor":"#6b7280"}];
+        const distributionDatasets = [{"label":"Passed","data":[9,8,9,10,10,9,10,9,8,8,10,7,8,9,11,9,7,11,8,10,9,10,9,8,10,10,10,7,7,9],"backgroundColor":"#10b981"},{"label":"Failed","data":[2,2,2,2,1,2,2,1,2,3,2,3,1,1,1,1,2,1,3,2,2,1,2,2,2,2,1,2,3,2],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[1,2,1,0,1,1,0,2,2,1,0,2,3,2,0,2,3,0,1,0,1,1,1,2,0,0,1,3,2,1],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"backgroundColor":"#6b7280"}];
         if (distributionCtx) {
             distributionChart = new Chart(distributionCtx, {
                 type: 'bar',
-                data: {"labels":[["05/12/2026","02:11"],["05/12/2026","02:18"],["05/12/2026","02:18"],["05/12/2026","02:24"],["05/12/2026","02:59"],["05/12/2026","03:47"],["05/16/2026","05:12"],["05/17/2026","15:27"],["05/17/2026","18:30"],["05/17/2026","20:20"],["05/17/2026","20:55"],["05/17/2026","21:34"],["05/18/2026","02:34"],["05/18/2026","03:42"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"],["05/18/2026","05:01"],["05/18/2026","05:07"],["05/18/2026","05:13"],["05/18/2026","05:26"],["05/18/2026","05:32"],["05/22/2026","05:58"],["05/22/2026","06:15"],["05/22/2026","12:12"],["05/22/2026","12:52"],["05/22/2026","15:07"],["05/22/2026","19:43"],["05/22/2026","19:54"]],"datasets":[{"label":"Passed","data":[8,9,8,9,10,10,9,10,9,8,8,10,7,8,9,11,9,7,11,8,10,9,10,9,8,10,10,10,7,7],"backgroundColor":"#10b981"},{"label":"Failed","data":[3,2,2,2,2,1,2,2,1,2,3,2,3,1,1,1,1,2,1,3,2,2,1,2,2,2,2,1,2,3],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[1,1,2,1,0,1,1,0,2,2,1,0,2,3,2,0,2,3,0,1,0,1,1,1,2,0,0,1,3,2],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"backgroundColor":"#6b7280"}]},
+                data: {"labels":[["05/12/2026","02:18"],["05/12/2026","02:18"],["05/12/2026","02:24"],["05/12/2026","02:59"],["05/12/2026","03:47"],["05/16/2026","05:12"],["05/17/2026","15:27"],["05/17/2026","18:30"],["05/17/2026","20:20"],["05/17/2026","20:55"],["05/17/2026","21:34"],["05/18/2026","02:34"],["05/18/2026","03:42"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"],["05/18/2026","05:01"],["05/18/2026","05:07"],["05/18/2026","05:13"],["05/18/2026","05:26"],["05/18/2026","05:32"],["05/22/2026","05:58"],["05/22/2026","06:15"],["05/22/2026","12:12"],["05/22/2026","12:52"],["05/22/2026","15:07"],["05/22/2026","19:43"],["05/22/2026","19:54"],["05/23/2026","04:02"]],"datasets":[{"label":"Passed","data":[9,8,9,10,10,9,10,9,8,8,10,7,8,9,11,9,7,11,8,10,9,10,9,8,10,10,10,7,7,9],"backgroundColor":"#10b981"},{"label":"Failed","data":[2,2,2,2,1,2,2,1,2,3,2,3,1,1,1,1,2,1,3,2,2,1,2,2,2,2,1,2,3,2],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[1,2,1,0,1,1,0,2,2,1,0,2,3,2,0,2,3,0,1,0,1,1,1,2,0,0,1,3,2,1],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"backgroundColor":"#6b7280"}]},
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -5855,7 +6028,7 @@ window.SarvaTimeline = SarvaTimeline;
         }
 
         // Date range filter function
-        const allRuns = [{"id":"2026-05-11-232930","timestamp":1778542146806,"duration":17859,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-11-233410","timestamp":1778542430326,"duration":17741,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-11-234106","timestamp":1778542851132,"duration":17273,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-11-234321","timestamp":1778542984208,"duration":19140,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-11-234952","timestamp":1778543369669,"duration":17506,"total":14,"passed":6,"failed":3,"skipped":2,"flaky":3,"passRate":42.9,"environment":{"ci":"false"}},{"id":"2026-05-11-235911","timestamp":1778543939273,"duration":14360,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-12-001216","timestamp":1778544713564,"duration":17655,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-001755","timestamp":1778545053114,"duration":18630,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-12-002648","timestamp":1778545592897,"duration":16457,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-004251","timestamp":1778546556110,"duration":14402,"total":14,"passed":8,"failed":1,"skipped":2,"flaky":3,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-011835","timestamp":1778548696378,"duration":14949,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-015803","timestamp":1778551061942,"duration":17480,"total":14,"passed":9,"failed":3,"skipped":2,"flaky":0,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-020618","timestamp":1778551563086,"duration":17177,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-021157","timestamp":1778551897210,"duration":18183,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-021850","timestamp":1778552312206,"duration":17646,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-021912","timestamp":1778552334903,"duration":17255,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-022518","timestamp":1778552695686,"duration":18755,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-025932","timestamp":1778554756627,"duration":15589,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-034753","timestamp":1778557654954,"duration":17371,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-16-051238","timestamp":1778908337447,"duration":15976,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-17-152737","timestamp":1779031640081,"duration":17053,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-17-183056","timestamp":1779042637176,"duration":15618,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-17-202104","timestamp":1779049247221,"duration":16530,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-17-205554","timestamp":1779051332969,"duration":18181,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-17-213503","timestamp":1779053685695,"duration":18073,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-18-023446","timestamp":1779071666198,"duration":16893,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-18-034313","timestamp":1779075771425,"duration":17532,"total":14,"passed":8,"failed":1,"skipped":2,"flaky":3,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-18-035759","timestamp":1779076660504,"duration":17545,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-040037","timestamp":1779076822376,"duration":16472,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-18-043728","timestamp":1779079027355,"duration":16074,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-044625","timestamp":1779079564857,"duration":16690,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-18-050132","timestamp":1779080478126,"duration":15739,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-18-050753","timestamp":1779080854098,"duration":17895,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-18-051353","timestamp":1779081213007,"duration":16438,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-18-052634","timestamp":1779081974934,"duration":16823,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-053242","timestamp":1779082342659,"duration":18619,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-055837","timestamp":1779429499255,"duration":15300,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-22-061618","timestamp":1779430556136,"duration":17900,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-22-121250","timestamp":1779451954156,"duration":16916,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-125229","timestamp":1779454329610,"duration":17838,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-150726","timestamp":1779462426553,"duration":18299,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-194419","timestamp":1779479036626,"duration":16793,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-22-195422","timestamp":1779479641951,"duration":17514,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}}];
+        const allRuns = [{"id":"2026-05-11-232930","timestamp":1778542146806,"duration":17859,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-11-233410","timestamp":1778542430326,"duration":17741,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-11-234106","timestamp":1778542851132,"duration":17273,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-11-234321","timestamp":1778542984208,"duration":19140,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-11-234952","timestamp":1778543369669,"duration":17506,"total":14,"passed":6,"failed":3,"skipped":2,"flaky":3,"passRate":42.9,"environment":{"ci":"false"}},{"id":"2026-05-11-235911","timestamp":1778543939273,"duration":14360,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-12-001216","timestamp":1778544713564,"duration":17655,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-001755","timestamp":1778545053114,"duration":18630,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-12-002648","timestamp":1778545592897,"duration":16457,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-004251","timestamp":1778546556110,"duration":14402,"total":14,"passed":8,"failed":1,"skipped":2,"flaky":3,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-011835","timestamp":1778548696378,"duration":14949,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-015803","timestamp":1778551061942,"duration":17480,"total":14,"passed":9,"failed":3,"skipped":2,"flaky":0,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-020618","timestamp":1778551563086,"duration":17177,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-021157","timestamp":1778551897210,"duration":18183,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-021850","timestamp":1778552312206,"duration":17646,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-021912","timestamp":1778552334903,"duration":17255,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-022518","timestamp":1778552695686,"duration":18755,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-025932","timestamp":1778554756627,"duration":15589,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-034753","timestamp":1778557654954,"duration":17371,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-16-051238","timestamp":1778908337447,"duration":15976,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-17-152737","timestamp":1779031640081,"duration":17053,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-17-183056","timestamp":1779042637176,"duration":15618,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-17-202104","timestamp":1779049247221,"duration":16530,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-17-205554","timestamp":1779051332969,"duration":18181,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-17-213503","timestamp":1779053685695,"duration":18073,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-18-023446","timestamp":1779071666198,"duration":16893,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-18-034313","timestamp":1779075771425,"duration":17532,"total":14,"passed":8,"failed":1,"skipped":2,"flaky":3,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-18-035759","timestamp":1779076660504,"duration":17545,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-040037","timestamp":1779076822376,"duration":16472,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-18-043728","timestamp":1779079027355,"duration":16074,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-044625","timestamp":1779079564857,"duration":16690,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-18-050132","timestamp":1779080478126,"duration":15739,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-18-050753","timestamp":1779080854098,"duration":17895,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-18-051353","timestamp":1779081213007,"duration":16438,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-18-052634","timestamp":1779081974934,"duration":16823,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-053242","timestamp":1779082342659,"duration":18619,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-055837","timestamp":1779429499255,"duration":15300,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-22-061618","timestamp":1779430556136,"duration":17900,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-22-121250","timestamp":1779451954156,"duration":16916,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-125229","timestamp":1779454329610,"duration":17838,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-150726","timestamp":1779462426553,"duration":18299,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-194419","timestamp":1779479036626,"duration":16793,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-22-195422","timestamp":1779479641951,"duration":17514,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-23-040224","timestamp":1779508924940,"duration":17235,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}}];
         let currentFilter = 'last20';
 
         function filterByDateRange(filter) {
