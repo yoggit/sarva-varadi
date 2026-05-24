@@ -65,8 +65,9 @@
 
 **📊 Reporting & Analytics**
 - 🎨 Dark/light theme with sidebar navigation
-- 📋 Overview: stat cards, pass rate donut, health pulse
-- 🔍 Tests: full list with filter/search/sort, per-test history
+- 📋 Overview: stat cards, pass rate donut, health pulse, new/absent tests
+- ❌ Failures: newly failing, recently fixed, ranked by severity
+- 🔍 Tests: full list with filter/search/sort, per-test history & steps
 - 📈 Trends: pass rate, failures, flakiness, duration over time
 - ⏱️ Timeline: run cadence and execution Gantt chart
 - 🔥 Intelligent flaky test detection with flaky score
@@ -78,7 +79,8 @@
 **⚡ Developer Experience**
 - ⚡ Zero config — works out of the box
 - 📁 File-based — no database needed
-- 🔄 Framework agnostic (5 frameworks supported)
+- 🔄 Framework agnostic (6 frameworks supported)
+- 🥒 Native BDD support — Cucumber Feature → Scenario → Step hierarchy
 - 📎 Rich attachments: screenshots, videos, traces
 - 🖨️ PDF print export (A4, with executive summary)
 - 📥 PNG chart download & CSV test export
@@ -94,20 +96,26 @@
 
 The best way to explore Sarva-Varadi is to open one of the live demos — each has 25 historical runs pre-loaded so every chart has real data to show.
 
+🗂️ **[View all demos → yoggit.github.io/sarva-varadi](https://yoggit.github.io/sarva-varadi)**
+
 | Framework | Demo |
 |-----------|------|
 | 🎭 Playwright | [yoggit.github.io/sarva-varadi/playwright/](https://yoggit.github.io/sarva-varadi/playwright/index.html) |
-| 🌐 Selenium (TestNG) | [yoggit.github.io/sarva-varadi/selenium/](https://yoggit.github.io/sarva-varadi/selenium/index.html) |
-| 🔌 RestAssured (TestNG) | [yoggit.github.io/sarva-varadi/rest-assured/](https://yoggit.github.io/sarva-varadi/rest-assured/index.html) |
+| 🔬 Selenium (TestNG) | [yoggit.github.io/sarva-varadi/selenium/](https://yoggit.github.io/sarva-varadi/selenium/index.html) |
+| 🌿 Selenium (Cucumber BDD) | [yoggit.github.io/sarva-varadi/selenium-cucumber/](https://yoggit.github.io/sarva-varadi/selenium-cucumber/index.html) |
+| 🌐 RestAssured (TestNG) | [yoggit.github.io/sarva-varadi/rest-assured/](https://yoggit.github.io/sarva-varadi/rest-assured/index.html) |
 | 🧪 RestAssured (JUnit 5) | [yoggit.github.io/sarva-varadi/rest-assured-junit/](https://yoggit.github.io/sarva-varadi/rest-assured-junit/index.html) |
+| 🔀 RestAssured (Cucumber BDD) | [yoggit.github.io/sarva-varadi/restassured-cucumber/](https://yoggit.github.io/sarva-varadi/restassured-cucumber/index.html) |
 
 ### What's in the report
 
-Each report is a single-page app with four sections reachable from the sidebar:
+Each report is a single-page app with five sections reachable from the sidebar:
 
 **Overview** — Pass rate donut, stat cards (total / passed / failed / flaky / skipped), Health Pulse trend indicator, run history table, top failing tests, top flaky tests, and a Needs Attention strip when things regress. Also surfaces **New Tests** (tests that appeared for the first time this run) and **Absent Tests** (tests present in the previous run but missing now) — both widgets are hidden automatically when there is nothing to report, and appear as soon as tests are added or removed between runs.
 
-**Tests** — Full test list with filter by status, free-text search, and sort. Click any test to open a drawer showing the full step tree, error message, stack trace, attachments (screenshots / videos / traces), and a per-test history chart across the last 25 runs.
+**Failures** — Dedicated failures view showing newly failing tests, recently fixed tests, and all failures ranked by severity label. Makes triage fast without scrolling through the full test list.
+
+**Tests** — Full test list with filter by status, free-text search, and sort. Click any test to open a drawer showing the full step tree (including BDD Given/When/Then hierarchy and HTTP/WebDriver sub-steps), error message, stack trace, attachments (screenshots / videos / traces), and a per-test history chart across the last 25 runs.
 
 **Trends** — Six interactive ECharts charts across runs: pass rate over time, failures & flakiness, test count, run duration, top failing tests bar chart, and top flaky tests bar chart. All charts share a run-count filter (Last 10 / 20 / 50 / All).
 
@@ -122,19 +130,25 @@ Each report is a single-page app with four sections reachable from the sidebar:
 Sarva-Varadi uses a **two-phase execution model** inspired by Allure:
 
 ### Phase 1: Data Collection
-During test execution, framework-specific adapters convert test results into a standardized JSON format.
+During test execution, framework-specific adapters convert test results into a standardized `SarvaTestResult` JSON format.
 
 ### Phase 2: Report Generation
-After execution, the core generator creates beautiful HTML reports from the collected data.
+After execution, the Node.js core generator reads the JSON and produces a fully self-contained `index.html` with embedded CSS, JavaScript, fonts, and all historical run data.
 
 ```
-┌─────────────────┐
-│  Playwright     │──┐
-│  Selenium       │──┼──→ Adapter ──→ Common JSON ──→ Report Generator ──→ HTML
-│  Cypress        │──┤                                                       
-│  RestAssured    │──┘
-└─────────────────┘
+┌──────────────────────────────┐
+│  Playwright (TS/JS)          │──→ @sarva-varadi/playwright  ──┐
+│  Selenium + TestNG (Java)    │──→ sarva-varadi-selenium     ──┤
+│  Selenium + Cucumber (Java)  │──→ sarva-varadi-cucumber     ──┤
+│  RestAssured + TestNG (Java) │──→ sarva-varadi-restassured  ──┼──→ SarvaTestResult JSON ──→ @sarva-varadi/core ──→ index.html
+│  RestAssured + JUnit (Java)  │──→ sarva-varadi-restassured- ──┤                              (Node.js CLI or
+│                              │     junit                    ──┤               Playwright reporter plugin)
+│  RestAssured + Cucumber(Java)│──→ sarva-varadi-cucumber     ──┘
+└──────────────────────────────┘
+         ↑ all write the same JSON schema — the core generator is framework-agnostic
 ```
+
+The `SarvaTestResult` schema is the single integration contract. Any tool that can write this JSON gets the full report — Failures view, Trends, Gantt, PDF export, flaky detection — automatically.
 
 ---
 
@@ -173,17 +187,37 @@ Add to your `pom.xml` — see the [RestAssured (JUnit 5) + Maven Integration Gui
 
 Add to your `pom.xml` — see the [Selenium + Maven Integration Guide](#selenium-maven-guide) below.
 
+### For Selenium + Cucumber BDD
+
+Add `sarva-varadi-cucumber` to your `pom.xml` and register the plugin in `junit-platform.properties`:
+
+```properties
+cucumber.plugin=io.github.yoggit.sarvavaradi.SarvaVaradiCucumberPlugin
+cucumber.glue=com.example.cucumber
+cucumber.features=src/test/resources/features
+```
+
+See the [demo-selenium-cucumber/](demo-selenium-cucumber/) project for a full working example.
+
+### For RestAssured + Cucumber BDD
+
+Same plugin registration as above — `sarva-varadi-cucumber` works with any underlying tool. When `sarva-varadi-restassured` is also on the classpath, HTTP request/response details are captured automatically as sub-steps under each `When` step.
+
+See the [demo-restassured-cucumber/](demo-restassured-cucumber/) project for a full working example.
+
 ---
 
 ## 📋 What Gets Captured
 
 Understanding what is automatic vs what requires an extra setup step saves a lot of confusion:
 
-| | Automatic (Steps 1–3 or 1–2) | Requires extra step |
+| | Automatic | Requires extra step |
 |---|---|---|
 | **RestAssured (TestNG)** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection | HTTP request/response details shown as test steps (Step 4) |
 | **RestAssured (JUnit 5)** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection, **HTTP steps auto-captured** | Nothing extra needed — the extension auto-registers the request capture filter |
-| **Selenium** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection | Browser actions (clicks, navigation, inputs) + screenshots shown as test steps (Step 4) |
+| **Selenium (TestNG)** | Test pass/fail/skip, duration, error & stack trace, flaky/retry detection | Browser actions (clicks, navigation, inputs) + screenshots shown as test steps (Step 4) |
+| **Selenium (Cucumber BDD)** | Feature → Scenario → Step hierarchy, pass/fail/skip per step, duration | Add `sarva-varadi-selenium` for WebDriver sub-steps (navigate, click, find) under each BDD step |
+| **RestAssured (Cucumber BDD)** | Feature → Scenario → Step hierarchy, pass/fail/skip per step, duration | Add `sarva-varadi-restassured` for HTTP request/response sub-steps under each `When` step |
 | **Playwright** | Everything — steps, screenshots, video, trace captured natively | Nothing extra needed |
 
 > **RestAssured + JUnit 5** ([guide](#restassured-junit-maven-guide)): Steps 1–3 (dependency → Surefire plugin → `@ExtendWith`) give you a fully detailed report including HTTP steps — no extra wiring needed.
@@ -825,6 +859,129 @@ xdg-open sarva-report/index.html   # Linux
 
 ---
 
+<a id="cucumber-guide"></a>
+<details>
+<summary>🥒 Cucumber BDD (Selenium or RestAssured) + Maven Integration Guide</summary>
+
+<br>
+
+> ✅ **One plugin, any underlying tool.** `sarva-varadi-cucumber` works with Selenium, RestAssured, or any Java-based Cucumber setup.
+>
+> **Prerequisites:** Java 11+, Maven 3.6+, Cucumber 7.x+, [Node.js](https://nodejs.org)
+
+---
+
+### Step 1 — Add repository & dependency to `pom.xml`
+
+```xml
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+
+<dependencies>
+  <!-- Cucumber BDD adapter -->
+  <dependency>
+    <groupId>com.github.yoggit.sarva-varadi</groupId>
+    <artifactId>sarva-varadi-cucumber</artifactId>
+    <version>2.1.1</version>
+    <scope>test</scope>
+  </dependency>
+
+  <!-- Optional: add the matching tool adapter for sub-step capture -->
+  <!-- For Selenium sub-steps (navigate, click, find element): -->
+  <dependency>
+    <groupId>com.github.yoggit.sarva-varadi</groupId>
+    <artifactId>sarva-varadi-selenium</artifactId>
+    <version>2.1.1</version>
+    <scope>test</scope>
+  </dependency>
+  <!-- For RestAssured HTTP sub-steps: -->
+  <dependency>
+    <groupId>com.github.yoggit.sarva-varadi</groupId>
+    <artifactId>sarva-varadi-restassured</artifactId>
+    <version>2.1.1</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
+### Step 2 — Register the plugin
+
+In `src/test/resources/junit-platform.properties`:
+
+```properties
+cucumber.plugin=io.github.yoggit.sarvavaradi.SarvaVaradiCucumberPlugin
+cucumber.glue=com.example.cucumber
+cucumber.features=src/test/resources/features
+```
+
+Or via `@CucumberOptions` on your runner class:
+
+```java
+@Suite
+@IncludeEngines("cucumber")
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME,
+    value = "io.github.yoggit.sarvavaradi.SarvaVaradiCucumberPlugin")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME,   value = "com.example.cucumber")
+@ConfigurationParameter(key = FEATURES_PROPERTY_NAME, value = "src/test/resources/features")
+public class CucumberTestRunner {}
+```
+
+### Step 3 — Add report generation plugin to `pom.xml`
+
+```xml
+<plugin>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>exec-maven-plugin</artifactId>
+  <version>3.1.0</version>
+  <executions>
+    <execution>
+      <id>generate-sarva-report</id>
+      <phase>test</phase>
+      <goals><goal>exec</goal></goals>
+      <configuration>
+        <executable>npx</executable>
+        <arguments>
+          <argument>@sarva-varadi/core</argument>
+          <argument>generate</argument>
+          <argument>--input</argument>
+          <argument>sarva-varadi-results/test-results.json</argument>
+          <argument>--output</argument>
+          <argument>sarva-report</argument>
+        </arguments>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
+
+### Step 4 — Configure label (optional)
+
+In `src/test/resources/sarva-varadi.properties`:
+
+```properties
+sarva.report.frameworkLabel=Selenium-Cucumber BDD
+# or: RestAssured-Cucumber BDD
+```
+
+### Step 5 — Run tests
+
+```bash
+mvn test
+# Report auto-generates at: sarva-report/index.html
+```
+
+The report captures the full **Feature → Scenario → Step** hierarchy. If the matching tool adapter (Selenium or RestAssured) is also on the classpath, each BDD step is automatically enriched with granular sub-steps.
+
+📂 **Demo projects:** [`demo-selenium-cucumber/`](demo-selenium-cucumber/) · [`demo-restassured-cucumber/`](demo-restassured-cucumber/)
+
+</details>
+
+---
+
 ## 🔄 Universal Converter
 
 <details>
@@ -999,7 +1156,8 @@ Each report is a single `index.html` — no server required, open it directly in
 | Tab | What's inside |
 |-----|---------------|
 | **Overview** | Pass rate donut · stat cards · Health Pulse trend · run history table · top failing & top flaky · Needs Attention strip · New Tests & Absent Tests widgets (auto-hidden when empty) |
-| **Tests** | Filterable test list · free-text search · sort by duration/status · test detail drawer with steps, attachments, and per-test history chart |
+| **Failures** | Newly failing tests · recently fixed tests · all failures ranked by severity label |
+| **Tests** | Filterable test list · free-text search · sort by duration/status · test detail drawer with collapsible step tree (BDD hierarchy + HTTP/WebDriver sub-steps), attachments, and per-test history chart |
 | **Trends** | Pass rate trend · failures & flakiness · test count · run duration · top failing bar chart · top flaky bar chart — all with run-count filter |
 | **Timeline** | Run Cadence chart (when and how often runs happen) · Execution Gantt (per-test start time and duration) |
 
@@ -1399,12 +1557,14 @@ Failed Tests:
 
 | Feature | Allure | ReportPortal | Sarva-Varadi |
 |---------|--------|--------------|--------------|
-| Multi-framework | ✅ 30+ | ✅ Many | ✅ 4 (growing) |
+| Multi-framework | ✅ 30+ | ✅ Many | ✅ 6 (growing) |
 | Modern UI | ⚠️ Dated | ⚠️ Complex | ✅ Sidebar SPA, dark/light |
 | Zero config | ❌ CLI needed | ❌ Server setup | ✅ Yes |
 | File-based | ✅ Yes | ❌ DB required | ✅ Yes |
 | Historical trends | ✅ Basic | ✅ Advanced | ✅ File-based, 6 charts |
 | Flaky detection | ⚠️ Manual | ✅ ML-based | ✅ Score-based, per-test history |
+| BDD step hierarchy | ✅ Via adapter | ⚠️ Limited | ✅ Native Cucumber (Feature → Scenario → Step) |
+| Dedicated Failures view | ✅ Yes | ✅ Yes | ✅ Yes — with severity ranking |
 | PDF / PNG / CSV export | ⚠️ PDF only | ❌ No | ✅ All three |
 | Notifications | ❌ No | ✅ Yes | ✅ Slack/Teams/Email |
 | CI/CD friendly | ✅ Yes | ⚠️ Complex | ✅ Yes |
@@ -1416,35 +1576,47 @@ Failed Tests:
 
 ```
 packages/
-├── core/                       # @sarva-varadi/core — report engine + CLI
+├── core/                         # @sarva-varadi/core — report engine + CLI
 │   ├── src/
-│   │   ├── types/              # Common interfaces (SarvaTestResult, RunHistory, …)
-│   │   ├── adapters/           # Base adapter class
-│   │   ├── converters/         # Format converters (JUnit, TestNG, Cucumber)
+│   │   ├── types/                # SarvaTestResult, RunHistory, config interfaces
+│   │   ├── converters/           # Format converters (JUnit XML, TestNG XML, Cucumber JSON)
 │   │   ├── generators/
-│   │   │   ├── shell/          # Sidebar shell, topbar, CSS, print styles
-│   │   │   ├── shared/         # SarvaStore state, EventBus, utilities
+│   │   │   ├── shell/            # Sidebar shell, topbar, CSS, print styles
 │   │   │   └── micro-apps/
-│   │   │       ├── overview/   # Overview tab (stat cards, donut, health pulse, …)
-│   │   │       ├── test-list/  # Tests tab (list, filter, search, drawer)
-│   │   │       ├── test-detail/# Per-test history drawer chart
-│   │   │       ├── trends/     # Trends tab (6 ECharts charts)
-│   │   │       └── timeline/   # Timeline tab (run cadence + Gantt)
-│   │   ├── history-manager.ts  # File-based run history & flaky score
-│   │   └── cli.ts              # CLI entry point
+│   │   │       ├── overview/     # Overview tab (stat cards, donut, health pulse, new/absent)
+│   │   │       ├── failures/     # Failures tab (newly failing, fixed, severity ranking)
+│   │   │       ├── tests/        # Tests tab (list, filter, search, detail drawer)
+│   │   │       ├── test-detail/  # Per-test history chart + step tree
+│   │   │       ├── trends/       # Trends tab (6 ECharts charts)
+│   │   │       └── timeline/     # Timeline tab (run cadence + Gantt)
+│   │   ├── history-manager.ts    # File-based run history & flaky score
+│   │   └── cli.ts                # CLI entry point
 │
-├── playwright/                 # @sarva-varadi/playwright
-│   └── src/index.ts            # Playwright reporter adapter
+├── playwright/                   # @sarva-varadi/playwright
+│   └── src/index.ts              # Playwright reporter adapter
 │
-└── rest-assured-junit/         # @sarva-varadi/rest-assured-junit (JitPack)
-    └── junit5-extension.ts     # JUnit 5 extension + RestAssured filter
+└── cucumber/                     # @sarva-varadi/cucumber (TypeScript bridge)
+    └── src/index.ts              # Cucumber result mapper
 
 java/
-├── sarva-varadi-restassured/           # JitPack: sarva-varadi-restassured
-│   └── SarvaVaradiListener             # TestNG listener + RestAssured filter
+├── sarva-varadi-selenium/              # JitPack: sarva-varadi-selenium
+│   └── SarvaVaradiListener             # TestNG listener + WebDriver event capture
 │
-└── sarva-varadi-restassured-junit/     # JitPack: sarva-varadi-restassured-junit
-    └── SarvaVaradiJUnit5Extension      # JUnit 5 extension + RestAssured filter
+├── sarva-varadi-restassured/           # JitPack: sarva-varadi-restassured
+│   └── SarvaVaradiListener             # TestNG listener + RestAssured request filter
+│
+├── sarva-varadi-restassured-junit/     # JitPack: sarva-varadi-restassured-junit
+│   └── SarvaVaradiJUnit5Extension      # JUnit 5 extension + RestAssured filter
+│
+└── sarva-varadi-cucumber/              # JitPack: sarva-varadi-cucumber
+    └── SarvaVaradiCucumberPlugin       # Cucumber EventListener — Feature → Scenario → Step
+
+demo-playwright/                  # Live Playwright demo (25-run history via CI)
+demo-selenium/                    # Live Selenium-TestNG demo
+demo-selenium-cucumber/           # Live Selenium-Cucumber BDD demo
+demo-restassured/                 # Live RestAssured-TestNG demo
+demo-restassured-junit/           # Live RestAssured-JUnit 5 demo
+demo-restassured-cucumber/        # Live RestAssured-Cucumber BDD demo
 ```
 
 ---
