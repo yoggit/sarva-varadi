@@ -17,7 +17,8 @@ on:
           - restassured-testng
           - restassured-junit
           - selenium-testng
-          - cucumber-bdd
+          - selenium-cucumber
+          - restassured-cucumber
 
 permissions:
   contents: write
@@ -92,7 +93,7 @@ jobs:
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
 
       - name: Generate Selenium, REST Assured & Cucumber demo reports (25-run history)
-        if: ${{ inputs.test_framework == 'selenium-testng' || inputs.test_framework == 'restassured-testng' || inputs.test_framework == 'restassured-junit' || inputs.test_framework == 'cucumber-bdd' || inputs.test_framework == '' }}
+        if: ${{ inputs.test_framework == 'selenium-testng' || inputs.test_framework == 'restassured-testng' || inputs.test_framework == 'restassured-junit' || inputs.test_framework == 'selenium-cucumber' || inputs.test_framework == 'restassured-cucumber' || inputs.test_framework == '' }}
         run: node scripts/generate-demo-history.js
         continue-on-error: true
 
