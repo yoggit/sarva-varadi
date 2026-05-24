@@ -52,25 +52,20 @@
 
         .demo-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-top: 3rem;
         }
 
-        /* 5th card: span full row on its own */
-        .demo-card:last-child:nth-child(odd) {
-            grid-column: 1 / -1;
-            max-width: 480px;
-            margin: 0 auto;
+        @media (max-width: 900px) {
+            .demo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .demo-grid {
                 grid-template-columns: 1fr;
-            }
-            .demo-card:last-child:nth-child(odd) {
-                grid-column: auto;
-                max-width: none;
             }
         }
 
@@ -160,10 +155,16 @@
                 <div class="demo-desc">Java API testing with JUnit 5 extension and request/response capture</div>
             </a>
 
-            <a href="cucumber/index.html" class="demo-card">
-                <div class="demo-icon">🥒</div>
-                <div class="demo-title">Cucumber BDD</div>
-                <div class="demo-desc">Java BDD/Gherkin testing with Feature, Scenario and Step hierarchy</div>
+            <a href="selenium-cucumber/index.html" class="demo-card">
+                <div class="demo-icon">🌿</div>
+                <div class="demo-title">Selenium (Cucumber BDD)</div>
+                <div class="demo-desc">Java WebDriver BDD testing with Feature, Scenario and Step hierarchy</div>
+            </a>
+
+            <a href="restassured-cucumber/index.html" class="demo-card">
+                <div class="demo-icon">🔀</div>
+                <div class="demo-title">RestAssured (Cucumber BDD)</div>
+                <div class="demo-desc">Java API BDD testing with Cucumber + RestAssured request/response capture</div>
             </a>
         </div>
 
