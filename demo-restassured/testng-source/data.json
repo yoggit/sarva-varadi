@@ -389,5 +389,50 @@
         "value": "low"
       }
     ]
+  },
+  {
+    "testName": "com.example.restassured.tests.ApiTests.POST /users - Validate response schema",
+    "methodName": "POST /users - Validate response schema",
+    "status": "FAIL",
+    "startTime": 1778513552650,
+    "endTime": 1778513553750,
+    "retryCount": 0,
+    "parameters": {},
+    "apiCalls": [
+      {
+        "name": "POST /users - Validate response schema",
+        "startTime": 1778513552750,
+        "endTime": 1778513553640,
+        "duration": 890,
+        "status": "passed",
+        "request": {
+          "method": "POST",
+          "uri": "/users",
+          "headers": "Content-Type: application/json\nAccept: application/json",
+          "body": "{\"name\":\"John Doe\",\"email\":\"john@example.com\"}"
+        },
+        "response": {
+          "statusCode": 200,
+          "statusLine": "OK",
+          "responseTime": "890ms",
+          "headers": "Content-Type: application/json",
+          "body": "{\"id\":456,\"name\":\"John Doe\"}"
+        }
+      }
+    ],
+    "error": {
+      "message": "1 expectation failed.\nJSON path $.email doesn't match.\nExpected: john@example.com\n  Actual: null",
+      "stackTrace": "java.lang.AssertionError: 1 expectation failed.\nJSON path $.email doesn't match.\nExpected: john@example.com\n  Actual: null\n\tat com.example.restassured.tests.ApiTests.POST /users - Validate response schema(ApiTests.java:104)"
+    },
+    "labels": [
+      {
+        "name": "severity",
+        "value": "critical"
+      },
+      {
+        "name": "feature",
+        "value": "users-api"
+      }
+    ]
   }
 ]

@@ -69,6 +69,26 @@ export function renderTrends(): string {
       </div>
     </div>
 
+    <!-- Failures by Severity over time -->
+    <div style="margin-top:1rem;" id="sv-trends-severity-section">
+      <div class="sv-card">
+        <div class="sv-card-header">
+          <span style="display:flex;align-items:center;gap:0.4rem;">
+            <span class="sv-card-title">Failures by Severity</span>
+            <span class="sv-info-btn" data-sv-tip="&lt;b&gt;Failures by Severity&lt;/b&gt;&lt;br&gt;• Stacked bars showing failed+flaky counts per severity level per run&lt;br&gt;• Critical (red) at the bottom — highest-priority issues&lt;br&gt;• Rising red/orange = critical regressions accumulating&lt;br&gt;• Only shown when severity labels are present in run data">${INFO_ICON}</span>
+          </span>
+          <span style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="font-size:0.72rem;color:var(--text-muted);" id="sv-trends-severity-label"></span>
+            <button class="sv-dl-btn" onclick="SarvaDownloadChart('sv-trends-severity-chart','failures-by-severity.png','Failures by Severity')" data-sv-tip="Download as PNG">${DL_ICON}</button>
+          </span>
+        </div>
+        <div class="sv-card-body">
+          <div id="sv-trends-severity-chart" style="height:200px;"></div>
+          <div id="sv-trends-severity-empty" style="display:none;text-align:center;padding:2.5rem;color:var(--text-muted);font-size:0.8rem;">Add <code>@severity</code> labels to your tests to see the breakdown here.</div>
+        </div>
+      </div>
+    </div>
+
     <!-- Test Count + Duration -->
     <div class="sv-grid-2" style="margin-top:1rem;gap:1rem;">
       <div class="sv-card">

@@ -226,10 +226,18 @@ const SarvaTestDetail = (() => {
 
     /* ── Steps ───────────────────────────────────────────────────────────── */
     if (test.steps && test.steps.length > 0) {
+      const stepsContId = `sv-steps-cont-${++_stepIdCounter}`;
+      const btnStyle = `padding:0.12rem 0.45rem;font-size:0.62rem;font-weight:600;border-radius:3px;cursor:pointer;border:1px solid var(--border);background:var(--bg-surface-3);color:var(--text-muted);`;
       html += `
         <div>
-          <div class="sv-section-label">Steps (${test.steps.length})</div>
-          <div style="display:flex;flex-direction:column;gap:2px;">
+          <div class="sv-section-label" style="display:flex;align-items:center;">
+            <span>Steps (${test.steps.length})</span>
+            <div style="margin-left:auto;display:flex;gap:4px;">
+              <button style="${btnStyle}" onclick="SarvaTestDetail.expandAllSteps('${stepsContId}')">Expand all</button>
+              <button style="${btnStyle}" onclick="SarvaTestDetail.collapseAllSteps('${stepsContId}')">Collapse all</button>
+            </div>
+          </div>
+          <div id="${stepsContId}" style="display:flex;flex-direction:column;gap:2px;">
             ${renderSteps(test.steps)}
           </div>
         </div>`;
@@ -329,8 +337,20 @@ const SarvaTestDetail = (() => {
 
   function renderHistoryTable(history) {
     const last5 = history.slice(-5).reverse();
+
+    // Detect severity changes across visible rows (newest first)
+    const sevValues = last5.map(h => h.severity || '').filter(s => s);
+    const uniqueSevs = new Set(sevValues);
+    const sevChanged = uniqueSevs.size > 1;
+
     return `
-      <div style="margin-top:0.75rem;display:flex;flex-direction:column;gap:2px;">
+      ${sevChanged ? `<div style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.25rem 0.6rem;
+               margin-top:0.5rem;border-radius:999px;background:rgba(245,158,11,0.1);
+               border:1px solid rgba(245,158,11,0.25);font-size:0.68rem;color:#f59e0b;">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Severity changed across recent runs
+        </div>` : ''}
+      <div style="margin-top:0.5rem;display:flex;flex-direction:column;gap:2px;">
         ${last5.map(h => `
           <div data-sv-run-row="${h.runId}"
                onclick="SarvaTestDetail.selectRun('${h.runId}')"
@@ -341,8 +361,9 @@ const SarvaTestDetail = (() => {
                onmouseenter="if(this.getAttribute('data-sv-run-row')!=='${h.runId}' || !this.style.outline) this.style.background='var(--bg-hover)'"
                onmouseleave="if(!this.style.outline||this.style.outline==='') this.style.background='var(--bg-surface-2)'">
             <span class="sv-pill ${h.status === 'broken' ? 'failed' : h.status}" style="font-size:0.65rem;">
-              ${h.status}
+              ${h.wasFlaky ? '~ flaky' : h.status}
             </span>
+            ${h.severity ? `<span class="sv-severity-badge ${escHtml(h.severity)}" style="font-size:0.55rem;padding:0.05rem 0.3rem;">${escHtml(h.severity)}</span>` : ''}
             <span style="color:var(--text-muted);">${h.timestamp ? new Date(h.timestamp).toLocaleString(undefined, { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '—'}</span>
             <span style="margin-left:auto;color:var(--text-secondary);font-variant-numeric:tabular-nums;">
               ${fmtDuration(h.duration)}
@@ -550,6 +571,12 @@ const SarvaTestDetail = (() => {
 
   let _stepIdCounter = 0;
 
+  function stepHasFailed(step) {
+    const s = step.status === 'broken' ? 'failed' : (step.status || 'passed');
+    if (s === 'failed') return true;
+    return (step.steps || []).some(c => stepHasFailed(c));
+  }
+
   function renderSteps(steps, level = 0) {
     return steps.map(step => {
       const status      = step.status === 'broken' ? 'failed' : (step.status || 'passed');
@@ -559,8 +586,11 @@ const SarvaTestDetail = (() => {
       const hasChildren = step.steps && step.steps.length > 0;
       const childId     = hasChildren ? `sv-step-ch-${++_stepIdCounter}` : null;
 
+      // Expand children only when the subtree contains a failure; otherwise start collapsed.
+      const autoExpand  = hasChildren && stepHasFailed(step);
+
       const chevron = hasChildren
-        ? `<svg class="sv-step-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;transition:transform 0.18s;transform:rotate(0deg);color:var(--text-muted);margin-right:2px;"><polyline points="6 9 12 15 18 9"/></svg>`
+        ? `<svg class="sv-step-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;transition:transform 0.18s;transform:rotate(${autoExpand ? '0' : '-90'}deg);color:var(--text-muted);margin-right:2px;"><polyline points="6 9 12 15 18 9"/></svg>`
         : '';
 
       const rowStyle = `display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0.5rem;
@@ -591,13 +621,27 @@ const SarvaTestDetail = (() => {
       }
 
       if (hasChildren) {
-        html += `<div id="${childId}" style="display:flex;flex-direction:column;gap:2px;margin-top:2px;">
+        html += `<div id="${childId}" style="display:${autoExpand ? 'flex' : 'none'};flex-direction:column;gap:2px;margin-top:2px;">
                    ${renderSteps(step.steps, level + 1)}
                  </div>`;
       }
 
       return html;
     }).join('');
+  }
+
+  function expandAllSteps(containerId) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.querySelectorAll('[id^="sv-step-ch-"]').forEach(c => { c.style.display = 'flex'; });
+    el.querySelectorAll('.sv-step-chevron').forEach(ch => { ch.style.transform = 'rotate(0deg)'; });
+  }
+
+  function collapseAllSteps(containerId) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.querySelectorAll('[id^="sv-step-ch-"]').forEach(c => { c.style.display = 'none'; });
+    el.querySelectorAll('.sv-step-chevron').forEach(ch => { ch.style.transform = 'rotate(-90deg)'; });
   }
 
   function renderAttachments(attachments) {
@@ -690,7 +734,54 @@ const SarvaTestDetail = (() => {
     });
   });
 
-  return { open, close, selectRun, setHistoryView, navigateTo, copyElem };
+  async function openFromHistory(testId, lastRunId) {
+    const ci       = testId.indexOf(':');
+    const tool     = ci > 0 ? testId.slice(0, ci) : null;
+    const fullName = ci > 0 ? testId.slice(ci + 1) : testId;
+    const nameParts = fullName.split(' > ');
+    const name      = nameParts[nameParts.length - 1] || fullName;
+
+    const th        = SarvaStore.getTestHistory(tool, fullName);
+    const lastEntry = th.length > 0 ? th[th.length - 1] : null;
+    const lastStatus = lastEntry ? lastEntry.status : 'unknown';
+
+    _openTest = { tool, fullName, name, uuid: null, status: lastStatus,
+                  labels: [], duration: 0, start: 0, steps: [], error: null, retry: 0 };
+    _selectedRunId = null;
+    _histViewN     = 20;
+    _currentIndex  = -1;
+    if (_histChart) { _histChart.dispose(); _histChart = null; }
+    updateNavUI();
+
+    const lastTs = lastEntry && lastEntry.timestamp
+      ? new Date(lastEntry.timestamp).toLocaleString(undefined, {
+          year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+        })
+      : '';
+
+    if (titleEl()) titleEl().textContent = name;
+    if (subEl()) subEl().innerHTML = `
+      <span style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);">Last Seen</span>
+      ${lastTs ? `<span style="font-size:0.72rem;color:var(--text-muted);margin:0 0.35rem;">·</span><span style="font-size:0.72rem;color:var(--text-muted);">${lastTs}</span>` : ''}
+      <span style="margin-left:0.6rem;"><span class="sv-pill ${lastStatus}">${lastStatus}</span></span>
+      <span style="margin-left:0.5rem;font-size:0.7rem;color:#f97316;font-style:italic;">absent from latest run</span>
+    `;
+
+    if (bodyEl()) bodyEl().innerHTML = renderBody(_openTest);
+    _histHistory = th;
+    const initialSlice = _histViewN > 0 ? th.slice(-_histViewN) : th;
+    if (th.length > 1) {
+      if (typeof echarts !== 'undefined') renderHistoryChart(initialSlice);
+      else SarvaEventBus.on('echarts:ready', () => renderHistoryChart(initialSlice));
+    }
+
+    drawer()?.classList.add('open');
+    overlay()?.classList.add('open');
+
+    if (lastRunId) await selectRun(lastRunId);
+  }
+
+  return { open, close, openFromHistory, selectRun, setHistoryView, navigateTo, copyElem, expandAllSteps, collapseAllSteps };
 })();
 
 // Make accessible from inline onclick handlers

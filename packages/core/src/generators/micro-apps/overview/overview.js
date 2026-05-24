@@ -38,13 +38,13 @@ const SarvaOverview = (() => {
 
     if (stats.failed > 0) {
       chips.push({ label: `${stats.failed} failing`, color: 'var(--status-failed)', bg: 'rgba(239,68,68,0.12)', border: 'rgba(239,68,68,0.3)',
-        onclick: `SarvaOverview.goToTests('failed')`,
-        tip: escHtml(`${stats.failed} test${stats.failed !== 1 ? 's' : ''} failed — blocks release, needs immediate investigation.`) });
+        onclick: `SarvaShell.navigate('failures')`,
+        tip: escHtml(`${stats.failed} test${stats.failed !== 1 ? 's' : ''} failed — click to open Failures analysis.`) });
     }
     if (stats.flaky > 0) {
       chips.push({ label: `${stats.flaky} flaky`, color: 'var(--status-flaky)', bg: 'rgba(245,158,11,0.12)', border: 'rgba(245,158,11,0.3)',
-        onclick: `SarvaOverview.goToTests('flaky')`,
-        tip: escHtml(`${stats.flaky} test${stats.flaky !== 1 ? 's' : ''} passed only after retries — address before they become consistent failures.`) });
+        onclick: `SarvaShell.navigate('failures')`,
+        tip: escHtml(`${stats.flaky} test${stats.flaky !== 1 ? 's' : ''} passed only after retries — click to open Failures analysis.`) });
     }
     if (stats.skipped > 0) {
       chips.push({ label: `${stats.skipped} skipped`, color: 'var(--text-muted)', bg: 'var(--bg-surface-3)', border: 'var(--border)',
@@ -59,8 +59,32 @@ const SarvaOverview = (() => {
       if (diff <= -5) {
         const absDiff = Math.abs(diff);
         chips.push({ label: `Pass rate ↓${absDiff}%`, color: 'var(--status-failed)', bg: 'rgba(239,68,68,0.12)', border: 'rgba(239,68,68,0.3)',
-          onclick: `SarvaOverview.goToTests('failed')`,
-          tip: escHtml(`Pass rate dropped ${absDiff}% vs previous run (${prevRate}% → ${+(+stats.passRate).toFixed(1)}%).`) });
+          onclick: `SarvaShell.navigate('failures')`,
+          tip: escHtml(`Pass rate dropped ${absDiff}% vs previous run (${prevRate}% → ${+(+stats.passRate).toFixed(1)}%) — click to open Failures analysis.`) });
+      }
+    }
+
+    // New tests / removed tests detection — uses same stripTags logic as renderCoverageChanges
+    const _latestRunId = SarvaStore.history && SarvaStore.history.length > 0 ? SarvaStore.history[0].id : null;
+    if (_latestRunId && SarvaStore.history && SarvaStore.history.length > 1) {
+      const _th = SarvaStore.testHistory || [];
+      const _stripTags = n => (n || '').replace(/\s*@\S+/g, '').trim();
+      const _latestBN = new Set(_th.filter(t => t.history.length > 0 && t.history[0].runId === _latestRunId).map(t => _stripTags(t.testName || '')));
+      const _histBN   = new Set(_th.filter(t => t.history.length > 0 && t.history[0].runId !== _latestRunId).map(t => _stripTags(t.testName || '')));
+      const _newN  = _th.filter(t => t.history.length === 1 && t.history[0].runId === _latestRunId && !_histBN.has(_stripTags(t.testName || ''))).length;
+      const _absN  = _th.filter(t => t.history.length > 0 && t.history[0].runId !== _latestRunId && !_latestBN.has(_stripTags(t.testName || ''))).length;
+      const _scrollToCoverage = `(function(){var el=document.getElementById('sv-coverage-changes');if(el&&el.style.display!=='none'){window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'});}})()`;
+      if (_newN > 0) {
+        chips.push({ label: `${_newN} new test${_newN !== 1 ? 's' : ''}`,
+          color: '#22d3ee', bg: 'rgba(34,211,238,0.1)', border: 'rgba(34,211,238,0.3)',
+          onclick: _scrollToCoverage,
+          tip: escHtml(`${_newN} test${_newN !== 1 ? 's' : ''} appearing in the suite for the first time — click to see the list below.`) });
+      }
+      if (_absN > 0) {
+        chips.push({ label: `${_absN} absent`,
+          color: '#f97316', bg: 'rgba(249,115,22,0.1)', border: 'rgba(249,115,22,0.3)',
+          onclick: _scrollToCoverage,
+          tip: escHtml(`${_absN} test${_absN !== 1 ? 's' : ''} from previous runs didn't run this time — click to see the list below.`) });
       }
     }
 
@@ -74,9 +98,19 @@ const SarvaOverview = (() => {
     }
     if (chips.length === 0) { el.innerHTML = ''; return; }
 
+    const attnChips     = chips.filter(c => c.color !== '#22d3ee' && c.color !== '#f97316');
+    const coverageChips = chips.filter(c => c.color === '#22d3ee' || c.color === '#f97316');
+
     el.innerHTML = `<div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center;">
-      <span style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);white-space:nowrap;">Needs attention</span>
-      ${chips.map(c => `<span onclick="${c.onclick}" style="cursor:pointer;display:inline-flex;align-items:center;gap:0.3rem;
+      ${attnChips.length > 0 ? `<span style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);white-space:nowrap;">Needs attention</span>` : ''}
+      ${attnChips.map(c => `<span onclick="${c.onclick}" style="cursor:pointer;display:inline-flex;align-items:center;gap:0.3rem;
+             font-size:0.75rem;font-weight:600;padding:0.2rem 0.65rem;border-radius:20px;
+             background:${c.bg};color:${c.color};border:1px solid ${c.border};transition:opacity 0.15s;"
+            onmouseenter="this.style.opacity='0.7'" onmouseleave="this.style.opacity='1'"
+            data-sv-tip="${c.tip}">${c.label}</span>`).join('')}
+      ${coverageChips.length > 0 && attnChips.length > 0 ? `<span style="font-size:0.65rem;color:var(--border);margin:0 0.15rem;">|</span>` : ''}
+      ${coverageChips.length > 0 ? `<span style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);white-space:nowrap;">Coverage</span>` : ''}
+      ${coverageChips.map(c => `<span onclick="${c.onclick}" style="cursor:pointer;display:inline-flex;align-items:center;gap:0.3rem;
              font-size:0.75rem;font-weight:600;padding:0.2rem 0.65rem;border-radius:20px;
              background:${c.bg};color:${c.color};border:1px solid ${c.border};transition:opacity 0.15s;"
             onmouseenter="this.style.opacity='0.7'" onmouseleave="this.style.opacity='1'"
@@ -603,334 +637,134 @@ const SarvaOverview = (() => {
     });
   }
 
-  /* ── Top Failures — ranked by cross-run failure count ──────────────────────── */
-  function renderTopFailures(finalTests) {
-    const list  = document.getElementById('sv-top-failures-list');
-    const count = document.getElementById('sv-top-failures-count');
-    if (!list) return;
-
-    // Build ranked list from testHistory (cross-run), falling back to current run only
-    const seen = new Set();
-    const failData = [];
-
-    (SarvaStore.testHistory || []).forEach(entry => {
-      const failCount = (entry.history || []).filter(h => (h.status === 'failed' || h.status === 'broken') && !h.wasFlaky).length;
-      if (failCount === 0) return;
-      const name = entry.testName || entry.testId;
-      if (seen.has(name)) return;
-      seen.add(name);
-
-      // Resolve exact fullName from testId (strips "tool:" prefix) to handle multi-browser variants
-      const histFullName = entry.testId && entry.testId.includes(':')
-        ? entry.testId.split(':').slice(1).join(':') : null;
-      // Find uuid: prefer exact browser variant match, fallback to name match
-      const cur = (histFullName && (
-        finalTests.find(t => t.fullName === histFullName) ||
-        (SarvaStore.tests || []).find(t => t.fullName === histFullName)
-      )) ||
-        finalTests.find(t => t.fullName === name || t.name === name) ||
-        (SarvaStore.tests || []).find(t => t.fullName === name || t.name === name);
-      const curStatus = cur ? (cur.status === 'broken' ? 'failed' : cur.status) : null;
-      const firstSeg  = histFullName ? histFullName.split('>')[0].trim() : '';
-      const browser   = firstSeg && !firstSeg.includes('.') && !firstSeg.includes('/') ? firstSeg : null;
-      failData.push({
-        uuid:         cur ? cur.uuid : null,
-        name:         cur ? cur.name : name,
-        fullName:     name,
-        duration:     cur ? cur.duration : null,
-        failCount,
-        totalRuns:    (entry.history || []).length,
-        currentFail:  curStatus === 'failed',
-        currentStatus: curStatus,
-        browser,
-      });
-    });
-
-    // Also add current-run failures not yet in history (edge case: first run)
-    finalTests.filter(t => t.status === 'failed' || t.status === 'broken').forEach(t => {
-      if (!seen.has(t.fullName)) {
-        const s = t.status === 'broken' ? 'failed' : t.status;
-        failData.push({ uuid: t.uuid, name: t.name, fullName: t.fullName,
-          duration: t.duration, failCount: 1, totalRuns: 1, currentFail: true, currentStatus: s });
-      }
-    });
-
-    failData.sort((a, b) => b.failCount - a.failCount);
-    const top = failData;
-
-    if (count) count.textContent = `${top.length} tests`;
-    if (top.length === 0) {
-      list.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:2rem;font-size:0.8rem;">No failures detected 🎉</div>`;
-      return;
-    }
-
-    list.innerHTML = top.map((f, i) => {
-      // Last 10 run symbols with hover date/time (same approach as Top Flaky)
-      // Match testHistory by the stored fullName (which came from entry.testName at failData build time)
-      // Also try testId exact match for multi-browser precision
-      const histEntry = (SarvaStore.testHistory || []).find(t =>
-        (t.testName === f.fullName || t.testName === f.name) &&
-        (t.history || []).some(h => (h.status === 'failed' || h.status === 'broken') && !h.wasFlaky)
-      ) || (SarvaStore.testHistory || []).find(t =>
-        t.testName === f.fullName || t.testName === f.name ||
-        t.testId   === f.fullName || t.testId   === f.name
-      );
-      const last10 = histEntry ? histEntry.history.slice(0, 10).reverse() : [];
-      const symbols = last10.map(h => {
-        const run = (SarvaStore.history || []).find(r => r.id === h.runId);
-        const dt  = run && run.timestamp ? new Date(run.timestamp).toLocaleString(undefined, {
-          year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
-        }) : '';
-        const isFlaky  = h.wasFlaky || h.status === 'flaky';
-        const isFailed = h.status === 'failed' || h.status === 'broken';
-        let label, color, sym;
-        if (isFlaky)        { label = 'Flaky (passed after retry)'; color = 'var(--status-flaky)';   sym = '~'; }
-        else if (isFailed)  { label = 'Failed';                     color = 'var(--status-failed)';  sym = '✗'; }
-        else if (h.status === 'passed') { label = 'Passed';         color = 'var(--status-passed)';  sym = '✓'; }
-        else                { label = 'Skipped';                    color = 'var(--status-skipped)'; sym = '○'; }
-        const tip = dt ? `<b>${label}</b>${dt}` : `<b>${label}</b>`;
-        return `<span data-sv-tip="${escHtml(tip)}" style="color:${color};font-size:0.75rem;cursor:default;line-height:1;">${sym}</span>`;
-      }).join('');
-
-      // Most recent failure timestamp (history is newest-first)
-      const lastFailH   = histEntry && (histEntry.history || []).find(h => (h.status === 'failed' || h.status === 'broken') && !h.wasFlaky);
-      const lastFailRun = lastFailH && (SarvaStore.history || []).find(r => r.id === lastFailH.runId);
-      const lastFailAt  = lastFailRun && lastFailRun.timestamp
-        ? new Date(lastFailRun.timestamp).toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
-        : null;
-
-      return `
-      <div style="display:flex;align-items:center;gap:0.75rem;padding:0.65rem 1.25rem;
-                  border-bottom:1px solid var(--border);${f.uuid ? 'cursor:pointer;' : ''}"
-           ${f.uuid ? `onclick="SarvaTestDetail.open('${f.uuid}')"` : ''}
-           onmouseenter="this.style.background='var(--bg-hover)'"
-           onmouseleave="this.style.background=''">
-        <span style="color:var(--text-muted);font-size:0.72rem;width:1rem;flex-shrink:0;">${i + 1}</span>
-        <span class="sv-pill ${f.currentStatus || 'skipped'}" style="flex-shrink:0;">${f.currentStatus === 'failed' ? '✗' : f.currentStatus === 'flaky' ? '~' : f.currentStatus === 'passed' ? '✓' : '○'}</span>
-        <div style="flex:1;min-width:0;">
-          <div style="display:flex;align-items:center;gap:0.4rem;min-width:0;">
-            <span class="sv-truncate" style="font-size:0.82rem;">${escHtml(f.name)}</span>
-            ${lastFailAt ? `<span data-sv-tip="${escHtml('<b>Last Failed:</b>' + lastFailAt + (f.browser ? '<br>Browser: ' + f.browser : ''))}" style="color:var(--status-failed);opacity:0.7;cursor:default;flex-shrink:0;display:inline-flex;align-items:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>` : ''}
-            ${f.duration ? `<span style="font-size:0.7rem;color:var(--text-muted);flex-shrink:0;margin-left:auto;">${fmtDuration(f.duration)}</span>` : ''}
-          </div>
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:2px;display:flex;align-items:center;gap:0.4rem;">
-            <span>Failed in ${f.failCount} of ${f.totalRuns} runs</span>
-            ${symbols ? `<span style="display:inline-flex;gap:1px;align-items:center;margin-left:0.25rem;">${symbols}</span>` : ''}
-          </div>
-        </div>
-        ${f.uuid ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>` : ''}
-      </div>`;
-    }).join('');
-  }
-
-  /* ── Top Flaky Offenders — with last-10 sparkline symbols ───────────────────── */
-  function renderTopFlaky() {
-    const list  = document.getElementById('sv-top-flaky-list');
-    const count = document.getElementById('sv-top-flaky-count');
-    if (!list) return;
-
-    const topFlaky = (SarvaStore.testHistory || [])
-      .filter(t => t.flakyScore > 0 || t.wasEverFlaky)
-      .sort((a, b) => b.flakyScore - a.flakyScore);
-
-    if (count) count.textContent = `${topFlaky.length} tests`;
-
-    if (topFlaky.length === 0) {
-      list.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:2rem;font-size:0.8rem;">No flaky tests detected 🎉</div>`;
-      return;
-    }
-
-    list.innerHTML = topFlaky.map((t, i) => {
-      // flakyScore is already 0-100 integer — use directly
-      const score     = Math.round(t.flakyScore || 0);
-      const runs      = t.history ? t.history.length : 0;
-      const flakyRuns = t.history ? t.history.filter(h => h.wasFlaky || h.status === 'flaky').length : 0;
-
-      // Last 10 run symbols (history is newest-first; show oldest→newest left→right)
-      const last10 = t.history ? t.history.slice(0, 10).reverse() : [];
-      const symbols = last10.map(h => {
-        const run = (SarvaStore.history || []).find(r => r.id === h.runId);
-        const dt = run && run.timestamp ? new Date(run.timestamp).toLocaleString(undefined, {
-          year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
-        }) : '';
-        const isFlaky  = h.wasFlaky || h.status === 'flaky';
-        const isFailed = h.status === 'failed' || h.status === 'broken';
-        let label, color, sym;
-        if (isFlaky)       { label = 'Flaky (passed after retry)'; color = 'var(--status-flaky)';   sym = '~'; }
-        else if (h.status === 'passed') { label = 'Passed';  color = 'var(--status-passed)';  sym = '✓'; }
-        else if (isFailed) { label = 'Failed';               color = 'var(--status-failed)';  sym = '✗'; }
-        else               { label = 'Skipped';              color = 'var(--status-skipped)'; sym = '○'; }
-        const tip = dt ? `<b>${label}</b>${dt}` : `<b>${label}</b>`;
-        return `<span data-sv-tip="${escHtml(tip)}" style="color:${color};font-size:0.75rem;cursor:default;line-height:1;">${sym}</span>`;
-      }).join('');
-
-      // Most recent flaky timestamp (history is newest-first)
-      const lastFlakyH   = t.history && t.history.find(h => h.wasFlaky || h.status === 'flaky');
-      const lastFlakyRun = lastFlakyH && (SarvaStore.history || []).find(r => r.id === lastFlakyH.runId);
-      const lastFlakyAt  = lastFlakyRun && lastFlakyRun.timestamp
-        ? new Date(lastFlakyRun.timestamp).toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
-        : null;
-
-      const flakyHistId   = t.testId && t.testId.includes(':') ? t.testId.split(':').slice(1).join(':') : null;
-      const flakyFirstSeg = flakyHistId ? flakyHistId.split('>')[0].trim() : '';
-      const flakyBrowser  = flakyFirstSeg && !flakyFirstSeg.includes('.') && !flakyFirstSeg.includes('/') ? flakyFirstSeg : null;
-
-      const flakyFullName = t.testId && t.testId.includes(':') ? t.testId.split(':').slice(1).join(':') : t.testName;
-      const flakyCur = (SarvaStore.tests || []).find(tc => tc.fullName === flakyFullName || tc.name === t.testName);
-      const flakyUuid = flakyCur?.uuid;
-
-      // Latest run status (history is newest-first)
-      const latestH      = t.history && t.history.length > 0 ? t.history[0] : null;
-      const latestIsFlaky = latestH && (latestH.wasFlaky || latestH.status === 'flaky');
-      const latestStatus = !latestH ? 'skipped'
-        : latestIsFlaky                                         ? 'flaky'
-        : (latestH.status === 'failed' || latestH.status === 'broken') ? 'failed'
-        : latestH.status === 'passed'                          ? 'passed'
-        : 'skipped';
-      const latestSym    = latestStatus === 'failed' ? '✗' : latestStatus === 'flaky' ? '~' : latestStatus === 'passed' ? '✓' : '○';
-
-      return `
-      <div style="display:flex;align-items:center;gap:0.75rem;padding:0.65rem 1.25rem;
-                  border-bottom:1px solid var(--border);${flakyUuid ? 'cursor:pointer;' : ''}"
-           ${flakyUuid ? `onclick="SarvaTestDetail.open('${flakyUuid}')"` : ''}
-           onmouseenter="this.style.background='var(--bg-hover)'"
-           onmouseleave="this.style.background=''">
-        <span style="color:var(--text-muted);font-size:0.72rem;width:1rem;flex-shrink:0;">${i + 1}</span>
-        <span class="sv-pill ${latestStatus}" style="flex-shrink:0;">${latestSym}</span>
-        <div style="flex:1;min-width:0;">
-          <div style="display:flex;align-items:center;gap:0.4rem;min-width:0;">
-            <span class="sv-truncate" style="font-size:0.82rem;">${escHtml(t.testName)}</span>
-            ${lastFlakyAt ? `<span data-sv-tip="${escHtml('<b>Last Flaky:</b>' + lastFlakyAt + (flakyBrowser ? '<br>Browser: ' + flakyBrowser : ''))}" style="color:var(--status-flaky);opacity:0.7;cursor:default;flex-shrink:0;display:inline-flex;align-items:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>` : ''}
-          </div>
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:2px;display:flex;align-items:center;gap:0.4rem;">
-            <span>Unstable in ${flakyRuns} of ${runs} runs</span>
-            ${symbols ? `<span style="display:inline-flex;gap:1px;align-items:center;margin-left:0.25rem;">${symbols}</span>` : ''}
-          </div>
-        </div>
-        <div style="flex-shrink:0;text-align:right;margin-right:0.25rem;">
-          <div style="font-size:0.85rem;font-weight:700;color:var(--status-flaky);">${score}%</div>
-          <div style="font-size:0.68rem;color:var(--text-muted);">flaky rate</div>
-        </div>
-        ${flakyUuid ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>` : ''}
-      </div>`;
-    }).join('');
-  }
-
-  /* ── Newly Failing / Recently Fixed ────────────────────────────────────────── */
-  function renderNewlyFailing() {
-    const section = document.getElementById('sv-newly-failing-section');
+  /* ── Coverage Changes: New Tests / Absent Tests ─────────────────────────────── */
+  function renderCoverageChanges() {
+    const section = document.getElementById('sv-coverage-changes');
     if (!section) return;
 
-    const INFO_ICON_SM = `<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
-
-    const newlyFailing = [];
-    const recentlyFixed = [];
-
-    (SarvaStore.testHistory || []).forEach(entry => {
-      const h = entry.history || [];
-      if (h.length < 2) return;
-      const recent = h[0];
-
-      // Resolve the matching test — prefer exact fullName match (browser-specific),
-      // fall back to name match. Extract browser label from testId for display.
-      const fullName = entry.testId && entry.testId.includes(':')
-        ? entry.testId.split(':').slice(1).join(':') : entry.testName;
-      const cur = (SarvaStore.tests || []).find(t => t.fullName === fullName)
-               || (SarvaStore.tests || []).find(t => t.name === entry.testName);
-
-      // Extract browser from testId (e.g. "playwright:chromium > ..." → "chromium")
-      let browser = '';
-      if (entry.testId && entry.testId.includes(':')) {
-        const seg = entry.testId.split(':')[1] || '';
-        const knownBrowsers = ['chromium', 'firefox', 'webkit', 'chrome', 'safari', 'edge'];
-        const b = seg.split('>')[0].trim().toLowerCase();
-        if (knownBrowsers.some(kb => b.includes(kb))) browser = b;
-      }
-      const displayName = (entry.testName || fullName) + (browser ? ` (${browser})` : '');
-
-      const isFailed = s => (s === 'failed' || s === 'broken');
-      const isPassed = e => e.status === 'passed' || e.wasFlaky;
-
-      if (isFailed(recent.status) && !recent.wasFlaky) {
-        // Newly Failing: current run = failed AND the immediately previous run = passed
-        if (h.length >= 2 && isPassed(h[1])) {
-          const prevRun = (SarvaStore.history || []).find(r => r.id === h[1].runId);
-          newlyFailing.push({
-            name: displayName,
-            uuid: cur?.uuid,
-            lastPassAt: prevRun?.timestamp || null,
-          });
-        }
-      } else if (recent.status === 'passed' && !recent.wasFlaky) {
-        // Recently Fixed: current run = a clean pass (not flaky) AND the immediately previous run = failed
-        if (h.length >= 2 && isFailed(h[1].status) && !h[1].wasFlaky) {
-          const totalFails = h.filter(e => isFailed(e.status) && !e.wasFlaky).length;
-          recentlyFixed.push({
-            name: displayName,
-            uuid: cur?.uuid,
-            failCount: totalFails,
-          });
-        }
-      }
-    });
-
-    if (newlyFailing.length === 0 && recentlyFixed.length === 0) {
+    const latestRunId = SarvaStore.history && SarvaStore.history.length > 0 ? SarvaStore.history[0].id : null;
+    if (!latestRunId || !SarvaStore.history || SarvaStore.history.length < 2) {
       section.style.display = 'none';
       return;
     }
+
+    const th = SarvaStore.testHistory || [];
+
+    // Strip Playwright inline tags so renamed tests (e.g. @severity added later) aren't
+    // counted as brand-new or absent — they're the same test with a different label
+    const stripTags = n => (n || '').replace(/\s*@\S+/g, '').trim();
+    const latestBaseNames = new Set(
+      th.filter(t => t.history.length > 0 && t.history[0].runId === latestRunId)
+        .map(t => stripTags(t.testName || ''))
+    );
+    const historicalBaseNames = new Set(
+      th.filter(t => t.history.length > 0 && t.history[0].runId !== latestRunId)
+        .map(t => stripTags(t.testName || ''))
+    );
+
+    const INFO_ICON_SM = `<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
+
+    const newTests = th.filter(t =>
+      t.history.length === 1 &&
+      t.history[0].runId === latestRunId &&
+      !historicalBaseNames.has(stripTags(t.testName || ''))
+    ).map(t => {
+      const ci     = t.testId ? t.testId.indexOf(':') : -1;
+      const histFN = ci > 0 ? t.testId.slice(ci + 1) : null;
+      const baseName = stripTags(t.testName || '');
+      const pool  = SarvaStore.tests || [];
+      const cur   = pool.find(tc => tc.fullName === histFN)
+                 || pool.find(tc => tc.name === t.testName)
+                 || pool.find(tc => stripTags(tc.fullName || '') === (histFN ? stripTags(histFN) : ''))
+                 || pool.find(tc => stripTags(tc.name || '') === baseName);
+      const firstSeg = histFN ? histFN.split('>')[0].trim() : '';
+      const browser  = (firstSeg && !firstSeg.includes('.') && !firstSeg.includes('/') ? firstSeg : null)
+                    || cur?.extra?.selenium?.browser?.name
+                    || cur?.extra?.playwright?.browser
+                    || null;
+      return { uuid: cur?.uuid || null, name: cur?.name || t.testName, status: t.history[0].status, browser };
+    });
+
+    const absentTests = th.filter(t =>
+      t.history.length > 0 &&
+      t.history[0].runId !== latestRunId &&
+      !latestBaseNames.has(stripTags(t.testName || ''))
+    ).map(t => {
+      const lastRun = (SarvaStore.history || []).find(r => r.id === t.history[0].runId);
+      const fmtTs = ts => ts ? new Date(ts).toLocaleString(undefined, {
+        year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+      }) : '';
+      const ci       = t.testId ? t.testId.indexOf(':') : -1;
+      const histFN   = ci > 0 ? t.testId.slice(ci + 1) : null;
+      const firstSeg = histFN ? histFN.split('>')[0].trim() : '';
+      const browser  = firstSeg && !firstSeg.includes('.') && !firstSeg.includes('/') ? firstSeg : null;
+      return { name: t.testName, testId: t.testId, lastRunId: t.history[0].runId, lastStatus: t.history[0].status, lastSeenAt: lastRun?.timestamp ? fmtTs(lastRun.timestamp) : null, browser };
+    });
+
+    if (newTests.length === 0 && absentTests.length === 0) { section.style.display = 'none'; return; }
     section.style.display = '';
 
-    const fmtTs = ts => ts ? new Date(ts).toLocaleString(undefined, {
-      month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
-    }) : null;
-
-    const mkRow = (item, isNew) => {
-      const sub = isNew
-        ? (item.lastPassAt ? `Last passed: ${fmtTs(item.lastPassAt)}` : 'Was passing before')
-        : `Was failing in ${item.failCount} run${item.failCount !== 1 ? 's' : ''}`;
-      const color = isNew ? 'var(--status-failed)' : 'var(--status-passed)';
-      const sym   = isNew ? '✗' : '✓';
+    const mkNewRow = t => {
+      const sym = t.status === 'failed' || t.status === 'broken' ? '✗' : t.status === 'flaky' ? '~' : t.status === 'passed' ? '✓' : '○';
       return `
       <div style="display:flex;align-items:center;gap:0.65rem;padding:0.55rem 1rem;
-                  border-bottom:1px solid var(--border);${item.uuid ? 'cursor:pointer;' : ''}"
-           ${item.uuid ? `onclick="SarvaTestDetail.open('${item.uuid}')"` : ''}
-           onmouseenter="this.style.background='var(--bg-hover)'"
-           onmouseleave="this.style.background=''">
-        <span style="color:${color};font-size:0.8rem;flex-shrink:0;">${sym}</span>
-        <div style="flex:1;min-width:0;">
-          <div class="sv-truncate" style="font-size:0.8rem;font-weight:500;">${escHtml(item.name)}</div>
-          <div style="font-size:0.68rem;color:var(--text-muted);margin-top:1px;">${sub}</div>
+                  border-bottom:1px solid var(--border);cursor:pointer;"
+           onclick="SarvaTestDetail.open('${t.uuid}')"
+           onmouseenter="this.style.background='var(--bg-hover)'" onmouseleave="this.style.background=''">
+        <span class="sv-pill ${t.status}" style="flex-shrink:0;">${sym}</span>
+        <div style="flex:1;min-width:0;display:flex;align-items:center;gap:0.3rem;">
+          <span class="sv-truncate" style="font-size:0.8rem;font-weight:500;">${escHtml(t.name)}</span>
+          ${t.browser ? `<span class="sv-browser-badge">${escHtml(t.browser)}</span>` : ''}
         </div>
-        ${item.uuid ? `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>` : ''}
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
       </div>`;
     };
-
+    const mkAbsentRow = (t, idx) => {
+      const sym     = t.lastStatus === 'failed' ? '✗' : t.lastStatus === 'flaky' ? '~' : t.lastStatus === 'passed' ? '✓' : '○';
+      const safeId  = escHtml(t.testId || '');
+      const lastRunId = escHtml(t.lastRunId || '');
+      return `
+      <div style="display:flex;align-items:center;gap:0.65rem;padding:0.55rem 1rem;
+                  border-bottom:1px solid var(--border);cursor:pointer;"
+           onclick="SarvaTestDetail.openFromHistory('${safeId}','${lastRunId}')"
+           onmouseenter="this.style.background='var(--bg-hover)'" onmouseleave="this.style.background=''">
+        <span class="sv-pill ${t.lastStatus}" style="flex-shrink:0;opacity:0.6;">${sym}</span>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:0.3rem;min-width:0;">
+            <span class="sv-truncate" style="font-size:0.8rem;font-weight:500;color:var(--text-secondary);">${escHtml(t.name)}</span>
+            ${t.browser ? `<span class="sv-browser-badge">${escHtml(t.browser)}</span>` : ''}
+          </div>
+          <div style="font-size:0.68rem;color:var(--text-muted);margin-top:1px;">Last seen${t.lastSeenAt ? `: ${escHtml(t.lastSeenAt)}` : ' in a previous run'}</div>
+        </div>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>`;
+    };
     const emptyRow = msg => `<div style="text-align:center;color:var(--text-muted);padding:1.5rem;font-size:0.78rem;">${msg}</div>`;
 
     section.innerHTML = `
     <div class="sv-grid-2" style="gap:1rem;align-items:start;">
-      <div class="sv-card" style="border-left:3px solid var(--status-failed);">
+      <div class="sv-card" style="border-left:3px solid #22d3ee;">
         <div class="sv-card-header">
           <span style="display:flex;align-items:center;gap:0.4rem;">
-            <span class="sv-card-title" style="color:var(--status-failed);">Newly Failing</span>
-            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Newly Failing</b><br>• Passing before but broke in this run<br>• A recent code change likely caused these — #1 priority<br>• Investigate commits since the last passing run<br>• Click any test to see the full error and stack trace')}">${INFO_ICON_SM}</span>
+            <span class="sv-card-title" style="color:#22d3ee;">New Tests</span>
+            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>New Tests</b><br>• Appearing in the suite for the first time this run<br>• Review to confirm they are intentionally added<br>• Click any test to inspect its result and steps')}">${INFO_ICON_SM}</span>
           </span>
-          <span style="font-size:0.72rem;color:var(--text-muted);">${newlyFailing.length} test${newlyFailing.length !== 1 ? 's' : ''}</span>
+          <span style="font-size:0.72rem;color:var(--text-muted);">${newTests.length} test${newTests.length !== 1 ? 's' : ''}</span>
         </div>
-        <div style="padding:0;max-height:260px;overflow-y:auto;">
-          ${newlyFailing.length ? newlyFailing.map(t => mkRow(t, true)).join('') : emptyRow('No newly failing tests 🎉')}
+        <div style="padding:0;max-height:240px;overflow-y:auto;">
+          ${newTests.length ? newTests.map(mkNewRow).join('') : emptyRow('No new tests this run')}
         </div>
       </div>
-      <div class="sv-card" style="border-left:3px solid var(--status-passed);">
+      <div class="sv-card" style="border-left:3px solid #f97316;">
         <div class="sv-card-header">
           <span style="display:flex;align-items:center;gap:0.4rem;">
-            <span class="sv-card-title" style="color:var(--status-passed);">Recently Fixed</span>
-            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Recently Fixed</b><br>• Was failing before but passing now<br>• Represents resolved issues in this cycle<br>• Use this list to report progress to management')}">${INFO_ICON_SM}</span>
+            <span class="sv-card-title" style="color:#f97316;">Absent Tests</span>
+            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Absent Tests</b><br>• Ran in previous runs but missing from this run<br>• Could be deleted, renamed, or excluded by a filter<br>• Last-seen status shown to help diagnose the cause')}">${INFO_ICON_SM}</span>
           </span>
-          <span style="font-size:0.72rem;color:var(--text-muted);">${recentlyFixed.length} test${recentlyFixed.length !== 1 ? 's' : ''}</span>
+          <span style="font-size:0.72rem;color:var(--text-muted);">${absentTests.length} test${absentTests.length !== 1 ? 's' : ''}</span>
         </div>
-        <div style="padding:0;max-height:260px;overflow-y:auto;">
-          ${recentlyFixed.length ? recentlyFixed.map(t => mkRow(t, false)).join('') : emptyRow('No recently fixed tests')}
+        <div style="padding:0;max-height:240px;overflow-y:auto;">
+          ${absentTests.length ? absentTests.map(mkAbsentRow).join('') : emptyRow('All previous tests ran this time')}
         </div>
       </div>
     </div>`;
@@ -1114,10 +948,8 @@ const SarvaOverview = (() => {
     renderPrintContent(stats, history);
     renderAttentionStrip(stats);
     renderStatCards(stats);
+    renderCoverageChanges();
     renderPassRate(stats);
-    renderTopFailuresAndStore(stats.finalTests || []);
-    renderTopFlakyAndStore();
-    renderNewlyFailing();
     renderBrowserToolBreakdown(stats.finalTests || []);
     if (typeof echarts !== 'undefined') {
       const h = getFilteredHistory();
@@ -1136,72 +968,20 @@ const SarvaOverview = (() => {
     }
   });
 
-  /* ── CSV exports ────────────────────────────────────────────────────────────── */
-  let _failData  = [];
-  let _topFlaky  = [];
   let _browserGroups = [];
-
-  const _origRenderTopFailures = renderTopFailures;
-  function renderTopFailuresAndStore(finalTests) {
-    _origRenderTopFailures(finalTests);
-    // Re-derive failData for CSV (mirrors renderTopFailures logic)
-    const seen = new Set();
-    _failData = [];
-    (SarvaStore.testHistory || []).forEach(entry => {
-      const failCount = (entry.history || []).filter(h => (h.status === 'failed' || h.status === 'broken') && !h.wasFlaky).length;
-      if (!failCount) return;
-      const name = entry.testName || entry.testId;
-      if (seen.has(name)) return;
-      seen.add(name);
-      _failData.push({ name, failCount, totalRuns: (entry.history || []).length });
-    });
-    (SarvaStore.stats.finalTests || []).filter(t => (t.status === 'failed' || t.status === 'broken') && !seen.has(t.fullName))
-      .forEach(t => _failData.push({ name: t.name, failCount: 1, totalRuns: 1 }));
-    _failData.sort((a, b) => b.failCount - a.failCount);
-  }
-
-  const _origRenderTopFlaky = renderTopFlaky;
-  function renderTopFlakyAndStore() {
-    _origRenderTopFlaky();
-    _topFlaky = (SarvaStore.testHistory || [])
-      .filter(t => t.flakyScore > 0 || t.wasEverFlaky)
-      .sort((a, b) => b.flakyScore - a.flakyScore)
-      .map(t => ({
-        name: t.testName || t.testId,
-        flakyRuns: (t.history || []).filter(h => h.wasFlaky || h.status === 'flaky').length,
-        totalRuns: (t.history || []).length,
-        flakyRate: Math.round(t.flakyScore || 0),
-      }));
-  }
 
   function csvEsc(v) {
     const s = String(v == null ? '' : v);
     return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s.replace(/"/g, '""')}"` : s;
   }
-
   function triggerCsvDownload(rows, filename) {
     const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
     a.href = url; a.download = filename;
     document.body.appendChild(a); a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  }
-
-  function downloadFailuresCsv() {
-    const lines = [['Test Name', 'Fail Count', 'Total Runs', 'Fail Rate %'].join(',')];
-    _failData.forEach(d => {
-      const rate = d.totalRuns > 0 ? +((d.failCount / d.totalRuns) * 100).toFixed(1) : 0;
-      lines.push([d.name, d.failCount, d.totalRuns, rate].map(csvEsc).join(','));
-    });
-    triggerCsvDownload(lines, `top-failures-${new Date().toISOString().slice(0,10)}.csv`);
-  }
-
-  function downloadFlakyCsv() {
-    const lines = [['Test Name', 'Flaky Runs', 'Total Runs', 'Flaky Rate %'].join(',')];
-    _topFlaky.forEach(d => lines.push([d.name, d.flakyRuns, d.totalRuns, d.flakyRate].map(csvEsc).join(',')));
-    triggerCsvDownload(lines, `top-flaky-${new Date().toISOString().slice(0,10)}.csv`);
   }
 
   function downloadBrowserCsv() {
@@ -1310,7 +1090,7 @@ const SarvaOverview = (() => {
     sImg.src = svgUrl;
   }
 
-  return { setRunFilter, goToTests, downloadFailuresCsv, downloadFlakyCsv, downloadBrowserCsv, downloadDistribution };
+  return { setRunFilter, goToTests, downloadBrowserCsv, downloadDistribution };
 
 })();
 

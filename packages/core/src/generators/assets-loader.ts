@@ -49,6 +49,7 @@ export class AssetsLoader {
       path.join(__dirname, 'shared', 'state-store.js'),
       path.join(__dirname, 'shell', 'shell.js'),
       path.join(__dirname, 'micro-apps', 'overview', 'overview.js'),
+      path.join(__dirname, 'micro-apps', 'failures', 'failures.js'),
       path.join(__dirname, 'micro-apps', 'test-list', 'test-list.js'),
       path.join(__dirname, 'micro-apps', 'test-detail', 'test-detail.js'),
       path.join(__dirname, 'micro-apps', 'trends', 'trends.js'),

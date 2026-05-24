@@ -19,6 +19,13 @@ export interface RunSummary {
     commit?: string;
     ci?: string;
   };
+  severityBreakdown?: {
+    critical: number;
+    high: number;
+    medium: number;
+    low: number;
+    trivial: number;
+  };
 }
 
 export interface TestTrendData {
@@ -37,4 +44,5 @@ export interface TestRunOutcome {
   duration: number;
   retries: number;
   wasFlaky?: boolean; // True when test passed after retry (original status was 'flaky')
+  severity?: string;  // Severity label at the time of this run (e.g. 'critical', 'high')
 }

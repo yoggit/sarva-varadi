@@ -97,6 +97,14 @@ export class ReportGenerator {
     return Array.from(uniqueTests.values());
   }
 
+  private getSeverityFromLabels(labels?: { name: string; value: string }[]): string {
+    if (!labels) return '';
+    const direct = labels.find(l => l.name === 'severity');
+    if (direct) return (direct.value || '').toLowerCase();
+    const tagged = labels.find(l => l.name === 'tag' && (l.value || '').startsWith('severity:'));
+    return tagged ? tagged.value.slice(9).toLowerCase() : '';
+  }
+
   private createRunSummary(metadata: RunMetadata, tests: SarvaTestResult[]): RunSummary {
     // Get only unique final test results for summary calculations
     const uniqueTests = this.getUniqueFinalTests(tests);
@@ -106,6 +114,18 @@ export class ReportGenerator {
     const skipped = uniqueTests.filter(t => t.status === 'skipped').length;
     const flaky = uniqueTests.filter(t => t.status === 'flaky').length;
     const total = uniqueTests.length;
+
+    const sevCounts = { critical: 0, high: 0, medium: 0, low: 0, trivial: 0 };
+    let anySev = false;
+    uniqueTests
+      .filter(t => t.status === 'failed' || t.status === 'broken' || t.status === 'flaky')
+      .forEach(t => {
+        const sev = this.getSeverityFromLabels(t.labels as { name: string; value: string }[]);
+        if (sev && sev in sevCounts) {
+          sevCounts[sev as keyof typeof sevCounts]++;
+          anySev = true;
+        }
+      });
 
     return {
       id: metadata.id,
@@ -118,6 +138,7 @@ export class ReportGenerator {
       flaky,
       passRate: total > 0 ? Math.round((passed / total) * 100 * 10) / 10 : 0,
       environment: metadata.environment,
+      ...(anySev ? { severityBreakdown: sevCounts } : {}),
     };
   }
 

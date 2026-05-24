@@ -75,8 +75,12 @@ const SarvaShell = (() => {
   function updateNavBadges(stats) {
     const badge = document.getElementById('sv-nav-badge-tests');
     if (badge) badge.textContent = stats.total;
-    const failed = document.getElementById('sv-nav-badge-failed');
-    if (failed && stats.failed > 0) { failed.textContent = stats.failed; failed.style.display = ''; }
+    const failBadge = document.getElementById('sv-nav-badge-failures');
+    if (failBadge) {
+      const n = (stats.failed || 0) + (stats.flaky || 0);
+      if (n > 0) { failBadge.textContent = n; failBadge.style.display = ''; }
+      else failBadge.style.display = 'none';
+    }
   }
 
   /* ── Timestamp ─────────────────────────────────────────────────────────────── */

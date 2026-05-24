@@ -41,12 +41,21 @@ export function renderShellOpen(params: {
       <div class="sv-nav-section">Report</div>
 
       <button class="sv-nav-item active" data-view="overview"
-              data-sv-tip="<b>Overview</b><br>• Summary dashboard<br>• Pass rate, stat cards, health pulse<br>• Run history, top failures &amp; flaky tests">
+              data-sv-tip="<b>Overview</b><br>• Summary dashboard<br>• Pass rate, stat cards, health pulse<br>• Run history and browser breakdown<br>• Coverage changes: new &amp; absent tests">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
           <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
         </svg>
         <span data-title="Overview">Overview</span>
+      </button>
+
+      <button class="sv-nav-item" data-view="failures"
+              data-sv-tip="<b>Failures</b><br>• Newly failing &amp; recently fixed tests<br>• Top failures &amp; flaky offenders ranked<br>• Failures grouped by severity label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span data-title="Failures">Failures</span>
+        <span class="sv-nav-badge sv-nav-badge-fail" id="sv-nav-badge-failures" style="display:none;"></span>
       </button>
 
       <button class="sv-nav-item" data-view="tests"
@@ -142,12 +151,20 @@ export function renderShellOpen(params: {
             <span class="sv-print-toc-num">1</span>
             <span class="sv-print-toc-text">
               <span class="sv-print-toc-label">Overview</span>
-              <span class="sv-print-toc-desc">Pass rate, distribution, health pulse, run history, top failures &amp; flaky tests</span>
+              <span class="sv-print-toc-desc">Pass rate, distribution, health pulse, run history</span>
+            </span>
+            <span class="sv-print-toc-arrow">→</span>
+          </a>
+          <a href="#sv-section-failures" class="sv-print-toc-item">
+            <span class="sv-print-toc-num">2</span>
+            <span class="sv-print-toc-text">
+              <span class="sv-print-toc-label">Failures</span>
+              <span class="sv-print-toc-desc">Newly failing, recently fixed, top failures &amp; flaky, severity breakdown</span>
             </span>
             <span class="sv-print-toc-arrow">→</span>
           </a>
           <a href="#sv-section-tests" class="sv-print-toc-item">
-            <span class="sv-print-toc-num">2</span>
+            <span class="sv-print-toc-num">3</span>
             <span class="sv-print-toc-text">
               <span class="sv-print-toc-label">Tests</span>
               <span class="sv-print-toc-desc">Complete test results list for this run</span>
@@ -155,7 +172,7 @@ export function renderShellOpen(params: {
             <span class="sv-print-toc-arrow">→</span>
           </a>
           <a href="#sv-section-trends" class="sv-print-toc-item">
-            <span class="sv-print-toc-num">3</span>
+            <span class="sv-print-toc-num">4</span>
             <span class="sv-print-toc-text">
               <span class="sv-print-toc-label">Trends</span>
               <span class="sv-print-toc-desc">Cross-run analytics, pass rate trend, top failing &amp; flaky tests</span>
@@ -163,7 +180,7 @@ export function renderShellOpen(params: {
             <span class="sv-print-toc-arrow">→</span>
           </a>
           <a href="#sv-section-timeline" class="sv-print-toc-item">
-            <span class="sv-print-toc-num">4</span>
+            <span class="sv-print-toc-num">5</span>
             <span class="sv-print-toc-text">
               <span class="sv-print-toc-label">Timeline</span>
               <span class="sv-print-toc-desc">Run cadence &amp; parallel execution Gantt</span>
@@ -365,6 +382,12 @@ window.SarvaPrint = function() {
     if (sidebar) sidebar.style.display = '';
     if (mainEl)  mainEl.style.marginLeft = '';
     views.forEach(function(v, i) { v.style.display = savedDisplays[i]; });
+    // Clear inline overrides applied during print prep.
+    document.querySelectorAll('[id$="-chart"]').forEach(function(el) {
+      el.style.width = ''; el.style.maxWidth = '';
+      var cb = el.closest && el.closest('.sv-card-body');
+      if (cb) { cb.style.paddingLeft = ''; cb.style.paddingRight = ''; }
+    });
     if (typeof echarts !== 'undefined') {
       setTimeout(function() {
         document.querySelectorAll('[id$="-chart"]').forEach(function(el) {
@@ -372,13 +395,12 @@ window.SarvaPrint = function() {
           if (inst) {
             try {
               var w = savedChartWidths[el.id];
-              // Restore to exact pre-print width; fall back to container read if not saved
               if (w > 0) { inst.resize({ width: w }); } else { inst.resize(); }
             } catch(e) {}
           }
         });
         if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-      }, 60);
+      }, 150);
     } else {
       if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
     }
@@ -393,30 +415,31 @@ window.SarvaPrint = function() {
     if (mainEl)  mainEl.style.marginLeft = '0';
     views.forEach(function(v) { v.style.display = 'block'; });
 
-    // Use fixed A4 landscape print dimensions — never el.offsetWidth (screen mode).
-    // A4 landscape usable: 297mm − 2×1.2cm margins = 273mm ≈ 1031 CSS px at 96dpi.
-    // Two-column grid (.sv-grid-2) cells: (1031 − 16px gap) / 2 = 507px.
-    var A4W  = 1031;
-    var HALF = Math.floor((A4W - 16) / 2); // 507px
-    if (typeof echarts !== 'undefined') {
-      document.querySelectorAll('[id$="-chart"]').forEach(function(el) {
+    // Resize charts to fill the print card interior edge-to-edge.
+    // @page: A4 landscape, margin 1.4cm 1.2cm → usable width 1031px.
+    // Card border: 1px each side → card interior = 1029px.
+    // .sv-grid-2 (gap 1rem=16px): (1031−16)/2 − 2px border = 505px per column.
+    //
+    // CSS max-width:100% constrains the chart div to the card-body *content* area
+    // (~989px when padding is in effect), causing the ECharts canvas to overflow
+    // visibly or leaving blank space.  Fix: zero card-body padding and override
+    // max-width via inline styles (inline style beats !important from stylesheets).
+    var FULL = 1029;
+    var HALF = 505;
+    document.querySelectorAll('[id$="-chart"]').forEach(function(el) {
+      if (el.id === 'sv-donut-chart') return;
+      var w = (el.closest && el.closest('.sv-grid-2')) ? HALF : FULL;
+      el.style.width    = w + 'px';   // override max-width:100% CSS
+      el.style.maxWidth = 'none';
+      var cb = el.closest && el.closest('.sv-card-body');
+      if (cb) { cb.style.paddingLeft = '0'; cb.style.paddingRight = '0'; }
+      if (typeof echarts !== 'undefined') {
         var inst = echarts.getInstanceByDom(el);
-        if (inst) {
-          try {
-            // Skip fixed-size charts (e.g., 160×160 donut) — their container
-            // enforces a specific size; resizing would break their layout.
-            if (el.style.width) return;
-            var inGrid = el.closest && el.closest('.sv-grid-2');
-            inst.resize({ width: inGrid ? HALF : A4W });
-          } catch(e) {}
-        }
-      });
-    }
-
-    // One more frame for ECharts to finish drawing before the print snapshot.
-    requestAnimationFrame(function() {
-      window.print();
+        if (inst) { try { inst.resize({ width: w }); } catch(e) {} }
+      }
     });
+
+    setTimeout(function() { window.print(); }, 300);
   });
 };
 </script>

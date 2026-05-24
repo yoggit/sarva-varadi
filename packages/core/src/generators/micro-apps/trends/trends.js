@@ -108,6 +108,7 @@ const SarvaTrends = (() => {
     renderSummary(display);
     renderPassRateChart(display);
     renderStabilityChart(display);
+    renderSeverityTrend(display);
     renderCountChart(display);
     renderDurationChart(display);
     renderTopFailures();
@@ -175,6 +176,12 @@ const SarvaTrends = (() => {
       const t = (r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0);
       return t > 0 ? +((r.passed / t) * 100).toFixed(1) : 0;
     });
+    const flakyRateData = display.map(r => {
+      const t = (r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0);
+      return t > 0 ? +((r.flaky / t) * 100).toFixed(1) : 0;
+    });
+    const hasFlakyData = flakyRateData.some(v => v > 0);
+
     function visibleAvg(data) {
       const dz = chart.getOption().dataZoom[0];
       const n  = data.length;
@@ -186,7 +193,12 @@ const SarvaTrends = (() => {
 
     chart.setOption({
       backgroundColor: 'transparent',
-      grid: { top: 12, right: 16, bottom: 36, left: 44 },
+      legend: {
+        show: hasFlakyData,
+        bottom: 20, itemWidth: 18, itemHeight: 8,
+        textStyle: { color: label, fontSize: 10 },
+      },
+      grid: { top: 12, right: 16, bottom: hasFlakyData ? 56 : 36, left: 44 },
       xAxis: {
         type: 'category', data: xData, boundaryGap: false,
         axisLine: { lineStyle: { color: label } }, axisTick: { show: false },
@@ -204,44 +216,51 @@ const SarvaTrends = (() => {
         backgroundColor: tipBg, borderColor: tipBdr,
         textStyle: { color: tipTxt, fontSize: 12 },
         formatter: params => {
-          const r   = display[params[0].dataIndex];
-          const avg = visibleAvg(yData);
+          const r       = display[params[0].dataIndex];
+          const avg     = visibleAvg(yData);
+          const flakyR  = flakyRateData[params[0].dataIndex];
           return `<b>Run ${params[0].name}</b>`
             + (r.timestamp ? `<br/><span style="opacity:0.7;font-size:0.85em;">${fmtDate(r.timestamp)}</span>` : '')
             + `<br/>Pass Rate: <b style="color:#22c55e;">${yData[params[0].dataIndex]}%</b>`
-            + `<br/>${r.passed||0} passed &nbsp;·&nbsp; ${r.failed||0} failed &nbsp;·&nbsp; ${r.flaky||0} flaky`
-            + (avg !== null ? `<br/><span style="opacity:0.65;font-size:0.88em;">Avg (visible): ${avg}%</span>` : '');
+            + (hasFlakyData ? `<br/>Flaky Rate: <b style="color:#f59e0b;">${flakyR}%</b> (${r.flaky||0} flaky)` : `<br/>${r.flaky||0} flaky`)
+            + `<br/>${r.passed||0} passed &nbsp;·&nbsp; ${r.failed||0} failed`
+            + (avg !== null ? `<br/><span style="opacity:0.65;font-size:0.88em;">Pass avg (visible): ${avg}%</span>` : '');
         },
       },
       dataZoom: dataZoomCfg(),
-      series: [{
-        name: 'Pass Rate', type: 'line', data: yData,
-        smooth: 0.4, symbol: 'circle', symbolSize: 5,
-        lineStyle: { color: '#22c55e', width: 2.5 },
-        itemStyle: { color: '#22c55e', borderColor: '#fff', borderWidth: 1.5 },
-        areaStyle: {
-          color: {
-            type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
-            colorStops: [{ offset: 0, color: 'rgba(34,197,94,0.25)' }, { offset: 1, color: 'rgba(34,197,94,0.01)' }],
+      series: [
+        {
+          name: 'Pass Rate', type: 'line', data: yData,
+          smooth: 0.4, symbol: 'circle', symbolSize: 5,
+          lineStyle: { color: '#22c55e', width: 2.5 },
+          itemStyle: { color: '#22c55e', borderColor: '#fff', borderWidth: 1.5 },
+          areaStyle: {
+            color: {
+              type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+              colorStops: [{ offset: 0, color: 'rgba(34,197,94,0.25)' }, { offset: 1, color: 'rgba(34,197,94,0.01)' }],
+            },
+          },
+          markLine: {
+            silent: true, symbol: ['none', 'none'],
+            data: [{ type: 'average', name: 'Avg',
+              lineStyle: { color: 'rgba(34,197,94,0.35)', type: 'dashed', width: 1 },
+              label: {
+                position: 'insideStartTop',
+                formatter: p => `Avg ${p.value.toFixed(1)}%`,
+                color: 'rgba(34,197,94,0.9)', fontSize: 9,
+                backgroundColor: 'rgba(16,20,32,0.75)', padding: [2, 5, 2, 5], borderRadius: 3,
+              },
+            }],
           },
         },
-        markLine: {
-          silent: true,
-          symbol: ['none', 'none'],
-          data: [{ type: 'average', name: 'Avg',
-            lineStyle: { color: 'rgba(34,197,94,0.35)', type: 'dashed', width: 1 },
-            label: {
-              position: 'insideStartTop',
-              formatter: p => `Avg ${p.value.toFixed(1)}%`,
-              color: 'rgba(34,197,94,0.9)',
-              fontSize: 9,
-              backgroundColor: 'rgba(16,20,32,0.75)',
-              padding: [2, 5, 2, 5],
-              borderRadius: 3,
-            },
-          }],
-        },
-      }],
+        ...(hasFlakyData ? [{
+          name: 'Flaky Rate', type: 'line', data: flakyRateData,
+          smooth: 0.4, symbol: 'none',
+          lineStyle: { color: '#f59e0b', width: 1.5, type: 'dashed' },
+          itemStyle: { color: '#f59e0b' },
+          areaStyle: { color: 'transparent' },
+        }] : []),
+      ],
     });
 
     SarvaEventBus.on('theme:changed', () => renderPassRateChart(display));
@@ -359,11 +378,19 @@ const SarvaTrends = (() => {
         backgroundColor: tipBg, borderColor: tipBdr,
         textStyle: { color: tipTxt, fontSize: 12 },
         formatter: params => {
-          const r    = display[params[0].dataIndex];
+          const idx   = params[0].dataIndex;
+          const r     = display[idx];
           const total = (r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0);
+          let delta = '';
+          if (idx > 0) {
+            const prev = display[idx - 1];
+            const prevTotal = (prev.passed||0)+(prev.failed||0)+(prev.flaky||0)+(prev.skipped||0);
+            const d = total - prevTotal;
+            if (d !== 0) delta = `<br/><span style="color:${d > 0 ? '#22d3ee' : '#f97316'};font-size:0.88em;">${d > 0 ? `+${d} new` : `${d} removed`} vs prev run</span>`;
+          }
           return `<b>Run ${params[0].name}</b>`
             + (r.timestamp ? `<br/><span style="opacity:0.7;font-size:0.85em;">${fmtDate(r.timestamp)}</span>` : '')
-            + `<br/>Total: <b>${total}</b>`
+            + `<br/>Total: <b>${total}</b>${delta}`
             + params.map(p => `<br/>${p.marker}${p.seriesName}: <b>${p.value}</b>`).join('');
         },
       },
@@ -373,6 +400,33 @@ const SarvaTrends = (() => {
         mkStack('Failed',  failed,  '#f43f5e', 'rgba(244,63,94,0.4)'),
         mkStack('Flaky',   flaky,   '#f59e0b', 'rgba(245,158,11,0.4)'),
         mkStack('Skipped', skipped, '#64748b', 'rgba(100,116,139,0.3)'),
+        // Scatter markers for test count changes (+N / -N)
+        {
+          name: 'Changes', type: 'scatter', data: display.map((r, i) => {
+            if (i === 0) return null;
+            const prev = display[i - 1];
+            const curr = (r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0);
+            const prevT = (prev.passed||0)+(prev.failed||0)+(prev.flaky||0)+(prev.skipped||0);
+            const d = curr - prevT;
+            return Math.abs(d) >= 1 ? { value: curr, delta: d } : null;
+          }).map(v => v ? v.value : null),
+          symbol: 'triangle', symbolSize: 8,
+          itemStyle: {
+            color: params => {
+              const d = display[params.dataIndex];
+              const prev = params.dataIndex > 0 ? display[params.dataIndex - 1] : null;
+              if (!prev) return 'transparent';
+              const currT = (d.passed||0)+(d.failed||0)+(d.flaky||0)+(d.skipped||0);
+              const prevT = (prev.passed||0)+(prev.failed||0)+(prev.flaky||0)+(prev.skipped||0);
+              return currT > prevT ? '#22d3ee' : '#f97316';
+            },
+          },
+          tooltip: { show: false },
+          silent: false,
+          legend: { show: false },
+          legendHoverLink: false,
+          z: 10,
+        },
       ],
     });
 
@@ -782,6 +836,102 @@ const SarvaTrends = (() => {
     } else {
       set('sv-print-insight-top-flaky', 'No flaky tests recorded in this window.');
     }
+  }
+
+  /* ── Failures by Severity over time ─────────────────────────────────────── */
+  function renderSeverityTrend(display) {
+    const section = document.getElementById('sv-trends-severity-section');
+    const el      = document.getElementById('sv-trends-severity-chart');
+    const empty   = document.getElementById('sv-trends-severity-empty');
+    const lbl     = document.getElementById('sv-trends-severity-label');
+    if (!el) return;
+
+    const hasSev = display.some(r => r.severityBreakdown &&
+      (r.severityBreakdown.critical || r.severityBreakdown.high ||
+       r.severityBreakdown.medium   || r.severityBreakdown.low  || r.severityBreakdown.trivial));
+
+    if (!hasSev) {
+      if (section) section.style.display = 'none';
+      return;
+    }
+    if (section) section.style.display = '';
+    if (empty) empty.style.display = 'none';
+    if (lbl) lbl.textContent = `${display.length} runs`;
+
+    const chart = initChart('sv-trends-severity-chart', 'canvas');
+    if (!chart) return;
+
+    const { label, split, tipBg, tipBdr, tipTxt } = colors();
+
+    const xData    = display.map((_, i) => `#${i + 1}`);
+    const critical = display.map(r => (r.severityBreakdown && r.severityBreakdown.critical) || 0);
+    const high     = display.map(r => (r.severityBreakdown && r.severityBreakdown.high)     || 0);
+    const medium   = display.map(r => (r.severityBreakdown && r.severityBreakdown.medium)   || 0);
+    const low      = display.map(r => (r.severityBreakdown && r.severityBreakdown.low)      || 0);
+    const trivial  = display.map(r => (r.severityBreakdown && r.severityBreakdown.trivial)  || 0);
+
+    const axisStyle = {
+      axisLine:  { lineStyle: { color: label } },
+      axisTick:  { show: false },
+      axisLabel: { color: label, fontSize: 10 },
+      splitLine: { lineStyle: { color: split } },
+    };
+
+    const mkBar = (name, data, color) => ({
+      name, type: 'bar', stack: 'sev', data,
+      itemStyle: { color },
+      emphasis: { focus: 'series' },
+    });
+
+    chart.setOption({
+      backgroundColor: 'transparent',
+      legend: {
+        bottom: 20, itemWidth: 10, itemHeight: 10,
+        textStyle: { color: label, fontSize: 10 },
+      },
+      grid: { top: 12, right: 16, bottom: 68, left: 36 },
+      xAxis: {
+        type: 'category', data: xData,
+        axisLine: { lineStyle: { color: label } }, axisTick: { show: false },
+        axisLabel: { color: label, fontSize: 10, interval: Math.max(0, Math.ceil(display.length / 8) - 1) },
+        splitLine: { show: false },
+      },
+      yAxis: { type: 'value', minInterval: 1, ...axisStyle },
+      dataZoom: dataZoomCfg(),
+      tooltip: {
+        trigger: 'axis', axisPointer: { type: 'shadow' },
+        backgroundColor: tipBg, borderColor: tipBdr,
+        textStyle: { color: tipTxt, fontSize: 12 },
+        formatter: params => {
+          const r     = display[params[0].dataIndex];
+          const total = params.reduce((s, p) => s + (p.value || 0), 0);
+          const hasSevData = r.severityBreakdown &&
+            (r.severityBreakdown.critical || r.severityBreakdown.high ||
+             r.severityBreakdown.medium   || r.severityBreakdown.low  || r.severityBreakdown.trivial);
+          const noDataNote = !hasSevData
+            ? `<br/><span style="opacity:0.6;font-size:0.85em;font-style:italic;">No failures with severity labels in this run</span>`
+            : (total === 0
+              ? `<br/><span style="opacity:0.6;font-size:0.85em;font-style:italic;">All tests passed — no failures to show</span>`
+              : '');
+          return `<b>Run ${params[0].axisValue}</b>`
+            + (r.timestamp ? `<br/><span style="opacity:0.7;font-size:0.85em;">${fmtDate(r.timestamp)}</span>` : '')
+            + (hasSevData && total > 0
+              ? '<br/>' + params.filter(p => p.value > 0).map(p =>
+                  `${p.marker}${p.seriesName}: <b>${p.value}</b>`).join('<br/>')
+                + `<br/><span style="opacity:0.65;font-size:0.88em;">Total affected: ${total}</span>`
+              : noDataNote);
+        },
+      },
+      series: [
+        mkBar('Critical', critical, '#ef4444'),
+        mkBar('High',     high,     '#f97316'),
+        mkBar('Medium',   medium,   '#f59e0b'),
+        mkBar('Low',      low,      '#3b82f6'),
+        mkBar('Trivial',  trivial,  '#94a3b8'),
+      ],
+    });
+
+    SarvaEventBus.on('theme:changed', () => renderSeverityTrend(display));
   }
 
   /* ── Boot ───────────────────────────────────────────────────────────────── */

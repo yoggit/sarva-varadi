@@ -33,7 +33,7 @@ export class TestNGListenerConverter extends BaseConverter {
     }
 
     // Convert API calls to steps
-    const steps = test.apiCalls ? test.apiCalls.map((call: any) => ({
+    const apiSteps = test.apiCalls ? test.apiCalls.map((call: any) => ({
       name: call.name || `${call.request?.method} ${call.request?.uri}`,
       status: call.status === 'passed' ? 'passed' as const : 'failed' as const,
       start: call.startTime,
@@ -41,6 +41,24 @@ export class TestNGListenerConverter extends BaseConverter {
       duration: call.duration,
       steps: this.convertApiCallToSubSteps(call),
     })) : [];
+
+    // If test failed but all API calls passed, add a synthetic assertion step
+    // so the failure path is visible in the step tree (assertion fails after the HTTP call)
+    const testFailed = test.status === 'FAIL';
+    const allCallsPassed = apiSteps.length > 0 && apiSteps.every((s: any) => s.status === 'passed');
+    if (testFailed && allCallsPassed && test.error) {
+      apiSteps.push({
+        name: '❌ Assertion',
+        status: 'failed' as const,
+        start: test.endTime - 1,
+        stop: test.endTime,
+        duration: 1,
+        steps: [],
+        statusDetails: { message: test.error.message || 'Assertion failed' },
+      });
+    }
+
+    const steps = apiSteps;
 
     return {
       uuid,

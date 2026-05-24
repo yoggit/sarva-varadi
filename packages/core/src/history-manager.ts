@@ -177,12 +177,14 @@ export class HistoryManager {
         status = 'failed';
       }
 
+      const sev = this.getSeverityFromTest(test);
       const outcome: TestRunOutcome = {
         runId,
         status,
         duration: test.duration,
         retries: test.extra?.playwright?.retries || 0,
         wasFlaky,
+        ...(sev ? { severity: sev } : {}),
       };
 
       if (testMap.has(testId)) {
@@ -215,6 +217,15 @@ export class HistoryManager {
     });
 
     return Array.from(testMap.values());
+  }
+
+  private getSeverityFromTest(test: SarvaTestResult): string {
+    const labels = test.labels as { name: string; value: string }[] | undefined;
+    if (!labels) return '';
+    const direct = labels.find(l => l.name === 'severity');
+    if (direct) return (direct.value || '').toLowerCase();
+    const tagged = labels.find(l => l.name === 'tag' && (l.value || '').startsWith('severity:'));
+    return tagged ? tagged.value.slice(9).toLowerCase() : '';
   }
 
   private calculateFlakyScore(history: TestRunOutcome[]): number {
