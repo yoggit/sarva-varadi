@@ -105,7 +105,7 @@ The best way to explore Sarva-Varadi is to open one of the live demos — each h
 
 Each report is a single-page app with four sections reachable from the sidebar:
 
-**Overview** — Pass rate donut, stat cards (total / passed / failed / flaky / skipped), Health Pulse trend indicator, run history table, top failing tests, top flaky tests, and a Needs Attention strip when things regress.
+**Overview** — Pass rate donut, stat cards (total / passed / failed / flaky / skipped), Health Pulse trend indicator, run history table, top failing tests, top flaky tests, and a Needs Attention strip when things regress. Also surfaces **New Tests** (tests that appeared for the first time this run) and **Absent Tests** (tests present in the previous run but missing now) — both widgets are hidden automatically when there is nothing to report, and appear as soon as tests are added or removed between runs.
 
 **Tests** — Full test list with filter by status, free-text search, and sort. Click any test to open a drawer showing the full step tree, error message, stack trace, attachments (screenshots / videos / traces), and a per-test history chart across the last 25 runs.
 
@@ -998,7 +998,7 @@ Each report is a single `index.html` — no server required, open it directly in
 
 | Tab | What's inside |
 |-----|---------------|
-| **Overview** | Pass rate donut · stat cards · Health Pulse trend · run history table · top failing & top flaky · Needs Attention strip |
+| **Overview** | Pass rate donut · stat cards · Health Pulse trend · run history table · top failing & top flaky · Needs Attention strip · New Tests & Absent Tests widgets (auto-hidden when empty) |
 | **Tests** | Filterable test list · free-text search · sort by duration/status · test detail drawer with steps, attachments, and per-test history chart |
 | **Trends** | Pass rate trend · failures & flakiness · test count · run duration · top failing bar chart · top flaky bar chart — all with run-count filter |
 | **Timeline** | Run Cadence chart (when and how often runs happen) · Execution Gantt (per-test start time and duration) |
