@@ -119,6 +119,37 @@ const CU = [
   /* 25 */ { f:[3,4], k:[7]       },
 ];
 
+// REST Assured Cucumber BDD (8 scenarios across 2 features)
+// 0:GetAllUsers 1:GetUserById 2:CreateUser(flaky) 3:UpdateUser 4:ValidateUserSchema(fail)
+// 5:GetAllPosts 6:CreatePost(flaky) 7:GetPostComments
+const RAC = [
+  /* 01 */ { f:[],    k:[6]       },
+  /* 02 */ { f:[],    k:[]        },
+  /* 03 */ { f:[4],   k:[6]       },
+  /* 04 */ { f:[],    k:[6,2]     },
+  /* 05 */ { f:[],    k:[]        },
+  /* 06 */ { f:[4,3], k:[6]       },
+  /* 07 */ { f:[4,3], k:[6,2]     },
+  /* 08 */ { f:[3,4], k:[6,2]     },
+  /* 09 */ { f:[4,3], k:[6]       },
+  /* 10 */ { f:[4],   k:[6,3]     },
+  /* 11 */ { f:[4],   k:[6]       },
+  /* 12 */ { f:[3],   k:[6]       },
+  /* 13 */ { f:[],    k:[6,4]     },
+  /* 14 */ { f:[4],   k:[6]       },
+  /* 15 */ { f:[],    k:[6]       },
+  /* 16 */ { f:[],    k:[]        },
+  /* 17 */ { f:[],    k:[6]       },
+  /* 18 */ { f:[4],   k:[]        },
+  /* 19 */ { f:[],    k:[]        },
+  /* 20 */ { f:[],    k:[6]       },
+  /* 21 */ { f:[3],   k:[6]       },
+  /* 22 */ { f:[],    k:[6,4]     },
+  /* 23 */ { f:[3,4], k:[6]       },
+  /* 24 */ { f:[4],   k:[6]       },
+  /* 25 */ { f:[4,3], k:[6]       },
+];
+
 // REST Assured JUnit5 (13 tests)
 // 0:getAllPosts 1:stableEndpointTest 2:createUser 3:updateUser 4:deleteUser
 // 5:getPostsByUserId 6:getUserNotFound 7:getAllUsers 8:getPostById
@@ -235,6 +266,14 @@ const CU_ERRORS = [
   'AssertionError: Navigation bar not present — site structure may have changed',
 ];
 
+const RAC_ERRORS = [
+  'AssertionError: Expected status code <200> but was <503>',
+  'AssertionError: Response body validation failed — field "id" was null',
+  'AssertionError: Expected status code <201> but was <400>',
+  'java.lang.AssertionError: 1 expectation failed.\nJSON path $.email doesn\'t match.\nExpected: carol@example.com\n  Actual: null',
+  'AssertionError: JSON schema validation failed — required field "email" is missing from response',
+];
+
 function applyCucumberScenario(tests, scenario, base) {
   const offset = base - tests[0].start;
   return tests.map((t, i) => {
@@ -255,6 +294,42 @@ function applyCucumberScenario(tests, scenario, base) {
       const errMsg = CU_ERRORS[i % CU_ERRORS.length];
       out.statusDetails = { message: errMsg };
       // Mark the last step as failed
+      if (out.steps && out.steps.length > 0) {
+        const last = out.steps.length - 1;
+        out.steps[last] = { ...out.steps[last], status: 'failed', statusDetails: { message: errMsg } };
+      }
+    } else if (scenario.k.includes(i)) {
+      out.status = 'flaky';
+      delete out.statusDetails;
+      if (out.extra) out.extra.flakyReason = 'Scenario passed after retry due to timing issue';
+    } else {
+      out.status = 'passed';
+      delete out.statusDetails;
+      if (out.extra) delete out.extra.flakyReason;
+    }
+    return out;
+  });
+}
+
+function applyRacScenario(tests, scenario, base) {
+  const offset = base - tests[0].start;
+  return tests.map((t, i) => {
+    const out = JSON.parse(JSON.stringify(t));
+    out.start = t.start + offset;
+    out.stop  = t.stop  + offset;
+    out.uuid  = `rac-${String(i).padStart(4,'0')}-${String(base).slice(-12)}`;
+    if (out.steps) out.steps = out.steps.map(s => ({
+      ...s,
+      start: s.start + offset,
+      stop:  s.stop  + offset,
+    }));
+
+    if (scenario.f.includes(i)) {
+      out.status = 'failed';
+      delete out.statusDetails;
+      if (out.extra) delete out.extra.flakyReason;
+      const errMsg = RAC_ERRORS[i % RAC_ERRORS.length];
+      out.statusDetails = { message: errMsg };
       if (out.steps && out.steps.length > 0) {
         const last = out.steps.length - 1;
         out.steps[last] = { ...out.steps[last], status: 'failed', statusDetails: { message: errMsg } };
@@ -299,14 +374,16 @@ async function main() {
   const selSrc = JSON.parse(fs.readFileSync(path.join(ROOT, 'demo-selenium/testng-source/data.json'), 'utf-8'));
   const raSrc  = JSON.parse(fs.readFileSync(path.join(ROOT, 'demo-restassured/testng-source/data.json'), 'utf-8'));
   const juSrc  = JSON.parse(fs.readFileSync(path.join(ROOT, 'demo-restassured-junit/junit5-source/data.json'), 'utf-8'));
-  const cuSrc  = JSON.parse(fs.readFileSync(path.join(ROOT, 'demo-cucumber/cucumber-source/data.json'), 'utf-8'));
+  const cuSrc  = JSON.parse(fs.readFileSync(path.join(ROOT, 'demo-selenium-cucumber/cucumber-source/data.json'), 'utf-8'));
+  const racSrc = JSON.parse(fs.readFileSync(path.join(ROOT, 'demo-restassured-cucumber/cucumber-source/data.json'), 'utf-8'));
 
   // Clear existing history so we get a clean 25-run slate
   const dirs = [
     'demo-selenium/sarva-report',
     'demo-restassured/sarva-report',
     'demo-restassured-junit/sarva-report',
-    'demo-cucumber/sarva-report',
+    'demo-selenium-cucumber/sarva-report',
+    'demo-restassured-cucumber/sarva-report',
   ];
   dirs.forEach(d => {
     const full = path.join(ROOT, d);
@@ -335,10 +412,15 @@ async function main() {
     runCLI(writeTmp(juData), path.join(ROOT, 'demo-restassured-junit/sarva-report'), 'testng-listener', path.join(ROOT, 'demo-restassured-junit'));
     process.stdout.write('junit5 ✓  ');
 
-    // Cucumber
+    // Cucumber (Selenium)
     const cuData = applyCucumberScenario(cuSrc, CU[i], base);
-    runCLI(writeTmp(cuData), path.join(ROOT, 'demo-cucumber/sarva-report'), 'sarva-varadi', path.join(ROOT, 'demo-cucumber'));
-    process.stdout.write('cucumber ✓\n');
+    runCLI(writeTmp(cuData), path.join(ROOT, 'demo-selenium-cucumber/sarva-report'), 'sarva-varadi', path.join(ROOT, 'demo-selenium-cucumber'));
+    process.stdout.write('cucumber ✓  ');
+
+    // RestAssured Cucumber BDD
+    const racData = applyRacScenario(racSrc, RAC[i], base);
+    runCLI(writeTmp(racData), path.join(ROOT, 'demo-restassured-cucumber/sarva-report'), 'sarva-varadi', path.join(ROOT, 'demo-restassured-cucumber'));
+    process.stdout.write('ra-cucumber ✓\n');
   }
 
   cleanTmp();
@@ -346,7 +428,8 @@ async function main() {
   console.log('   demo-selenium/sarva-report/index.html');
   console.log('   demo-restassured/sarva-report/index.html');
   console.log('   demo-restassured-junit/sarva-report/index.html');
-  console.log('   demo-cucumber/sarva-report/index.html');
+  console.log('   demo-selenium-cucumber/sarva-report/index.html');
+  console.log('   demo-restassured-cucumber/sarva-report/index.html');
 }
 
 main().catch(err => { console.error(err); process.exit(1); });

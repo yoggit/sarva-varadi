@@ -175,6 +175,7 @@ async function handleGenerate(args: string[]) {
     const generator = new ReportGenerator({
       outputFolder: options.output,
       title: options.title || props['sarva.report.title'] || undefined,
+      frameworkLabel: props['sarva.report.frameworkLabel'] || undefined,
       showStackTrace: props['sarva.report.showStackTrace'] !== 'false',
       embedAttachments: props['sarva.report.embedAttachments'] !== 'false',
       maskSensitiveData: props['sarva.report.maskSensitiveData'] === 'true',

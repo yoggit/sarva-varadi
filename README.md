@@ -31,11 +31,12 @@
 </p>
 
 <p align="center">
-  <strong>🎭 <a href="https://yoggit.github.io/sarva-varadi/playwright/index.html">Playwright Demo</a></strong> • 
-  <strong>🌐 <a href="https://yoggit.github.io/sarva-varadi/selenium/index.html">Selenium Demo</a></strong> • 
+  <strong>🎭 <a href="https://yoggit.github.io/sarva-varadi/playwright/index.html">Playwright Demo</a></strong> •
+  <strong>🌐 <a href="https://yoggit.github.io/sarva-varadi/selenium/index.html">Selenium (TestNG) Demo</a></strong> •
+  <strong>🌿 <a href="https://yoggit.github.io/sarva-varadi/selenium-cucumber/index.html">Selenium (Cucumber BDD) Demo</a></strong> •
   <strong>🔌 <a href="https://yoggit.github.io/sarva-varadi/rest-assured/index.html">RestAssured (TestNG) Demo</a></strong> •
-  <strong>🧪 <a href="https://yoggit.github.io/sarva-varadi/rest-assured-junit/index.html">RestAssured (JUnit 5) Demo</a></strong> •
-  <strong>🥒 <a href="https://yoggit.github.io/sarva-varadi/cucumber/index.html">Cucumber BDD Demo</a></strong>
+  <strong>🧪 <a href="https://yoggit.github.io/sarva-varadi/rest-assured-junit/index.html">RestAssured (JUnit) Demo</a></strong> •
+  <strong>🔀 <a href="https://yoggit.github.io/sarva-varadi/restassured-cucumber/index.html">RestAssured (Cucumber BDD) Demo</a></strong>
 </p>
 
 ---
@@ -44,12 +45,13 @@
 
 <table>
 <tr>
-<td width="16%" align="center"><strong>🎭 Playwright</strong><br/>Web automation<br/>TypeScript/JavaScript</td>
-<td width="16%" align="center"><strong>🔌 RestAssured (TestNG)</strong><br/>API testing<br/>Java/TestNG</td>
-<td width="16%" align="center"><strong>🧪 RestAssured (JUnit 5)</strong><br/>API testing<br/>Java/JUnit 5</td>
-<td width="16%" align="center"><strong>🌐 Selenium</strong><br/>WebDriver browser tests<br/>Java/TestNG</td>
-<td width="16%" align="center"><strong>🥒 Cucumber BDD</strong><br/>BDD scenarios<br/>Java/Cucumber 7</td>
-<td width="20%" align="center"><strong>🚧 Cypress</strong><br/>Modern web testing<br/><em>(Coming soon)</em></td>
+<td width="14%" align="center"><strong>🎭 Playwright</strong><br/>Web automation<br/>TypeScript/JavaScript</td>
+<td width="14%" align="center"><strong>🌐 Selenium (TestNG)</strong><br/>WebDriver browser tests<br/>Java/TestNG</td>
+<td width="14%" align="center"><strong>🌿 Selenium (Cucumber BDD)</strong><br/>BDD browser tests<br/>Java/Cucumber 7</td>
+<td width="14%" align="center"><strong>🔌 RestAssured (TestNG)</strong><br/>API testing<br/>Java/TestNG</td>
+<td width="14%" align="center"><strong>🧪 RestAssured (JUnit)</strong><br/>API testing<br/>Java/JUnit 5</td>
+<td width="14%" align="center"><strong>🔀 RestAssured (Cucumber BDD)</strong><br/>BDD API testing<br/>Java/Cucumber 7</td>
+<td width="16%" align="center"><strong>🚧 Cypress</strong><br/>Modern web testing<br/><em>(Coming soon)</em></td>
 </tr>
 </table>
 
@@ -1104,6 +1106,8 @@ sarva.maxRetryCount=2                         # [RestAssured TestNG, Selenium] r
 
 # ── Report: display ─────────────────────────────────────────────────────
 sarva.report.title=My Test Suite              # [All tools] title shown in the HTML report header
+sarva.report.frameworkLabel=Selenium-TestNG   # [All tools] label shown below "Test Report" heading and in PDF/page title
+                                              # e.g. "Selenium-TestNG", "RestAssured-Cucumber BDD", "Playwright"
 sarva.report.showStackTrace=true              # [All tools] show full stack traces in the report
 sarva.report.embedAttachments=true            # [All tools] embed screenshots/videos inline in the report
 

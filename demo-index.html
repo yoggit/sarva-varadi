@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarva-Varadi Demo Reports</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f35 100%);
+            color: #e8eaf0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container { max-width: 1200px; width: 100%; text-align: center; }
+
+        h1 {
+            font-family: 'Syne', system-ui, sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(125deg, #e6eaf4 20%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle { color: #9ca3af; font-size: 1.1rem; margin-bottom: 3rem; }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .demo-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 580px) {
+            .demo-grid { grid-template-columns: 1fr; }
+        }
+
+        .demo-card {
+            background: #1a1f35;
+            border: 1px solid #2d3550;
+            border-radius: 12px;
+            padding: 1.75rem 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+            display: block;
+            text-align: left;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.4);
+            border-color: #6366f1;
+        }
+
+        .demo-icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+
+        .demo-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #6366f1;
+            margin-bottom: 0.4rem;
+        }
+
+        .demo-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #e6eaf4;
+        }
+
+        .demo-desc { color: #9ca3af; font-size: 0.82rem; line-height: 1.5; }
+
+        .github-link {
+            font-family: 'Syne', system-ui, sans-serif;
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 1rem 2rem;
+            background: #6366f1;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            transition: background 0.3s ease;
+        }
+
+        .github-link:hover { background: #4f46e5; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="local-gh-pages-test/logo.svg" alt="Sarva-Varadi" style="height:100px;width:auto;margin-bottom:0.75rem;">
+        <h1>Sarva-Varadi</h1>
+        <p class="subtitle">Universal Test Reporting Framework — Live Demo Reports</p>
+
+        <div class="demo-grid">
+            <a href="demo-playwright/sarva-report/index.html" class="demo-card">
+                <div class="demo-icon">🎭</div>
+                <div class="demo-badge">Playwright</div>
+                <div class="demo-title">Playwright</div>
+                <div class="demo-desc">TypeScript/JavaScript E2E testing with multi-browser runs, traces and videos</div>
+            </a>
+
+            <a href="demo-selenium/sarva-report/index.html" class="demo-card">
+                <div class="demo-icon">🔬</div>
+                <div class="demo-badge">Selenium · TestNG</div>
+                <div class="demo-title">Selenium (TestNG)</div>
+                <div class="demo-desc">Java WebDriver UI testing with TestNG, screenshots and action logs</div>
+            </a>
+
+            <a href="demo-selenium-cucumber/sarva-report/index.html" class="demo-card">
+                <div class="demo-icon">🌿</div>
+                <div class="demo-badge">Selenium · Cucumber BDD</div>
+                <div class="demo-title">Selenium (Cucumber BDD)</div>
+                <div class="demo-desc">Java BDD/Gherkin UI testing with Feature, Scenario and Step hierarchy</div>
+            </a>
+
+            <a href="demo-restassured/sarva-report/index.html" class="demo-card">
+                <div class="demo-icon">🌐</div>
+                <div class="demo-badge">RestAssured · TestNG</div>
+                <div class="demo-title">RestAssured (TestNG)</div>
+                <div class="demo-desc">Java API testing with TestNG and full request/response capture</div>
+            </a>
+
+            <a href="demo-restassured-junit/sarva-report/index.html" class="demo-card">
+                <div class="demo-icon">🧪</div>
+                <div class="demo-badge">RestAssured · JUnit 5</div>
+                <div class="demo-title">RestAssured (JUnit 5)</div>
+                <div class="demo-desc">Java API testing with JUnit 5 extension and request/response capture</div>
+            </a>
+
+            <a href="demo-restassured-cucumber/sarva-report/index.html" class="demo-card">
+                <div class="demo-icon">🔀</div>
+                <div class="demo-badge">RestAssured · Cucumber BDD</div>
+                <div class="demo-title">RestAssured (Cucumber BDD)</div>
+                <div class="demo-desc">Java BDD/Gherkin API testing with Cucumber scenarios and request/response capture</div>
+            </a>
+        </div>
+
+        <a href="https://github.com/yoggit/sarva-varadi" class="github-link" target="_blank">
+            ⭐ View on GitHub
+        </a>
+    </div>
+</body>
+</html>

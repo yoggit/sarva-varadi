@@ -116,8 +116,11 @@ jobs:
           if [ -d "demo-restassured-junit/sarva-report" ]; then
             cp -r demo-restassured-junit/sarva-report gh-pages-deploy/rest-assured-junit
           fi
-          if [ -d "demo-cucumber/sarva-report" ]; then
-            cp -r demo-cucumber/sarva-report gh-pages-deploy/cucumber
+          if [ -d "demo-selenium-cucumber/sarva-report" ]; then
+            cp -r demo-selenium-cucumber/sarva-report gh-pages-deploy/selenium-cucumber
+          fi
+          if [ -d "demo-restassured-cucumber/sarva-report" ]; then
+            cp -r demo-restassured-cucumber/sarva-report gh-pages-deploy/restassured-cucumber
           fi
 
       - name: Create landing page

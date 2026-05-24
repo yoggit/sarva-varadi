@@ -223,6 +223,14 @@ body::before {
   background: var(--accent-glow);
   color: var(--accent);
 }
+.sv-nav-badge-fail {
+  background: rgba(239,68,68,0.15);
+  color: var(--status-failed);
+}
+.sv-nav-item.active .sv-nav-badge-fail {
+  background: rgba(239,68,68,0.25);
+  color: var(--status-failed);
+}
 
 .sv-sidebar-footer {
   padding: 0.75rem 0.5rem;
@@ -846,6 +854,13 @@ body.light-mode .sv-tip-popup {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 }
+@page sv-failures {
+  @top-left {
+    content: "FAILURES";
+    font-size: 7pt; font-weight: 700; letter-spacing: 0.1em; color: #6366f1;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+}
 @page sv-tests {
   @top-left {
     content: "TESTS";
@@ -914,18 +929,20 @@ body.light-mode .sv-tip-popup {
 
   /* Show all views as sections; assign named pages for running section headers */
   .sv-view { display: block !important; }
-  .sv-view[data-view="overview"] { page: sv-overview; }
-  .sv-view[data-view="tests"]    { page: sv-tests; }
-  .sv-view[data-view="trends"]   { page: sv-trends; }
-  .sv-view[data-view="timeline"] { page: sv-timeline; }
+  .sv-view[data-view="overview"]  { page: sv-overview; }
+  .sv-view[data-view="failures"]  { page: sv-failures; }
+  .sv-view[data-view="tests"]     { page: sv-tests; }
+  .sv-view[data-view="trends"]    { page: sv-trends; }
+  .sv-view[data-view="timeline"]  { page: sv-timeline; }
   /* Named page changes force breaks automatically; keep explicit break as fallback */
   .sv-view + .sv-view { break-before: page; page-break-before: always; }
 
   /* Section heading before each tab — large, bold, clearly a page title */
-  .sv-view[data-view="overview"]::before { content: 'Overview'; }
-  .sv-view[data-view="tests"]::before    { content: 'Tests'; }
-  .sv-view[data-view="trends"]::before   { content: 'Trends'; }
-  .sv-view[data-view="timeline"]::before { content: 'Timeline'; }
+  .sv-view[data-view="overview"]::before  { content: 'Overview'; }
+  .sv-view[data-view="failures"]::before  { content: 'Failures'; }
+  .sv-view[data-view="tests"]::before     { content: 'Tests'; }
+  .sv-view[data-view="trends"]::before    { content: 'Trends'; }
+  .sv-view[data-view="timeline"]::before  { content: 'Timeline'; }
   .sv-view[data-view]::before {
     display: block;
     font-size: 1.6rem;
@@ -943,7 +960,9 @@ body.light-mode .sv-tip-popup {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 70vh;
+    min-height: 18cm;
+    max-height: 18cm;
+    overflow: hidden;
     break-after: page;
     page-break-after: always;
     padding: 3rem;
@@ -1018,6 +1037,14 @@ body.light-mode .sv-tip-popup {
   /* Charts — scale to fit, never clip */
   [id$="-chart"] { max-width: 100% !important; overflow: visible !important; }
 
+  /* Zero out left/right padding for chart card bodies so the chart canvas fills
+     the full card interior (edge-to-edge, minus card border).
+     Donut chart excluded — its card body is shared with legend text. */
+  .sv-card-body:has([id$="-chart"]:not(#sv-donut-chart)) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
   /* Stat cards — force light colours */
   .sv-stat-card {
     background: #f8fafc !important;
@@ -1032,7 +1059,7 @@ body.light-mode .sv-tip-popup {
   .sv-print-back-global {
     display: block !important;
     position: fixed;
-    bottom: 0;
+    bottom: 0.1cm;
     right: 1.2cm;
     z-index: 9999;
     font-size: 8pt;
@@ -1041,5 +1068,7 @@ body.light-mode .sv-tip-popup {
     text-decoration: none !important;
     letter-spacing: 0.02em;
     line-height: 1.2cm;
+    background: white;
+    padding: 0 0.3cm;
   }
 }

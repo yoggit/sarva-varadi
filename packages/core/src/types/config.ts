@@ -4,6 +4,7 @@ export interface SarvaReporterOptions {
   outputFolder?: string;
   outputFile?: string;
   title?: string;
+  frameworkLabel?: string; // e.g. "Selenium-TestNG", "RestAssured-Cucumber BDD" — shown below "Test Report"
   environment?: string;   // e.g. "QA", "Staging", "Production" — shown as a badge in the report
   showStackTrace?: boolean;
   embedAttachments?: boolean;
@@ -36,6 +37,7 @@ export const DEFAULT_OPTIONS: Required<SarvaReporterOptions> = {
   outputFolder: 'sarva-report',
   outputFile: 'index.html',
   title: 'Sarva-Varadi Test Report',
+  frameworkLabel: '',
   environment: '',
   showStackTrace: true,
   embedAttachments: true,

@@ -822,120 +822,6 @@
     }
   },
   {
-    "uuid": "cu-0001-0000-0000-0000-000000000007",
-    "tool": "cucumber",
-    "name": "Blog page is accessible",
-    "fullName": "Selenium API Documentation > Blog page is accessible",
-    "status": "passed",
-    "stage": "finished",
-    "start": 1716300035100,
-    "stop": 1716300039100,
-    "duration": 4000,
-    "steps": [
-      {
-        "name": "Given a Chrome browser is launched",
-        "status": "passed",
-        "start": 1716300035100,
-        "stop": 1716300036300,
-        "duration": 1200,
-        "steps": [
-          {
-            "name": "Start ChromeDriver session",
-            "status": "passed",
-            "start": 1716300035100,
-            "stop": 1716300035950,
-            "duration": 850
-          },
-          {
-            "name": "Initialize browser: headless chrome",
-            "status": "passed",
-            "start": 1716300035950,
-            "stop": 1716300036300,
-            "duration": 350
-          }
-        ]
-      },
-      {
-        "name": "When I navigate to \"https://www.selenium.dev/blog/\"",
-        "status": "passed",
-        "start": 1716300036300,
-        "stop": 1716300038900,
-        "duration": 2600,
-        "steps": [
-          {
-            "name": "Navigate: https://www.selenium.dev/blog/",
-            "status": "passed",
-            "start": 1716300036300,
-            "stop": 1716300038700,
-            "duration": 2400
-          },
-          {
-            "name": "Wait for page load complete",
-            "status": "passed",
-            "start": 1716300038700,
-            "stop": 1716300038900,
-            "duration": 200
-          }
-        ]
-      },
-      {
-        "name": "Then the page title should contain \"Selenium\"",
-        "status": "passed",
-        "start": 1716300038900,
-        "stop": 1716300039100,
-        "duration": 200,
-        "steps": [
-          {
-            "name": "Get page title → \"Selenium Blog\"",
-            "status": "passed",
-            "start": 1716300038900,
-            "stop": 1716300039000,
-            "duration": 100
-          },
-          {
-            "name": "Assert title contains \"Selenium\"",
-            "status": "passed",
-            "start": 1716300039000,
-            "stop": 1716300039100,
-            "duration": 100
-          }
-        ]
-      }
-    ],
-    "attachments": [],
-    "labels": [
-      {
-        "name": "tag",
-        "value": "api-docs"
-      },
-      {
-        "name": "tag",
-        "value": "selenium"
-      },
-      {
-        "name": "tag",
-        "value": "blog"
-      },
-      {
-        "name": "tag",
-        "value": "severity:low"
-      }
-    ],
-    "extra": {
-      "cucumber": {
-        "featureName": "Selenium API Documentation",
-        "featureUri": "features/selenium_api_docs.feature",
-        "tags": [
-          "@api-docs",
-          "@selenium",
-          "@blog"
-        ]
-      },
-      "testClass": "Selenium API Documentation",
-      "testMethod": "Blog page is accessible"
-    }
-  },
-  {
     "uuid": "cu-0001-0000-0000-0000-000000000008",
     "tool": "cucumber",
     "name": "WebDriver API reference loads",
@@ -1083,5 +969,54 @@
       "testClass": "Selenium API Documentation",
       "testMethod": "WebDriver API reference loads"
     }
+  },
+  {
+    "uuid": "cu-new-login-scenario-001",
+    "tool": "cucumber",
+    "name": "User login with valid credentials",
+    "fullName": "Selenium Website Navigation > User login with valid credentials",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1716300045000,
+    "stop": 1716300048400,
+    "duration": 3400,
+    "steps": [
+      {
+        "name": "Given a Chrome browser is launched",
+        "status": "passed",
+        "start": 1716300045000,
+        "stop": 1716300046100,
+        "duration": 1100
+      },
+      {
+        "name": "When I navigate to the login page",
+        "status": "passed",
+        "start": 1716300046100,
+        "stop": 1716300046900,
+        "duration": 800
+      },
+      {
+        "name": "And I enter valid credentials",
+        "status": "passed",
+        "start": 1716300046900,
+        "stop": 1716300047600,
+        "duration": 700
+      },
+      {
+        "name": "Then I should be logged in successfully",
+        "status": "passed",
+        "start": 1716300047600,
+        "stop": 1716300048400,
+        "duration": 800
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "high"
+      }
+    ],
+    "extra": {}
   }
 ]

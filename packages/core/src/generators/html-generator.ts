@@ -2,6 +2,7 @@ import { SarvaTestResult, RunMetadata, SarvaReporterOptions } from '../types';
 import { AssetsLoader } from './assets-loader';
 import { renderShellOpen, renderShellClose } from './shell/shell-template';
 import { renderOverview } from './micro-apps/overview/overview-template';
+import { renderFailures } from './micro-apps/failures/failures-template';
 import { renderTestList } from './micro-apps/test-list/test-list-template';
 import { renderTrends } from './micro-apps/trends/trends-template';
 import { renderTimeline } from './micro-apps/timeline/timeline-template';
@@ -42,6 +43,7 @@ export class HTMLGenerator {
     return [
       renderShellOpen({ title, toolName, version: PACKAGE_VERSION, styles, logoDataUrl, syneFontB64, linkPatterns: this.options.links }),
       renderOverview(),
+      renderFailures(),
       renderTestList(),
       renderTrends(),
       renderTimeline(),
@@ -63,6 +65,7 @@ export class HTMLGenerator {
   }
 
   private getToolName(tests: SarvaTestResult[]): string {
+    if (this.options.frameworkLabel) return this.options.frameworkLabel;
     if (tests.length === 0) return '';
     const tool = tests[0].tool;
     const names: Record<string, string> = {

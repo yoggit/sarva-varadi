@@ -1,6 +1,6 @@
-# Sarva-Varadi Cucumber BDD Demo
+# Sarva-Varadi Selenium-Cucumber BDD Demo
 
-Demo project showing how to integrate Cucumber BDD tests with Sarva-Varadi reporting. Feature → Scenario → Step hierarchy is captured automatically, and when Selenium WebDriver is also on the classpath, each BDD step is enriched with granular WebDriver sub-steps (navigate, click, find element, etc.).
+Demo project showing how to integrate Selenium + Cucumber BDD tests with Sarva-Varadi reporting. Feature → Scenario → Step hierarchy is captured automatically, and each BDD step is enriched with granular WebDriver sub-steps (navigate, click, find element, etc.).
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ Demo project showing how to integrate Cucumber BDD tests with Sarva-Varadi repor
 ## Project Structure
 
 ```
-demo-cucumber/
+demo-selenium-cucumber/
 ├── pom.xml                                   # Maven configuration
 ├── src/
 │   └── test/
@@ -135,7 +135,7 @@ The generated report (`sarva-report/index.html`) includes:
   uses: actions/upload-artifact@v4
   with:
     name: cucumber-bdd-report
-    path: demo-cucumber/sarva-report/
+    path: demo-selenium-cucumber/sarva-report/
 ```
 
 ## Troubleshooting
