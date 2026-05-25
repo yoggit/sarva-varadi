@@ -1,0 +1,945 @@
+[
+  {
+    "uuid": "rac-0000-777929460333",
+    "tool": "cucumber",
+    "name": "Retrieve all users from the API",
+    "fullName": "User Management API > Retrieve all users from the API",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1777929460333,
+    "stop": 1777929461433,
+    "duration": 1100,
+    "steps": [
+      {
+        "name": "Given the REST API base URL is \"https://api.example.com\"",
+        "status": "passed",
+        "start": 1777929460333,
+        "stop": 1777929460433,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Initialize RestAssured: baseURI=https://api.example.com",
+            "status": "passed",
+            "start": 1716300000000,
+            "stop": 1716300000100,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "When I send a GET request to \"/users\"",
+        "status": "passed",
+        "start": 1777929460433,
+        "stop": 1777929461273,
+        "duration": 840,
+        "steps": [
+          {
+            "name": "HTTP GET /users — 200 OK (840ms)",
+            "status": "passed",
+            "start": 1716300000100,
+            "stop": 1716300000940,
+            "duration": 840
+          }
+        ]
+      },
+      {
+        "name": "Then the response status code should be 200",
+        "status": "passed",
+        "start": 1777929461273,
+        "stop": 1777929461333,
+        "duration": 60,
+        "steps": [
+          {
+            "name": "Assert statusCode == 200",
+            "status": "passed",
+            "start": 1716300000940,
+            "stop": 1716300001000,
+            "duration": 60
+          }
+        ]
+      },
+      {
+        "name": "And the response body should contain a list of users",
+        "status": "passed",
+        "start": 1777929461333,
+        "stop": 1777929461433,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Assert body: $.data is array with size >= 1",
+            "status": "passed",
+            "start": 1716300001000,
+            "stop": 1716300001100,
+            "duration": 100
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tag",
+        "value": "smoke"
+      },
+      {
+        "name": "tag",
+        "value": "rest-assured"
+      },
+      {
+        "name": "tag",
+        "value": "users-api"
+      },
+      {
+        "name": "tag",
+        "value": "tms:1"
+      },
+      {
+        "name": "tag",
+        "value": "severity:high"
+      },
+      {
+        "name": "tag",
+        "value": "owner:backend-team"
+      }
+    ],
+    "extra": {
+      "cucumber": {
+        "featureName": "User Management API",
+        "featureUri": "features/user_management.feature",
+        "tags": [
+          "@smoke",
+          "@rest-assured",
+          "@users-api"
+        ]
+      },
+      "testClass": "User Management API",
+      "testMethod": "Retrieve all users from the API"
+    }
+  },
+  {
+    "uuid": "rac-0001-777929460333",
+    "tool": "cucumber",
+    "name": "Retrieve a specific user by ID",
+    "fullName": "User Management API > Retrieve a specific user by ID",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1777929461533,
+    "stop": 1777929462333,
+    "duration": 800,
+    "steps": [
+      {
+        "name": "Given the REST API base URL is \"https://api.example.com\"",
+        "status": "passed",
+        "start": 1777929461533,
+        "stop": 1777929461633,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Initialize RestAssured: baseURI=https://api.example.com",
+            "status": "passed",
+            "start": 1716300001200,
+            "stop": 1716300001300,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "And a user with ID \"42\" exists in the system",
+        "status": "passed",
+        "start": 1777929461633,
+        "stop": 1777929461733,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Precondition: user id=42 seeded",
+            "status": "passed",
+            "start": 1716300001300,
+            "stop": 1716300001400,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "When I send a GET request to \"/users/42\"",
+        "status": "passed",
+        "start": 1777929461733,
+        "stop": 1777929462233,
+        "duration": 500,
+        "steps": [
+          {
+            "name": "HTTP GET /users/42 — 200 OK (500ms)",
+            "status": "passed",
+            "start": 1716300001400,
+            "stop": 1716300001900,
+            "duration": 500
+          }
+        ]
+      },
+      {
+        "name": "Then the response status code should be 200",
+        "status": "passed",
+        "start": 1777929462233,
+        "stop": 1777929462283,
+        "duration": 50,
+        "steps": [
+          {
+            "name": "Assert statusCode == 200",
+            "status": "passed",
+            "start": 1716300001900,
+            "stop": 1716300001950,
+            "duration": 50
+          }
+        ]
+      },
+      {
+        "name": "And the response body field \"id\" should equal 42",
+        "status": "passed",
+        "start": 1777929462283,
+        "stop": 1777929462333,
+        "duration": 50,
+        "steps": [
+          {
+            "name": "Assert body: $.id == 42",
+            "status": "passed",
+            "start": 1716300001950,
+            "stop": 1716300002000,
+            "duration": 50
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tag",
+        "value": "smoke"
+      },
+      {
+        "name": "tag",
+        "value": "rest-assured"
+      },
+      {
+        "name": "tag",
+        "value": "users-api"
+      },
+      {
+        "name": "tag",
+        "value": "severity:medium"
+      }
+    ],
+    "extra": {
+      "cucumber": {
+        "featureName": "User Management API",
+        "featureUri": "features/user_management.feature",
+        "tags": [
+          "@smoke",
+          "@rest-assured",
+          "@users-api"
+        ]
+      },
+      "testClass": "User Management API",
+      "testMethod": "Retrieve a specific user by ID"
+    }
+  },
+  {
+    "uuid": "rac-0002-777929460333",
+    "tool": "cucumber",
+    "name": "Create a new user successfully",
+    "fullName": "User Management API > Create a new user successfully",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1777929462433,
+    "stop": 1777929463833,
+    "duration": 1400,
+    "steps": [
+      {
+        "name": "Given the REST API base URL is \"https://api.example.com\"",
+        "status": "passed",
+        "start": 1777929462433,
+        "stop": 1777929462533,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Initialize RestAssured: baseURI=https://api.example.com",
+            "status": "passed",
+            "start": 1716300002100,
+            "stop": 1716300002200,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "And I have a valid user payload with name \"Alice\" and email \"alice@example.com\"",
+        "status": "passed",
+        "start": 1777929462533,
+        "stop": 1777929462633,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Build request body: {name: Alice, email: alice@example.com}",
+            "status": "passed",
+            "start": 1716300002200,
+            "stop": 1716300002300,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "When I send a POST request to \"/users\" with the payload",
+        "status": "passed",
+        "start": 1777929462633,
+        "stop": 1777929463633,
+        "duration": 1000,
+        "steps": [
+          {
+            "name": "HTTP POST /users — 201 Created (1000ms)",
+            "status": "passed",
+            "start": 1716300002300,
+            "stop": 1716300003300,
+            "duration": 1000
+          }
+        ]
+      },
+      {
+        "name": "Then the response status code should be 201",
+        "status": "passed",
+        "start": 1777929463633,
+        "stop": 1777929463683,
+        "duration": 50,
+        "steps": [
+          {
+            "name": "Assert statusCode == 201",
+            "status": "passed",
+            "start": 1716300003300,
+            "stop": 1716300003350,
+            "duration": 50
+          }
+        ]
+      },
+      {
+        "name": "And the response body should contain the created user's \"id\"",
+        "status": "passed",
+        "start": 1777929463683,
+        "stop": 1777929463833,
+        "duration": 150,
+        "steps": [
+          {
+            "name": "Assert body: $.id is not null",
+            "status": "passed",
+            "start": 1716300003350,
+            "stop": 1716300003500,
+            "duration": 150
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tag",
+        "value": "rest-assured"
+      },
+      {
+        "name": "tag",
+        "value": "users-api"
+      },
+      {
+        "name": "tag",
+        "value": "tms:3"
+      },
+      {
+        "name": "tag",
+        "value": "severity:critical"
+      },
+      {
+        "name": "tag",
+        "value": "owner:backend-team"
+      }
+    ],
+    "extra": {
+      "cucumber": {
+        "featureName": "User Management API",
+        "featureUri": "features/user_management.feature",
+        "tags": [
+          "@rest-assured",
+          "@users-api"
+        ]
+      },
+      "testClass": "User Management API",
+      "testMethod": "Create a new user successfully"
+    }
+  },
+  {
+    "uuid": "rac-0003-777929460333",
+    "tool": "cucumber",
+    "name": "Update user details with valid data",
+    "fullName": "User Management API > Update user details with valid data",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1777929463933,
+    "stop": 1777929465233,
+    "duration": 1300,
+    "steps": [
+      {
+        "name": "Given the REST API base URL is \"https://api.example.com\"",
+        "status": "passed",
+        "start": 1777929463933,
+        "stop": 1777929464033,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Initialize RestAssured: baseURI=https://api.example.com",
+            "status": "passed",
+            "start": 1716300003600,
+            "stop": 1716300003700,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "And a user with ID \"7\" exists in the system",
+        "status": "passed",
+        "start": 1777929464033,
+        "stop": 1777929464133,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Precondition: user id=7 seeded",
+            "status": "passed",
+            "start": 1716300003700,
+            "stop": 1716300003800,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "When I send a PUT request to \"/users/7\" with updated name \"Bob\"",
+        "status": "passed",
+        "start": 1777929464133,
+        "stop": 1777929465033,
+        "duration": 900,
+        "steps": [
+          {
+            "name": "HTTP PUT /users/7 — 200 OK (900ms)",
+            "status": "passed",
+            "start": 1716300003800,
+            "stop": 1716300004700,
+            "duration": 900
+          }
+        ]
+      },
+      {
+        "name": "Then the response status code should be 200",
+        "status": "passed",
+        "start": 1777929465033,
+        "stop": 1777929465083,
+        "duration": 50,
+        "steps": [
+          {
+            "name": "Assert statusCode == 200",
+            "status": "passed",
+            "start": 1716300004700,
+            "stop": 1716300004750,
+            "duration": 50
+          }
+        ]
+      },
+      {
+        "name": "And the response body field \"name\" should equal \"Bob\"",
+        "status": "passed",
+        "start": 1777929465083,
+        "stop": 1777929465233,
+        "duration": 150,
+        "steps": [
+          {
+            "name": "Assert body: $.name == Bob",
+            "status": "passed",
+            "start": 1716300004750,
+            "stop": 1716300004900,
+            "duration": 150
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tag",
+        "value": "rest-assured"
+      },
+      {
+        "name": "tag",
+        "value": "users-api"
+      },
+      {
+        "name": "tag",
+        "value": "severity:high"
+      },
+      {
+        "name": "tag",
+        "value": "owner:backend-team"
+      }
+    ],
+    "extra": {
+      "cucumber": {
+        "featureName": "User Management API",
+        "featureUri": "features/user_management.feature",
+        "tags": [
+          "@rest-assured",
+          "@users-api"
+        ]
+      },
+      "testClass": "User Management API",
+      "testMethod": "Update user details with valid data"
+    }
+  },
+  {
+    "uuid": "rac-0004-777929460333",
+    "tool": "cucumber",
+    "name": "Validate schema of user creation response",
+    "fullName": "User Management API > Validate schema of user creation response",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1777929465333,
+    "stop": 1777929466533,
+    "duration": 1200,
+    "steps": [
+      {
+        "name": "Given the REST API base URL is \"https://api.example.com\"",
+        "status": "passed",
+        "start": 1777929465333,
+        "stop": 1777929465433,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Initialize RestAssured: baseURI=https://api.example.com",
+            "status": "passed",
+            "start": 1716300005000,
+            "stop": 1716300005100,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "When I send a POST request to \"/users\" with name \"Carol\" and email \"carol@example.com\"",
+        "status": "passed",
+        "start": 1777929465433,
+        "stop": 1777929466333,
+        "duration": 900,
+        "steps": [
+          {
+            "name": "HTTP POST /users — 201 Created (900ms)",
+            "status": "passed",
+            "start": 1716300005100,
+            "stop": 1716300006000,
+            "duration": 900
+          }
+        ]
+      },
+      {
+        "name": "Then the response JSON should match the user schema",
+        "status": "passed",
+        "start": 1777929466333,
+        "stop": 1777929466433,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Validate JSON schema: user-schema.json",
+            "status": "passed",
+            "start": 1716300006000,
+            "stop": 1716300006100,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "And the response body should contain field \"email\"",
+        "status": "passed",
+        "start": 1777929466433,
+        "stop": 1777929466533,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Assert body: $.email is present and not null",
+            "status": "passed",
+            "start": 1716300006100,
+            "stop": 1716300006200,
+            "duration": 100
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tag",
+        "value": "rest-assured"
+      },
+      {
+        "name": "tag",
+        "value": "users-api"
+      },
+      {
+        "name": "tag",
+        "value": "severity:critical"
+      },
+      {
+        "name": "tag",
+        "value": "owner:backend-team"
+      }
+    ],
+    "extra": {
+      "cucumber": {
+        "featureName": "User Management API",
+        "featureUri": "features/user_management.feature",
+        "tags": [
+          "@rest-assured",
+          "@users-api"
+        ]
+      },
+      "testClass": "User Management API",
+      "testMethod": "Validate schema of user creation response"
+    }
+  },
+  {
+    "uuid": "rac-0005-777929460333",
+    "tool": "cucumber",
+    "name": "Retrieve all posts from the API",
+    "fullName": "Posts API > Retrieve all posts from the API",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1777929466733,
+    "stop": 1777929467613,
+    "duration": 880,
+    "steps": [
+      {
+        "name": "Given the REST API base URL is \"https://api.example.com\"",
+        "status": "passed",
+        "start": 1777929466733,
+        "stop": 1777929466833,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Initialize RestAssured: baseURI=https://api.example.com",
+            "status": "passed",
+            "start": 1716300006400,
+            "stop": 1716300006500,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "When I send a GET request to \"/posts\"",
+        "status": "passed",
+        "start": 1777929466833,
+        "stop": 1777929467533,
+        "duration": 700,
+        "steps": [
+          {
+            "name": "HTTP GET /posts — 200 OK (700ms)",
+            "status": "passed",
+            "start": 1716300006500,
+            "stop": 1716300007200,
+            "duration": 700
+          }
+        ]
+      },
+      {
+        "name": "Then the response status code should be 200",
+        "status": "passed",
+        "start": 1777929467533,
+        "stop": 1777929467573,
+        "duration": 40,
+        "steps": [
+          {
+            "name": "Assert statusCode == 200",
+            "status": "passed",
+            "start": 1716300007200,
+            "stop": 1716300007240,
+            "duration": 40
+          }
+        ]
+      },
+      {
+        "name": "And the response should contain a non-empty list",
+        "status": "passed",
+        "start": 1777929467573,
+        "stop": 1777929467613,
+        "duration": 40,
+        "steps": [
+          {
+            "name": "Assert body: $.data.size() >= 1",
+            "status": "passed",
+            "start": 1716300007240,
+            "stop": 1716300007280,
+            "duration": 40
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tag",
+        "value": "smoke"
+      },
+      {
+        "name": "tag",
+        "value": "rest-assured"
+      },
+      {
+        "name": "tag",
+        "value": "posts-api"
+      },
+      {
+        "name": "tag",
+        "value": "tms:2"
+      },
+      {
+        "name": "tag",
+        "value": "severity:high"
+      }
+    ],
+    "extra": {
+      "cucumber": {
+        "featureName": "Posts API",
+        "featureUri": "features/posts_api.feature",
+        "tags": [
+          "@smoke",
+          "@rest-assured",
+          "@posts-api"
+        ]
+      },
+      "testClass": "Posts API",
+      "testMethod": "Retrieve all posts from the API"
+    }
+  },
+  {
+    "uuid": "rac-0006-777929460333",
+    "tool": "cucumber",
+    "name": "Create a new post and verify location header",
+    "fullName": "Posts API > Create a new post and verify location header",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1777929467733,
+    "stop": 1777929469033,
+    "duration": 1300,
+    "steps": [
+      {
+        "name": "Given the REST API base URL is \"https://api.example.com\"",
+        "status": "passed",
+        "start": 1777929467733,
+        "stop": 1777929467833,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Initialize RestAssured: baseURI=https://api.example.com",
+            "status": "passed",
+            "start": 1716300007400,
+            "stop": 1716300007500,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "And I have a post payload with title \"BDD API Testing\" and body \"Cucumber + RestAssured\"",
+        "status": "passed",
+        "start": 1777929467833,
+        "stop": 1777929467933,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Build request body: {title: BDD API Testing, body: Cucumber + RestAssured}",
+            "status": "passed",
+            "start": 1716300007500,
+            "stop": 1716300007600,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "When I send a POST request to \"/posts\" with the payload",
+        "status": "passed",
+        "start": 1777929467933,
+        "stop": 1777929468833,
+        "duration": 900,
+        "steps": [
+          {
+            "name": "HTTP POST /posts — 201 Created (900ms)",
+            "status": "passed",
+            "start": 1716300007600,
+            "stop": 1716300008500,
+            "duration": 900
+          }
+        ]
+      },
+      {
+        "name": "Then the response status code should be 201",
+        "status": "passed",
+        "start": 1777929468833,
+        "stop": 1777929468883,
+        "duration": 50,
+        "steps": [
+          {
+            "name": "Assert statusCode == 201",
+            "status": "passed",
+            "start": 1716300008500,
+            "stop": 1716300008550,
+            "duration": 50
+          }
+        ]
+      },
+      {
+        "name": "And the response header \"Location\" should not be empty",
+        "status": "passed",
+        "start": 1777929468883,
+        "stop": 1777929469033,
+        "duration": 150,
+        "steps": [
+          {
+            "name": "Assert header: Location is present",
+            "status": "passed",
+            "start": 1716300008550,
+            "stop": 1716300008700,
+            "duration": 150
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tag",
+        "value": "rest-assured"
+      },
+      {
+        "name": "tag",
+        "value": "posts-api"
+      },
+      {
+        "name": "tag",
+        "value": "tms:5"
+      },
+      {
+        "name": "tag",
+        "value": "severity:medium"
+      }
+    ],
+    "extra": {
+      "cucumber": {
+        "featureName": "Posts API",
+        "featureUri": "features/posts_api.feature",
+        "tags": [
+          "@rest-assured",
+          "@posts-api"
+        ]
+      },
+      "testClass": "Posts API",
+      "testMethod": "Create a new post and verify location header"
+    }
+  },
+  {
+    "uuid": "rac-0007-777929460333",
+    "tool": "cucumber",
+    "name": "Get comments for a specific post",
+    "fullName": "Posts API > Get comments for a specific post",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1777929469133,
+    "stop": 1777929469933,
+    "duration": 800,
+    "steps": [
+      {
+        "name": "Given the REST API base URL is \"https://api.example.com\"",
+        "status": "passed",
+        "start": 1777929469133,
+        "stop": 1777929469233,
+        "duration": 100,
+        "steps": [
+          {
+            "name": "Initialize RestAssured: baseURI=https://api.example.com",
+            "status": "passed",
+            "start": 1716300008800,
+            "stop": 1716300008900,
+            "duration": 100
+          }
+        ]
+      },
+      {
+        "name": "When I send a GET request to \"/posts/1/comments\"",
+        "status": "passed",
+        "start": 1777929469233,
+        "stop": 1777929469833,
+        "duration": 600,
+        "steps": [
+          {
+            "name": "HTTP GET /posts/1/comments — 200 OK (600ms)",
+            "status": "passed",
+            "start": 1716300008900,
+            "stop": 1716300009500,
+            "duration": 600
+          }
+        ]
+      },
+      {
+        "name": "Then the response status code should be 200",
+        "status": "passed",
+        "start": 1777929469833,
+        "stop": 1777929469873,
+        "duration": 40,
+        "steps": [
+          {
+            "name": "Assert statusCode == 200",
+            "status": "passed",
+            "start": 1716300009500,
+            "stop": 1716300009540,
+            "duration": 40
+          }
+        ]
+      },
+      {
+        "name": "And each comment should have fields \"id\", \"postId\", and \"body\"",
+        "status": "passed",
+        "start": 1777929469873,
+        "stop": 1777929469933,
+        "duration": 60,
+        "steps": [
+          {
+            "name": "Assert each comment: $.id, $.postId, $.body are present",
+            "status": "passed",
+            "start": 1716300009540,
+            "stop": 1716300009600,
+            "duration": 60
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tag",
+        "value": "rest-assured"
+      },
+      {
+        "name": "tag",
+        "value": "posts-api"
+      },
+      {
+        "name": "tag",
+        "value": "severity:low"
+      }
+    ],
+    "extra": {
+      "cucumber": {
+        "featureName": "Posts API",
+        "featureUri": "features/posts_api.feature",
+        "tags": [
+          "@rest-assured",
+          "@posts-api"
+        ]
+      },
+      "testClass": "Posts API",
+      "testMethod": "Get comments for a specific post"
+    }
+  }
+]
