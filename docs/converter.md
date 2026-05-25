@@ -1,6 +1,6 @@
 # CLI Converter
 
-The built-in converter transforms test results from other formats (JUnit XML, Playwright JSON, Cypress JSON) into a Sarva-Varadi report — without adding any adapter code to your tests.
+The built-in converter transforms test results from other formats (JUnit XML, TestNG XML, Cucumber JSON, Robot Framework XML) into a Sarva-Varadi report — without adding any adapter code to your tests.
 
 [[toc]]
 
@@ -26,8 +26,9 @@ open sarva-report/index.html
 | Format | Source | Auto-detected? |
 |--------|--------|---------------|
 | **JUnit XML** | Maven Surefire, Gradle, Ant | ✅ Yes |
-| **Playwright JSON** | `playwright.config.ts` → `json` reporter | ✅ Yes |
-| **Cypress JSON** | `cypress.json` results | ✅ Yes |
+| **TestNG XML** | Standard TestNG `testng-results.xml` | ✅ Yes |
+| **Cucumber JSON** | Cucumber JSON formatter output | ✅ Yes |
+| **Robot Framework XML** | `output.xml` from RF 4, 5, 6, and 7 | ✅ Yes |
 | **Sarva-Varadi JSON** | Native format (no conversion needed) | ✅ Skips conversion |
 
 Format is **auto-detected** from file structure — no `--format` flag needed in most cases.
@@ -109,6 +110,27 @@ sarva-varadi generate \
       --output sarva-report
 ```
 
+### GitHub Actions — Robot Framework project
+
+```yaml
+- name: Run Robot Framework tests
+  run: robot --outputdir results tests/
+
+- name: Generate Sarva-Varadi report
+  run: |
+    npm install -g @sarva-varadi/core
+    sarva-varadi generate \
+      --input results/output.xml \
+      --output sarva-report \
+      --title "Robot Suite"
+
+- name: Upload report
+  uses: actions/upload-artifact@v4
+  with:
+    name: robot-report
+    path: sarva-report/
+```
+
 ---
 
 ## Native adapters vs. converter
@@ -125,6 +147,9 @@ The converter is great for a quick start or when you can't modify the test code.
 | Video / traces | ✗ | ✅ (Playwright) |
 | HTTP request/response | ✗ | ✅ (RestAssured) |
 | Flaky test detection | ⚠️ Basic | ✅ Full score |
-| Severity labels | ✗ | ✅ |
+| Severity labels | ✗ (except Robot — tags map automatically) | ✅ |
 | BDD Gherkin hierarchy | ✗ | ✅ (Cucumber) |
+| Keyword step tree | ✅ (Robot Framework — full nested keyword hierarchy) | N/A |
 | Browser grouping | ⚠️ Name parsing | ✅ Automatic |
+
+> **Robot Framework** is the only converter input that captures a full step hierarchy (keyword tree with sub-keywords) and tag-based labels — making the converter output nearly as rich as a native adapter.

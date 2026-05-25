@@ -36,7 +36,8 @@
   <strong>🌿 <a href="https://yoggit.github.io/sarva-varadi/selenium-cucumber/index.html">Selenium (Cucumber BDD) Demo</a></strong> •
   <strong>🔌 <a href="https://yoggit.github.io/sarva-varadi/rest-assured/index.html">RestAssured (TestNG) Demo</a></strong> •
   <strong>🧪 <a href="https://yoggit.github.io/sarva-varadi/rest-assured-junit/index.html">RestAssured (JUnit) Demo</a></strong> •
-  <strong>🔀 <a href="https://yoggit.github.io/sarva-varadi/restassured-cucumber/index.html">RestAssured (Cucumber BDD) Demo</a></strong>
+  <strong>🔀 <a href="https://yoggit.github.io/sarva-varadi/restassured-cucumber/index.html">RestAssured (Cucumber BDD) Demo</a></strong> •
+  <strong>🤖 <a href="https://yoggit.github.io/sarva-varadi/robot/index.html">Robot Framework Demo</a></strong>
 </p>
 
 ---
@@ -45,13 +46,14 @@
 
 <table>
 <tr>
-<td width="14%" align="center"><strong>🎭 Playwright</strong><br/>Web automation<br/>TypeScript/JavaScript</td>
-<td width="14%" align="center"><strong>🌐 Selenium (TestNG)</strong><br/>WebDriver browser tests<br/>Java/TestNG</td>
-<td width="14%" align="center"><strong>🌿 Selenium (Cucumber BDD)</strong><br/>BDD browser tests<br/>Java/Cucumber 7</td>
-<td width="14%" align="center"><strong>🔌 RestAssured (TestNG)</strong><br/>API testing<br/>Java/TestNG</td>
-<td width="14%" align="center"><strong>🧪 RestAssured (JUnit)</strong><br/>API testing<br/>Java/JUnit 5</td>
-<td width="14%" align="center"><strong>🔀 RestAssured (Cucumber BDD)</strong><br/>BDD API testing<br/>Java/Cucumber 7</td>
-<td width="16%" align="center"><strong>🚧 Cypress</strong><br/>Modern web testing<br/><em>(Coming soon)</em></td>
+<td width="13%" align="center"><strong>🎭 Playwright</strong><br/>Web automation<br/>TypeScript/JavaScript</td>
+<td width="13%" align="center"><strong>🌐 Selenium (TestNG)</strong><br/>WebDriver browser tests<br/>Java/TestNG</td>
+<td width="13%" align="center"><strong>🌿 Selenium (Cucumber BDD)</strong><br/>BDD browser tests<br/>Java/Cucumber 7</td>
+<td width="13%" align="center"><strong>🔌 RestAssured (TestNG)</strong><br/>API testing<br/>Java/TestNG</td>
+<td width="13%" align="center"><strong>🧪 RestAssured (JUnit)</strong><br/>API testing<br/>Java/JUnit 5</td>
+<td width="13%" align="center"><strong>🔀 RestAssured (Cucumber BDD)</strong><br/>BDD API testing<br/>Java/Cucumber 7</td>
+<td width="13%" align="center"><strong>🤖 Robot Framework</strong><br/>Keyword-driven UI & API<br/>Python</td>
+<td width="9%" align="center"><strong>🚧 Cypress</strong><br/><em>(Coming soon)</em></td>
 </tr>
 </table>
 
@@ -107,6 +109,7 @@ The best way to explore Sarva-Varadi is to open one of the live demos — each h
 | 🌐 RestAssured (TestNG) | [yoggit.github.io/sarva-varadi/rest-assured/](https://yoggit.github.io/sarva-varadi/rest-assured/index.html) |
 | 🧪 RestAssured (JUnit 5) | [yoggit.github.io/sarva-varadi/rest-assured-junit/](https://yoggit.github.io/sarva-varadi/rest-assured-junit/index.html) |
 | 🔀 RestAssured (Cucumber BDD) | [yoggit.github.io/sarva-varadi/restassured-cucumber/](https://yoggit.github.io/sarva-varadi/restassured-cucumber/index.html) |
+| 🤖 Robot Framework | [yoggit.github.io/sarva-varadi/robot/](https://yoggit.github.io/sarva-varadi/robot/index.html) |
 
 ### What's in the report
 
@@ -146,7 +149,8 @@ After execution, the Node.js core generator reads the JSON and produces a fully 
 │  RestAssured + TestNG (Java) │──→ sarva-varadi-restassured  ──┼──→ SarvaTestResult JSON ──→ @sarva-varadi/core ──→ index.html
 │  RestAssured + JUnit (Java)  │──→ sarva-varadi-restassured- ──┤                              (Node.js CLI or
 │                              │     junit                    ──┤               Playwright reporter plugin)
-│  RestAssured + Cucumber(Java)│──→ sarva-varadi-cucumber     ──┘
+│  RestAssured + Cucumber(Java)│──→ sarva-varadi-cucumber     ──┤
+│  Robot Framework (Python)    │──→ CLI converter (output.xml)──┘
 └──────────────────────────────┘
          ↑ all write the same JSON schema — the core generator is framework-agnostic
 ```
@@ -208,6 +212,17 @@ Same plugin registration as above — `sarva-varadi-cucumber` works with any und
 
 See the [demo-restassured-cucumber/](demo-restassured-cucumber/) project for a full working example.
 
+### For Robot Framework
+
+No additional packages needed — Robot Framework is covered by the CLI converter built into `@sarva-varadi/core`. Run your tests normally, then convert `output.xml`:
+
+```bash
+npm install -g @sarva-varadi/core
+sarva-varadi generate --input output.xml --output sarva-report
+```
+
+See the [demo-robot/](demo-robot/) project for a full working example, and the [Robot Framework integration guide](#robot-guide) below for CI/CD setup and tag conventions.
+
 ---
 
 ## 📋 What Gets Captured
@@ -222,6 +237,7 @@ Understanding what is automatic vs what requires an extra setup step saves a lot
 | **Selenium (Cucumber BDD)** | Feature → Scenario → Step hierarchy, pass/fail/skip per step, duration | Add `sarva-varadi-selenium` for WebDriver sub-steps (navigate, click, find) under each BDD step |
 | **RestAssured (Cucumber BDD)** | Feature → Scenario → Step hierarchy, pass/fail/skip per step, duration | Add `sarva-varadi-restassured` for HTTP request/response sub-steps under each `When` step |
 | **Playwright** | Everything — steps, screenshots, video, trace captured natively | Nothing extra needed |
+| **Robot Framework** | Test pass/fail/skip, duration, error message, nested keyword tree (steps + sub-steps), tags mapped to labels (`severity:high`, `tms:`, etc.) | Run `sarva-varadi generate --input output.xml` after the suite; supports RF 4, 5, 6, and 7 |
 
 > **RestAssured + JUnit 5** ([guide](#restassured-junit-maven-guide)): Steps 1–3 (dependency → Surefire plugin → `@ExtendWith`) give you a fully detailed report including HTTP steps — no extra wiring needed.
 >
@@ -985,10 +1001,109 @@ The report captures the full **Feature → Scenario → Step** hierarchy. If the
 
 ---
 
+<a id="robot-guide"></a>
+<details>
+<summary>🤖 Robot Framework + CLI Converter Integration Guide</summary>
+
+<br>
+
+> **Prerequisites:** Robot Framework 4+, [Node.js](https://nodejs.org) 16+
+
+---
+
+### Step 1 — Install the CLI
+
+```bash
+npm install -g @sarva-varadi/core
+# or locally:
+npm install --save-dev @sarva-varadi/core
+```
+
+### Step 2 — Run your Robot Framework tests
+
+Robot Framework always produces `output.xml` after a run:
+
+```bash
+robot --outputdir results tests/
+# → results/output.xml
+```
+
+### Step 3 — Convert and generate the report
+
+```bash
+sarva-varadi generate \
+  --input results/output.xml \
+  --output sarva-report \
+  --title "Robot Framework Suite"
+
+# Open the report
+open sarva-report/index.html        # macOS
+start sarva-report/index.html       # Windows
+xdg-open sarva-report/index.html    # Linux
+```
+
+### GitHub Actions example
+
+```yaml
+- name: Run Robot Framework tests
+  run: robot --outputdir results tests/
+
+- name: Generate Sarva-Varadi report
+  run: |
+    npm install -g @sarva-varadi/core
+    sarva-varadi generate \
+      --input results/output.xml \
+      --output sarva-report \
+      --title "Robot Suite"
+
+- name: Upload report
+  uses: actions/upload-artifact@v4
+  with:
+    name: robot-report
+    path: sarva-report/
+```
+
+### Tag conventions
+
+Tags on Robot test cases map to Sarva-Varadi labels automatically:
+
+| Tag pattern | Maps to |
+|-------------|---------|
+| `severity:critical` / `severity:high` / `severity:normal` / `severity:low` | Severity label (colours failures in the Failures view) |
+| `tms:PROJ-123` | TMS link (clickable badge on each test) |
+| `issue:BUG-456` | Issue tracker link |
+| Any other tag (e.g. `smoke`, `regression`) | Generic tag label shown in the test drawer |
+
+Example test case:
+
+```robot
+*** Test Cases ***
+Valid Login
+    [Tags]    severity:critical    tms:AUTH-001    smoke
+    Open Browser To Login Page
+    Submit Credentials    admin    secret
+    Dashboard Should Be Visible
+```
+
+### What gets captured
+
+- ✅ Pass / fail / skip per test, suite duration
+- ✅ Error message from the failing keyword
+- ✅ Full nested keyword tree (keyword type shown: `[SETUP]`, `[TEARDOWN]`, etc.)
+- ✅ Tags → labels (severity, TMS, issue, custom)
+- ✅ Suite path as `fullName` for grouping in the Tests view
+- ✅ Supports RF 4, 5, 6, and 7 (`schemaversion` 3 & 4)
+
+📂 **Demo project:** [`demo-robot/`](demo-robot/)
+
+</details>
+
+---
+
 ## 🔄 Universal Converter
 
 <details>
-<summary><b>Generate Reports from Any Format (JUnit, TestNG, Cucumber)</b></summary>
+<summary><b>Generate Reports from Any Format (JUnit, TestNG, Cucumber, Robot Framework)</b></summary>
 
 <br>
 
@@ -1017,6 +1132,9 @@ sarva-varadi generate --input test-output/testng-results.xml --output sarva-repo
 # Cucumber JSON
 sarva-varadi generate --input cucumber-report.json --output sarva-report --title "API Tests"
 
+# Robot Framework output.xml (RF 4, 5, 6, 7)
+sarva-varadi generate --input output.xml --output sarva-report --title "Robot Suite"
+
 # Already in Sarva-Varadi format (no conversion needed)
 sarva-varadi generate --input sarva-data.json --output sarva-report
 ```
@@ -1031,6 +1149,7 @@ The converter intelligently detects the format and handles conversion automatica
 | **JUnit XML** | Looks for `<testsuites>` or `<testsuite>` root | Maven Surefire, Gradle test reports |
 | **TestNG XML** | Looks for `<testng-results>` or `<suite>` root | Standard TestNG output |
 | **Cucumber JSON** | Checks for `type: "feature"` and `elements` array | Cucumber JSON formatter output |
+| **Robot Framework XML** | Looks for `<robot>` root element | `output.xml` from RF 4, 5, 6, and 7 (`schemaversion` 3 & 4) |
 
 **Key Features:**
 - 🎯 Zero-config format detection - just point to your file

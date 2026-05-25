@@ -586,7 +586,6 @@ const SarvaTestDetail = (() => {
       const hasChildren = step.steps && step.steps.length > 0;
       const childId     = hasChildren ? `sv-step-ch-${++_stepIdCounter}` : null;
 
-      // Expand children only when the subtree contains a failure; otherwise start collapsed.
       const autoExpand  = hasChildren && stepHasFailed(step);
 
       const chevron = hasChildren
