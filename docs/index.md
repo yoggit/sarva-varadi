@@ -1,0 +1,51 @@
+---
+layout: home
+
+hero:
+  name: "Sarva-Varadi"
+  text: "Universal Test Reporting"
+  tagline: Single self-contained HTML file. No server. No database. Works with Playwright, Selenium, RestAssured & Cucumber.
+  image:
+    src: /logo.svg
+    alt: Sarva-Varadi
+  actions:
+    - theme: brand
+      text: Quick Start →
+      link: /quickstart
+    - theme: alt
+      text: Live Demos
+      link: https://yoggit.github.io/sarva-varadi/
+
+features:
+  - icon: 📊
+    title: 6 interactive sections
+    details: Overview, Failures, Tests, Trends, Timeline, and Run History — all navigable from a sidebar, with dark/light theme.
+  - icon: 🕐
+    title: Browse any historical run
+    details: The Run History tab lists every past run. Click any row and every chart — Overview, Failures, Trends, Timeline — re-renders in-place.
+  - icon: 🔥
+    title: Flaky test detection
+    details: Automatic flaky score computed across runs. Per-test history chart shows pass/fail/flaky pattern across the last 25 runs.
+  - icon: 🥒
+    title: BDD / Cucumber support
+    details: Native Gherkin hierarchy — Feature → Scenario → Step — in the test detail drawer. Works with Selenium and RestAssured Cucumber adapters.
+  - icon: 🖨️
+    title: PDF, PNG & CSV export
+    details: Print the full 6-section report to A4 PDF with page headers and TOC, download any chart as PNG, or export test data as CSV.
+  - icon: ⚡
+    title: Zero configuration
+    details: Works out of the box. File-based history — just point a CI step at the output folder and history accumulates automatically.
+---
+
+## Supported Frameworks
+
+| Framework | Adapter | Language |
+|-----------|---------|----------|
+| 🎭 Playwright | `@sarva-varadi/playwright` | TypeScript / JavaScript |
+| 🔬 Selenium (TestNG) | `@sarva-varadi/selenium` | Java |
+| 🌿 Selenium (Cucumber BDD) | `@sarva-varadi/cucumber` | Java |
+| 🌐 RestAssured (TestNG) | `@sarva-varadi/rest-assured` | Java |
+| 🧪 RestAssured (JUnit 5) | `@sarva-varadi/rest-assured-junit` | Java |
+| 🔀 RestAssured (Cucumber BDD) | `@sarva-varadi/cucumber` | Java |
+
+→ [Live Demos](https://yoggit.github.io/sarva-varadi/) — each has 25 historical runs pre-loaded.

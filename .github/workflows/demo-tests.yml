@@ -124,9 +124,20 @@ jobs:
             cp -r demo-restassured-cucumber/sarva-report gh-pages-deploy/restassured-cucumber
           fi
 
+      - name: Build documentation site
+        if: always()
+        run: npm run docs:build
+        continue-on-error: true
+
       - name: Create landing page
         if: always()
-        run: cp local-gh-pages-test/index.html gh-pages-deploy/index.html && cp local-gh-pages-test/logo.svg gh-pages-deploy/logo.svg
+        run: |
+          cp local-gh-pages-test/index.html gh-pages-deploy/index.html
+          cp local-gh-pages-test/logo.svg gh-pages-deploy/logo.svg
+          if [ -d "docs/.vitepress/dist" ]; then
+            cp -r docs/.vitepress/dist gh-pages-deploy/docs
+            echo "✅ Documentation site deployed at /docs/"
+          fi
 
       - name: Upload Sarva-Varadi Reports
         if: always()

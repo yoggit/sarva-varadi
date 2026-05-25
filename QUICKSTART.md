@@ -349,16 +349,18 @@ xdg-open sarva-report/index.html  # Linux
 
 ## 📊 Your Report
 
-All frameworks generate the same interactive report at `sarva-report/index.html` — a single-page app with four sidebar tabs:
+All frameworks generate the same interactive report at `sarva-report/index.html` — a single-page app with six sidebar tabs:
 
 | Tab | What you see |
 |-----|---|
-| **Overview** | Pass rate summary, run metadata, key stats |
+| **Overview** | Pass rate summary, run metadata, key stats, top failing & top flaky |
+| **Failures** | Newly failing tests · recently fixed · all failures ranked by severity |
 | **Tests** | Searchable/filterable test list with step details and attachments |
-| **Trends** | Pass rate over time, flaky test leaderboard, run cadence chart |
+| **Trends** | Pass rate over time, flaky test leaderboard, failures & flakiness, run duration |
 | **Timeline** | Gantt chart — when each test ran and how long it took |
+| **Run History** | Every historical run in a filterable table — click any row to view that run |
 
-Export options: PDF print, PNG screenshot, CSV data.
+Export options: PDF print (all six sections), PNG chart download, CSV data export.
 
 ## 📖 Full Documentation
 
