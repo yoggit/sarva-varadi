@@ -126,7 +126,9 @@ jobs:
 
       - name: Build documentation site
         if: always()
-        run: npx vitepress build docs
+        run: |
+          npm install vitepress
+          npx vitepress build docs
         continue-on-error: true
 
       - name: Create landing page
