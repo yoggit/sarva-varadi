@@ -586,8 +586,7 @@ const SarvaTestDetail = (() => {
       const hasChildren = step.steps && step.steps.length > 0;
       const childId     = hasChildren ? `sv-step-ch-${++_stepIdCounter}` : null;
 
-      // Expand direct children (level 0) always; expand deeper only on failure path.
-      const autoExpand  = hasChildren && (level === 0 || stepHasFailed(step));
+      const autoExpand  = hasChildren && stepHasFailed(step);
 
       const chevron = hasChildren
         ? `<svg class="sv-step-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;transition:transform 0.18s;transform:rotate(${autoExpand ? '0' : '-90'}deg);color:var(--text-muted);margin-right:2px;"><polyline points="6 9 12 15 18 9"/></svg>`

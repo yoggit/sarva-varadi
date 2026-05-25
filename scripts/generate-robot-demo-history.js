@@ -403,7 +403,7 @@ const KW_DEFS = {
 
 function buildKwXml(kw, t, failed, failOnLast, indent) {
   const pad = ' '.repeat(indent);
-  const status = (failOnLast && !kw.steps) ? 'FAIL' : 'PASS';
+  const status = failOnLast ? 'FAIL' : 'PASS';
   const subXml = kw.steps
     ? kw.steps.map((s, i) => {
         const isLast = i === kw.steps.length - 1;
