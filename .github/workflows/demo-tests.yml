@@ -19,6 +19,7 @@ on:
           - selenium-testng
           - selenium-cucumber
           - restassured-cucumber
+          - robot
 
 permissions:
   contents: write
@@ -97,6 +98,11 @@ jobs:
         run: node scripts/generate-demo-history.js
         continue-on-error: true
 
+      - name: Generate Robot Framework demo reports (25-run history)
+        if: ${{ inputs.test_framework == 'robot' || inputs.test_framework == '' }}
+        run: node scripts/generate-robot-demo-history.js
+        continue-on-error: true
+
       - name: Regenerate trends
         if: always()
         run: node regenerate-trends.js
@@ -122,6 +128,9 @@ jobs:
           fi
           if [ -d "demo-restassured-cucumber/sarva-report" ]; then
             cp -r demo-restassured-cucumber/sarva-report gh-pages-deploy/restassured-cucumber
+          fi
+          if [ -d "demo-robot/sarva-report" ]; then
+            cp -r demo-robot/sarva-report gh-pages-deploy/robot
           fi
 
       - name: Build documentation site

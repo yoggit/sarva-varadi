@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "Sarva-Varadi"
   text: "Universal Test Reporting"
-  tagline: Single self-contained HTML file. No server. No database. Works with Playwright, Selenium, RestAssured & Cucumber.
+  tagline: Single self-contained HTML file. No server. No database. Works with Playwright, Selenium, RestAssured, Cucumber & Robot Framework.
   image:
     src: /logo.svg
     alt: Sarva-Varadi
@@ -27,8 +27,8 @@ features:
     title: Flaky test detection
     details: Automatic flaky score computed across runs. Per-test history chart shows pass/fail/flaky pattern across the last 25 runs.
   - icon: 🥒
-    title: BDD / Cucumber support
-    details: Native Gherkin hierarchy — Feature → Scenario → Step — in the test detail drawer. Works with Selenium and RestAssured Cucumber adapters.
+    title: BDD & keyword-driven support
+    details: Native Gherkin hierarchy (Feature → Scenario → Step) for Cucumber adapters. Full nested keyword tree for Robot Framework tests — keyword type, timing, and sub-keywords all shown.
   - icon: 🖨️
     title: PDF, PNG & CSV export
     details: Print the full 6-section report to A4 PDF with page headers and TOC, download any chart as PNG, or export test data as CSV.
@@ -47,5 +47,6 @@ features:
 | 🌐 RestAssured (TestNG) | `@sarva-varadi/rest-assured` | Java |
 | 🧪 RestAssured (JUnit 5) | `@sarva-varadi/rest-assured-junit` | Java |
 | 🔀 RestAssured (Cucumber BDD) | `@sarva-varadi/cucumber` | Java |
+| 🤖 Robot Framework | CLI converter (`output.xml`) | Python |
 
 → [Live Demos](https://yoggit.github.io/sarva-varadi/) — each has 25 historical runs pre-loaded.
