@@ -1143,6 +1143,10 @@ body.light-mode .sv-tip-popup {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 }
+@page sv-toc {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
 
 /* ─── @media print ───────────────────────────────────────────────────────────── */
 @media print {
@@ -1208,6 +1212,7 @@ body.light-mode .sv-tip-popup {
   .sv-view[data-view="tests"]::before     { content: 'Tests'; }
   .sv-view[data-view="trends"]::before    { content: 'Trends'; }
   .sv-view[data-view="timeline"]::before  { content: 'Timeline'; }
+  .sv-view[data-view="runs"]::before      { content: 'Run History'; }
   .sv-view[data-view]::before {
     display: block;
     font-size: 1.6rem;
@@ -1219,7 +1224,8 @@ body.light-mode .sv-tip-popup {
     margin-bottom: 1.25rem;
   }
 
-  /* Table of Contents — first page */
+  /* Table of Contents — first page (named page prevents blank page before sv-overview) */
+  .sv-print-toc { page: sv-toc; }
   .sv-print-toc {
     display: flex !important;
     flex-direction: column;

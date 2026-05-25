@@ -1,6 +1,6 @@
 export function renderRuns(): string {
   return `
-  <div class="sv-view" data-view="runs" style="display:none;">
+  <div class="sv-view" id="sv-section-runs" data-view="runs" style="display:none;">
     <div class="sv-runs-header">
       <div class="sv-runs-header-title">
         <h2>Run History</h2>
