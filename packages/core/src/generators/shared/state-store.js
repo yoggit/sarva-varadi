@@ -7,6 +7,8 @@ window.SarvaStore = window.SarvaStore || (() => {
   let _metadata = {};
   let _history = [];
   let _stats = {};
+  let _originalTests = [];
+  let _originalMetadata = {};
 
   function computeStats(tests) {
     const unique = new Map();
@@ -30,6 +32,8 @@ window.SarvaStore = window.SarvaStore || (() => {
     init(tests, metadata, historyData) {
       _tests = tests || [];
       _metadata = metadata || {};
+      _originalTests = _tests;
+      _originalMetadata = _metadata;
       // historyData may be { runs, testHistory } or a plain runs array (backwards compat)
       if (Array.isArray(historyData)) {
         _history = historyData;
@@ -40,6 +44,25 @@ window.SarvaStore = window.SarvaStore || (() => {
       }
       _stats = computeStats(_tests);
       SarvaEventBus.emit('store:ready', { tests: _tests, metadata: _metadata, history: _history, stats: _stats });
+    },
+    switchToRun(tests, runSummary) {
+      _tests = tests || [];
+      _metadata = {
+        id: runSummary.id,
+        timestamp: runSummary.timestamp,
+        duration: runSummary.duration,
+        environment: runSummary.environment || {},
+      };
+      _stats = computeStats(_tests);
+      SarvaEventBus.emit('store:ready', { tests: _tests, metadata: _metadata, history: _history, stats: _stats });
+      SarvaEventBus.emit('run:switched', { runId: runSummary.id });
+    },
+    restoreLatest() {
+      _tests = _originalTests;
+      _metadata = _originalMetadata;
+      _stats = computeStats(_tests);
+      SarvaEventBus.emit('store:ready', { tests: _tests, metadata: _metadata, history: _history, stats: _stats });
+      SarvaEventBus.emit('run:switched', { runId: null });
     },
     get tests() { return _tests; },
     get metadata() { return _metadata; },

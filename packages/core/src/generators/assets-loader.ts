@@ -54,6 +54,7 @@ export class AssetsLoader {
       path.join(__dirname, 'micro-apps', 'test-detail', 'test-detail.js'),
       path.join(__dirname, 'micro-apps', 'trends', 'trends.js'),
       path.join(__dirname, 'micro-apps', 'timeline', 'timeline.js'),
+      path.join(__dirname, 'micro-apps', 'runs', 'runs.js'),
     ];
     this.scriptsCache = parts.map(p => fs.readFileSync(p, 'utf-8')).join('\n');
     return this.scriptsCache;

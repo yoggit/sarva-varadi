@@ -58,6 +58,7 @@ export function renderOverview(): string {
     <button class="sv-run-filter-btn active" onclick="SarvaOverview.setRunFilter(20,this)">Last 20</button>
     <button class="sv-run-filter-btn" onclick="SarvaOverview.setRunFilter(50,this)">Last 50</button>
     <button class="sv-run-filter-btn" id="sv-filter-all-btn" onclick="SarvaOverview.setRunFilter(0,this)">All runs</button>
+    <span id="sv-overview-run-label" style="font-size:0.72rem;color:var(--text-muted);margin-left:0.5rem;"></span>
   </div>
 
   <!-- Health Pulse line chart -->

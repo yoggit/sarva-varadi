@@ -8,8 +8,10 @@
  */
 const SarvaTimeline = (() => {
 
-  let _charts = {};
-  let _cadenceFilterN = 20; // default: last 20 runs
+  let _charts          = {};
+  let _cadenceFilterN  = 20; // default: last 20 runs
+  let _activeRunId     = null;
+  let _centeredSlice   = null; // { sliceStart, sliceEnd } in oldest-first sorted history
 
   /* ── Utilities ──────────────────────────────────────────────────────────── */
   function fmtDur(ms) {
@@ -62,13 +64,70 @@ const SarvaTimeline = (() => {
     return '#64748b';
   }
 
+  /* ── Run Cadence marker (vertical dashed line for selected historical run) ── */
+  function _cadenceMarkerSeries(display, xData) {
+    if (!_activeRunId) return [];
+    const mi = display.findIndex(r => r.id === _activeRunId);
+    if (mi === -1) return [];
+    // run number in the full history (oldest-first counting)
+    const allHistory = SarvaStore.history || [];
+    const sorted     = allHistory.slice().sort((a, b) => a.timestamp - b.timestamp);
+    const fullIdx    = sorted.findIndex(r => r.id === _activeRunId);
+    const runNum     = fullIdx >= 0 ? fullIdx + 1 : mi + 1;
+    return [{
+      type: 'line', data: [], animation: false,
+      lineStyle: { opacity: 0 }, itemStyle: { opacity: 0 }, symbol: 'none',
+      markLine: {
+        silent: true, symbol: ['none', 'none'],
+        data: [{
+          xAxis: xData[mi],
+          lineStyle: { color: 'rgba(129,140,248,0.9)', type: 'dashed', width: 1.5 },
+          label: {
+            show: true, position: 'insideStartTop',
+            formatter: `Run #${runNum}`,
+            color: '#818cf8', fontSize: 9,
+            backgroundColor: 'rgba(16,20,32,0.75)',
+            padding: [2, 4, 2, 4], borderRadius: 3,
+          },
+        }],
+      },
+    }];
+  }
+
   /* ── Run Cadence ────────────────────────────────────────────────────────── */
   function setCadenceFilter(n, btn) {
     _cadenceFilterN = n;
+    _centeredSlice  = null;
+    _activeRunId    = null; // suppress marker for this visit only — re-syncs on next nav:change
     document.querySelectorAll('.sv-cadence-run-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
-    renderRunCadence();
-    renderTimelinePrintInsights();
+    // Hide banner locally without touching global history state (other views stay in history mode)
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
+    if (typeof echarts !== 'undefined') {
+      renderRunCadence();
+      renderTimelinePrintInsights();
+    }
+  }
+
+  function _applyCadenCentering(sorted) {
+    // sorted = oldest-first array from SarvaStore.history
+    if (!_activeRunId || !sorted || sorted.length === 0) { _centeredSlice = null; return; }
+    const hi = sorted.findIndex(r => r.id === _activeRunId);
+    if (hi === -1) { _centeredSlice = null; return; }
+    // In oldest-first sorted array: position hi; current window is the LAST _cadenceFilterN items
+    const windowStart = _cadenceFilterN > 0 ? Math.max(0, sorted.length - _cadenceFilterN) : 0;
+    const windowEnd   = sorted.length;
+    if (_cadenceFilterN > 0 && hi >= windowStart && hi < windowEnd) {
+      _centeredSlice = null; return; // visible in current window
+    }
+    // Center a 20-run window around hi in sorted (oldest-first)
+    const windowSize = 20;
+    let sliceStart = Math.max(0, hi - 9);
+    let sliceEnd   = Math.min(sorted.length, sliceStart + windowSize);
+    sliceStart = Math.max(0, sliceEnd - windowSize);
+    _centeredSlice = { sliceStart, sliceEnd };
+    document.querySelectorAll('.sv-cadence-run-btn').forEach(b => b.classList.remove('active'));
   }
 
   function renderRunCadence() {
@@ -88,13 +147,24 @@ const SarvaTimeline = (() => {
 
     // Sort all history oldest → newest, then apply filter (keep most recent N)
     const sorted = allHistory.slice().sort((a, b) => a.timestamp - b.timestamp);
-    const history = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+    _applyCadenCentering(sorted);
+    let history;
+    if (_centeredSlice) {
+      history = sorted.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
+      // Label shows the run number range (oldest-first: run #1 = index 0)
+      const hi           = sorted.findIndex(r => r.id === _activeRunId);
+      const runNumOldest = _centeredSlice.sliceStart + 1;
+      const runNumNewest = _centeredSlice.sliceEnd;
+      const activeRunNum = hi + 1;
+      if (lbl) lbl.textContent = `Runs #${runNumOldest}–#${runNumNewest} · centered on Run #${activeRunNum}`;
+    } else {
+      history = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+      if (lbl) lbl.textContent = _cadenceFilterN > 0 && allHistory.length > _cadenceFilterN
+        ? `Last ${history.length} of ${allHistory.length} runs`
+        : `${history.length} runs`;
+    }
 
-    if (lbl) lbl.textContent = _cadenceFilterN > 0 && allHistory.length > _cadenceFilterN
-      ? `Last ${history.length} of ${allHistory.length} runs`
-      : `${history.length} runs`;
-
-    // Sort oldest → newest (already sorted, but kept for clarity)
+    // oldest → newest (already sorted)
     const display = history;
 
     const chart = initChart('sv-cadence-chart', 'canvas');
@@ -181,12 +251,15 @@ const SarvaTimeline = (() => {
           handleStyle: { color: '#6366f1' }, textStyle: { color: label, fontSize: 10 },
           showDataShadow: false, showDetail: false },
       ],
-      series: [{
-        type: 'bar', data: durs.map((v, i) => ({ value: v, itemStyle: { color: barColors[i] } })),
-        itemStyle: { borderRadius: [3, 3, 0, 0] },
-        emphasis: { itemStyle: { opacity: 0.8 } },
-        barMaxWidth: 32,
-      }],
+      series: [
+        {
+          type: 'bar', data: durs.map((v, i) => ({ value: v, itemStyle: { color: barColors[i] } })),
+          itemStyle: { borderRadius: [3, 3, 0, 0] },
+          emphasis: { itemStyle: { opacity: 0.8 } },
+          barMaxWidth: 32,
+        },
+        ..._cadenceMarkerSeries(display, xData),
+      ],
     });
 
     SarvaEventBus.on('theme:changed', () => renderRunCadence());
@@ -198,6 +271,20 @@ const SarvaTimeline = (() => {
     const empty   = document.getElementById('sv-gantt-empty');
     const chartEl = document.getElementById('sv-gantt-chart');
     if (!chartEl) return;
+
+    // Update title to reflect whether we're viewing history or the current run
+    const titleEl = document.getElementById('sv-gantt-title');
+    if (titleEl) {
+      if (_activeRunId) {
+        const allHistory = SarvaStore.history || [];
+        const sorted = allHistory.slice().sort((a, b) => a.timestamp - b.timestamp);
+        const hi = sorted.findIndex(r => r.id === _activeRunId);
+        const runNum = hi >= 0 ? hi + 1 : '?';
+        titleEl.textContent = `Execution Gantt — Run #${runNum}`;
+      } else {
+        titleEl.textContent = 'Execution Gantt — Current Run';
+      }
+    }
 
     const tests = (SarvaStore.stats && SarvaStore.stats.finalTests) || SarvaStore.tests || [];
     if (!tests.length) {
@@ -387,7 +474,18 @@ const SarvaTimeline = (() => {
 
     const allHistory = SarvaStore.history;
     const sorted = (allHistory || []).slice().sort((a, b) => a.timestamp - b.timestamp);
-    const cadenceHistory = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+    // Use centered slice if active, otherwise the standard filter window
+    let cadenceHistory;
+    let windowLabel;
+    if (_centeredSlice) {
+      cadenceHistory = sorted.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
+      const hi = sorted.findIndex(r => r.id === _activeRunId);
+      windowLabel = `Runs #${_centeredSlice.sliceStart + 1}–#${_centeredSlice.sliceEnd} · centered on Run #${hi + 1}`;
+    } else {
+      cadenceHistory = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+      windowLabel = _cadenceFilterN > 0 && sorted.length > _cadenceFilterN
+        ? `Last ${cadenceHistory.length} of ${sorted.length} runs` : `${cadenceHistory.length} runs`;
+    }
 
     if (cadenceHistory.length >= 2) {
       const durs = cadenceHistory.filter(r => r.duration > 0).map(r => r.duration);
@@ -406,7 +504,7 @@ const SarvaTimeline = (() => {
           : 'Most runs are healthy; a few dipped below 95%.';
       const durNote = avgS ? ` Average run duration: ${avgS}s.` : '';
       set('sv-print-insight-cadence',
-        `${cadenceHistory.length} runs shown. Average pass rate: ${avgRate !== null ? avgRate + '%' : '—'}.${durNote} ${healthSummary}`
+        `${windowLabel}. Average pass rate: ${avgRate !== null ? avgRate + '%' : '—'}.${durNote} ${healthSummary}`
       );
     }
 
@@ -443,7 +541,24 @@ const SarvaTimeline = (() => {
   // Lazy-render when tab becomes visible
   SarvaEventBus.on('nav:change', ({ view }) => {
     if (view === 'timeline' && typeof echarts !== 'undefined') {
+      // Re-sync history mode from global state (restores after a view-local filter reset)
+      _activeRunId = (typeof SarvaRunSwitch !== 'undefined') ? SarvaRunSwitch.activeRunId : null;
+      if (_activeRunId) _applyCadenCentering((SarvaStore.history || []).slice().sort((a, b) => a.timestamp - b.timestamp));
       setTimeout(renderAll, 50);
+    }
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeRunId = runId;
+    if (typeof echarts !== 'undefined') {
+      if (!runId) {
+        // Restore: reset to default Last 20 filter
+        _cadenceFilterN = 20;
+        document.querySelectorAll('.sv-cadence-run-btn').forEach(b => {
+          b.classList.toggle('active', b.textContent.trim() === 'Last 20');
+        });
+      }
+      renderAll();
     }
   });
 

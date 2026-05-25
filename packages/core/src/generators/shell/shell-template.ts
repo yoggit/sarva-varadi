@@ -50,7 +50,7 @@ export function renderShellOpen(params: {
       </button>
 
       <button class="sv-nav-item" data-view="failures"
-              data-sv-tip="<b>Failures</b><br>• Newly failing &amp; recently fixed tests<br>• Top failures &amp; flaky offenders ranked<br>• Failures grouped by severity label">
+              data-sv-tip="<b>Failures</b><br>• Newly failing &amp; recently fixed tests<br>• Top failures &amp; flaky offenders ranked<br>• Failures grouped by severity label<br>• Always shows the <b>current/latest run</b> — not updated when viewing history">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
         </svg>
@@ -59,7 +59,7 @@ export function renderShellOpen(params: {
       </button>
 
       <button class="sv-nav-item" data-view="tests"
-              data-sv-tip="<b>Tests</b><br>• Full list of all test results for this run<br>• Filter by status, search by name<br>• Click any row to open test detail &amp; error">
+              data-sv-tip="<b>Tests</b><br>• Full list of all test results for this run<br>• Filter by status, search by name<br>• Click any row to open test detail &amp; error<br>• Always shows the <b>current/latest run</b> — not updated when viewing history">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
         </svg>
@@ -82,6 +82,17 @@ export function renderShellOpen(params: {
           <circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="17" cy="12" r="2"/>
         </svg>
         <span data-title="Timeline">Timeline</span>
+      </button>
+
+      <div class="sv-nav-section" style="margin-top:0.75rem;">History</div>
+
+      <button class="sv-nav-item" data-view="runs"
+              data-sv-tip="<b>Runs</b><br>• Browse all historical runs<br>• Filter by status, date or pass rate<br>• Click any run to view its full report">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span data-title="Runs">Runs</span>
+        <span class="sv-nav-badge" id="sv-nav-badge-runs" style="display:none;"></span>
       </button>
     </nav>
 
@@ -133,6 +144,13 @@ export function renderShellOpen(params: {
       </div>
     </div>
 
+    <!-- Viewing banner — shown when browsing a historical run -->
+    <div id="sv-viewing-banner" class="sv-viewing-banner" style="display:none;">
+      <span class="sv-viewing-banner-icon">⏪</span>
+      <span id="sv-viewing-banner-text" class="sv-viewing-banner-text"></span>
+      <button class="sv-viewing-banner-back" onclick="SarvaRunSwitch.restoreLatest()">← Back to latest</button>
+    </div>
+
     <!-- Content area — micro-apps inject into their .sv-view containers -->
     <div class="sv-content">
 
@@ -146,6 +164,7 @@ export function renderShellOpen(params: {
         <h1 class="sv-print-toc-title">Test Report</h1>
         <p class="sv-print-toc-tool">${toolName || 'Multi-framework'}</p>
         <p class="sv-print-toc-meta" id="sv-toc-meta"></p>
+        <p class="sv-print-toc-history-note" id="sv-print-toc-history-note" style="display:none;"></p>
         <nav class="sv-print-toc-nav">
           <a href="#sv-section-overview" class="sv-print-toc-item">
             <span class="sv-print-toc-num">1</span>
@@ -184,6 +203,14 @@ export function renderShellOpen(params: {
             <span class="sv-print-toc-text">
               <span class="sv-print-toc-label">Timeline</span>
               <span class="sv-print-toc-desc">Run cadence &amp; parallel execution Gantt</span>
+            </span>
+            <span class="sv-print-toc-arrow">→</span>
+          </a>
+          <a href="#sv-section-runs" class="sv-print-toc-item">
+            <span class="sv-print-toc-num">6</span>
+            <span class="sv-print-toc-text">
+              <span class="sv-print-toc-label">Run History</span>
+              <span class="sv-print-toc-desc">Full run log with pass rate, duration &amp; status for every run</span>
             </span>
             <span class="sv-print-toc-arrow">→</span>
           </a>
@@ -352,6 +379,18 @@ window.SarvaPrint = function() {
     tocMeta.textContent = 'Run: ' + runTs.textContent.trim();
   }
 
+  var histNote     = document.getElementById('sv-print-toc-history-note');
+  var bannerText   = document.getElementById('sv-viewing-banner-text');
+  if (histNote) {
+    var bText = bannerText ? bannerText.textContent.trim() : '';
+    if (bText) {
+      histNote.textContent  = '⏪ ' + bText;
+      histNote.style.display = 'block';
+    } else {
+      histNote.style.display = 'none';
+    }
+  }
+
   var wasLight = document.body.classList.contains('light-mode');
   if (!wasLight) document.body.classList.add('light-mode');
 
@@ -382,6 +421,8 @@ window.SarvaPrint = function() {
     if (sidebar) sidebar.style.display = '';
     if (mainEl)  mainEl.style.marginLeft = '';
     views.forEach(function(v, i) { v.style.display = savedDisplays[i]; });
+    var _hn = document.getElementById('sv-print-toc-history-note');
+    if (_hn) { _hn.style.display = 'none'; _hn.textContent = ''; }
     // Clear inline overrides applied during print prep.
     document.querySelectorAll('[id$="-chart"]').forEach(function(el) {
       el.style.width = ''; el.style.maxWidth = '';

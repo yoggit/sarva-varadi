@@ -6,6 +6,7 @@ import { renderFailures } from './micro-apps/failures/failures-template';
 import { renderTestList } from './micro-apps/test-list/test-list-template';
 import { renderTrends } from './micro-apps/trends/trends-template';
 import { renderTimeline } from './micro-apps/timeline/timeline-template';
+import { renderRuns } from './micro-apps/runs/runs-template';
 
 const PACKAGE_VERSION = '3.0.0';
 
@@ -47,6 +48,7 @@ export class HTMLGenerator {
       renderTestList(),
       renderTrends(),
       renderTimeline(),
+      renderRuns(),
       renderShellClose(`/* ECharts loaded async */\n${allScripts}`),
     ].join('\n') + this.renderEChartsLoader();
   }
