@@ -1,0 +1,1356 @@
+[
+  {
+    "uuid": "160f4e7d-ee13-4b66-aaf5-1df51db85723",
+    "tool": "rest-assured",
+    "name": "getAllPosts",
+    "fullName": "com.example.tests.PostApiTest.getAllPosts",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830805241,
+    "stop": 1778830805315,
+    "duration": 74,
+    "steps": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/posts",
+        "status": "passed",
+        "start": 1778830805243,
+        "stop": 1778830805296,
+        "duration": 53,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830805243,
+            "stop": 1778830805244,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: https://jsonplaceholder.typicode.com/posts",
+                "status": "passed",
+                "start": 1778830805243,
+                "stop": 1778830805243,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805243,
+                "stop": 1778830805243,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*]"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830805295,
+            "stop": 1778830805296,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 HTTP/1.1 200 OK | Response Time: 53ms",
+                "status": "passed",
+                "start": 1778830805295,
+                "stop": 1778830805296,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805295,
+                "stop": 1778830805296,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, Content-Encoding=gzip, etag=W/\"6b80-Ybsq/K6GwwqrYkAsFxqDXGC7DoM\", expires=-1, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=Ee2TzQ9f9wEz72VI4uSP7CAZj%2BnhfJLNWqcHUZydjkU%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1778551595\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=Ee2TzQ9f9wEz72VI4uSP7CAZj%2BnhfJLNWqcHUZydjkU%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1778551595\", Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1778551638, Age=25436, cf-cache-status=HIT, CF-RAY=9fd70d4d2e775e57-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830805295,
+                "stop": 1778830805296,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[\n  {\n    \"userId\": 1,\n    \"id\": 1,\n    \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n    \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 2,\n    \"title\": \"qui est esse\",\n    \"body\": \"est rerum tempore vitae\\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\\nqui aperiam non debitis possimus qui neque nisi nulla\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 3,\n    \"title\": \"ea molestias quasi exercitationem repellat qui ipsa sit aut\",\n    \"body\": \"et iusto sed quo iure\\nvoluptatem occaecati omnis eligendi aut ad\\nvoluptatem doloribus vel accusantium quis pariatur\\nmolestiae porro eius odio et labore et velit aut\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 4,\n    \"title\": \"eum et est occaecati\",\n    \"body\": \"ullam et saepe reic... (truncated)"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tms",
+        "value": "2"
+      },
+      {
+        "name": "severity",
+        "value": "high"
+      },
+      {
+        "name": "feature",
+        "value": "posts-api"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.PostApiTest",
+      "testMethod": "getAllPosts"
+    }
+  },
+  {
+    "uuid": "117c36d3-1cf6-4ee3-b148-752d4cfea04f",
+    "tool": "rest-assured",
+    "name": "stableEndpointTest",
+    "fullName": "com.example.tests.FlakyApiTest.stableEndpointTest",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830805037,
+    "stop": 1778830805103,
+    "duration": 66,
+    "steps": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/users/2",
+        "status": "passed",
+        "start": 1778830805038,
+        "stop": 1778830805096,
+        "duration": 58,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830805038,
+            "stop": 1778830805039,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: https://jsonplaceholder.typicode.com/users/2",
+                "status": "passed",
+                "start": 1778830805038,
+                "stop": 1778830805038,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805038,
+                "stop": 1778830805038,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*]"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830805095,
+            "stop": 1778830805096,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 HTTP/1.1 200 OK | Response Time: 57ms",
+                "status": "passed",
+                "start": 1778830805095,
+                "stop": 1778830805096,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805095,
+                "stop": 1778830805096,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/\"1fd-XTG63SYhaP/Uo6/vgmARnL3rpBk\", expires=-1, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=JkocaItob6JD7JpUQbcAqI0N97wUW7aORIuxjnQlO8Q%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1778961410\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=JkocaItob6JD7JpUQbcAqI0N97wUW7aORIuxjnQlO8Q%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1778961410\", Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=955, x-ratelimit-reset=1778961457, Age=10024, cf-cache-status=HIT, Content-Encoding=gzip, CF-RAY=9fd70d4bdf3ce7aa-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830805095,
+                "stop": 1778830805096,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\n  \"id\": 2,\n  \"name\": \"Ervin Howell\",\n  \"username\": \"Antonette\",\n  \"email\": \"Shanna@melissa.tv\",\n  \"address\": {\n    \"street\": \"Victor Plains\",\n    \"suite\": \"Suite 879\",\n    \"city\": \"Wisokyburgh\",\n    \"zipcode\": \"90566-7771\",\n    \"geo\": {\n      \"lat\": \"-43.9509\",\n      \"lng\": \"-34.4618\"\n    }\n  },\n  \"phone\": \"010-692-6593 x09125\",\n  \"website\": \"anastasia.net\",\n  \"company\": {\n    \"name\": \"Deckow-Crist\",\n    \"catchPhrase\": \"Proactive didactic contingency\",\n    \"bs\": \"synergize scalable supply-chains\"\n  }\n}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "medium"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.FlakyApiTest",
+      "testMethod": "stableEndpointTest"
+    }
+  },
+  {
+    "uuid": "c4decd5b-57f0-4356-85a4-839e01d8a6fe",
+    "tool": "rest-assured",
+    "name": "createUser",
+    "fullName": "com.example.tests.UserApiTest.createUser",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830804777,
+    "stop": 1778830804878,
+    "duration": 101,
+    "steps": [
+      {
+        "name": "POST https://jsonplaceholder.typicode.com/users",
+        "status": "passed",
+        "start": 1778830804778,
+        "stop": 1778830804867,
+        "duration": 89,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830804778,
+            "stop": 1778830804779,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: POST | URL: https://jsonplaceholder.typicode.com/users",
+                "status": "passed",
+                "start": 1778830804778,
+                "stop": 1778830804778,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830804778,
+                "stop": 1778830804778,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*, Content-Type=application/json]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830804778,
+                "stop": 1778830804778,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{ \"name\": \"John Doe\", \"email\": \"john@example.com\" }"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830804866,
+            "stop": 1778830804867,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 201 HTTP/1.1 201 Created | Response Time: 88ms",
+                "status": "passed",
+                "start": 1778830804866,
+                "stop": 1778830804867,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830804866,
+                "stop": 1778830804867,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Content-Length=67, Connection=keep-alive, access-control-allow-credentials=true, access-control-expose-headers=Location, Cache-Control=no-cache, etag=W/\"43-iv+zGbP9dMgXHuo+euFZMKacl6Q\", expires=-1, location=https://jsonplaceholder.typicode.com/users/11, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1779067357\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1779067357\", Server=cloudflare, vary=Origin, X-HTTP-Method-Override, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=998, x-ratelimit-reset=1779067403, cf-cache-status=DYNAMIC, CF-RAY=9fd70d4a499690ff-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830804866,
+                "stop": 1778830804867,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"id\": 11\n}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "medium"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.UserApiTest",
+      "testMethod": "createUser"
+    }
+  },
+  {
+    "uuid": "12c152b1-f5af-4ce4-87cc-40e4c1f3e18e",
+    "tool": "rest-assured",
+    "name": "updateUser",
+    "fullName": "com.example.tests.UserApiTest.updateUser",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830804611,
+    "stop": 1778830804775,
+    "duration": 164,
+    "steps": [
+      {
+        "name": "PUT https://jsonplaceholder.typicode.com/users/1",
+        "status": "passed",
+        "start": 1778830804615,
+        "stop": 1778830804768,
+        "duration": 153,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830804615,
+            "stop": 1778830804616,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: PUT | URL: https://jsonplaceholder.typicode.com/users/1",
+                "status": "passed",
+                "start": 1778830804615,
+                "stop": 1778830804615,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830804615,
+                "stop": 1778830804615,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*, Content-Type=application/json]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830804615,
+                "stop": 1778830804615,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{ \"name\": \"Jane Updated\", \"email\": \"jane.updated@example.com\" }"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830804767,
+            "stop": 1778830804768,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 HTTP/1.1 200 OK | Response Time: 152ms",
+                "status": "passed",
+                "start": 1778830804767,
+                "stop": 1778830804768,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830804767,
+                "stop": 1778830804768,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=no-cache, etag=W/\"4e-Syg+x9VT+BWBQW/eGxeI8/PFkX4\", expires=-1, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1779067357\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=69fY9l34F%2B2i54k72ySJXWnsW%2BwgWvavkSX3Iqkhs0Y%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1779067357\", Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1779067403, cf-cache-status=DYNAMIC, Content-Encoding=gzip, CF-RAY=9fd70d492e1a6778-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830804767,
+                "stop": 1778830804768,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\n  \"name\": \"Jane Updated\",\n  \"email\": \"jane.updated@example.com\",\n  \"id\": 1\n}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "low"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.UserApiTest",
+      "testMethod": "updateUser"
+    }
+  },
+  {
+    "uuid": "dbb7fe2f-440a-4188-ad00-cbb6f670323a",
+    "tool": "rest-assured",
+    "name": "getPostsByUserId",
+    "fullName": "com.example.tests.PostApiTest.getPostsByUserId",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830805316,
+    "stop": 1778830805376,
+    "duration": 60,
+    "steps": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/posts?userId=1",
+        "status": "passed",
+        "start": 1778830805322,
+        "stop": 1778830805366,
+        "duration": 44,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830805322,
+            "stop": 1778830805323,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: https://jsonplaceholder.typicode.com/posts?userId=1",
+                "status": "passed",
+                "start": 1778830805322,
+                "stop": 1778830805322,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805322,
+                "stop": 1778830805322,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*]"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830805365,
+            "stop": 1778830805366,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 HTTP/1.1 200 OK | Response Time: 44ms",
+                "status": "passed",
+                "start": 1778830805365,
+                "stop": 1778830805366,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805365,
+                "stop": 1778830805366,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Content-Length=1002, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, Content-Encoding=gzip, etag=W/\"aa6-j2NSH739l9uq40OywFMn7Y0C/iY\", expires=-1, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=DimHfPySHlu%2Fk5DEJ7IeiVafnh8lpbIDU5fa13JMqqY%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1778703428\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=DimHfPySHlu%2Fk5DEJ7IeiVafnh8lpbIDU5fa13JMqqY%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1778703428\", Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=996, x-ratelimit-reset=1778703447, Age=4443, Accept-Ranges=bytes, cf-cache-status=HIT, CF-RAY=9fd70d4d98b56719-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830805365,
+                "stop": 1778830805366,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[\n  {\n    \"userId\": 1,\n    \"id\": 1,\n    \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n    \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 2,\n    \"title\": \"qui est esse\",\n    \"body\": \"est rerum tempore vitae\\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\\nqui aperiam non debitis possimus qui neque nisi nulla\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 3,\n    \"title\": \"ea molestias quasi exercitationem repellat qui ipsa sit aut\",\n    \"body\": \"et iusto sed quo iure\\nvoluptatem occaecati omnis eligendi aut ad\\nvoluptatem doloribus vel accusantium quis pariatur\\nmolestiae porro eius odio et labore et velit aut\"\n  },\n  {\n    \"userId\": 1,\n    \"id\": 4,\n    \"title\": \"eum et est occaecati\",\n    \"body\": \"ullam et saepe reic... (truncated)"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "low"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.PostApiTest",
+      "testMethod": "getPostsByUserId"
+    }
+  },
+  {
+    "uuid": "4e114444-75d2-408b-8880-b8dbd4ba7b02",
+    "tool": "rest-assured",
+    "name": "getUserNotFound",
+    "fullName": "com.example.tests.UserApiTest.getUserNotFound",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830803665,
+    "stop": 1778830804328,
+    "duration": 663,
+    "steps": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/users/999999",
+        "status": "failed",
+        "start": 1778830803882,
+        "stop": 1778830804310,
+        "duration": 428,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830803882,
+            "stop": 1778830803883,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: https://jsonplaceholder.typicode.com/users/999999",
+                "status": "passed",
+                "start": 1778830803882,
+                "stop": 1778830803882,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830803882,
+                "stop": 1778830803882,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*]"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "failed",
+            "start": 1778830804309,
+            "stop": 1778830804310,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 404 HTTP/1.1 404 Not Found | Response Time: 426ms",
+                "status": "failed",
+                "start": 1778830804309,
+                "stop": 1778830804310,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "failed",
+                "start": 1778830804309,
+                "stop": 1778830804310,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Content-Length=2, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\", expires=-1, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=oWJc0qPspUCT2PiqRvNfICWjuLxBaracuFzegxaz8WM%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1779067157\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=oWJc0qPspUCT2PiqRvNfICWjuLxBaracuFzegxaz8WM%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1779067157\", Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1779067163, Age=199, cf-cache-status=HIT, CF-RAY=9fd70d46eb6d4403-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "failed",
+                "start": 1778830804309,
+                "stop": 1778830804310,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "issue",
+        "value": "11"
+      },
+      {
+        "name": "severity",
+        "value": "high"
+      },
+      {
+        "name": "feature",
+        "value": "users-api"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.UserApiTest",
+      "testMethod": "getUserNotFound"
+    }
+  },
+  {
+    "uuid": "4179bea4-0817-4153-8dd7-0657a5a06f80",
+    "tool": "rest-assured",
+    "name": "getAllUsers",
+    "fullName": "com.example.tests.UserApiTest.getAllUsers",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830804337,
+    "stop": 1778830804609,
+    "duration": 272,
+    "steps": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/users",
+        "status": "passed",
+        "start": 1778830804339,
+        "stop": 1778830804392,
+        "duration": 53,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830804339,
+            "stop": 1778830804340,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: https://jsonplaceholder.typicode.com/users",
+                "status": "passed",
+                "start": 1778830804339,
+                "stop": 1778830804339,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830804339,
+                "stop": 1778830804339,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*]"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830804391,
+            "stop": 1778830804392,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 HTTP/1.1 200 OK | Response Time: 53ms",
+                "status": "passed",
+                "start": 1778830804391,
+                "stop": 1778830804392,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830804391,
+                "stop": 1778830804392,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Content-Length=1847, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, Content-Encoding=gzip, etag=W/\"160d-1eMSsxeJRfnVLRBmYJSbCiJZ1qQ\", expires=-1, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=wUfMTgt5imK6bV74N4nfmNt95%2B4BMjLJYtFmPVErqCc%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1775694193\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=wUfMTgt5imK6bV74N4nfmNt95%2B4BMjLJYtFmPVErqCc%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1775694193\", Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1775694233, Age=15850, Accept-Ranges=bytes, cf-cache-status=HIT, CF-RAY=9fd70d477dc36f98-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830804391,
+                "stop": 1778830804392,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[\n  {\n    \"id\": 1,\n    \"name\": \"Leanne Graham\",\n    \"username\": \"Bret\",\n    \"email\": \"Sincere@april.biz\",\n    \"address\": {\n      \"street\": \"Kulas Light\",\n      \"suite\": \"Apt. 556\",\n      \"city\": \"Gwenborough\",\n      \"zipcode\": \"92998-3874\",\n      \"geo\": {\n        \"lat\": \"-37.3159\",\n        \"lng\": \"81.1496\"\n      }\n    },\n    \"phone\": \"1-770-736-8031 x56442\",\n    \"website\": \"hildegard.org\",\n    \"company\": {\n      \"name\": \"Romaguera-Crona\",\n      \"catchPhrase\": \"Multi-layered client-server neural-net\",\n      \"bs\": \"harness real-time e-markets\"\n    }\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Ervin Howell\",\n    \"username\": \"Antonette\",\n    \"email\": \"Shanna@melissa.tv\",\n    \"address\": {\n      \"street\": \"Victor Plains\",\n      \"suite\": \"Suite 879\",\n      \"city\": \"Wisokyburgh\",\n      \"zipcode\": \"90566-7771\",\n      \"geo\": {\n        \"lat\": \"-43.9509\",\n        \"lng\": \"-34.4618\"\n      }\n    },\n    \"phone\": \"010-692-6593 x09125\",\n    \"website\": \"anastasia.net\",\n    \"company\": {\n      \"name\": \"Deckow-Crist... (truncated)"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "medium"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.UserApiTest",
+      "testMethod": "getAllUsers"
+    }
+  },
+  {
+    "uuid": "a49163f3-5c4b-4534-86e8-29edd65979f2",
+    "tool": "rest-assured",
+    "name": "getPostById",
+    "fullName": "com.example.tests.PostApiTest.getPostById",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830805165,
+    "stop": 1778830805239,
+    "duration": 74,
+    "steps": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/posts/1",
+        "status": "passed",
+        "start": 1778830805168,
+        "stop": 1778830805220,
+        "duration": 52,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830805168,
+            "stop": 1778830805169,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: https://jsonplaceholder.typicode.com/posts/1",
+                "status": "passed",
+                "start": 1778830805168,
+                "stop": 1778830805168,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805168,
+                "stop": 1778830805168,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*]"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830805219,
+            "stop": 1778830805220,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 HTTP/1.1 200 OK | Response Time: 51ms",
+                "status": "passed",
+                "start": 1778830805219,
+                "stop": 1778830805220,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805219,
+                "stop": 1778830805220,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/\"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU\", expires=-1, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=rbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1778425763\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=rbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1778425763\", Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1778425771, Age=4957, cf-cache-status=HIT, Content-Encoding=gzip, CF-RAY=9fd70d4cac1a478b-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830805219,
+                "stop": 1778830805220,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\n  \"userId\": 1,\n  \"id\": 1,\n  \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n  \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "low"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.PostApiTest",
+      "testMethod": "getPostById"
+    }
+  },
+  {
+    "uuid": "11d2205b-e385-4f47-9f12-e951d4988a40",
+    "tool": "rest-assured",
+    "name": "flakyEndpointTest",
+    "fullName": "com.example.tests.FlakyApiTest.flakyEndpointTest",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830805540,
+    "stop": 1778830805593,
+    "duration": 53,
+    "steps": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/users/1",
+        "status": "passed",
+        "start": 1778830805541,
+        "stop": 1778830805588,
+        "duration": 47,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830805541,
+            "stop": 1778830805542,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: https://jsonplaceholder.typicode.com/users/1",
+                "status": "passed",
+                "start": 1778830805541,
+                "stop": 1778830805541,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805541,
+                "stop": 1778830805541,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*]"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830805587,
+            "stop": 1778830805588,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 HTTP/1.1 200 OK | Response Time: 47ms",
+                "status": "passed",
+                "start": 1778830805587,
+                "stop": 1778830805588,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805587,
+                "stop": 1778830805588,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/\"1fd-+2Y3G3w049iSZtw5t1mzSnunngE\", expires=-1, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=M2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1779058723\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=M2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1779058723\", Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=896, x-ratelimit-reset=1779058761, Age=8635, cf-cache-status=HIT, Content-Encoding=gzip, CF-RAY=9fd70d4efeb6dc2d-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830805587,
+                "stop": 1778830805588,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\n  \"id\": 1,\n  \"name\": \"Leanne Graham\",\n  \"username\": \"Bret\",\n  \"email\": \"Sincere@april.biz\",\n  \"address\": {\n    \"street\": \"Kulas Light\",\n    \"suite\": \"Apt. 556\",\n    \"city\": \"Gwenborough\",\n    \"zipcode\": \"92998-3874\",\n    \"geo\": {\n      \"lat\": \"-37.3159\",\n      \"lng\": \"81.1496\"\n    }\n  },\n  \"phone\": \"1-770-736-8031 x56442\",\n  \"website\": \"hildegard.org\",\n  \"company\": {\n    \"name\": \"Romaguera-Crona\",\n    \"catchPhrase\": \"Multi-layered client-server neural-net\",\n    \"bs\": \"harness real-time e-markets\"\n  }\n}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "medium"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.FlakyApiTest",
+      "testMethod": "flakyEndpointTest",
+      "flakyReason": "Test passed after 1 retry attempt(s)"
+    }
+  },
+  {
+    "uuid": "f8d7a2bb-a153-46e4-bd8b-473389db2a7b",
+    "tool": "rest-assured",
+    "name": "getUserById",
+    "fullName": "com.example.tests.UserApiTest.getUserById",
+    "status": "flaky",
+    "stage": "finished",
+    "start": 1778830804969,
+    "stop": 1778830805032,
+    "duration": 63,
+    "steps": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/users/1",
+        "status": "passed",
+        "start": 1778830804971,
+        "stop": 1778830805017,
+        "duration": 46,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830804971,
+            "stop": 1778830804972,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: https://jsonplaceholder.typicode.com/users/1",
+                "status": "passed",
+                "start": 1778830804971,
+                "stop": 1778830804971,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830804971,
+                "stop": 1778830804971,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*]"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830805016,
+            "stop": 1778830805017,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 HTTP/1.1 200 OK | Response Time: 46ms",
+                "status": "passed",
+                "start": 1778830805016,
+                "stop": 1778830805017,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805016,
+                "stop": 1778830805017,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:37 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/\"1fd-+2Y3G3w049iSZtw5t1mzSnunngE\", expires=-1, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=M2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1779058723\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=M2fm9RzU9UGgUzRQvuMdS6VjUQet3koeNlQwPc%2FyiPs%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1779058723\", Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=896, x-ratelimit-reset=1779058761, Age=8634, cf-cache-status=HIT, Content-Encoding=gzip, CF-RAY=9fd70d4b6bea2d38-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830805016,
+                "stop": 1778830805017,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\n  \"id\": 1,\n  \"name\": \"Leanne Graham\",\n  \"username\": \"Bret\",\n  \"email\": \"Sincere@april.biz\",\n  \"address\": {\n    \"street\": \"Kulas Light\",\n    \"suite\": \"Apt. 556\",\n    \"city\": \"Gwenborough\",\n    \"zipcode\": \"92998-3874\",\n    \"geo\": {\n      \"lat\": \"-37.3159\",\n      \"lng\": \"81.1496\"\n    }\n  },\n  \"phone\": \"1-770-736-8031 x56442\",\n  \"website\": \"hildegard.org\",\n  \"company\": {\n    \"name\": \"Romaguera-Crona\",\n    \"catchPhrase\": \"Multi-layered client-server neural-net\",\n    \"bs\": \"harness real-time e-markets\"\n  }\n}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tms",
+        "value": "10"
+      },
+      {
+        "name": "severity",
+        "value": "medium"
+      },
+      {
+        "name": "feature",
+        "value": "users-api"
+      },
+      {
+        "name": "owner",
+        "value": "backend-team"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 1
+      },
+      "testClass": "com.example.tests.UserApiTest",
+      "testMethod": "getUserById"
+    }
+  },
+  {
+    "uuid": "f722a517-88ee-4172-8dc7-84d54bba34d9",
+    "tool": "rest-assured",
+    "name": "failedAssertionDemo",
+    "fullName": "com.example.tests.PostApiTest.failedAssertionDemo",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830805595,
+    "stop": 1778830805663,
+    "duration": 68,
+    "steps": [
+      {
+        "name": "GET https://jsonplaceholder.typicode.com/posts/1",
+        "status": "passed",
+        "start": 1778830805598,
+        "stop": 1778830805651,
+        "duration": 53,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830805598,
+            "stop": 1778830805599,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: https://jsonplaceholder.typicode.com/posts/1",
+                "status": "passed",
+                "start": 1778830805598,
+                "stop": 1778830805598,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805598,
+                "stop": 1778830805598,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*]"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830805650,
+            "stop": 1778830805651,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 HTTP/1.1 200 OK | Response Time: 52ms",
+                "status": "passed",
+                "start": 1778830805650,
+                "stop": 1778830805651,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805650,
+                "stop": 1778830805651,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, Cache-Control=max-age=43200, etag=W/\"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU\", expires=-1, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=rbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1778425763\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=rbTIQ%2FjeVCBbgFijBdSOtrAy%2BEhUFDQFunzrEpA0JHA%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1778425763\", Server=cloudflare, vary=Origin, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=999, x-ratelimit-reset=1778425771, Age=4957, cf-cache-status=HIT, Content-Encoding=gzip, CF-RAY=9fd70d4f5acb4f40-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830805650,
+                "stop": 1778830805651,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\n  \"userId\": 1,\n  \"id\": 1,\n  \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n  \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "issue",
+        "value": "9"
+      },
+      {
+        "name": "severity",
+        "value": "critical"
+      },
+      {
+        "name": "feature",
+        "value": "posts-api"
+      },
+      {
+        "name": "owner",
+        "value": "backend-team"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.PostApiTest",
+      "testMethod": "failedAssertionDemo"
+    }
+  },
+  {
+    "uuid": "3e6ad7f0-74b9-47d1-834c-412e07ccf37e",
+    "tool": "rest-assured",
+    "name": "createPost",
+    "fullName": "com.example.tests.PostApiTest.createPost",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830805441,
+    "stop": 1778830805533,
+    "duration": 92,
+    "steps": [
+      {
+        "name": "POST https://jsonplaceholder.typicode.com/posts",
+        "status": "passed",
+        "start": 1778830805442,
+        "stop": 1778830805523,
+        "duration": 81,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830805442,
+            "stop": 1778830805443,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: POST | URL: https://jsonplaceholder.typicode.com/posts",
+                "status": "passed",
+                "start": 1778830805442,
+                "stop": 1778830805442,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805442,
+                "stop": 1778830805442,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Accept=*/*, Content-Type=application/json]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830805442,
+                "stop": 1778830805442,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{ \"title\": \"Test Post\", \"body\": \"This is a test post\", \"userId\": 1 }"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830805522,
+            "stop": 1778830805523,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 201 HTTP/1.1 201 Created | Response Time: 81ms",
+                "status": "passed",
+                "start": 1778830805522,
+                "stop": 1778830805523,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805522,
+                "stop": 1778830805523,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "[Date=Mon, 18 May 2026 01:22:38 GMT, Content-Type=application/json; charset=utf-8, Content-Length=87, Connection=keep-alive, access-control-allow-credentials=true, access-control-expose-headers=Location, Cache-Control=no-cache, etag=W/\"57-tb2JEXLtqvlYgkxd1vS0t5try68\", expires=-1, location=https://jsonplaceholder.typicode.com/posts/101, nel={\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}, pragma=no-cache, report-to={\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=T5iZ%2BTXbO1MjABonK1Ho5yokkOdCrx6lCGQqXFxFltk%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1779067358\"}],\"max_age\":3600}, reporting-endpoints=heroku-nel=\"https://nel.heroku.com/reports?s=T5iZ%2BTXbO1MjABonK1Ho5yokkOdCrx6lCGQqXFxFltk%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1779067358\", Server=cloudflare, vary=Origin, X-HTTP-Method-Override, Accept-Encoding, via=2.0 heroku-router, x-content-type-options=nosniff, x-powered-by=Express, x-ratelimit-limit=1000, x-ratelimit-remaining=996, x-ratelimit-reset=1779067403, cf-cache-status=DYNAMIC, CF-RAY=9fd70d4e5f1426c3-DFW, alt-svc=h3=\":443\"; ma=86400]"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830805522,
+                "stop": 1778830805523,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\n  \"title\": \"Test Post\",\n  \"body\": \"This is a test post\",\n  \"userId\": 1,\n  \"id\": 101\n}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tms",
+        "value": "5"
+      },
+      {
+        "name": "severity",
+        "value": "medium"
+      },
+      {
+        "name": "feature",
+        "value": "posts-api"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "testClass": "com.example.tests.PostApiTest",
+      "testMethod": "createPost"
+    }
+  },
+  {
+    "uuid": "5050c1b6-621d-4fa6-9140-632534b54949",
+    "tool": "rest-assured",
+    "name": "validateApiVersionEndpoint",
+    "fullName": "com.example.tests.ApiTests.validateApiVersionEndpoint",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778830805633,
+    "stop": 1778830805678,
+    "duration": 45,
+    "steps": [
+      {
+        "name": "GET /api/version",
+        "status": "passed",
+        "start": 1778830805643,
+        "stop": 1778830805678,
+        "duration": 35,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778830805643,
+            "stop": 1778830805644,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: /api/version",
+                "status": "passed",
+                "start": 1778830805643,
+                "stop": 1778830805643,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805643,
+                "stop": 1778830805643,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Accept: application/json"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778830805677,
+            "stop": 1778830805678,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 35ms",
+                "status": "passed",
+                "start": 1778830805677,
+                "stop": 1778830805678,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778830805677,
+                "stop": 1778830805678,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778830805677,
+                "stop": 1778830805678,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"version\":\"2.1.0\",\"status\":\"stable\"}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "low"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "parameters": [],
+      "testClass": "com.example.tests.ApiTests",
+      "testMethod": "validateApiVersionEndpoint"
+    }
+  }
+]
