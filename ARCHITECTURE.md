@@ -2,7 +2,7 @@
 
 ## Overview
 
-Sarva-Varadi is a universal test reporter that supports multiple testing frameworks (Playwright, Selenium, RestAssured, and more coming) with a unified, beautiful UI and historical trend analysis.
+Sarva-Varadi is a universal test reporter that supports multiple testing frameworks (Playwright, Selenium, RestAssured, Robot Framework, and more coming) with a unified, beautiful UI and historical trend analysis.
 
 ## Design Principles
 
@@ -20,9 +20,10 @@ Sarva-Varadi is a universal test reporter that supports multiple testing framewo
 Each framework adapter listens to test execution events and converts them to the common `SarvaTestResult` format:
 
 ```
-Playwright Test  → Playwright Adapter  → SarvaTestResult JSON
-Selenium Test    → Selenium Adapter    → SarvaTestResult JSON
-RestAssured Test → RestAssured Adapter → SarvaTestResult JSON
+Playwright Test       → Playwright Adapter       → SarvaTestResult JSON
+Selenium Test         → Selenium Adapter         → SarvaTestResult JSON
+RestAssured Test      → RestAssured Adapter      → SarvaTestResult JSON
+Robot Framework Test  → CLI converter (output.xml) → SarvaTestResult JSON
 ```
 
 **Output**: `sarva-varadi-results/*.json` (one file per test or suite)
@@ -160,6 +161,13 @@ abstract class BaseAdapter {
 - Same request/response capture, step structure, and masking as TestNG adapter
 - Integrates with Surefire's `rerunFailingTestsCount` for flaky test detection
 
+#### Robot Framework Converter (✅ Implemented — CLI)
+- Parses `output.xml` produced by the `robot` command (RF 4/5/6/7)
+- Maps `<suite>/<test>/<kw>` tree recursively to `SarvaTestResult` with full nested keyword hierarchy
+- Tags mapped to severity/TMS labels automatically
+- Auto-detected by `SmartConverter` — no `--format` flag needed
+- No adapter code required in tests — works with any RF project out of the box
+
 #### Cypress Adapter (🚧 Future)
 - Uses Cypress reporter API
 - Handles time-travel debugging data
@@ -254,6 +262,7 @@ sarva-varadi/
 ├── demo-selenium/
 ├── demo-restassured/
 ├── demo-restassured-junit/
+├── demo-robot/                        # Robot Framework demo project
 └── docs/
 ```
 
@@ -299,6 +308,11 @@ The HTML report detects the test tool from `test.tool` field and shows/hides rel
 - Status code badges
 - Request/response headers
 - Hierarchical test steps
+
+**Robot Framework-specific** (✅ Implemented — CLI converter):
+- Full nested keyword tree with sub-keyword timing
+- Tag-based severity and TMS label mapping
+- Suite breadcrumb (`Suite > Sub-suite > Test`)
 
 **Cypress-specific** (🚧 Future):
 - Time-travel debugging links
@@ -384,7 +398,7 @@ npx sarva-varadi compare run-1/ run-2/ -o comparison-report/
 | Architecture | Two-phase | Real-time + DB | Two-phase |
 | Storage | Files | PostgreSQL | Files |
 | Setup | Java CLI | Docker stack | npm install |
-| Frameworks | 30+ | Many | 4+ (growing) |
+| Frameworks | 30+ | Many | 5+ (growing) |
 | UI Modern | ⚠️ | ⚠️ | ✅ |
 | Flaky Detection | Manual | ML-based | Score-based |
 | Historical | Basic | Advanced | File-based |
@@ -398,5 +412,5 @@ Sarva-Varadi provides:
 - **Exports** — PDF print, PNG screenshot, CSV data export
 - **Historical** trend tracking with flaky test detection (file-based, up to 30 runs by default)
 - **Modular** installation (install only what you need)
-- **Framework agnostic** with consistent experience across Playwright, Selenium, RestAssured (TestNG & JUnit 5)
+- **Framework agnostic** with consistent experience across Playwright, Selenium, RestAssured (TestNG & JUnit 5), and Robot Framework
 - **CI/CD friendly** static HTML artifacts — no external dependencies at runtime

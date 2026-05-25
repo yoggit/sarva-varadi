@@ -4,6 +4,7 @@ Sarva-Varadi uses different config mechanisms depending on the adapter:
 
 - **Playwright** — options in `playwright.config.ts`
 - **Java adapters** — `sarva-varadi.properties` file in project root (or `-D` system properties)
+- **Robot Framework** — CLI flags + optional `sarva-varadi.properties` in the directory where you run the CLI
 
 [[toc]]
 
@@ -116,6 +117,73 @@ sarva.maxRetryCount=2                # requires @Test(retryAnalyzer=...) on Test
 
 ---
 
+## Robot Framework (CLI converter)
+
+The CLI converter is configured through **flags** and an optional **`sarva-varadi.properties`** file placed in the directory where you run the command.
+
+### CLI flags
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--input`, `-i` | required | Path to `output.xml` |
+| `--output`, `-o` | required | Output directory for the report |
+| `--title`, `-t` | `'Sarva-Varadi Test Report'` | Title shown in the report header |
+| `--use-current-timestamp` | off | Shift all test timestamps to the current time (useful for demo/sample data) |
+
+```bash
+sarva-varadi generate \
+  --input results/output.xml \
+  --output sarva-report \
+  --title "Robot Suite — Nightly"
+```
+
+### `sarva-varadi.properties` (CLI)
+
+Place this file in the same directory you run the CLI from. Flags always take precedence over file values.
+
+```properties
+# ── Report display ──────────────────────────────────────────
+sarva.report.title=Robot Framework Tests
+sarva.report.frameworkLabel=Robot Framework
+sarva.report.showStackTrace=true
+sarva.report.embedAttachments=true
+
+# ── History & trends ────────────────────────────────────────
+sarva.report.history=true
+sarva.report.trends=true
+sarva.report.maxRuns=30
+sarva.report.retentionDays=90
+
+# ── Sensitive data ──────────────────────────────────────────
+sarva.report.maskSensitiveData=false
+
+# ── Environment info ────────────────────────────────────────
+sarva.environment=staging
+
+# ── Issue / TMS link templates ──────────────────────────────
+sarva.links.issue=https://jira.example.com/browse/{issue}
+sarva.links.tms=https://testrail.example.com/index.php?/cases/view/{tms}
+```
+
+### Properties reference (CLI)
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `sarva.report.title` | `Sarva-Varadi Test Report` | Report title (overridden by `--title` flag) |
+| `sarva.report.frameworkLabel` | `robot` | Label shown below the report heading |
+| `sarva.report.showStackTrace` | `true` | Show stack traces in test detail |
+| `sarva.report.embedAttachments` | `true` | Embed attachments inline |
+| `sarva.report.history` | `true` | Enable run history tracking |
+| `sarva.report.trends` | `true` | Enable trends analysis |
+| `sarva.report.maxRuns` | `30` | Max runs to retain |
+| `sarva.report.retentionDays` | `90` | Max age in days |
+| `sarva.report.maskSensitiveData` | `false` | Mask sensitive values with `***` |
+| `sarva.environment` | — | Environment name shown in report (e.g. `staging`, `prod`) |
+| `sarva.links.issue` | — | URL template for issue links — use `{issue}` as placeholder |
+| `sarva.links.tms` | — | URL template for TMS links — use `{tms}` as placeholder |
+
+---
+
 ## Severity labels
 
 Tag tests with severity to unlock the **Failures by Severity** trend chart and ranked failure view.
@@ -132,6 +200,29 @@ test.info().annotations.push({ type: 'severity', description: 'critical' });
 @Test(groups = { "severity:critical" })
 public void loginTest() { ... }
 ```
+
+**Robot Framework:**
+```robotframework
+*** Test Cases ***
+Valid Login With Correct Credentials
+    [Tags]    severity:critical    tms:AUTH-001    smoke
+    Navigate To    ${BASE_URL}/login
+    ...
+
+GET All Users Returns 200
+    [Tags]    severity:high    tms:USR-001    regression
+    GET On Session    api    /users
+    ...
+```
+
+Tags are mapped automatically by the CLI converter — no extra configuration needed.
+
+| Tag format | Effect |
+|-----------|--------|
+| `severity:critical` / `severity:high` / `severity:medium` / `severity:low` | Severity badge in report |
+| `tms:JIRA-123` | TMS link (requires `sarva.links.tms` property) |
+| `issue:BUG-456` | Issue link (requires `sarva.links.issue` property) |
+| Any other tag | Shown as a plain label chip |
 
 Levels: `critical` · `high` · `medium` · `low`
 

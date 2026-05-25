@@ -175,6 +175,49 @@ cucumber --format json --out cucumber-report.json
 - ✅ Tags → Labels
 - ✅ Error messages from failed steps
 
+### ✅ Robot Framework XML
+
+**Source:** `output.xml` produced by `robot` command (RF 4, 5, 6, 7)
+
+**File structure:**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20260525 12:00:00.000">
+  <suite name="My Suite">
+    <test name="Login With Valid Credentials">
+      <tag>severity:critical</tag>
+      <tag>tms:AUTH-001</tag>
+      <kw name="Navigate To" library="Browser">
+        <arg>https://example.com/login</arg>
+        <status status="PASS" start="..." elapsed="0.310"/>
+      </kw>
+      <kw name="Fill Login Form" library="common.resource">
+        <kw name="Fill Text" library="Browser">
+          <arg>id=username    admin</arg>
+          <status status="PASS" start="..." elapsed="0.106"/>
+        </kw>
+        <status status="PASS" start="..." elapsed="0.280"/>
+      </kw>
+      <status status="PASS" start="..." elapsed="1.234"/>
+    </test>
+  </suite>
+</robot>
+```
+
+**How to generate:**
+```bash
+robot --outputdir results tests/
+# produces: results/output.xml
+```
+
+**What's converted:**
+- ✅ Suite hierarchy → `fullName`
+- ✅ Full nested keyword tree (sub-keywords at any depth)
+- ✅ Per-keyword timing and pass/fail status
+- ✅ Tags → severity/TMS labels (`severity:critical`, `tms:JIRA-123`, `regression`, etc.)
+- ✅ Error messages and failure path
+- ✅ RF 4, 5, 6, and 7 supported
+
 ### ✅ Sarva-Varadi JSON (Native)
 
 **Source:** Playwright/Selenium adapters, or previous converter output
@@ -213,6 +256,7 @@ The converter uses these detection rules:
 | **JUnit** | Root element `testsuites` or `testsuite` (after XML parsing) |
 | **TestNG** | Root element `testng-results`, `testng`, or `suite` with `test` child |
 | **Cucumber** | Array with objects containing `type: "feature"` and `elements` array |
+| **Robot Framework** | Root element `robot` with `suite` child containing `test` elements with `kw` children |
 
 **No configuration needed** - just point to your file and let the converter handle it.
 
@@ -229,6 +273,9 @@ sarva-varadi generate --input test-output/testng-results.xml --output reports
 
 # Cucumber
 sarva-varadi generate --input cucumber-report.json --output reports
+
+# Robot Framework
+sarva-varadi generate --input results/output.xml --output reports --title "Robot Suite"
 
 # With custom title
 sarva-varadi generate -i junit.xml -o reports --title "Nightly Regression Tests"
