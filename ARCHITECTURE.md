@@ -205,14 +205,25 @@ Cleanup runs automatically after each test execution.
 
 ### Primary Report — `index.html` (Single-Page App)
 
-The report is a self-contained SPA with a collapsible sidebar and four micro-app tabs. History data is embedded at generation time via `SarvaStore.init(tests, metadata, history)`.
+The report is a self-contained SPA with a collapsible sidebar and five micro-app tabs. History data is embedded at generation time via `SarvaStore.init(tests, metadata, history)`.
 
 | Tab | Contents |
 |-----|---|
 | **Overview** | Pass rate summary, run metadata, environment badge, key stats |
 | **Tests** | Full test list — searchable, filterable, expandable step details, attachment viewer |
+| **Failures** | Failed/flaky tests grouped and ranked |
 | **Trends** | Pass rate over time, test distribution chart, flakiest tests leaderboard, run cadence |
-| **Timeline** | Gantt chart showing when each test started and finished across a run |
+| **Timeline** | Gantt chart (per-test parallel execution) + Run Cadence bar chart |
+| **Run History** | Filterable table of all historical runs; clicking a row loads that run's data and updates all charts in-place |
+
+**Run History view — filter defaults and behaviour**:
+- On load the date range defaults to the **last 30 days** to avoid rendering hundreds of rows up front. Clear ✕ or widen the range to see older runs.
+- **Clear All** resets every filter but restores the 30-day date default rather than showing all runs.
+- Clicking **View →** on any row calls `SarvaRunSwitch.switchToRun()`, which hot-swaps `SarvaStore` state and re-emits `store:ready` so every micro-app re-renders against the selected run.
+- Charts with a run-count filter (Overview Health Pulse, Trends, Timeline Run Cadence) auto-center a 20-run window on the selected run when it falls outside the current filter window, then show a label like `Runs #51–#70 · centered on Run #61`. Clicking any filter button exits centered mode.
+- A dashed vertical marker appears on Trends and Timeline Run Cadence charts to indicate the selected run's position.
+- A banner (`Viewing Run #N · date · pass rate · duration`) is shown on Overview and Timeline while a historical run is active; Trends shows a compact `Trend marker showing Run #N` variant. The banner includes a **Back to Latest** link.
+- **Coverage Changes** (New Tests / Absent Tests) on Overview is always relative to the current/latest run — it is hidden automatically when viewing a historical run because test-history is not replayed to a point-in-time. The tooltip on each Coverage card notes this behaviour.
 
 **Technology**:
 - Self-contained HTML with embedded CSS/JS — no external dependencies at runtime

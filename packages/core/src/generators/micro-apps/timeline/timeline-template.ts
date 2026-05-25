@@ -35,7 +35,7 @@ export function renderTimeline(): string {
   <div class="sv-card" style="margin-top:1rem;">
     <div class="sv-card-header">
       <span style="display:flex;align-items:center;gap:0.4rem;">
-        <span class="sv-card-title">Execution Gantt — Current Run</span>
+        <span class="sv-card-title" id="sv-gantt-title">Execution Gantt — Current Run</span>
         <span class="sv-info-btn" data-sv-tip="&lt;b&gt;Execution Gantt&lt;/b&gt;&lt;br&gt;• Each row = one test, bar = start → end time (relative to first test)&lt;br&gt;• Overlapping bars = parallel execution&lt;br&gt;• Colour: green Passed · red Failed · amber Flaky · grey Skipped&lt;br&gt;• Hover a bar for exact timing">${INFO_ICON}</span>
       </span>
       <span style="display:flex;align-items:center;gap:0.4rem;">

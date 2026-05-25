@@ -5,9 +5,11 @@
  */
 const SarvaTrends = (() => {
 
-  let _history = null;
-  let _filterN  = 20;
-  let _charts   = {};
+  let _history        = null;
+  let _filterN        = 20;
+  let _charts         = {};
+  let _activeRunId    = null;
+  let _centeredSlice  = null; // { sliceStart, sliceEnd } when centering on a run outside the filter window
 
   /* ── Utilities ──────────────────────────────────────────────────────────── */
   function fmtDur(ms) {
@@ -34,7 +36,86 @@ const SarvaTrends = (() => {
 
   function getFiltered() {
     if (!_history || _history.length === 0) return [];
+    if (_centeredSlice) return _history.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
     return _filterN > 0 ? _history.slice(0, _filterN) : _history;
+  }
+
+  function _applyCentering() {
+    if (!_activeRunId || !_history) { _centeredSlice = null; _updateRunLabel(); return; }
+    const hi = _history.findIndex(r => r.id === _activeRunId);
+    if (hi === -1) { _centeredSlice = null; _updateRunLabel(); return; }
+    // Skip centering only if a specific filter is active AND the run is within that window
+    if (_filterN > 0 && hi < _filterN) { _centeredSlice = null; _updateRunLabel(); return; }
+    // Center a 20-run window around the selected run
+    const windowSize = 20;
+    let sliceStart = Math.max(0, hi - 9);
+    let sliceEnd   = Math.min(_history.length, sliceStart + windowSize);
+    sliceStart = Math.max(0, sliceEnd - windowSize);
+    _centeredSlice = { sliceStart, sliceEnd };
+    document.querySelectorAll('.sv-trends-run-btn').forEach(b => b.classList.remove('active'));
+    _updateRunLabel();
+  }
+
+  function _runWindowLabel(display) {
+    if (_centeredSlice && _history) {
+      const { sliceStart, sliceEnd } = _centeredSlice;
+      const len       = _history.length;
+      const newestNum = len - sliceStart;
+      const oldestNum = len - (sliceEnd - 1);
+      const hi        = _history.findIndex(r => r.id === _activeRunId);
+      const activeNum = len - hi;
+      return `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+    }
+    return _filterN > 0 && _history && _history.length > _filterN
+      ? `Last ${display.length} runs` : `${display.length} runs`;
+  }
+
+  function _updateRunLabel() {
+    const lbl = document.getElementById('sv-trends-run-label');
+    if (!lbl) return;
+    if (!_centeredSlice || !_history) { lbl.textContent = ''; return; }
+    const { sliceStart, sliceEnd } = _centeredSlice;
+    const len       = _history.length;
+    const newestNum = len - sliceStart;
+    const oldestNum = len - (sliceEnd - 1);
+    const hi        = _history.findIndex(r => r.id === _activeRunId);
+    const activeNum = len - hi;
+    lbl.textContent = `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+  }
+
+  // Returns actual run number (#1 = oldest) for a run object
+  function _runNum(r) {
+    const hi = (_history || []).findIndex(h => h.id === r.id);
+    return hi >= 0 ? _history.length - hi : '?';
+  }
+
+  function _runMarker(display) {
+    if (!_activeRunId) return null;
+    const mi = display.findIndex(r => r.id === _activeRunId);
+    if (mi === -1) return null;
+    const actualNum = _runNum(display[mi]);
+    return {
+      xAxis: `#${actualNum}`,  // actual run number, matches new xData labels
+      lineStyle: { color: 'rgba(129,140,248,0.9)', type: 'dashed', width: 1.5 },
+      label: {
+        show: true, position: 'insideStartTop',
+        formatter: `Run #${actualNum}`,
+        color: '#fff', fontSize: 9,
+        backgroundColor: 'rgba(99,102,241,0.92)',
+        padding: [2, 4, 2, 4], borderRadius: 3,
+      },
+    };
+  }
+
+  function _markerSeries(display) {
+    const m = _runMarker(display);
+    if (!m) return [];
+    // No 'name' → stays out of chart legends
+    return [{
+      type: 'line', data: [], animation: false,
+      lineStyle: { opacity: 0 }, itemStyle: { opacity: 0 }, symbol: 'none',
+      markLine: { silent: true, symbol: ['none', 'none'], data: [m] },
+    }];
   }
 
   /* ── Chart lifecycle ────────────────────────────────────────────────────── */
@@ -85,8 +166,14 @@ const SarvaTrends = (() => {
   /* ── Top-level render ───────────────────────────────────────────────────── */
   function setRunFilter(n, btn) {
     _filterN = n;
+    _centeredSlice = null;
+    _activeRunId   = null; // suppress marker for this visit only — re-syncs on next nav:change
     document.querySelectorAll('.sv-trends-run-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
+    _updateRunLabel();
+    // Hide banner locally without touching global history state (other views stay in history mode)
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
     if (typeof echarts !== 'undefined' && _history !== null) renderAll();
   }
 
@@ -165,13 +252,13 @@ const SarvaTrends = (() => {
   /* ── Pass Rate Trend ────────────────────────────────────────────────────── */
   function renderPassRateChart(display) {
     const lbl = document.getElementById('sv-trends-passrate-label');
-    if (lbl) lbl.textContent = `${display.length} runs`;
+    if (lbl) lbl.textContent = _runWindowLabel(display);
 
     const chart = initChart('sv-trends-passrate-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData = display.map((_, i) => `#${i + 1}`);
+    const xData = display.map(r => `#${_runNum(r)}`);
     const yData = display.map(r => {
       const t = (r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0);
       return t > 0 ? +((r.passed / t) * 100).toFixed(1) : 0;
@@ -260,6 +347,7 @@ const SarvaTrends = (() => {
           itemStyle: { color: '#f59e0b' },
           areaStyle: { color: 'transparent' },
         }] : []),
+        ..._markerSeries(display),
       ],
     });
 
@@ -269,13 +357,13 @@ const SarvaTrends = (() => {
   /* ── Failures & Flakiness ───────────────────────────────────────────────── */
   function renderStabilityChart(display) {
     const lbl = document.getElementById('sv-trends-stability-label');
-    if (lbl) lbl.textContent = `${display.length} runs`;
+    if (lbl) lbl.textContent = _runWindowLabel(display);
 
     const chart = initChart('sv-trends-stability-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData  = display.map((_, i) => `#${i + 1}`);
+    const xData  = display.map(r => `#${_runNum(r)}`);
     const failed = display.map(r => r.failed || 0);
     const flaky  = display.map(r => r.flaky  || 0);
 
@@ -320,6 +408,7 @@ const SarvaTrends = (() => {
       series: [
         mkArea('Failed', failed, '#f43f5e', 'rgba(244,63,94,0.18)'),
         mkArea('Flaky',  flaky,  '#f59e0b', 'rgba(245,158,11,0.18)'),
+        ..._markerSeries(display),
       ],
     });
 
@@ -338,11 +427,13 @@ const SarvaTrends = (() => {
 
   /* ── Test Count Over Time ───────────────────────────────────────────────── */
   function renderCountChart(display) {
+    const lbl = document.getElementById('sv-trends-count-label');
+    if (lbl) lbl.textContent = _runWindowLabel(display);
     const chart = initChart('sv-trends-count-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData   = display.map((_, i) => `#${i + 1}`);
+    const xData   = display.map(r => `#${_runNum(r)}`);
     const passed  = display.map(r => r.passed  || 0);
     const failed  = display.map(r => r.failed  || 0);
     const flaky   = display.map(r => r.flaky   || 0);
@@ -400,6 +491,7 @@ const SarvaTrends = (() => {
         mkStack('Failed',  failed,  '#f43f5e', 'rgba(244,63,94,0.4)'),
         mkStack('Flaky',   flaky,   '#f59e0b', 'rgba(245,158,11,0.4)'),
         mkStack('Skipped', skipped, '#64748b', 'rgba(100,116,139,0.3)'),
+        ..._markerSeries(display),
         // Scatter markers for test count changes (+N / -N)
         {
           name: 'Changes', type: 'scatter', data: display.map((r, i) => {
@@ -445,6 +537,8 @@ const SarvaTrends = (() => {
 
   /* ── Run Duration Trend ─────────────────────────────────────────────────── */
   function renderDurationChart(display) {
+    const lbl = document.getElementById('sv-trends-duration-label');
+    if (lbl) lbl.textContent = _runWindowLabel(display);
     const empty = document.getElementById('sv-trends-duration-empty');
     const durs  = display.map(r => r.duration > 0 ? +(r.duration / 1000).toFixed(1) : null);
     const valid  = durs.filter(d => d !== null && d > 0);
@@ -461,7 +555,7 @@ const SarvaTrends = (() => {
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData  = display.map((_, i) => `#${i + 1}`);
+    const xData  = display.map(r => `#${_runNum(r)}`);
     const avgDur = +(valid.reduce((a, b) => a + b, 0) / valid.length).toFixed(1);
 
     chart.setOption({
@@ -527,6 +621,7 @@ const SarvaTrends = (() => {
             }],
           },
         },
+        ..._markerSeries(display),
       ],
     });
 
@@ -856,14 +951,14 @@ const SarvaTrends = (() => {
     }
     if (section) section.style.display = '';
     if (empty) empty.style.display = 'none';
-    if (lbl) lbl.textContent = `${display.length} runs`;
+    if (lbl) lbl.textContent = _runWindowLabel(display);
 
     const chart = initChart('sv-trends-severity-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
 
-    const xData    = display.map((_, i) => `#${i + 1}`);
+    const xData    = display.map(r => `#${_runNum(r)}`);
     const critical = display.map(r => (r.severityBreakdown && r.severityBreakdown.critical) || 0);
     const high     = display.map(r => (r.severityBreakdown && r.severityBreakdown.high)     || 0);
     const medium   = display.map(r => (r.severityBreakdown && r.severityBreakdown.medium)   || 0);
@@ -928,6 +1023,7 @@ const SarvaTrends = (() => {
         mkBar('Medium',   medium,   '#f59e0b'),
         mkBar('Low',      low,      '#3b82f6'),
         mkBar('Trivial',  trivial,  '#94a3b8'),
+        ..._markerSeries(display),
       ],
     });
 
@@ -947,7 +1043,26 @@ const SarvaTrends = (() => {
   // Re-render when tab becomes visible (ECharts needs a visible container)
   SarvaEventBus.on('nav:change', ({ view }) => {
     if (view === 'trends' && typeof echarts !== 'undefined' && _history !== null) {
+      // Re-sync history mode from global state (restores after a view-local filter reset)
+      _activeRunId = (typeof SarvaRunSwitch !== 'undefined') ? SarvaRunSwitch.activeRunId : null;
+      _applyCentering();
       setTimeout(renderAll, 50);
+    }
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeRunId = runId;
+    if (typeof echarts !== 'undefined' && _history !== null) {
+      _applyCentering();
+      if (!runId) {
+        // Restore: reset to default Last 20 filter
+        _filterN = 20;
+        document.querySelectorAll('.sv-trends-run-btn').forEach(b => {
+          b.classList.toggle('active', b.textContent.trim() === 'Last 20');
+        });
+        _updateRunLabel();
+      }
+      renderAll();
     }
   });
 

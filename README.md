@@ -70,6 +70,7 @@
 - 🔍 Tests: full list with filter/search/sort, per-test history & steps
 - 📈 Trends: pass rate, failures, flakiness, duration over time
 - ⏱️ Timeline: run cadence and execution Gantt chart
+- 🕐 Run History: browse every past run, click to re-render all charts against any run
 - 🔥 Intelligent flaky test detection with flaky score
 - 🎯 Top failing & top flaky leaderboards
 
@@ -109,7 +110,7 @@ The best way to explore Sarva-Varadi is to open one of the live demos — each h
 
 ### What's in the report
 
-Each report is a single-page app with five sections reachable from the sidebar:
+Each report is a single-page app with six sections reachable from the sidebar:
 
 **Overview** — Pass rate donut, stat cards (total / passed / failed / flaky / skipped), Health Pulse trend indicator, run history table, top failing tests, top flaky tests, and a Needs Attention strip when things regress. Also surfaces **New Tests** (tests that appeared for the first time this run) and **Absent Tests** (tests present in the previous run but missing now) — both widgets are hidden automatically when there is nothing to report, and appear as soon as tests are added or removed between runs.
 
@@ -120,6 +121,8 @@ Each report is a single-page app with five sections reachable from the sidebar:
 **Trends** — Six interactive ECharts charts across runs: pass rate over time, failures & flakiness, test count, run duration, top failing tests bar chart, and top flaky tests bar chart. All charts share a run-count filter (Last 10 / 20 / 50 / All).
 
 **Timeline** — Run Cadence bar chart showing how often and when runs happen, plus an Execution Gantt showing every test's start time and duration for the current run.
+
+**Run History** — Filterable table of every historical run (filter by date, status, pass rate, duration). Click any row to hot-swap all charts to that run — Overview, Failures, Tests, Trends, and Timeline all update in-place. Charts with a run-count filter auto-center a window on the selected run, showing a label like `Runs #51–70 · centered on Run #61`. A banner persists across all views while browsing history; one click returns to the latest run.
 
 **Export** — Every chart has a PNG download button. The Tests page has a CSV export. Print the full report to a structured PDF (A4 landscape, with an executive summary and page numbers) via the print button.
 
@@ -1160,12 +1163,13 @@ Each report is a single `index.html` — no server required, open it directly in
 | **Tests** | Filterable test list · free-text search · sort by duration/status · test detail drawer with collapsible step tree (BDD hierarchy + HTTP/WebDriver sub-steps), attachments, and per-test history chart |
 | **Trends** | Pass rate trend · failures & flakiness · test count · run duration · top failing bar chart · top flaky bar chart — all with run-count filter |
 | **Timeline** | Run Cadence chart (when and how often runs happen) · Execution Gantt (per-test start time and duration) |
+| **Run History** | Filterable table of all historical runs (date, status, pass rate, duration) · click any row to re-render all charts against that run · auto-centering window label · viewing banner with Back to Latest link |
 
 ### Export options
 
 | Format | Where |
 |--------|-------|
-| **PDF** | Print button — A4 landscape, executive summary, page numbers |
+| **PDF** | Print button — A4 landscape, executive summary, page numbers; includes all six sections (Overview → Failures → Tests → Trends → Timeline → Run History) |
 | **PNG** | Download button on every chart (12 total) |
 | **CSV** | Tests page toolbar · Overview Top Failures & Top Flaky tables |
 

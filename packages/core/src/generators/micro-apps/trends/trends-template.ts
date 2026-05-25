@@ -12,6 +12,7 @@ export function renderTrends(): string {
     <button class="sv-trends-run-btn active" onclick="SarvaTrends.setRunFilter(20,this)">Last 20</button>
     <button class="sv-trends-run-btn" onclick="SarvaTrends.setRunFilter(50,this)">Last 50</button>
     <button class="sv-trends-run-btn" onclick="SarvaTrends.setRunFilter(0,this)">All runs</button>
+    <span id="sv-trends-run-label" style="font-size:0.72rem;color:var(--text-muted);margin-left:0.5rem;"></span>
   </div>
 
   <!-- No-history fallback -->
@@ -97,7 +98,10 @@ export function renderTrends(): string {
             <span class="sv-card-title">Test Count Over Time</span>
             <span class="sv-info-btn" data-sv-tip="&lt;b&gt;Test Count Over Time&lt;/b&gt;&lt;br&gt;• Stacked area showing test counts by outcome per run&lt;br&gt;• Growing green = expanding stable suite&lt;br&gt;• Growing red = accumulating failures · Shrinking total = tests removed">${INFO_ICON}</span>
           </span>
-          <button class="sv-dl-btn" onclick="SarvaDownloadChart('sv-trends-count-chart','test-count.png','Test Count Over Time')" data-sv-tip="Download as PNG">${DL_ICON}</button>
+          <span style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="font-size:0.72rem;color:var(--text-muted);" id="sv-trends-count-label"></span>
+            <button class="sv-dl-btn" onclick="SarvaDownloadChart('sv-trends-count-chart','test-count.png','Test Count Over Time')" data-sv-tip="Download as PNG">${DL_ICON}</button>
+          </span>
         </div>
         <div class="sv-card-body">
           <div id="sv-trends-count-chart" style="height:200px;"></div>
@@ -110,7 +114,10 @@ export function renderTrends(): string {
             <span class="sv-card-title">Run Duration Trend</span>
             <span class="sv-info-btn" data-sv-tip="&lt;b&gt;Run Duration Trend&lt;/b&gt;&lt;br&gt;• How long each run took in seconds&lt;br&gt;• Increasing bars = new tests added or infrastructure slowdowns&lt;br&gt;• Dashed line shows the rolling average">${INFO_ICON}</span>
           </span>
-          <button class="sv-dl-btn" onclick="SarvaDownloadChart('sv-trends-duration-chart','run-duration.png','Run Duration Trend')" data-sv-tip="Download as PNG">${DL_ICON}</button>
+          <span style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="font-size:0.72rem;color:var(--text-muted);" id="sv-trends-duration-label"></span>
+            <button class="sv-dl-btn" onclick="SarvaDownloadChart('sv-trends-duration-chart','run-duration.png','Run Duration Trend')" data-sv-tip="Download as PNG">${DL_ICON}</button>
+          </span>
         </div>
         <div class="sv-card-body">
           <div id="sv-trends-duration-chart" style="height:200px;"></div>

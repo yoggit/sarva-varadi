@@ -8,6 +8,8 @@ const SarvaOverview = (() => {
   let _cachedStats   = null;
   let _cachedHistory = null;
   let _filterN       = 20; // default: last 20 runs
+  let _activeRunId   = null;
+  let _centeredSlice = null; // { sliceStart, sliceEnd } when centering on a run outside the filter window
   let _healthChart   = null;
   let _historyChart  = null;
   let _healthSeriesVisible = { passRate: true, duration: true };
@@ -15,14 +17,88 @@ const SarvaOverview = (() => {
 
   function getFilteredHistory() {
     if (!_cachedHistory) return [];
+    if (_centeredSlice) return _cachedHistory.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
     return _filterN > 0 ? _cachedHistory.slice(0, _filterN) : _cachedHistory;
+  }
+
+  // Actual run number (#1 = oldest) for a run object
+  function _runNum(r) {
+    const hi = (_cachedHistory || []).findIndex(h => h.id === r.id);
+    return hi >= 0 ? _cachedHistory.length - hi : '?';
+  }
+
+  // Dashed vertical marker config for the active historical run
+  function _overviewMarkLine(display) {
+    if (!_activeRunId) return null;
+    const mi = display.findIndex(r => r.id === _activeRunId);
+    if (mi === -1) return null;
+    const actualNum = _runNum(display[mi]);
+    return {
+      xAxis: `#${actualNum}`,
+      lineStyle: { color: 'rgba(129,140,248,0.9)', type: 'dashed', width: 1.5 },
+      label: {
+        show: true, position: 'insideStartTop',
+        formatter: `Run #${actualNum}`,
+        color: '#fff', fontSize: 9,
+        backgroundColor: 'rgba(99,102,241,0.92)',
+        padding: [2, 4, 2, 4], borderRadius: 3,
+      },
+    };
+  }
+
+  function _applyCentering() {
+    if (!_activeRunId || !_cachedHistory) { _centeredSlice = null; _updateOverviewLabel(); return; }
+    const hi = _cachedHistory.findIndex(r => r.id === _activeRunId);
+    if (hi === -1) { _centeredSlice = null; _updateOverviewLabel(); return; }
+    if (_filterN > 0 && hi < _filterN) { _centeredSlice = null; _updateOverviewLabel(); return; }
+    const windowSize = 20;
+    let sliceStart = Math.max(0, hi - 9);
+    let sliceEnd   = Math.min(_cachedHistory.length, sliceStart + windowSize);
+    sliceStart = Math.max(0, sliceEnd - windowSize);
+    _centeredSlice = { sliceStart, sliceEnd };
+    document.querySelectorAll('.sv-run-filter-btn').forEach(b => b.classList.remove('active'));
+    _updateOverviewLabel();
+  }
+
+  function _updateOverviewLabel() {
+    const lbl = document.getElementById('sv-overview-run-label');
+    if (!lbl) return;
+    if (!_centeredSlice || !_cachedHistory) { lbl.textContent = ''; return; }
+    const { sliceStart, sliceEnd } = _centeredSlice;
+    const len       = _cachedHistory.length;
+    const newestNum = len - sliceStart;
+    const oldestNum = len - (sliceEnd - 1);
+    const hi        = _cachedHistory.findIndex(r => r.id === _activeRunId);
+    const activeNum = len - hi;
+    lbl.textContent = `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+  }
+
+  // Returns the run window label for chart headers
+  function _runWindowLabel(display) {
+    if (_centeredSlice && _cachedHistory) {
+      const { sliceStart, sliceEnd } = _centeredSlice;
+      const len       = _cachedHistory.length;
+      const newestNum = len - sliceStart;
+      const oldestNum = len - (sliceEnd - 1);
+      const hi        = _cachedHistory.findIndex(r => r.id === _activeRunId);
+      const activeNum = len - hi;
+      return `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+    }
+    return _filterN > 0 && _cachedHistory && _cachedHistory.length > _filterN
+      ? `Last ${display.length} runs` : `${display.length} runs`;
   }
 
   function setRunFilter(n, btn) {
     _filterN = n;
+    _centeredSlice = null;
+    _activeRunId   = null; // suppress marker for this visit only — re-syncs on next nav:change
     document.querySelectorAll('.sv-run-filter-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
-    if (typeof echarts !== 'undefined') {
+    _updateOverviewLabel();
+    // Hide banner locally without touching global history state (other views stay in history mode)
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
+    if (typeof echarts !== 'undefined' && _cachedHistory !== null) {
       const h = getFilteredHistory();
       renderHealthPulse(h);
       renderHistoryChart(h);
@@ -64,9 +140,10 @@ const SarvaOverview = (() => {
       }
     }
 
-    // New tests / removed tests detection — uses same stripTags logic as renderCoverageChanges
+    // Coverage chips are always relative to the latest run — skip when viewing history
+    const _isViewingHistory = typeof SarvaRunSwitch !== 'undefined' && SarvaRunSwitch.activeRunId;
     const _latestRunId = SarvaStore.history && SarvaStore.history.length > 0 ? SarvaStore.history[0].id : null;
-    if (_latestRunId && SarvaStore.history && SarvaStore.history.length > 1) {
+    if (!_isViewingHistory && _latestRunId && SarvaStore.history && SarvaStore.history.length > 1) {
       const _th = SarvaStore.testHistory || [];
       const _stripTags = n => (n || '').replace(/\s*@\S+/g, '').trim();
       const _latestBN = new Set(_th.filter(t => t.history.length > 0 && t.history[0].runId === _latestRunId).map(t => _stripTags(t.testName || '')));
@@ -304,7 +381,16 @@ const SarvaOverview = (() => {
       return;
     }
 
-    if (label) label.textContent = `Last ${display.length} runs`;
+    if (label) label.textContent = _runWindowLabel(display);
+
+    // Update print insight with window-aware text
+    const _healthInsightEl = document.getElementById('sv-print-insight-health');
+    if (_healthInsightEl && display.length >= 2) {
+      const _rates = display.map(r => { const t=(r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0); return t>0?+((r.passed/t)*100).toFixed(1):0; });
+      const _avg = +(_rates.reduce((a,b)=>a+b,0)/_rates.length).toFixed(1);
+      const _best = Math.max(..._rates), _worst = Math.min(..._rates);
+      _healthInsightEl.textContent = `${_runWindowLabel(display)}: avg pass rate ${_avg}%, best ${_best}%, worst ${_worst}%.`;
+    }
 
     /* Trend badge: delta between the two most recent runs */
     const trendEl = document.getElementById('sv-health-trend');
@@ -343,12 +429,13 @@ const SarvaOverview = (() => {
       });
     };
 
-    const xData = display.map((_, i) => `#${i + 1}`);
+    const xData = display.map(r => `#${_runNum(r)}`);
     const yData = display.map(r => {
       const t = (r.passed || 0) + (r.failed || 0) + (r.flaky || 0) + (r.skipped || 0);
       return t > 0 ? +((r.passed / t) * 100).toFixed(1) : 0;
     });
     const durData = display.map(r => r.duration > 0 ? +(r.duration / 1000).toFixed(1) : null);
+    const healthMl = _overviewMarkLine(display);
     const hasDuration = durData.some(d => d !== null && d > 0);
 
     const axisColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
@@ -462,6 +549,7 @@ const SarvaOverview = (() => {
             ],
           },
         },
+        ...(healthMl ? { markLine: { silent: true, symbol: ['none','none'], data: [healthMl] } } : {}),
       },
       ...(hasDuration ? [{
         name: 'Duration',
@@ -525,13 +613,24 @@ const SarvaOverview = (() => {
       return;
     }
 
-    if (label) label.textContent = `Last ${display.length} runs`;
+    if (label) label.textContent = _runWindowLabel(display);
+
+    // Update print insight with window-aware text
+    const _histInsightEl = document.getElementById('sv-print-insight-history');
+    if (_histInsightEl && display.length >= 2) {
+      const _hRates = display.map(r => { const t=(r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0); return t>0?+((r.passed/t)*100).toFixed(1):0; });
+      const _hBest = Math.max(..._hRates), _hWorst = Math.min(..._hRates);
+      const _hLatest = _hRates[_hRates.length - 1];
+      _histInsightEl.textContent = `${_runWindowLabel(display)}. Latest: ${_hLatest}%. Range: ${_hWorst}%–${_hBest}%.`;
+    }
+
     const isDark = !document.body.classList.contains('light-mode');
     if (_historyChart) { try { _historyChart.dispose(); } catch (e) {} _historyChart = null; }
     _historyChart = echarts.init(el, null, { renderer: 'svg' });
     const chart = _historyChart;
 
-    const xData   = display.map((_, i) => `#${i + 1}`);
+    const xData      = display.map(r => `#${_runNum(r)}`);
+    const historyMl  = _overviewMarkLine(display);
     const passed  = display.map(r => r.passed  || 0);
     const failed  = display.map(r => r.failed  || 0);
     const flaky   = display.map(r => r.flaky   || 0);
@@ -608,7 +707,7 @@ const SarvaOverview = (() => {
         },
       },
       series: [
-        mkBar('Passed',  passed,  '#22c55e'),
+        { ...mkBar('Passed', passed, '#22c55e'), ...(historyMl ? { markLine: { silent: true, symbol: ['none','none'], data: [historyMl] } } : {}) },
         mkBar('Failed',  failed,  '#f43f5e'),
         mkBar('Flaky',   flaky,   '#f59e0b'),
         mkBar('Skipped', skipped, '#64748b'),
@@ -641,6 +740,12 @@ const SarvaOverview = (() => {
   function renderCoverageChanges() {
     const section = document.getElementById('sv-coverage-changes');
     if (!section) return;
+
+    // Coverage changes are always relative to the latest run; not meaningful for historical views
+    if (typeof SarvaRunSwitch !== 'undefined' && SarvaRunSwitch.activeRunId) {
+      section.style.display = 'none';
+      return;
+    }
 
     const latestRunId = SarvaStore.history && SarvaStore.history.length > 0 ? SarvaStore.history[0].id : null;
     if (!latestRunId || !SarvaStore.history || SarvaStore.history.length < 2) {
@@ -747,7 +852,7 @@ const SarvaOverview = (() => {
         <div class="sv-card-header">
           <span style="display:flex;align-items:center;gap:0.4rem;">
             <span class="sv-card-title" style="color:#22d3ee;">New Tests</span>
-            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>New Tests</b><br>• Appearing in the suite for the first time this run<br>• Review to confirm they are intentionally added<br>• Click any test to inspect its result and steps')}">${INFO_ICON_SM}</span>
+            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>New Tests</b><br>• Appearing in the suite for the first time this run<br>• Review to confirm they are intentionally added<br>• Click any test to inspect its result and steps<br>• Always reflects the current/latest run — hidden when viewing a historical run')}">${INFO_ICON_SM}</span>
           </span>
           <span style="font-size:0.72rem;color:var(--text-muted);">${newTests.length} test${newTests.length !== 1 ? 's' : ''}</span>
         </div>
@@ -759,7 +864,7 @@ const SarvaOverview = (() => {
         <div class="sv-card-header">
           <span style="display:flex;align-items:center;gap:0.4rem;">
             <span class="sv-card-title" style="color:#f97316;">Absent Tests</span>
-            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Absent Tests</b><br>• Ran in previous runs but missing from this run<br>• Could be deleted, renamed, or excluded by a filter<br>• Last-seen status shown to help diagnose the cause')}">${INFO_ICON_SM}</span>
+            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Absent Tests</b><br>• Ran in previous runs but missing from this run<br>• Could be deleted, renamed, or excluded by a filter<br>• Last-seen status shown to help diagnose the cause<br>• Always reflects the current/latest run — hidden when viewing a historical run')}">${INFO_ICON_SM}</span>
           </span>
           <span style="font-size:0.72rem;color:var(--text-muted);">${absentTests.length} test${absentTests.length !== 1 ? 's' : ''}</span>
         </div>
@@ -962,6 +1067,39 @@ const SarvaOverview = (() => {
   SarvaEventBus.on('echarts:ready', () => {
     if (_cachedStats)   renderDonut(_cachedStats);
     if (_cachedHistory) {
+      const h = getFilteredHistory();
+      renderHealthPulse(h);
+      renderHistoryChart(h);
+    }
+  });
+
+  // Re-render ECharts when Overview becomes visible (e.g. after a run switch from Runs view)
+  SarvaEventBus.on('nav:change', ({ view }) => {
+    if (view === 'overview' && typeof echarts !== 'undefined' && _cachedStats) {
+      // Re-sync history mode from global state (restores after a view-local filter reset)
+      _activeRunId = (typeof SarvaRunSwitch !== 'undefined') ? SarvaRunSwitch.activeRunId : null;
+      _applyCentering();
+      setTimeout(() => {
+        const h = getFilteredHistory();
+        renderDonut(_cachedStats);
+        renderHealthPulse(h);
+        renderHistoryChart(h);
+      }, 50);
+    }
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeRunId = runId;
+    if (typeof echarts !== 'undefined' && _cachedHistory) {
+      _applyCentering();
+      if (!runId) {
+        // Restore: reset to default Last 20 filter
+        _filterN = 20;
+        document.querySelectorAll('.sv-run-filter-btn').forEach(b => {
+          b.classList.toggle('active', b.textContent.trim() === 'Last 20');
+        });
+        _updateOverviewLabel();
+      }
       const h = getFilteredHistory();
       renderHealthPulse(h);
       renderHistoryChart(h);

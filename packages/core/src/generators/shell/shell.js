@@ -81,6 +81,12 @@ const SarvaShell = (() => {
       if (n > 0) { failBadge.textContent = n; failBadge.style.display = ''; }
       else failBadge.style.display = 'none';
     }
+    const runsBadge = document.getElementById('sv-nav-badge-runs');
+    if (runsBadge) {
+      const n = (SarvaStore.history || []).length;
+      if (n > 0) { runsBadge.textContent = n; runsBadge.style.display = ''; }
+      else runsBadge.style.display = 'none';
+    }
   }
 
   /* ── Timestamp ─────────────────────────────────────────────────────────────── */
@@ -121,3 +127,97 @@ const SarvaShell = (() => {
 })();
 
 document.addEventListener('DOMContentLoaded', () => SarvaShell.init());
+
+/* ── Run Switcher — loads historical run data and swaps store state ────────── */
+const SarvaRunSwitch = (() => {
+  let _activeRunId    = null;
+  let _currentSummary = null;
+  let _currentView    = 'overview';
+
+  function fmtDate(ts) {
+    return new Date(ts).toLocaleString(undefined, {
+      month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+    });
+  }
+
+  function fmtDur(ms) {
+    if (!ms || ms <= 0) return '';
+    if (ms < 60000) return `${(ms / 1000).toFixed(1)}s`;
+    return `${Math.floor(ms / 60000)}m ${Math.floor((ms % 60000) / 1000)}s`;
+  }
+
+  function switchToRun(runId, runSummary) {
+    _activeRunId    = runId;
+    _currentSummary = runSummary;
+    if (window.SarvaRunData && window.SarvaRunData[runId]) {
+      _apply(runId, runSummary);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = `history/${runId}/data.js`;
+    script.onload = () => _apply(runId, runSummary);
+    script.onerror = () => {
+      console.warn(`[SarvaRunSwitch] Could not load history/${runId}/data.js`);
+      _activeRunId = null;
+      _currentSummary = null;
+    };
+    document.head.appendChild(script);
+  }
+
+  function _apply(runId, runSummary) {
+    const tests = window.SarvaRunData && window.SarvaRunData[runId];
+    if (!tests) return;
+    SarvaStore.switchToRun(tests, runSummary);
+    SarvaShell.navigate('overview'); // nav:change will call _updateBanner
+  }
+
+  function restoreLatest() {
+    _activeRunId    = null;
+    _currentSummary = null;
+    SarvaStore.restoreLatest();
+    _hideBanner();
+  }
+
+  function _updateBanner() {
+    if (!_activeRunId || !_currentSummary) { _hideBanner(); return; }
+    const banner = document.getElementById('sv-viewing-banner');
+    const text   = document.getElementById('sv-viewing-banner-text');
+    if (!banner || !text) return;
+
+    const runs   = SarvaStore.history || [];
+    const idx    = runs.findIndex(r => r.id === _currentSummary.id);
+    const runNum = idx >= 0 ? runs.length - idx : '?';
+
+    if (_currentView === 'overview' || _currentView === 'timeline') {
+      const pct = _currentSummary.passRate != null ? `${_currentSummary.passRate}% pass rate` : '';
+      const dur = fmtDur(_currentSummary.duration);
+      text.textContent = [
+        `Viewing Run #${runNum}`,
+        fmtDate(_currentSummary.timestamp),
+        pct, dur,
+      ].filter(Boolean).join(' · ');
+      banner.style.display = 'flex';
+    } else if (_currentView === 'trends') {
+      text.textContent = `Trend marker showing Run #${runNum}`;
+      banner.style.display = 'flex';
+    } else {
+      _hideBanner();
+    }
+  }
+
+  function _hideBanner() {
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
+  }
+
+  SarvaEventBus.on('nav:change', ({ view }) => {
+    _currentView = view;
+    _updateBanner();
+  });
+
+  return {
+    switchToRun,
+    restoreLatest,
+    get activeRunId() { return _activeRunId; },
+  };
+})();
