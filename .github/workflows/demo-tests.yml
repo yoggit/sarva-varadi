@@ -126,7 +126,7 @@ jobs:
 
       - name: Build documentation site
         if: always()
-        run: npm run docs:build
+        run: npx vitepress build docs
         continue-on-error: true
 
       - name: Create landing page
