@@ -333,6 +333,260 @@ body.light-mode .sv-topbar {
   flex: 1;
 }
 
+/* ─── Viewing Banner ─────────────────────────────────────────────────────────── */
+.sv-viewing-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.5rem;
+  background: rgba(99, 102, 241, 0.08);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+.sv-viewing-banner-icon { font-size: 0.9rem; }
+.sv-viewing-banner-text { flex: 1; font-weight: 500; color: var(--text-primary); }
+.sv-viewing-banner-back {
+  background: none;
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast);
+  white-space: nowrap;
+}
+.sv-viewing-banner-back:hover {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: var(--accent);
+}
+
+/* ─── Runs view ──────────────────────────────────────────────────────────────── */
+.sv-runs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+.sv-runs-header-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.sv-runs-header h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+.sv-runs-count-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.sv-runs-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.sv-runs-filters select,
+.sv-runs-filters input {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  padding: 0.35rem 0.65rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--t-fast);
+}
+.sv-runs-filters select:hover,
+.sv-runs-filters input:hover { border-color: var(--accent); }
+.sv-runs-filters input { min-width: 120px; }
+.sv-runs-filters input[type="number"] { min-width: 60px; max-width: 70px; }
+.sv-runs-filters input[type="date"]   { min-width: 130px; }
+.sv-runs-filters input::placeholder { color: var(--text-muted); }
+
+.sv-runs-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  padding: 0.2rem 0.55rem;
+}
+.sv-runs-filter-group input {
+  border: none !important;
+  background: transparent !important;
+  padding: 0.15rem 0.25rem !important;
+  min-width: unset !important;
+  max-width: unset !important;
+  font-size: 0.78rem;
+}
+.sv-runs-filter-group input[type="number"] { width: 52px; }
+.sv-runs-filter-group input[type="date"]   { width: 120px; }
+.sv-runs-filter-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  user-select: none;
+}
+.sv-runs-filter-sep {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+/* Pill wrapper for select + search (adds the ✕ button inline) */
+.sv-runs-filter-pill {
+  display: flex;
+  align-items: center;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.sv-runs-filter-pill select,
+.sv-runs-filter-pill input {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* ✕ clear button inside each filter */
+.sv-runs-filter-clear-x {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.65rem;
+  padding: 0 0.4rem;
+  line-height: 1;
+  opacity: 0.55;
+  transition: opacity var(--t-fast), color var(--t-fast);
+}
+.sv-runs-filter-clear-x:hover { opacity: 1; color: var(--accent); }
+
+/* Clear All button */
+.sv-runs-clear-all {
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  white-space: nowrap;
+  transition: border-color var(--t-fast), color var(--t-fast);
+}
+.sv-runs-clear-all:hover { border-color: var(--accent); color: var(--accent); }
+
+.sv-runs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.sv-runs-table th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.sv-runs-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+.sv-runs-table tr:last-child td { border-bottom: none; }
+.sv-runs-table tr:hover td { background: var(--bg-hover); }
+.sv-runs-table tr.sv-runs-row--active td { background: rgba(99,102,241,0.06); }
+
+.sv-runs-num { color: var(--text-muted); font-weight: 600; font-size: 0.75rem; }
+.sv-runs-date { color: var(--text-secondary); white-space: nowrap; }
+.sv-runs-env { white-space: nowrap; }
+.sv-runs-env-chip {
+  display: inline-block;
+  background: rgba(99,102,241,0.12);
+  color: #818cf8;
+  border: 1px solid rgba(99,102,241,0.22);
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: default;
+  vertical-align: middle;
+}
+.light-mode .sv-runs-env-chip {
+  background: rgba(99,102,241,0.1);
+  border-color: rgba(99,102,241,0.2);
+}
+.sv-runs-passrate-wrap { display: flex; align-items: center; gap: 0.5rem; min-width: 100px; }
+.sv-runs-passrate-bar-bg {
+  flex: 1; height: 6px; border-radius: 3px;
+  background: rgba(255,255,255,0.08); overflow: hidden; min-width: 40px;
+}
+.light-mode .sv-runs-passrate-bar-bg { background: rgba(0,0,0,0.08); }
+.sv-runs-passrate-bar { height: 6px; border-radius: 3px; transition: width 0.3s; }
+.sv-runs-passrate-val { font-size: 0.75rem; font-weight: 700; white-space: nowrap; }
+.sv-runs-count { font-size: 0.75rem; white-space: nowrap; }
+.sv-runs-count span { display: inline-block; min-width: 22px; text-align: right; font-weight: 600; }
+.sv-runs-dur { color: var(--text-secondary); font-size: 0.75rem; white-space: nowrap; }
+.sv-runs-action { text-align: right; }
+
+.sv-runs-chip-current {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.18rem 0.5rem;
+  border-radius: 5px;
+  background: rgba(99,102,241,0.12);
+  color: var(--accent);
+  border: 1px solid rgba(99,102,241,0.25);
+}
+.sv-runs-btn-view {
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.28rem 0.65rem;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  white-space: nowrap;
+}
+.sv-runs-btn-view:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(99,102,241,0.08);
+}
+.sv-runs-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
 /* ─── Cards ──────────────────────────────────────────────────────────────────── */
 .sv-card {
   background: var(--bg-surface);
@@ -889,6 +1143,13 @@ body.light-mode .sv-tip-popup {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 }
+@page sv-runs {
+  @top-left {
+    content: "RUN HISTORY";
+    font-size: 7pt; font-weight: 700; letter-spacing: 0.1em; color: #6366f1;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+}
 
 /* ─── @media print ───────────────────────────────────────────────────────────── */
 @media print {
@@ -926,7 +1187,10 @@ body.light-mode .sv-tip-popup {
   #sv-cadence-label,
   [data-sv-hist-filter],
   .sv-print-hide,
-  .sv-dl-btn { display: none !important; }
+  .sv-dl-btn,
+  .sv-viewing-banner,
+  .sv-runs-filter-clear-x,
+  .sv-runs-clear-all { display: none !important; }
 
   /* Full-width layout */
   html, body { background: #fff !important; }
@@ -941,6 +1205,7 @@ body.light-mode .sv-tip-popup {
   .sv-view[data-view="tests"]     { page: sv-tests; }
   .sv-view[data-view="trends"]    { page: sv-trends; }
   .sv-view[data-view="timeline"]  { page: sv-timeline; }
+  .sv-view[data-view="runs"]      { page: sv-runs; }
   /* Named page changes force breaks automatically; keep explicit break as fallback */
   .sv-view + .sv-view { break-before: page; page-break-before: always; }
 
@@ -990,11 +1255,11 @@ body.light-mode .sv-tip-popup {
     margin: 0 0 0.3rem; letter-spacing: -0.03em; line-height: 1.1;
   }
   .sv-print-toc-tool  { font-size: 0.9rem; color: #6b7280; margin: 0 0 0.25rem; }
-  .sv-print-toc-meta  { font-size: 0.75rem; color: #9ca3af; margin: 0 0 2.25rem; }
-  .sv-print-toc-nav   { display: block; text-align: left; border-top: 1px solid #e5e7eb; margin-bottom: 1.75rem; }
+  .sv-print-toc-meta  { font-size: 0.75rem; color: #9ca3af; margin: 0 0 1.5rem; }
+  .sv-print-toc-nav   { display: block; text-align: left; border-top: 1px solid #e5e7eb; margin-bottom: 1.25rem; }
   .sv-print-toc-item  {
     display: flex; align-items: center; gap: 0.9rem;
-    padding: 0.8rem 0; border-bottom: 1px solid #f3f4f6;
+    padding: 0.55rem 0; border-bottom: 1px solid #f3f4f6;
     text-decoration: none; color: inherit;
   }
   .sv-print-toc-num {
@@ -1008,6 +1273,12 @@ body.light-mode .sv-tip-popup {
   .sv-print-toc-desc  { display: block; font-size: 0.73rem; color: #6b7280; margin-top: 0.1rem; }
   .sv-print-toc-arrow { font-size: 0.9rem; color: #6366f1; flex-shrink: 0; }
   .sv-print-toc-footer { font-size: 0.68rem; color: #9ca3af; font-style: italic; }
+  .sv-print-toc-history-note {
+    font-size: 0.7rem; color: #6366f1;
+    background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.22);
+    border-radius: 5px; padding: 0.25rem 0.6rem;
+    margin: 0 0 1rem; display: inline-block;
+  }
 
   /* Executive summary — flows into overview content on same page */
   .sv-print-summary {
@@ -1038,8 +1309,52 @@ body.light-mode .sv-tip-popup {
     margin-bottom: 1rem !important;
     overflow: visible !important;
   }
+  /* Run History table is too long to keep on one page — allow it to break */
+  .sv-view[data-view="runs"] .sv-card {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
   .sv-card-header { border-bottom: 1px solid #e2e8f0 !important; }
   .sv-card-body   { overflow: visible !important; }
+
+  /* Run History filters — show as compact read-only single row, hide interactive controls */
+  .sv-runs-header {
+    flex-wrap: nowrap !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .sv-runs-filters {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0.35rem !important;
+    align-items: center !important;
+  }
+  .sv-runs-filter-pill,
+  .sv-runs-filter-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.2rem !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 5px !important;
+    padding: 0.15rem 0.35rem !important;
+    background: #f9fafb !important;
+    font-size: 0.68rem !important;
+  }
+  .sv-runs-filter-label { font-size: 0.65rem !important; color: #6b7280 !important; }
+  .sv-runs-filter-sep   { color: #9ca3af !important; font-size: 0.65rem !important; }
+  .sv-runs-filters select,
+  .sv-runs-filters input {
+    border: none !important;
+    background: transparent !important;
+    font-size: 0.68rem !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+    color: #374151 !important;
+    box-shadow: none !important;
+  }
+  .sv-runs-filters input[type="text"]   { width: 70px !important; }
+  .sv-runs-filters input[type="date"]   { width: 90px !important; }
+  .sv-runs-filters input[type="number"] { width: 36px !important; }
+  .sv-runs-filters .sv-info-btn { display: none !important; }
 
   /* Charts — scale to fit, never clip */
   [id$="-chart"] { max-width: 100% !important; overflow: visible !important; }
@@ -1212,7 +1527,7 @@ body.light-mode .sv-tip-popup {
       </button>
 
       <button class="sv-nav-item" data-view="failures"
-              data-sv-tip="<b>Failures</b><br>• Newly failing &amp; recently fixed tests<br>• Top failures &amp; flaky offenders ranked<br>• Failures grouped by severity label">
+              data-sv-tip="<b>Failures</b><br>• Newly failing &amp; recently fixed tests<br>• Top failures &amp; flaky offenders ranked<br>• Failures grouped by severity label<br>• Always shows the <b>current/latest run</b> — not updated when viewing history">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
         </svg>
@@ -1221,7 +1536,7 @@ body.light-mode .sv-tip-popup {
       </button>
 
       <button class="sv-nav-item" data-view="tests"
-              data-sv-tip="<b>Tests</b><br>• Full list of all test results for this run<br>• Filter by status, search by name<br>• Click any row to open test detail &amp; error">
+              data-sv-tip="<b>Tests</b><br>• Full list of all test results for this run<br>• Filter by status, search by name<br>• Click any row to open test detail &amp; error<br>• Always shows the <b>current/latest run</b> — not updated when viewing history">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
         </svg>
@@ -1244,6 +1559,17 @@ body.light-mode .sv-tip-popup {
           <circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="17" cy="12" r="2"/>
         </svg>
         <span data-title="Timeline">Timeline</span>
+      </button>
+
+      <div class="sv-nav-section" style="margin-top:0.75rem;">History</div>
+
+      <button class="sv-nav-item" data-view="runs"
+              data-sv-tip="<b>Runs</b><br>• Browse all historical runs<br>• Filter by status, date or pass rate<br>• Click any run to view its full report">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span data-title="Runs">Runs</span>
+        <span class="sv-nav-badge" id="sv-nav-badge-runs" style="display:none;"></span>
       </button>
     </nav>
 
@@ -1295,6 +1621,13 @@ body.light-mode .sv-tip-popup {
       </div>
     </div>
 
+    <!-- Viewing banner — shown when browsing a historical run -->
+    <div id="sv-viewing-banner" class="sv-viewing-banner" style="display:none;">
+      <span class="sv-viewing-banner-icon">⏪</span>
+      <span id="sv-viewing-banner-text" class="sv-viewing-banner-text"></span>
+      <button class="sv-viewing-banner-back" onclick="SarvaRunSwitch.restoreLatest()">← Back to latest</button>
+    </div>
+
     <!-- Content area — micro-apps inject into their .sv-view containers -->
     <div class="sv-content">
 
@@ -1308,6 +1641,7 @@ body.light-mode .sv-tip-popup {
         <h1 class="sv-print-toc-title">Test Report</h1>
         <p class="sv-print-toc-tool">Selenium-Cucumber BDD</p>
         <p class="sv-print-toc-meta" id="sv-toc-meta"></p>
+        <p class="sv-print-toc-history-note" id="sv-print-toc-history-note" style="display:none;"></p>
         <nav class="sv-print-toc-nav">
           <a href="#sv-section-overview" class="sv-print-toc-item">
             <span class="sv-print-toc-num">1</span>
@@ -1346,6 +1680,14 @@ body.light-mode .sv-tip-popup {
             <span class="sv-print-toc-text">
               <span class="sv-print-toc-label">Timeline</span>
               <span class="sv-print-toc-desc">Run cadence &amp; parallel execution Gantt</span>
+            </span>
+            <span class="sv-print-toc-arrow">→</span>
+          </a>
+          <a href="#sv-section-runs" class="sv-print-toc-item">
+            <span class="sv-print-toc-num">6</span>
+            <span class="sv-print-toc-text">
+              <span class="sv-print-toc-label">Run History</span>
+              <span class="sv-print-toc-desc">Full run log with pass rate, duration &amp; status for every run</span>
             </span>
             <span class="sv-print-toc-arrow">→</span>
           </a>
@@ -1409,6 +1751,7 @@ body.light-mode .sv-tip-popup {
     <button class="sv-run-filter-btn active" onclick="SarvaOverview.setRunFilter(20,this)">Last 20</button>
     <button class="sv-run-filter-btn" onclick="SarvaOverview.setRunFilter(50,this)">Last 50</button>
     <button class="sv-run-filter-btn" id="sv-filter-all-btn" onclick="SarvaOverview.setRunFilter(0,this)">All runs</button>
+    <span id="sv-overview-run-label" style="font-size:0.72rem;color:var(--text-muted);margin-left:0.5rem;"></span>
   </div>
 
   <!-- Health Pulse line chart -->
@@ -1595,6 +1938,7 @@ body.light-mode .sv-tip-popup {
     <button class="sv-trends-run-btn active" onclick="SarvaTrends.setRunFilter(20,this)">Last 20</button>
     <button class="sv-trends-run-btn" onclick="SarvaTrends.setRunFilter(50,this)">Last 50</button>
     <button class="sv-trends-run-btn" onclick="SarvaTrends.setRunFilter(0,this)">All runs</button>
+    <span id="sv-trends-run-label" style="font-size:0.72rem;color:var(--text-muted);margin-left:0.5rem;"></span>
   </div>
 
   <!-- No-history fallback -->
@@ -1680,7 +2024,10 @@ body.light-mode .sv-tip-popup {
             <span class="sv-card-title">Test Count Over Time</span>
             <span class="sv-info-btn" data-sv-tip="&lt;b&gt;Test Count Over Time&lt;/b&gt;&lt;br&gt;• Stacked area showing test counts by outcome per run&lt;br&gt;• Growing green = expanding stable suite&lt;br&gt;• Growing red = accumulating failures · Shrinking total = tests removed"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
           </span>
-          <button class="sv-dl-btn" onclick="SarvaDownloadChart('sv-trends-count-chart','test-count.png','Test Count Over Time')" data-sv-tip="Download as PNG"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          <span style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="font-size:0.72rem;color:var(--text-muted);" id="sv-trends-count-label"></span>
+            <button class="sv-dl-btn" onclick="SarvaDownloadChart('sv-trends-count-chart','test-count.png','Test Count Over Time')" data-sv-tip="Download as PNG"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          </span>
         </div>
         <div class="sv-card-body">
           <div id="sv-trends-count-chart" style="height:200px;"></div>
@@ -1693,7 +2040,10 @@ body.light-mode .sv-tip-popup {
             <span class="sv-card-title">Run Duration Trend</span>
             <span class="sv-info-btn" data-sv-tip="&lt;b&gt;Run Duration Trend&lt;/b&gt;&lt;br&gt;• How long each run took in seconds&lt;br&gt;• Increasing bars = new tests added or infrastructure slowdowns&lt;br&gt;• Dashed line shows the rolling average"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
           </span>
-          <button class="sv-dl-btn" onclick="SarvaDownloadChart('sv-trends-duration-chart','run-duration.png','Run Duration Trend')" data-sv-tip="Download as PNG"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          <span style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="font-size:0.72rem;color:var(--text-muted);" id="sv-trends-duration-label"></span>
+            <button class="sv-dl-btn" onclick="SarvaDownloadChart('sv-trends-duration-chart','run-duration.png','Run Duration Trend')" data-sv-tip="Download as PNG"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+          </span>
         </div>
         <div class="sv-card-body">
           <div id="sv-trends-duration-chart" style="height:200px;"></div>
@@ -1778,7 +2128,7 @@ body.light-mode .sv-tip-popup {
   <div class="sv-card" style="margin-top:1rem;">
     <div class="sv-card-header">
       <span style="display:flex;align-items:center;gap:0.4rem;">
-        <span class="sv-card-title">Execution Gantt — Current Run</span>
+        <span class="sv-card-title" id="sv-gantt-title">Execution Gantt — Current Run</span>
         <span class="sv-info-btn" data-sv-tip="&lt;b&gt;Execution Gantt&lt;/b&gt;&lt;br&gt;• Each row = one test, bar = start → end time (relative to first test)&lt;br&gt;• Overlapping bars = parallel execution&lt;br&gt;• Colour: green Passed · red Failed · amber Flaky · grey Skipped&lt;br&gt;• Hover a bar for exact timing"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
       </span>
       <span style="display:flex;align-items:center;gap:0.4rem;">
@@ -1798,6 +2148,85 @@ body.light-mode .sv-tip-popup {
 
 
 </div>
+
+  <div class="sv-view" data-view="runs" style="display:none;">
+    <div class="sv-runs-header">
+      <div class="sv-runs-header-title">
+        <h2>Run History</h2>
+        <span id="sv-runs-count-label" class="sv-runs-count-label"></span>
+      </div>
+      <div class="sv-runs-filters">
+        <div class="sv-runs-filter-pill">
+          <select id="sv-runs-filter-status" onchange="SarvaRuns.applyFilters()">
+            <option value="">All Status</option>
+            <option value="pass">All Passing</option>
+            <option value="fail">Has Failures</option>
+            <option value="flaky">Has Flaky</option>
+          </select>
+          <button class="sv-runs-filter-clear-x" onclick="SarvaRuns.clearFilter('status')" title="Clear">✕</button>
+        </div>
+
+        <div class="sv-runs-filter-pill">
+          <input id="sv-runs-filter-search" type="text" placeholder="Env or run #"
+                 oninput="SarvaRuns.applyFilters()">
+          <button class="sv-runs-filter-clear-x" onclick="SarvaRuns.clearFilter('search')" title="Clear">✕</button>
+        </div>
+
+        <div class="sv-runs-filter-group">
+          <span class="sv-runs-filter-label">Date</span>
+          <span class="sv-info-btn" data-sv-tip="&lt;b&gt;Date Range Filter&lt;/b&gt;&lt;br&gt;• Defaults to the &lt;b&gt;last 30 days&lt;/b&gt; on load to keep the list fast&lt;br&gt;• Clear ✕ or widen the range to see older runs&lt;br&gt;• &lt;b&gt;Clear All&lt;/b&gt; resets back to the 30-day default"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+          <input type="date" id="sv-runs-filter-date-from" onchange="SarvaRuns.applyFilters()">
+          <span class="sv-runs-filter-sep">–</span>
+          <input type="date" id="sv-runs-filter-date-to" onchange="SarvaRuns.applyFilters()">
+          <button class="sv-runs-filter-clear-x" onclick="SarvaRuns.clearFilter('date')" title="Clear">✕</button>
+        </div>
+
+        <div class="sv-runs-filter-group">
+          <span class="sv-runs-filter-label">Pass %</span>
+          <input type="number" id="sv-runs-filter-pass-min" min="0" max="100" placeholder="min"
+                 oninput="SarvaRuns.applyFilters()">
+          <span class="sv-runs-filter-sep">–</span>
+          <input type="number" id="sv-runs-filter-pass-max" min="0" max="100" placeholder="max"
+                 oninput="SarvaRuns.applyFilters()">
+          <button class="sv-runs-filter-clear-x" onclick="SarvaRuns.clearFilter('pass')" title="Clear">✕</button>
+        </div>
+
+        <div class="sv-runs-filter-group">
+          <span class="sv-runs-filter-label">Duration (s)</span>
+          <input type="number" id="sv-runs-filter-dur-min" min="0" placeholder="min"
+                 oninput="SarvaRuns.applyFilters()">
+          <span class="sv-runs-filter-sep">–</span>
+          <input type="number" id="sv-runs-filter-dur-max" min="0" placeholder="max"
+                 oninput="SarvaRuns.applyFilters()">
+          <button class="sv-runs-filter-clear-x" onclick="SarvaRuns.clearFilter('dur')" title="Clear">✕</button>
+        </div>
+
+        <button class="sv-runs-clear-all" onclick="SarvaRuns.clearAllFilters()">Clear all</button>
+      </div>
+    </div>
+
+    <div class="sv-card">
+      <table class="sv-runs-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Env</th>
+            <th colspan="2">Pass Rate</th>
+            <th style="text-align:right">Passed</th>
+            <th style="text-align:right">Failed</th>
+            <th style="text-align:right">Flaky</th>
+            <th style="text-align:right">Skipped</th>
+            <th>Duration</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="sv-runs-tbody">
+          <tr><td colspan="11" class="sv-runs-empty">Loading run history…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
     </div><!-- .sv-content -->
   </main><!-- .sv-main -->
@@ -1980,6 +2409,8 @@ window.SarvaStore = window.SarvaStore || (() => {
   let _metadata = {};
   let _history = [];
   let _stats = {};
+  let _originalTests = [];
+  let _originalMetadata = {};
 
   function computeStats(tests) {
     const unique = new Map();
@@ -2003,6 +2434,8 @@ window.SarvaStore = window.SarvaStore || (() => {
     init(tests, metadata, historyData) {
       _tests = tests || [];
       _metadata = metadata || {};
+      _originalTests = _tests;
+      _originalMetadata = _metadata;
       // historyData may be { runs, testHistory } or a plain runs array (backwards compat)
       if (Array.isArray(historyData)) {
         _history = historyData;
@@ -2013,6 +2446,25 @@ window.SarvaStore = window.SarvaStore || (() => {
       }
       _stats = computeStats(_tests);
       SarvaEventBus.emit('store:ready', { tests: _tests, metadata: _metadata, history: _history, stats: _stats });
+    },
+    switchToRun(tests, runSummary) {
+      _tests = tests || [];
+      _metadata = {
+        id: runSummary.id,
+        timestamp: runSummary.timestamp,
+        duration: runSummary.duration,
+        environment: runSummary.environment || {},
+      };
+      _stats = computeStats(_tests);
+      SarvaEventBus.emit('store:ready', { tests: _tests, metadata: _metadata, history: _history, stats: _stats });
+      SarvaEventBus.emit('run:switched', { runId: runSummary.id });
+    },
+    restoreLatest() {
+      _tests = _originalTests;
+      _metadata = _originalMetadata;
+      _stats = computeStats(_tests);
+      SarvaEventBus.emit('store:ready', { tests: _tests, metadata: _metadata, history: _history, stats: _stats });
+      SarvaEventBus.emit('run:switched', { runId: null });
     },
     get tests() { return _tests; },
     get metadata() { return _metadata; },
@@ -2126,6 +2578,12 @@ const SarvaShell = (() => {
       if (n > 0) { failBadge.textContent = n; failBadge.style.display = ''; }
       else failBadge.style.display = 'none';
     }
+    const runsBadge = document.getElementById('sv-nav-badge-runs');
+    if (runsBadge) {
+      const n = (SarvaStore.history || []).length;
+      if (n > 0) { runsBadge.textContent = n; runsBadge.style.display = ''; }
+      else runsBadge.style.display = 'none';
+    }
   }
 
   /* ── Timestamp ─────────────────────────────────────────────────────────────── */
@@ -2167,6 +2625,100 @@ const SarvaShell = (() => {
 
 document.addEventListener('DOMContentLoaded', () => SarvaShell.init());
 
+/* ── Run Switcher — loads historical run data and swaps store state ────────── */
+const SarvaRunSwitch = (() => {
+  let _activeRunId    = null;
+  let _currentSummary = null;
+  let _currentView    = 'overview';
+
+  function fmtDate(ts) {
+    return new Date(ts).toLocaleString(undefined, {
+      month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+    });
+  }
+
+  function fmtDur(ms) {
+    if (!ms || ms <= 0) return '';
+    if (ms < 60000) return `${(ms / 1000).toFixed(1)}s`;
+    return `${Math.floor(ms / 60000)}m ${Math.floor((ms % 60000) / 1000)}s`;
+  }
+
+  function switchToRun(runId, runSummary) {
+    _activeRunId    = runId;
+    _currentSummary = runSummary;
+    if (window.SarvaRunData && window.SarvaRunData[runId]) {
+      _apply(runId, runSummary);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = `history/${runId}/data.js`;
+    script.onload = () => _apply(runId, runSummary);
+    script.onerror = () => {
+      console.warn(`[SarvaRunSwitch] Could not load history/${runId}/data.js`);
+      _activeRunId = null;
+      _currentSummary = null;
+    };
+    document.head.appendChild(script);
+  }
+
+  function _apply(runId, runSummary) {
+    const tests = window.SarvaRunData && window.SarvaRunData[runId];
+    if (!tests) return;
+    SarvaStore.switchToRun(tests, runSummary);
+    SarvaShell.navigate('overview'); // nav:change will call _updateBanner
+  }
+
+  function restoreLatest() {
+    _activeRunId    = null;
+    _currentSummary = null;
+    SarvaStore.restoreLatest();
+    _hideBanner();
+  }
+
+  function _updateBanner() {
+    if (!_activeRunId || !_currentSummary) { _hideBanner(); return; }
+    const banner = document.getElementById('sv-viewing-banner');
+    const text   = document.getElementById('sv-viewing-banner-text');
+    if (!banner || !text) return;
+
+    const runs   = SarvaStore.history || [];
+    const idx    = runs.findIndex(r => r.id === _currentSummary.id);
+    const runNum = idx >= 0 ? runs.length - idx : '?';
+
+    if (_currentView === 'overview' || _currentView === 'timeline') {
+      const pct = _currentSummary.passRate != null ? `${_currentSummary.passRate}% pass rate` : '';
+      const dur = fmtDur(_currentSummary.duration);
+      text.textContent = [
+        `Viewing Run #${runNum}`,
+        fmtDate(_currentSummary.timestamp),
+        pct, dur,
+      ].filter(Boolean).join(' · ');
+      banner.style.display = 'flex';
+    } else if (_currentView === 'trends') {
+      text.textContent = `Trend marker showing Run #${runNum}`;
+      banner.style.display = 'flex';
+    } else {
+      _hideBanner();
+    }
+  }
+
+  function _hideBanner() {
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
+  }
+
+  SarvaEventBus.on('nav:change', ({ view }) => {
+    _currentView = view;
+    _updateBanner();
+  });
+
+  return {
+    switchToRun,
+    restoreLatest,
+    get activeRunId() { return _activeRunId; },
+  };
+})();
+
 /**
  * Overview micro-app.
  * Renders stat cards, segmented pass rate, donut, health pulse, stacked run history,
@@ -2177,6 +2729,8 @@ const SarvaOverview = (() => {
   let _cachedStats   = null;
   let _cachedHistory = null;
   let _filterN       = 20; // default: last 20 runs
+  let _activeRunId   = null;
+  let _centeredSlice = null; // { sliceStart, sliceEnd } when centering on a run outside the filter window
   let _healthChart   = null;
   let _historyChart  = null;
   let _healthSeriesVisible = { passRate: true, duration: true };
@@ -2184,14 +2738,88 @@ const SarvaOverview = (() => {
 
   function getFilteredHistory() {
     if (!_cachedHistory) return [];
+    if (_centeredSlice) return _cachedHistory.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
     return _filterN > 0 ? _cachedHistory.slice(0, _filterN) : _cachedHistory;
+  }
+
+  // Actual run number (#1 = oldest) for a run object
+  function _runNum(r) {
+    const hi = (_cachedHistory || []).findIndex(h => h.id === r.id);
+    return hi >= 0 ? _cachedHistory.length - hi : '?';
+  }
+
+  // Dashed vertical marker config for the active historical run
+  function _overviewMarkLine(display) {
+    if (!_activeRunId) return null;
+    const mi = display.findIndex(r => r.id === _activeRunId);
+    if (mi === -1) return null;
+    const actualNum = _runNum(display[mi]);
+    return {
+      xAxis: `#${actualNum}`,
+      lineStyle: { color: 'rgba(129,140,248,0.9)', type: 'dashed', width: 1.5 },
+      label: {
+        show: true, position: 'insideStartTop',
+        formatter: `Run #${actualNum}`,
+        color: '#fff', fontSize: 9,
+        backgroundColor: 'rgba(99,102,241,0.92)',
+        padding: [2, 4, 2, 4], borderRadius: 3,
+      },
+    };
+  }
+
+  function _applyCentering() {
+    if (!_activeRunId || !_cachedHistory) { _centeredSlice = null; _updateOverviewLabel(); return; }
+    const hi = _cachedHistory.findIndex(r => r.id === _activeRunId);
+    if (hi === -1) { _centeredSlice = null; _updateOverviewLabel(); return; }
+    if (_filterN > 0 && hi < _filterN) { _centeredSlice = null; _updateOverviewLabel(); return; }
+    const windowSize = 20;
+    let sliceStart = Math.max(0, hi - 9);
+    let sliceEnd   = Math.min(_cachedHistory.length, sliceStart + windowSize);
+    sliceStart = Math.max(0, sliceEnd - windowSize);
+    _centeredSlice = { sliceStart, sliceEnd };
+    document.querySelectorAll('.sv-run-filter-btn').forEach(b => b.classList.remove('active'));
+    _updateOverviewLabel();
+  }
+
+  function _updateOverviewLabel() {
+    const lbl = document.getElementById('sv-overview-run-label');
+    if (!lbl) return;
+    if (!_centeredSlice || !_cachedHistory) { lbl.textContent = ''; return; }
+    const { sliceStart, sliceEnd } = _centeredSlice;
+    const len       = _cachedHistory.length;
+    const newestNum = len - sliceStart;
+    const oldestNum = len - (sliceEnd - 1);
+    const hi        = _cachedHistory.findIndex(r => r.id === _activeRunId);
+    const activeNum = len - hi;
+    lbl.textContent = `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+  }
+
+  // Returns the run window label for chart headers
+  function _runWindowLabel(display) {
+    if (_centeredSlice && _cachedHistory) {
+      const { sliceStart, sliceEnd } = _centeredSlice;
+      const len       = _cachedHistory.length;
+      const newestNum = len - sliceStart;
+      const oldestNum = len - (sliceEnd - 1);
+      const hi        = _cachedHistory.findIndex(r => r.id === _activeRunId);
+      const activeNum = len - hi;
+      return `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+    }
+    return _filterN > 0 && _cachedHistory && _cachedHistory.length > _filterN
+      ? `Last ${display.length} runs` : `${display.length} runs`;
   }
 
   function setRunFilter(n, btn) {
     _filterN = n;
+    _centeredSlice = null;
+    _activeRunId   = null; // suppress marker for this visit only — re-syncs on next nav:change
     document.querySelectorAll('.sv-run-filter-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
-    if (typeof echarts !== 'undefined') {
+    _updateOverviewLabel();
+    // Hide banner locally without touching global history state (other views stay in history mode)
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
+    if (typeof echarts !== 'undefined' && _cachedHistory !== null) {
       const h = getFilteredHistory();
       renderHealthPulse(h);
       renderHistoryChart(h);
@@ -2233,9 +2861,10 @@ const SarvaOverview = (() => {
       }
     }
 
-    // New tests / removed tests detection — uses same stripTags logic as renderCoverageChanges
+    // Coverage chips are always relative to the latest run — skip when viewing history
+    const _isViewingHistory = typeof SarvaRunSwitch !== 'undefined' && SarvaRunSwitch.activeRunId;
     const _latestRunId = SarvaStore.history && SarvaStore.history.length > 0 ? SarvaStore.history[0].id : null;
-    if (_latestRunId && SarvaStore.history && SarvaStore.history.length > 1) {
+    if (!_isViewingHistory && _latestRunId && SarvaStore.history && SarvaStore.history.length > 1) {
       const _th = SarvaStore.testHistory || [];
       const _stripTags = n => (n || '').replace(/\s*@\S+/g, '').trim();
       const _latestBN = new Set(_th.filter(t => t.history.length > 0 && t.history[0].runId === _latestRunId).map(t => _stripTags(t.testName || '')));
@@ -2473,7 +3102,16 @@ const SarvaOverview = (() => {
       return;
     }
 
-    if (label) label.textContent = `Last ${display.length} runs`;
+    if (label) label.textContent = _runWindowLabel(display);
+
+    // Update print insight with window-aware text
+    const _healthInsightEl = document.getElementById('sv-print-insight-health');
+    if (_healthInsightEl && display.length >= 2) {
+      const _rates = display.map(r => { const t=(r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0); return t>0?+((r.passed/t)*100).toFixed(1):0; });
+      const _avg = +(_rates.reduce((a,b)=>a+b,0)/_rates.length).toFixed(1);
+      const _best = Math.max(..._rates), _worst = Math.min(..._rates);
+      _healthInsightEl.textContent = `${_runWindowLabel(display)}: avg pass rate ${_avg}%, best ${_best}%, worst ${_worst}%.`;
+    }
 
     /* Trend badge: delta between the two most recent runs */
     const trendEl = document.getElementById('sv-health-trend');
@@ -2512,12 +3150,13 @@ const SarvaOverview = (() => {
       });
     };
 
-    const xData = display.map((_, i) => `#${i + 1}`);
+    const xData = display.map(r => `#${_runNum(r)}`);
     const yData = display.map(r => {
       const t = (r.passed || 0) + (r.failed || 0) + (r.flaky || 0) + (r.skipped || 0);
       return t > 0 ? +((r.passed / t) * 100).toFixed(1) : 0;
     });
     const durData = display.map(r => r.duration > 0 ? +(r.duration / 1000).toFixed(1) : null);
+    const healthMl = _overviewMarkLine(display);
     const hasDuration = durData.some(d => d !== null && d > 0);
 
     const axisColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
@@ -2631,6 +3270,7 @@ const SarvaOverview = (() => {
             ],
           },
         },
+        ...(healthMl ? { markLine: { silent: true, symbol: ['none','none'], data: [healthMl] } } : {}),
       },
       ...(hasDuration ? [{
         name: 'Duration',
@@ -2694,13 +3334,24 @@ const SarvaOverview = (() => {
       return;
     }
 
-    if (label) label.textContent = `Last ${display.length} runs`;
+    if (label) label.textContent = _runWindowLabel(display);
+
+    // Update print insight with window-aware text
+    const _histInsightEl = document.getElementById('sv-print-insight-history');
+    if (_histInsightEl && display.length >= 2) {
+      const _hRates = display.map(r => { const t=(r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0); return t>0?+((r.passed/t)*100).toFixed(1):0; });
+      const _hBest = Math.max(..._hRates), _hWorst = Math.min(..._hRates);
+      const _hLatest = _hRates[_hRates.length - 1];
+      _histInsightEl.textContent = `${_runWindowLabel(display)}. Latest: ${_hLatest}%. Range: ${_hWorst}%–${_hBest}%.`;
+    }
+
     const isDark = !document.body.classList.contains('light-mode');
     if (_historyChart) { try { _historyChart.dispose(); } catch (e) {} _historyChart = null; }
     _historyChart = echarts.init(el, null, { renderer: 'svg' });
     const chart = _historyChart;
 
-    const xData   = display.map((_, i) => `#${i + 1}`);
+    const xData      = display.map(r => `#${_runNum(r)}`);
+    const historyMl  = _overviewMarkLine(display);
     const passed  = display.map(r => r.passed  || 0);
     const failed  = display.map(r => r.failed  || 0);
     const flaky   = display.map(r => r.flaky   || 0);
@@ -2777,7 +3428,7 @@ const SarvaOverview = (() => {
         },
       },
       series: [
-        mkBar('Passed',  passed,  '#22c55e'),
+        { ...mkBar('Passed', passed, '#22c55e'), ...(historyMl ? { markLine: { silent: true, symbol: ['none','none'], data: [historyMl] } } : {}) },
         mkBar('Failed',  failed,  '#f43f5e'),
         mkBar('Flaky',   flaky,   '#f59e0b'),
         mkBar('Skipped', skipped, '#64748b'),
@@ -2810,6 +3461,12 @@ const SarvaOverview = (() => {
   function renderCoverageChanges() {
     const section = document.getElementById('sv-coverage-changes');
     if (!section) return;
+
+    // Coverage changes are always relative to the latest run; not meaningful for historical views
+    if (typeof SarvaRunSwitch !== 'undefined' && SarvaRunSwitch.activeRunId) {
+      section.style.display = 'none';
+      return;
+    }
 
     const latestRunId = SarvaStore.history && SarvaStore.history.length > 0 ? SarvaStore.history[0].id : null;
     if (!latestRunId || !SarvaStore.history || SarvaStore.history.length < 2) {
@@ -2916,7 +3573,7 @@ const SarvaOverview = (() => {
         <div class="sv-card-header">
           <span style="display:flex;align-items:center;gap:0.4rem;">
             <span class="sv-card-title" style="color:#22d3ee;">New Tests</span>
-            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>New Tests</b><br>• Appearing in the suite for the first time this run<br>• Review to confirm they are intentionally added<br>• Click any test to inspect its result and steps')}">${INFO_ICON_SM}</span>
+            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>New Tests</b><br>• Appearing in the suite for the first time this run<br>• Review to confirm they are intentionally added<br>• Click any test to inspect its result and steps<br>• Always reflects the current/latest run — hidden when viewing a historical run')}">${INFO_ICON_SM}</span>
           </span>
           <span style="font-size:0.72rem;color:var(--text-muted);">${newTests.length} test${newTests.length !== 1 ? 's' : ''}</span>
         </div>
@@ -2928,7 +3585,7 @@ const SarvaOverview = (() => {
         <div class="sv-card-header">
           <span style="display:flex;align-items:center;gap:0.4rem;">
             <span class="sv-card-title" style="color:#f97316;">Absent Tests</span>
-            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Absent Tests</b><br>• Ran in previous runs but missing from this run<br>• Could be deleted, renamed, or excluded by a filter<br>• Last-seen status shown to help diagnose the cause')}">${INFO_ICON_SM}</span>
+            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Absent Tests</b><br>• Ran in previous runs but missing from this run<br>• Could be deleted, renamed, or excluded by a filter<br>• Last-seen status shown to help diagnose the cause<br>• Always reflects the current/latest run — hidden when viewing a historical run')}">${INFO_ICON_SM}</span>
           </span>
           <span style="font-size:0.72rem;color:var(--text-muted);">${absentTests.length} test${absentTests.length !== 1 ? 's' : ''}</span>
         </div>
@@ -3131,6 +3788,39 @@ const SarvaOverview = (() => {
   SarvaEventBus.on('echarts:ready', () => {
     if (_cachedStats)   renderDonut(_cachedStats);
     if (_cachedHistory) {
+      const h = getFilteredHistory();
+      renderHealthPulse(h);
+      renderHistoryChart(h);
+    }
+  });
+
+  // Re-render ECharts when Overview becomes visible (e.g. after a run switch from Runs view)
+  SarvaEventBus.on('nav:change', ({ view }) => {
+    if (view === 'overview' && typeof echarts !== 'undefined' && _cachedStats) {
+      // Re-sync history mode from global state (restores after a view-local filter reset)
+      _activeRunId = (typeof SarvaRunSwitch !== 'undefined') ? SarvaRunSwitch.activeRunId : null;
+      _applyCentering();
+      setTimeout(() => {
+        const h = getFilteredHistory();
+        renderDonut(_cachedStats);
+        renderHealthPulse(h);
+        renderHistoryChart(h);
+      }, 50);
+    }
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeRunId = runId;
+    if (typeof echarts !== 'undefined' && _cachedHistory) {
+      _applyCentering();
+      if (!runId) {
+        // Restore: reset to default Last 20 filter
+        _filterN = 20;
+        document.querySelectorAll('.sv-run-filter-btn').forEach(b => {
+          b.classList.toggle('active', b.textContent.trim() === 'Last 20');
+        });
+        _updateOverviewLabel();
+      }
       const h = getFilteredHistory();
       renderHealthPulse(h);
       renderHistoryChart(h);
@@ -4937,9 +5627,11 @@ window.SarvaTestDetail = SarvaTestDetail;
  */
 const SarvaTrends = (() => {
 
-  let _history = null;
-  let _filterN  = 20;
-  let _charts   = {};
+  let _history        = null;
+  let _filterN        = 20;
+  let _charts         = {};
+  let _activeRunId    = null;
+  let _centeredSlice  = null; // { sliceStart, sliceEnd } when centering on a run outside the filter window
 
   /* ── Utilities ──────────────────────────────────────────────────────────── */
   function fmtDur(ms) {
@@ -4966,7 +5658,86 @@ const SarvaTrends = (() => {
 
   function getFiltered() {
     if (!_history || _history.length === 0) return [];
+    if (_centeredSlice) return _history.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
     return _filterN > 0 ? _history.slice(0, _filterN) : _history;
+  }
+
+  function _applyCentering() {
+    if (!_activeRunId || !_history) { _centeredSlice = null; _updateRunLabel(); return; }
+    const hi = _history.findIndex(r => r.id === _activeRunId);
+    if (hi === -1) { _centeredSlice = null; _updateRunLabel(); return; }
+    // Skip centering only if a specific filter is active AND the run is within that window
+    if (_filterN > 0 && hi < _filterN) { _centeredSlice = null; _updateRunLabel(); return; }
+    // Center a 20-run window around the selected run
+    const windowSize = 20;
+    let sliceStart = Math.max(0, hi - 9);
+    let sliceEnd   = Math.min(_history.length, sliceStart + windowSize);
+    sliceStart = Math.max(0, sliceEnd - windowSize);
+    _centeredSlice = { sliceStart, sliceEnd };
+    document.querySelectorAll('.sv-trends-run-btn').forEach(b => b.classList.remove('active'));
+    _updateRunLabel();
+  }
+
+  function _runWindowLabel(display) {
+    if (_centeredSlice && _history) {
+      const { sliceStart, sliceEnd } = _centeredSlice;
+      const len       = _history.length;
+      const newestNum = len - sliceStart;
+      const oldestNum = len - (sliceEnd - 1);
+      const hi        = _history.findIndex(r => r.id === _activeRunId);
+      const activeNum = len - hi;
+      return `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+    }
+    return _filterN > 0 && _history && _history.length > _filterN
+      ? `Last ${display.length} runs` : `${display.length} runs`;
+  }
+
+  function _updateRunLabel() {
+    const lbl = document.getElementById('sv-trends-run-label');
+    if (!lbl) return;
+    if (!_centeredSlice || !_history) { lbl.textContent = ''; return; }
+    const { sliceStart, sliceEnd } = _centeredSlice;
+    const len       = _history.length;
+    const newestNum = len - sliceStart;
+    const oldestNum = len - (sliceEnd - 1);
+    const hi        = _history.findIndex(r => r.id === _activeRunId);
+    const activeNum = len - hi;
+    lbl.textContent = `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+  }
+
+  // Returns actual run number (#1 = oldest) for a run object
+  function _runNum(r) {
+    const hi = (_history || []).findIndex(h => h.id === r.id);
+    return hi >= 0 ? _history.length - hi : '?';
+  }
+
+  function _runMarker(display) {
+    if (!_activeRunId) return null;
+    const mi = display.findIndex(r => r.id === _activeRunId);
+    if (mi === -1) return null;
+    const actualNum = _runNum(display[mi]);
+    return {
+      xAxis: `#${actualNum}`,  // actual run number, matches new xData labels
+      lineStyle: { color: 'rgba(129,140,248,0.9)', type: 'dashed', width: 1.5 },
+      label: {
+        show: true, position: 'insideStartTop',
+        formatter: `Run #${actualNum}`,
+        color: '#fff', fontSize: 9,
+        backgroundColor: 'rgba(99,102,241,0.92)',
+        padding: [2, 4, 2, 4], borderRadius: 3,
+      },
+    };
+  }
+
+  function _markerSeries(display) {
+    const m = _runMarker(display);
+    if (!m) return [];
+    // No 'name' → stays out of chart legends
+    return [{
+      type: 'line', data: [], animation: false,
+      lineStyle: { opacity: 0 }, itemStyle: { opacity: 0 }, symbol: 'none',
+      markLine: { silent: true, symbol: ['none', 'none'], data: [m] },
+    }];
   }
 
   /* ── Chart lifecycle ────────────────────────────────────────────────────── */
@@ -5017,8 +5788,14 @@ const SarvaTrends = (() => {
   /* ── Top-level render ───────────────────────────────────────────────────── */
   function setRunFilter(n, btn) {
     _filterN = n;
+    _centeredSlice = null;
+    _activeRunId   = null; // suppress marker for this visit only — re-syncs on next nav:change
     document.querySelectorAll('.sv-trends-run-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
+    _updateRunLabel();
+    // Hide banner locally without touching global history state (other views stay in history mode)
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
     if (typeof echarts !== 'undefined' && _history !== null) renderAll();
   }
 
@@ -5097,13 +5874,13 @@ const SarvaTrends = (() => {
   /* ── Pass Rate Trend ────────────────────────────────────────────────────── */
   function renderPassRateChart(display) {
     const lbl = document.getElementById('sv-trends-passrate-label');
-    if (lbl) lbl.textContent = `${display.length} runs`;
+    if (lbl) lbl.textContent = _runWindowLabel(display);
 
     const chart = initChart('sv-trends-passrate-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData = display.map((_, i) => `#${i + 1}`);
+    const xData = display.map(r => `#${_runNum(r)}`);
     const yData = display.map(r => {
       const t = (r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0);
       return t > 0 ? +((r.passed / t) * 100).toFixed(1) : 0;
@@ -5192,6 +5969,7 @@ const SarvaTrends = (() => {
           itemStyle: { color: '#f59e0b' },
           areaStyle: { color: 'transparent' },
         }] : []),
+        ..._markerSeries(display),
       ],
     });
 
@@ -5201,13 +5979,13 @@ const SarvaTrends = (() => {
   /* ── Failures & Flakiness ───────────────────────────────────────────────── */
   function renderStabilityChart(display) {
     const lbl = document.getElementById('sv-trends-stability-label');
-    if (lbl) lbl.textContent = `${display.length} runs`;
+    if (lbl) lbl.textContent = _runWindowLabel(display);
 
     const chart = initChart('sv-trends-stability-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData  = display.map((_, i) => `#${i + 1}`);
+    const xData  = display.map(r => `#${_runNum(r)}`);
     const failed = display.map(r => r.failed || 0);
     const flaky  = display.map(r => r.flaky  || 0);
 
@@ -5252,6 +6030,7 @@ const SarvaTrends = (() => {
       series: [
         mkArea('Failed', failed, '#f43f5e', 'rgba(244,63,94,0.18)'),
         mkArea('Flaky',  flaky,  '#f59e0b', 'rgba(245,158,11,0.18)'),
+        ..._markerSeries(display),
       ],
     });
 
@@ -5270,11 +6049,13 @@ const SarvaTrends = (() => {
 
   /* ── Test Count Over Time ───────────────────────────────────────────────── */
   function renderCountChart(display) {
+    const lbl = document.getElementById('sv-trends-count-label');
+    if (lbl) lbl.textContent = _runWindowLabel(display);
     const chart = initChart('sv-trends-count-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData   = display.map((_, i) => `#${i + 1}`);
+    const xData   = display.map(r => `#${_runNum(r)}`);
     const passed  = display.map(r => r.passed  || 0);
     const failed  = display.map(r => r.failed  || 0);
     const flaky   = display.map(r => r.flaky   || 0);
@@ -5332,6 +6113,7 @@ const SarvaTrends = (() => {
         mkStack('Failed',  failed,  '#f43f5e', 'rgba(244,63,94,0.4)'),
         mkStack('Flaky',   flaky,   '#f59e0b', 'rgba(245,158,11,0.4)'),
         mkStack('Skipped', skipped, '#64748b', 'rgba(100,116,139,0.3)'),
+        ..._markerSeries(display),
         // Scatter markers for test count changes (+N / -N)
         {
           name: 'Changes', type: 'scatter', data: display.map((r, i) => {
@@ -5377,6 +6159,8 @@ const SarvaTrends = (() => {
 
   /* ── Run Duration Trend ─────────────────────────────────────────────────── */
   function renderDurationChart(display) {
+    const lbl = document.getElementById('sv-trends-duration-label');
+    if (lbl) lbl.textContent = _runWindowLabel(display);
     const empty = document.getElementById('sv-trends-duration-empty');
     const durs  = display.map(r => r.duration > 0 ? +(r.duration / 1000).toFixed(1) : null);
     const valid  = durs.filter(d => d !== null && d > 0);
@@ -5393,7 +6177,7 @@ const SarvaTrends = (() => {
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData  = display.map((_, i) => `#${i + 1}`);
+    const xData  = display.map(r => `#${_runNum(r)}`);
     const avgDur = +(valid.reduce((a, b) => a + b, 0) / valid.length).toFixed(1);
 
     chart.setOption({
@@ -5459,6 +6243,7 @@ const SarvaTrends = (() => {
             }],
           },
         },
+        ..._markerSeries(display),
       ],
     });
 
@@ -5788,14 +6573,14 @@ const SarvaTrends = (() => {
     }
     if (section) section.style.display = '';
     if (empty) empty.style.display = 'none';
-    if (lbl) lbl.textContent = `${display.length} runs`;
+    if (lbl) lbl.textContent = _runWindowLabel(display);
 
     const chart = initChart('sv-trends-severity-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
 
-    const xData    = display.map((_, i) => `#${i + 1}`);
+    const xData    = display.map(r => `#${_runNum(r)}`);
     const critical = display.map(r => (r.severityBreakdown && r.severityBreakdown.critical) || 0);
     const high     = display.map(r => (r.severityBreakdown && r.severityBreakdown.high)     || 0);
     const medium   = display.map(r => (r.severityBreakdown && r.severityBreakdown.medium)   || 0);
@@ -5860,6 +6645,7 @@ const SarvaTrends = (() => {
         mkBar('Medium',   medium,   '#f59e0b'),
         mkBar('Low',      low,      '#3b82f6'),
         mkBar('Trivial',  trivial,  '#94a3b8'),
+        ..._markerSeries(display),
       ],
     });
 
@@ -5879,7 +6665,26 @@ const SarvaTrends = (() => {
   // Re-render when tab becomes visible (ECharts needs a visible container)
   SarvaEventBus.on('nav:change', ({ view }) => {
     if (view === 'trends' && typeof echarts !== 'undefined' && _history !== null) {
+      // Re-sync history mode from global state (restores after a view-local filter reset)
+      _activeRunId = (typeof SarvaRunSwitch !== 'undefined') ? SarvaRunSwitch.activeRunId : null;
+      _applyCentering();
       setTimeout(renderAll, 50);
+    }
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeRunId = runId;
+    if (typeof echarts !== 'undefined' && _history !== null) {
+      _applyCentering();
+      if (!runId) {
+        // Restore: reset to default Last 20 filter
+        _filterN = 20;
+        document.querySelectorAll('.sv-trends-run-btn').forEach(b => {
+          b.classList.toggle('active', b.textContent.trim() === 'Last 20');
+        });
+        _updateRunLabel();
+      }
+      renderAll();
     }
   });
 
@@ -5898,8 +6703,10 @@ window.SarvaTrends = SarvaTrends;
  */
 const SarvaTimeline = (() => {
 
-  let _charts = {};
-  let _cadenceFilterN = 20; // default: last 20 runs
+  let _charts          = {};
+  let _cadenceFilterN  = 20; // default: last 20 runs
+  let _activeRunId     = null;
+  let _centeredSlice   = null; // { sliceStart, sliceEnd } in oldest-first sorted history
 
   /* ── Utilities ──────────────────────────────────────────────────────────── */
   function fmtDur(ms) {
@@ -5952,13 +6759,70 @@ const SarvaTimeline = (() => {
     return '#64748b';
   }
 
+  /* ── Run Cadence marker (vertical dashed line for selected historical run) ── */
+  function _cadenceMarkerSeries(display, xData) {
+    if (!_activeRunId) return [];
+    const mi = display.findIndex(r => r.id === _activeRunId);
+    if (mi === -1) return [];
+    // run number in the full history (oldest-first counting)
+    const allHistory = SarvaStore.history || [];
+    const sorted     = allHistory.slice().sort((a, b) => a.timestamp - b.timestamp);
+    const fullIdx    = sorted.findIndex(r => r.id === _activeRunId);
+    const runNum     = fullIdx >= 0 ? fullIdx + 1 : mi + 1;
+    return [{
+      type: 'line', data: [], animation: false,
+      lineStyle: { opacity: 0 }, itemStyle: { opacity: 0 }, symbol: 'none',
+      markLine: {
+        silent: true, symbol: ['none', 'none'],
+        data: [{
+          xAxis: xData[mi],
+          lineStyle: { color: 'rgba(129,140,248,0.9)', type: 'dashed', width: 1.5 },
+          label: {
+            show: true, position: 'insideStartTop',
+            formatter: `Run #${runNum}`,
+            color: '#818cf8', fontSize: 9,
+            backgroundColor: 'rgba(16,20,32,0.75)',
+            padding: [2, 4, 2, 4], borderRadius: 3,
+          },
+        }],
+      },
+    }];
+  }
+
   /* ── Run Cadence ────────────────────────────────────────────────────────── */
   function setCadenceFilter(n, btn) {
     _cadenceFilterN = n;
+    _centeredSlice  = null;
+    _activeRunId    = null; // suppress marker for this visit only — re-syncs on next nav:change
     document.querySelectorAll('.sv-cadence-run-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
-    renderRunCadence();
-    renderTimelinePrintInsights();
+    // Hide banner locally without touching global history state (other views stay in history mode)
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
+    if (typeof echarts !== 'undefined') {
+      renderRunCadence();
+      renderTimelinePrintInsights();
+    }
+  }
+
+  function _applyCadenCentering(sorted) {
+    // sorted = oldest-first array from SarvaStore.history
+    if (!_activeRunId || !sorted || sorted.length === 0) { _centeredSlice = null; return; }
+    const hi = sorted.findIndex(r => r.id === _activeRunId);
+    if (hi === -1) { _centeredSlice = null; return; }
+    // In oldest-first sorted array: position hi; current window is the LAST _cadenceFilterN items
+    const windowStart = _cadenceFilterN > 0 ? Math.max(0, sorted.length - _cadenceFilterN) : 0;
+    const windowEnd   = sorted.length;
+    if (_cadenceFilterN > 0 && hi >= windowStart && hi < windowEnd) {
+      _centeredSlice = null; return; // visible in current window
+    }
+    // Center a 20-run window around hi in sorted (oldest-first)
+    const windowSize = 20;
+    let sliceStart = Math.max(0, hi - 9);
+    let sliceEnd   = Math.min(sorted.length, sliceStart + windowSize);
+    sliceStart = Math.max(0, sliceEnd - windowSize);
+    _centeredSlice = { sliceStart, sliceEnd };
+    document.querySelectorAll('.sv-cadence-run-btn').forEach(b => b.classList.remove('active'));
   }
 
   function renderRunCadence() {
@@ -5978,13 +6842,24 @@ const SarvaTimeline = (() => {
 
     // Sort all history oldest → newest, then apply filter (keep most recent N)
     const sorted = allHistory.slice().sort((a, b) => a.timestamp - b.timestamp);
-    const history = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+    _applyCadenCentering(sorted);
+    let history;
+    if (_centeredSlice) {
+      history = sorted.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
+      // Label shows the run number range (oldest-first: run #1 = index 0)
+      const hi           = sorted.findIndex(r => r.id === _activeRunId);
+      const runNumOldest = _centeredSlice.sliceStart + 1;
+      const runNumNewest = _centeredSlice.sliceEnd;
+      const activeRunNum = hi + 1;
+      if (lbl) lbl.textContent = `Runs #${runNumOldest}–#${runNumNewest} · centered on Run #${activeRunNum}`;
+    } else {
+      history = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+      if (lbl) lbl.textContent = _cadenceFilterN > 0 && allHistory.length > _cadenceFilterN
+        ? `Last ${history.length} of ${allHistory.length} runs`
+        : `${history.length} runs`;
+    }
 
-    if (lbl) lbl.textContent = _cadenceFilterN > 0 && allHistory.length > _cadenceFilterN
-      ? `Last ${history.length} of ${allHistory.length} runs`
-      : `${history.length} runs`;
-
-    // Sort oldest → newest (already sorted, but kept for clarity)
+    // oldest → newest (already sorted)
     const display = history;
 
     const chart = initChart('sv-cadence-chart', 'canvas');
@@ -6071,12 +6946,15 @@ const SarvaTimeline = (() => {
           handleStyle: { color: '#6366f1' }, textStyle: { color: label, fontSize: 10 },
           showDataShadow: false, showDetail: false },
       ],
-      series: [{
-        type: 'bar', data: durs.map((v, i) => ({ value: v, itemStyle: { color: barColors[i] } })),
-        itemStyle: { borderRadius: [3, 3, 0, 0] },
-        emphasis: { itemStyle: { opacity: 0.8 } },
-        barMaxWidth: 32,
-      }],
+      series: [
+        {
+          type: 'bar', data: durs.map((v, i) => ({ value: v, itemStyle: { color: barColors[i] } })),
+          itemStyle: { borderRadius: [3, 3, 0, 0] },
+          emphasis: { itemStyle: { opacity: 0.8 } },
+          barMaxWidth: 32,
+        },
+        ..._cadenceMarkerSeries(display, xData),
+      ],
     });
 
     SarvaEventBus.on('theme:changed', () => renderRunCadence());
@@ -6088,6 +6966,20 @@ const SarvaTimeline = (() => {
     const empty   = document.getElementById('sv-gantt-empty');
     const chartEl = document.getElementById('sv-gantt-chart');
     if (!chartEl) return;
+
+    // Update title to reflect whether we're viewing history or the current run
+    const titleEl = document.getElementById('sv-gantt-title');
+    if (titleEl) {
+      if (_activeRunId) {
+        const allHistory = SarvaStore.history || [];
+        const sorted = allHistory.slice().sort((a, b) => a.timestamp - b.timestamp);
+        const hi = sorted.findIndex(r => r.id === _activeRunId);
+        const runNum = hi >= 0 ? hi + 1 : '?';
+        titleEl.textContent = `Execution Gantt — Run #${runNum}`;
+      } else {
+        titleEl.textContent = 'Execution Gantt — Current Run';
+      }
+    }
 
     const tests = (SarvaStore.stats && SarvaStore.stats.finalTests) || SarvaStore.tests || [];
     if (!tests.length) {
@@ -6277,7 +7169,18 @@ const SarvaTimeline = (() => {
 
     const allHistory = SarvaStore.history;
     const sorted = (allHistory || []).slice().sort((a, b) => a.timestamp - b.timestamp);
-    const cadenceHistory = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+    // Use centered slice if active, otherwise the standard filter window
+    let cadenceHistory;
+    let windowLabel;
+    if (_centeredSlice) {
+      cadenceHistory = sorted.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
+      const hi = sorted.findIndex(r => r.id === _activeRunId);
+      windowLabel = `Runs #${_centeredSlice.sliceStart + 1}–#${_centeredSlice.sliceEnd} · centered on Run #${hi + 1}`;
+    } else {
+      cadenceHistory = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+      windowLabel = _cadenceFilterN > 0 && sorted.length > _cadenceFilterN
+        ? `Last ${cadenceHistory.length} of ${sorted.length} runs` : `${cadenceHistory.length} runs`;
+    }
 
     if (cadenceHistory.length >= 2) {
       const durs = cadenceHistory.filter(r => r.duration > 0).map(r => r.duration);
@@ -6296,7 +7199,7 @@ const SarvaTimeline = (() => {
           : 'Most runs are healthy; a few dipped below 95%.';
       const durNote = avgS ? ` Average run duration: ${avgS}s.` : '';
       set('sv-print-insight-cadence',
-        `${cadenceHistory.length} runs shown. Average pass rate: ${avgRate !== null ? avgRate + '%' : '—'}.${durNote} ${healthSummary}`
+        `${windowLabel}. Average pass rate: ${avgRate !== null ? avgRate + '%' : '—'}.${durNote} ${healthSummary}`
       );
     }
 
@@ -6333,7 +7236,24 @@ const SarvaTimeline = (() => {
   // Lazy-render when tab becomes visible
   SarvaEventBus.on('nav:change', ({ view }) => {
     if (view === 'timeline' && typeof echarts !== 'undefined') {
+      // Re-sync history mode from global state (restores after a view-local filter reset)
+      _activeRunId = (typeof SarvaRunSwitch !== 'undefined') ? SarvaRunSwitch.activeRunId : null;
+      if (_activeRunId) _applyCadenCentering((SarvaStore.history || []).slice().sort((a, b) => a.timestamp - b.timestamp));
       setTimeout(renderAll, 50);
+    }
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeRunId = runId;
+    if (typeof echarts !== 'undefined') {
+      if (!runId) {
+        // Restore: reset to default Last 20 filter
+        _cadenceFilterN = 20;
+        document.querySelectorAll('.sv-cadence-run-btn').forEach(b => {
+          b.classList.toggle('active', b.textContent.trim() === 'Last 20');
+        });
+      }
+      renderAll();
     }
   });
 
@@ -6343,12 +7263,224 @@ const SarvaTimeline = (() => {
 
 window.SarvaTimeline = SarvaTimeline;
 
+/**
+ * Runs micro-app — filterable historical run list.
+ * Clicking a row loads that run's data.js and swaps the store state in-place.
+ */
+const SarvaRuns = (() => {
+
+  let _allRuns      = [];
+  let _activeId     = null;
+  let _initialized  = false;
+
+  function _localDateStr(d) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  function _setDefaultDateRange() {
+    const from = document.getElementById('sv-runs-filter-date-from');
+    const to   = document.getElementById('sv-runs-filter-date-to');
+    if (!from || !to) return;
+    const today = new Date();
+    const past  = new Date(today);
+    past.setDate(today.getDate() - 29); // last 30 days (today inclusive)
+    from.value = _localDateStr(past);
+    to.value   = _localDateStr(today);
+  }
+
+  /* ── Utilities ──────────────────────────────────────────────────────────── */
+  function fmtDate(ts) {
+    return new Date(ts).toLocaleString(undefined, {
+      month: 'short', day: 'numeric', year: 'numeric',
+      hour: '2-digit', minute: '2-digit',
+    });
+  }
+
+  function fmtDur(ms) {
+    if (!ms || ms <= 0) return '—';
+    if (ms < 60000) return `${(ms / 1000).toFixed(1)}s`;
+    return `${Math.floor(ms / 60000)}m ${Math.floor((ms % 60000) / 1000)}s`;
+  }
+
+  function passRateColor(rate) {
+    if (rate >= 90) return 'var(--status-passed)';
+    if (rate >= 70) return 'var(--status-flaky)';
+    return 'var(--status-failed)';
+  }
+
+  function escHtml(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function envChip(run) {
+    const env = run.environment || {};
+    const display = env.name || env.branch || (env.commit ? env.commit.slice(0, 7) : '') || '';
+    const full    = [env.name, env.branch, env.commit ? env.commit.slice(0, 7) : null].filter(Boolean).join(' · ');
+    if (!display) return '<span style="color:var(--text-muted)">—</span>';
+    const label = display.length > 14 ? display.slice(0, 13) + '…' : display;
+    return `<span class="sv-runs-env-chip" title="${escHtml(full || display)}">${escHtml(label)}</span>`;
+  }
+
+  /* ── Render ─────────────────────────────────────────────────────────────── */
+  function renderRows(runs) {
+    const tbody = document.getElementById('sv-runs-tbody');
+    if (!tbody) return;
+
+    // Update count label
+    const lbl = document.getElementById('sv-runs-count-label');
+    if (lbl) {
+      const total = _allRuns.length;
+      if (runs && runs.length > 0) {
+        lbl.textContent = runs.length === total
+          ? `${total} run${total !== 1 ? 's' : ''}`
+          : `${runs.length} of ${total} runs`;
+      } else {
+        lbl.textContent = '';
+      }
+    }
+
+    if (!runs || runs.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="11" class="sv-runs-empty">No runs match the current filters.</td></tr>';
+      return;
+    }
+
+    const total = _allRuns.length;
+
+    tbody.innerHTML = runs.map((run) => {
+      const globalIdx = _allRuns.indexOf(run);
+      const runNum    = total - globalIdx;
+      const isLatest  = globalIdx === 0;
+      const isActive  = run.id === _activeId;
+      const rate      = run.passRate != null ? +run.passRate : 0;
+      const color     = passRateColor(rate);
+
+      const actionCell = isLatest
+        ? `<span class="sv-runs-chip-current">Current</span>`
+        : `<button class="sv-runs-btn-view" onclick="SarvaRuns.viewRun(${escHtml(JSON.stringify(run.id))})">View →</button>`;
+
+      return `
+        <tr class="${isActive ? 'sv-runs-row--active' : ''}">
+          <td class="sv-runs-num">#${runNum}</td>
+          <td class="sv-runs-date">${fmtDate(run.timestamp)}</td>
+          <td class="sv-runs-env">${envChip(run)}</td>
+          <td>
+            <div class="sv-runs-passrate-wrap">
+              <div class="sv-runs-passrate-bar-bg">
+                <div class="sv-runs-passrate-bar" style="width:${Math.min(100, rate)}%;background:${color};"></div>
+              </div>
+            </div>
+          </td>
+          <td class="sv-runs-passrate-val" style="color:${color};">${rate}%</td>
+          <td class="sv-runs-count" style="text-align:right;"><span style="color:var(--status-passed);">${run.passed || 0}</span></td>
+          <td class="sv-runs-count" style="text-align:right;"><span style="color:var(--status-failed);">${run.failed || 0}</span></td>
+          <td class="sv-runs-count" style="text-align:right;"><span style="color:var(--status-flaky);">${run.flaky || 0}</span></td>
+          <td class="sv-runs-count" style="text-align:right;"><span style="color:var(--text-muted);">${run.skipped || 0}</span></td>
+          <td class="sv-runs-dur">${fmtDur(run.duration)}</td>
+          <td class="sv-runs-action">${actionCell}</td>
+        </tr>`;
+    }).join('');
+  }
+
+  /* ── Filters ────────────────────────────────────────────────────────────── */
+  function applyFilters() {
+    const status   = (document.getElementById('sv-runs-filter-status')    || {}).value || '';
+    const search   = ((document.getElementById('sv-runs-filter-search')   || {}).value || '').toLowerCase().trim();
+    const dateFrom = (document.getElementById('sv-runs-filter-date-from') || {}).value || '';
+    const dateTo   = (document.getElementById('sv-runs-filter-date-to')   || {}).value || '';
+    const passMin  = (document.getElementById('sv-runs-filter-pass-min')  || {}).value;
+    const passMax  = (document.getElementById('sv-runs-filter-pass-max')  || {}).value;
+    const durMin   = (document.getElementById('sv-runs-filter-dur-min')   || {}).value;
+    const durMax   = (document.getElementById('sv-runs-filter-dur-max')   || {}).value;
+
+    let runs = _allRuns.slice();
+
+    if (status === 'pass')  runs = runs.filter(r => (r.failed || 0) === 0 && (r.flaky || 0) === 0);
+    if (status === 'fail')  runs = runs.filter(r => (r.failed || 0) > 0);
+    if (status === 'flaky') runs = runs.filter(r => (r.flaky  || 0) > 0);
+
+    // Parse date strings as local midnight to avoid UTC offset shifting the boundary day
+    const parseLocalDay = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d).getTime(); };
+    if (dateFrom) runs = runs.filter(r => r.timestamp >= parseLocalDay(dateFrom));
+    if (dateTo)   runs = runs.filter(r => r.timestamp <  parseLocalDay(dateTo) + 86400000);
+
+    if (passMin !== '') runs = runs.filter(r => (r.passRate || 0) >= +passMin);
+    if (passMax !== '') runs = runs.filter(r => (r.passRate || 0) <= +passMax);
+
+    // Compare against displayed 1-decimal seconds to avoid raw-ms vs rounded-display mismatch
+    if (durMin !== '') runs = runs.filter(r => +((r.duration || 0) / 1000).toFixed(1) >= +durMin);
+    if (durMax !== '') runs = runs.filter(r => +((r.duration || 0) / 1000).toFixed(1) <= +durMax);
+
+    if (search) {
+      runs = runs.filter(r => {
+        const env = r.environment || {};
+        const gi  = _allRuns.indexOf(r);
+        const num = String(_allRuns.length - gi);
+        const hay = [num, env.name, env.branch, env.commit, env.ci].filter(Boolean).join(' ').toLowerCase();
+        return hay.includes(search);
+      });
+    }
+
+    renderRows(runs);
+  }
+
+  /* ── Clear helpers ──────────────────────────────────────────────────────── */
+  function clearFilter(which) {
+    const g = id => document.getElementById(id);
+    if (which === 'status') { const el = g('sv-runs-filter-status'); if (el) el.value = ''; }
+    if (which === 'search') { const el = g('sv-runs-filter-search'); if (el) el.value = ''; }
+    if (which === 'date')   { ['sv-runs-filter-date-from','sv-runs-filter-date-to'].forEach(i => { const el = g(i); if (el) el.value = ''; }); }
+    if (which === 'pass')   { ['sv-runs-filter-pass-min','sv-runs-filter-pass-max'].forEach(i => { const el = g(i); if (el) el.value = ''; }); }
+    if (which === 'dur')    { ['sv-runs-filter-dur-min','sv-runs-filter-dur-max'].forEach(i => { const el = g(i); if (el) el.value = ''; }); }
+    applyFilters();
+  }
+
+  function clearAllFilters() {
+    ['sv-runs-filter-status','sv-runs-filter-search',
+     'sv-runs-filter-pass-min','sv-runs-filter-pass-max',
+     'sv-runs-filter-dur-min','sv-runs-filter-dur-max'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    _setDefaultDateRange(); // restore default 30-day window instead of clearing date entirely
+    applyFilters();
+  }
+
+  /* ── View a run ─────────────────────────────────────────────────────────── */
+  function viewRun(runId) {
+    const run = _allRuns.find(r => r.id === runId);
+    if (!run) return;
+    _activeId = runId;
+    applyFilters(); // re-render to highlight the active row
+    SarvaRunSwitch.switchToRun(runId, run);
+  }
+
+  /* ── Init ───────────────────────────────────────────────────────────────── */
+  SarvaEventBus.on('store:ready', ({ history }) => {
+    _allRuns = history || [];
+    if (!_initialized) {
+      _initialized = true;
+      _setDefaultDateRange();
+    }
+    applyFilters();
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeId = runId;
+    applyFilters();
+  });
+
+  return { applyFilters, viewRun, clearFilter, clearAllFilters };
+
+})();
+
+window.SarvaRuns = SarvaRuns;
+
       
       document.addEventListener('DOMContentLoaded', () => {
         SarvaStore.init(
-          [{"uuid":"cu-0000-779619838451","tool":"cucumber","name":"Homepage loads with correct title","fullName":"Selenium Website Navigation > Homepage loads with correct title","status":"passed","stage":"finished","start":1779619838451,"stop":1779619842651,"duration":4200,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779619838451,"stop":1779619839651,"duration":1200,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300000000,"stop":1716300000820,"duration":820},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300000820,"stop":1716300001200,"duration":380}]},{"name":"When I navigate to \"https://www.selenium.dev/\"","status":"passed","start":1779619839651,"stop":1779619842151,"duration":2500,"steps":[{"name":"Navigate: https://www.selenium.dev/","status":"passed","start":1716300001200,"stop":1716300003500,"duration":2300},{"name":"Wait for page load complete","status":"passed","start":1716300003500,"stop":1716300003700,"duration":200}]},{"name":"Then the page title should contain \"Selenium\"","status":"passed","start":1779619842151,"stop":1779619842351,"duration":200,"steps":[{"name":"Get page title → \"Selenium: Web Browser Automation\"","status":"passed","start":1716300003700,"stop":1716300003800,"duration":100},{"name":"Assert title contains \"Selenium\"","status":"passed","start":1716300003800,"stop":1716300003900,"duration":100}]},{"name":"And the navigation bar should be present","status":"passed","start":1779619842351,"stop":1779619842651,"duration":300,"steps":[{"name":"Find: nav[class*='navbar']","status":"passed","start":1716300003900,"stop":1716300004100,"duration":200},{"name":"Assert element visible","status":"passed","start":1716300004100,"stop":1716300004200,"duration":100}]}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"homepage"},{"name":"tag","value":"tms:1"},{"name":"tag","value":"severity:medium"},{"name":"tag","value":"owner:ui-team"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@homepage"]},"testClass":"Selenium Website Navigation","testMethod":"Homepage loads with correct title"}},{"uuid":"cu-0001-779619838451","tool":"cucumber","name":"Documentation page is accessible","fullName":"Selenium Website Navigation > Documentation page is accessible","status":"passed","stage":"finished","start":1779619844651,"stop":1779619848151,"duration":3500,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779619844651,"stop":1779619845751,"duration":1100,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300006200,"stop":1716300006950,"duration":750},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300006950,"stop":1716300007300,"duration":350}]},{"name":"When I navigate to \"https://www.selenium.dev/documentation/\"","status":"passed","start":1779619845751,"stop":1779619847951,"duration":2200,"steps":[{"name":"Navigate: https://www.selenium.dev/documentation/","status":"passed","start":1716300007300,"stop":1716300009300,"duration":2000},{"name":"Wait for page load complete","status":"passed","start":1716300009300,"stop":1716300009500,"duration":200}]},{"name":"Then the page title should not be empty","status":"passed","start":1779619847951,"stop":1779619848051,"duration":100,"steps":[{"name":"Get page title → \"The Selenium Browser Automation Project\"","status":"passed","start":1716300009500,"stop":1716300009600,"duration":100}]},{"name":"And the main heading should be visible","status":"passed","start":1779619848051,"stop":1779619848151,"duration":100,"steps":[{"name":"Find: h1, h2[class*='heading']","status":"passed","start":1716300009600,"stop":1716300009700,"duration":100}]}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"documentation"},{"name":"tag","value":"severity:low"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@documentation"]},"testClass":"Selenium Website Navigation","testMethod":"Documentation page is accessible"}},{"uuid":"cu-0002-779619838451","tool":"cucumber","name":"Downloads page loads successfully","fullName":"Selenium Website Navigation > Downloads page loads successfully","status":"passed","stage":"finished","start":1779619850151,"stop":1779619854351,"duration":4200,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779619850151,"stop":1779619851151,"duration":1000,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300011700,"stop":1716300012350,"duration":650},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300012350,"stop":1716300012700,"duration":350}]},{"name":"When I navigate to \"https://www.selenium.dev/downloads/\"","status":"passed","start":1779619851151,"stop":1779619853951,"duration":2800,"steps":[{"name":"Navigate: https://www.selenium.dev/downloads/","status":"passed","start":1716300012700,"stop":1716300015200,"duration":2500},{"name":"Wait for page load complete","status":"passed","start":1716300015200,"stop":1716300015500,"duration":300}]},{"name":"Then the page title should not be empty","status":"passed","start":1779619853951,"stop":1779619854151,"duration":200,"steps":[{"name":"Get page title → \"Downloads\"","status":"passed","start":1716300015500,"stop":1716300015700,"duration":200}]},{"name":"And the page has content","status":"passed","start":1779619854151,"stop":1779619854351,"duration":200,"steps":[{"name":"Find: body","status":"passed","start":1716300015700,"stop":1716300015800,"duration":100},{"name":"Assert body text length > 0","status":"passed","start":1716300015800,"stop":1716300015900,"duration":100}]}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"downloads"},{"name":"tag","value":"issue:7"},{"name":"tag","value":"tms:3"},{"name":"tag","value":"severity:high"},{"name":"tag","value":"owner:ui-team"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@downloads"]},"testClass":"Selenium Website Navigation","testMethod":"Downloads page loads successfully"}},{"uuid":"cu-0003-779619838451","tool":"cucumber","name":"WebDriver docs display content","fullName":"Selenium Website Navigation > WebDriver docs display content","status":"failed","stage":"finished","start":1779619856351,"stop":1779619860551,"duration":4200,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779619856351,"stop":1779619857551,"duration":1200,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300017900,"stop":1716300018750,"duration":850},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300018750,"stop":1716300019100,"duration":350}]},{"name":"When I navigate to \"https://www.selenium.dev/documentation/webdriver/\"","status":"passed","start":1779619857551,"stop":1779619860051,"duration":2500,"steps":[{"name":"Navigate: https://www.selenium.dev/documentation/webdriver/","status":"passed","start":1716300019100,"stop":1716300021400,"duration":2300},{"name":"Wait for page load complete","status":"passed","start":1716300021400,"stop":1716300021600,"duration":200}]},{"name":"Then the main heading should be visible","status":"passed","start":1779619860051,"stop":1779619860351,"duration":300,"steps":[{"name":"Find: h1, h2[class*='heading']","status":"passed","start":1716300021600,"stop":1716300021800,"duration":200},{"name":"Assert element displayed","status":"passed","start":1716300021800,"stop":1716300021900,"duration":100}]},{"name":"And the page has content","status":"failed","start":1779619860351,"stop":1779619860551,"duration":200,"steps":[{"name":"Find: body","status":"passed","start":1716300021900,"stop":1716300022000,"duration":100},{"name":"Assert body text length > 0","status":"passed","start":1716300022000,"stop":1716300022100,"duration":100}],"statusDetails":{"message":"AssertionError: Page content (main/article/section) not found — layout may have changed"}}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"webdriver"},{"name":"tag","value":"issue:12"},{"name":"tag","value":"tms:4"},{"name":"tag","value":"severity:critical"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@webdriver"]},"testClass":"Selenium Website Navigation","testMethod":"WebDriver docs display content"},"statusDetails":{"message":"AssertionError: Page content (main/article/section) not found — layout may have changed"}},{"uuid":"cu-0004-779619838451","tool":"cucumber","name":"Ecosystem page is reachable","fullName":"Selenium Website Navigation > Ecosystem page is reachable","status":"failed","stage":"finished","start":1779619862551,"stop":1779619865951,"duration":3400,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779619862551,"stop":1779619863651,"duration":1100,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300024100,"stop":1716300024900,"duration":800},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300024900,"stop":1716300025200,"duration":300}]},{"name":"When I navigate to \"https://www.selenium.dev/ecosystem/\"","status":"passed","start":1779619863651,"stop":1779619865751,"duration":2100,"steps":[{"name":"Navigate: https://www.selenium.dev/ecosystem/","status":"passed","start":1716300025200,"stop":1716300027100,"duration":1900},{"name":"Wait for page load complete","status":"passed","start":1716300027100,"stop":1716300027300,"duration":200}]},{"name":"Then the page title should not be empty","status":"passed","start":1779619865751,"stop":1779619865851,"duration":100,"steps":[{"name":"Get page title → \"Ecosystem\"","status":"passed","start":1716300027300,"stop":1716300027400,"duration":100}]},{"name":"And the page has content","status":"failed","start":1779619865851,"stop":1779619865951,"duration":100,"steps":[{"name":"Find: body","status":"passed","start":1716300027400,"stop":1716300027500,"duration":100}],"statusDetails":{"message":"AssertionError: Navigation bar not present — site structure may have changed"}}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"ecosystem"},{"name":"tag","value":"severity:low"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@ecosystem"]},"testClass":"Selenium Website Navigation","testMethod":"Ecosystem page is reachable"},"statusDetails":{"message":"AssertionError: Navigation bar not present — site structure may have changed"}},{"uuid":"cu-0005-779619838451","tool":"cucumber","name":"Getting started guide is accessible","fullName":"Selenium Website Navigation > Getting started guide is accessible","status":"passed","stage":"finished","start":1779619867951,"stop":1779619871551,"duration":3600,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779619867951,"stop":1779619868951,"duration":1000,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300029500,"stop":1716300030100,"duration":600},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300030100,"stop":1716300030500,"duration":400}]},{"name":"When I navigate to \"https://www.selenium.dev/documentation/overview/\"","status":"passed","start":1779619868951,"stop":1779619871251,"duration":2300,"steps":[{"name":"Navigate: https://www.selenium.dev/documentation/overview/","status":"passed","start":1716300030500,"stop":1716300032600,"duration":2100},{"name":"Wait for page load complete","status":"passed","start":1716300032600,"stop":1716300032800,"duration":200}]},{"name":"Then the main heading should be visible","status":"passed","start":1779619871251,"stop":1779619871551,"duration":300,"steps":[{"name":"Find: h1, h2[class*='heading']","status":"passed","start":1716300032800,"stop":1716300033000,"duration":200},{"name":"Assert element displayed","status":"passed","start":1716300033000,"stop":1716300033100,"duration":100}]}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"getting-started"},{"name":"tag","value":"severity:medium"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@getting-started"]},"testClass":"Selenium Website Navigation","testMethod":"Getting started guide is accessible"}},{"uuid":"cu-0006-779619838451","tool":"cucumber","name":"WebDriver API reference loads","fullName":"Selenium API Documentation > WebDriver API reference loads","status":"passed","stage":"finished","start":1779619879551,"stop":1779619883351,"duration":3800,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779619879551,"stop":1779619880651,"duration":1100,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300041100,"stop":1716300041850,"duration":750},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300041850,"stop":1716300042200,"duration":350}]},{"name":"When I navigate to \"https://www.selenium.dev/documentation/webdriver/getting_started/\"","status":"passed","start":1779619880651,"stop":1779619883051,"duration":2400,"steps":[{"name":"Navigate: https://www.selenium.dev/documentation/webdriver/getting_started/","status":"passed","start":1716300042200,"stop":1716300044400,"duration":2200},{"name":"Wait for page load complete","status":"passed","start":1716300044400,"stop":1716300044600,"duration":200}]},{"name":"Then the main heading should be visible","status":"passed","start":1779619883051,"stop":1779619883251,"duration":200,"steps":[{"name":"Find: h1, h2[class*='heading']","status":"passed","start":1716300044600,"stop":1716300044750,"duration":150},{"name":"Assert element displayed","status":"passed","start":1716300044750,"stop":1716300044800,"duration":50}]},{"name":"And the page has content","status":"passed","start":1779619883251,"stop":1779619883351,"duration":100,"steps":[{"name":"Find: body","status":"passed","start":1716300044800,"stop":1716300044850,"duration":50},{"name":"Assert body text length > 0","status":"passed","start":1716300044850,"stop":1716300044900,"duration":50}]}],"attachments":[],"labels":[{"name":"tag","value":"api-docs"},{"name":"tag","value":"selenium"},{"name":"tag","value":"webdriver-api"},{"name":"tag","value":"issue:15"},{"name":"tag","value":"tms:6"},{"name":"tag","value":"severity:high"},{"name":"tag","value":"owner:api-team"}],"extra":{"cucumber":{"featureName":"Selenium API Documentation","featureUri":"features/selenium_api_docs.feature","tags":["@api-docs","@selenium","@webdriver-api"]},"testClass":"Selenium API Documentation","testMethod":"WebDriver API reference loads"}},{"uuid":"cu-0007-779619838451","tool":"cucumber","name":"User login with valid credentials","fullName":"Selenium Website Navigation > User login with valid credentials","status":"flaky","stage":"finished","start":1779619883451,"stop":1779619886851,"duration":3400,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779619883451,"stop":1779619884551,"duration":1100},{"name":"When I navigate to the login page","status":"passed","start":1779619884551,"stop":1779619885351,"duration":800},{"name":"And I enter valid credentials","status":"passed","start":1779619885351,"stop":1779619886051,"duration":700},{"name":"Then I should be logged in successfully","status":"passed","start":1779619886051,"stop":1779619886851,"duration":800}],"attachments":[],"labels":[{"name":"severity","value":"high"}],"extra":{"flakyReason":"Scenario passed after retry due to timing issue"}}],
-          {"id":"cli-1779666652490","tool":"cucumber","timestamp":1779666652490,"duration":30300,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},
-          {"runs":[{"id":"cli-1779666652490","timestamp":1779666652490,"duration":30300,"total":8,"passed":5,"failed":2,"skipped":0,"flaky":1,"passRate":62.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779666651930","timestamp":1779666651930,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666651381","timestamp":1779666651381,"duration":30300,"total":8,"passed":5,"failed":2,"skipped":0,"flaky":1,"passRate":62.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779666650825","timestamp":1779666650825,"duration":30300,"total":8,"passed":6,"failed":0,"skipped":0,"flaky":2,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666650270","timestamp":1779666650270,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779666649715","timestamp":1779666649715,"duration":30300,"total":8,"passed":7,"failed":0,"skipped":0,"flaky":1,"passRate":87.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666649165","timestamp":1779666649165,"duration":30300,"total":8,"passed":8,"failed":0,"skipped":0,"flaky":0,"passRate":100,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779666648604","timestamp":1779666648604,"duration":30300,"total":8,"passed":7,"failed":1,"skipped":0,"flaky":0,"passRate":87.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":0,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666648049","timestamp":1779666648049,"duration":30300,"total":8,"passed":7,"failed":0,"skipped":0,"flaky":1,"passRate":87.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666647498","timestamp":1779666647498,"duration":30300,"total":8,"passed":8,"failed":0,"skipped":0,"flaky":0,"passRate":100,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779666646946","timestamp":1779666646946,"duration":30300,"total":8,"passed":7,"failed":0,"skipped":0,"flaky":1,"passRate":87.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666646392","timestamp":1779666646392,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666645841","timestamp":1779666645841,"duration":30300,"total":8,"passed":6,"failed":0,"skipped":0,"flaky":2,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666645288","timestamp":1779666645288,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779666644737","timestamp":1779666644737,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666644186","timestamp":1779666644186,"duration":30300,"total":8,"passed":5,"failed":1,"skipped":0,"flaky":2,"passRate":62.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779666643631","timestamp":1779666643631,"duration":30300,"total":8,"passed":4,"failed":2,"skipped":0,"flaky":2,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":2,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779666643079","timestamp":1779666643079,"duration":30300,"total":8,"passed":3,"failed":3,"skipped":0,"flaky":2,"passRate":37.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":3,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779666642529","timestamp":1779666642529,"duration":30300,"total":8,"passed":4,"failed":3,"skipped":0,"flaky":1,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":2,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779666641984","timestamp":1779666641984,"duration":30300,"total":8,"passed":5,"failed":2,"skipped":0,"flaky":1,"passRate":62.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779666641336","timestamp":1779666641336,"duration":30300,"total":8,"passed":8,"failed":0,"skipped":0,"flaky":0,"passRate":100,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779666640452","timestamp":1779666640452,"duration":30300,"total":8,"passed":6,"failed":0,"skipped":0,"flaky":2,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":2,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666639908","timestamp":1779666639908,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779666639368","timestamp":1779666639368,"duration":30300,"total":8,"passed":8,"failed":0,"skipped":0,"flaky":0,"passRate":100,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779666638842","timestamp":1777539038451,"duration":30300,"total":8,"passed":7,"failed":0,"skipped":0,"flaky":1,"passRate":87.5,"environment":{"ci":"false"}}],"testHistory":[{"testId":"cucumber:Selenium Website Navigation > Homepage loads with correct title","testName":"Homepage loads with correct title","history":[{"runId":"cli-1779666652490","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666651930","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666651381","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666650825","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666650270","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666649715","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666649165","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666648604","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666648049","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666647498","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666646946","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666646392","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666645841","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666645288","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666644737","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666644186","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666643631","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666643079","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666642529","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666641984","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666641336","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666640452","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666639908","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666639368","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666638842","status":"passed","duration":4200,"retries":0,"wasFlaky":false}],"flakyScore":0,"lastStatus":"passed","wasEverFlaky":false},{"testId":"cucumber:Selenium Website Navigation > Documentation page is accessible","testName":"Documentation page is accessible","history":[{"runId":"cli-1779666652490","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666651930","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666651381","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666650825","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666650270","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666649715","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666649165","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666648604","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666648049","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666647498","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666646946","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666646392","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666645841","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666645288","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666644737","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666644186","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666643631","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666643079","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666642529","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666641984","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666641336","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666640452","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666639908","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666639368","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666638842","status":"passed","duration":3500,"retries":0,"wasFlaky":false}],"flakyScore":0,"lastStatus":"passed","wasEverFlaky":false},{"testId":"cucumber:Selenium Website Navigation > Downloads page loads successfully","testName":"Downloads page loads successfully","history":[{"runId":"cli-1779666652490","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666651930","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666651381","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666650825","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666650270","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666649715","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666649165","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666648604","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666648049","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666647498","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666646946","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666646392","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666645841","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666645288","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666644737","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666644186","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666643631","status":"failed","duration":4200,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666643079","status":"failed","duration":4200,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666642529","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666641984","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666641336","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666640452","status":"failed","duration":4200,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666639908","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666639368","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666638842","status":"passed","duration":4200,"retries":0,"wasFlaky":false}],"flakyScore":17,"lastStatus":"passed","wasEverFlaky":true,"lastFlakyRunId":"cli-1779666643631"},{"testId":"cucumber:Selenium Website Navigation > WebDriver docs display content","testName":"WebDriver docs display content","history":[{"runId":"cli-1779666652490","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666651930","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666651381","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666650825","status":"failed","duration":4200,"retries":0,"wasFlaky":true,"severity":"critical"},{"runId":"cli-1779666650270","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666649715","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666649165","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666648604","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666648049","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666647498","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666646946","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666646392","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666645841","status":"failed","duration":4200,"retries":0,"wasFlaky":true,"severity":"critical"},{"runId":"cli-1779666645288","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666644737","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666644186","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666643631","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666643079","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666642529","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666641984","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666641336","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666640452","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666639908","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666639368","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779666638842","status":"passed","duration":4200,"retries":0,"wasFlaky":false}],"flakyScore":38,"lastStatus":"failed","wasEverFlaky":true,"lastFlakyRunId":"cli-1779666650825"},{"testId":"cucumber:Selenium Website Navigation > Ecosystem page is reachable","testName":"Ecosystem page is reachable","history":[{"runId":"cli-1779666652490","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666651930","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666651381","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666650825","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666650270","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666649715","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666649165","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666648604","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666648049","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666647498","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666646946","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666646392","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666645841","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666645288","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666644737","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666644186","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"low"},{"runId":"cli-1779666643631","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666643079","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666642529","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666641984","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666641336","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666640452","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666639908","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666639368","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779666638842","status":"passed","duration":3400,"retries":0,"wasFlaky":false}],"flakyScore":38,"lastStatus":"failed","wasEverFlaky":true,"lastFlakyRunId":"cli-1779666644186"},{"testId":"cucumber:Selenium Website Navigation > Getting started guide is accessible","testName":"Getting started guide is accessible","history":[{"runId":"cli-1779666652490","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666651930","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666651381","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666650825","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666650270","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666649715","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666649165","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666648604","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666648049","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666647498","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666646946","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666646392","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666645841","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666645288","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666644737","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666644186","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666643631","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666643079","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666642529","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666641984","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666641336","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666640452","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666639908","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666639368","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779666638842","status":"passed","duration":3600,"retries":0,"wasFlaky":false}],"flakyScore":0,"lastStatus":"passed","wasEverFlaky":false},{"testId":"cucumber:Selenium API Documentation > WebDriver API reference loads","testName":"WebDriver API reference loads","history":[{"runId":"cli-1779666652490","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666651930","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666651381","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666650825","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666650270","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666649715","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666649165","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666648604","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666648049","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666647498","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666646946","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666646392","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666645841","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666645288","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666644737","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666644186","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666643631","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666643079","status":"failed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666642529","status":"failed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666641984","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666641336","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666640452","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666639908","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666639368","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666638842","status":"passed","duration":3800,"retries":0,"wasFlaky":false}],"flakyScore":8,"lastStatus":"passed","wasEverFlaky":false},{"testId":"cucumber:Selenium Website Navigation > User login with valid credentials","testName":"User login with valid credentials","history":[{"runId":"cli-1779666652490","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666651930","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666651381","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666650825","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666650270","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666649715","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666649165","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666648604","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666648049","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666647498","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666646946","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666646392","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666645841","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666645288","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666644737","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666644186","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666643631","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666643079","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666642529","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666641984","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666641336","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666640452","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666639908","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779666639368","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779666638842","status":"failed","duration":3400,"retries":0,"wasFlaky":true}],"flakyScore":33,"lastStatus":"failed","wasEverFlaky":true,"lastFlakyRunId":"cli-1779666652490"}]}
+          [{"uuid":"cu-0000-779663469253","tool":"cucumber","name":"Homepage loads with correct title","fullName":"Selenium Website Navigation > Homepage loads with correct title","status":"passed","stage":"finished","start":1779663469253,"stop":1779663473453,"duration":4200,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779663469253,"stop":1779663470453,"duration":1200,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300000000,"stop":1716300000820,"duration":820},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300000820,"stop":1716300001200,"duration":380}]},{"name":"When I navigate to \"https://www.selenium.dev/\"","status":"passed","start":1779663470453,"stop":1779663472953,"duration":2500,"steps":[{"name":"Navigate: https://www.selenium.dev/","status":"passed","start":1716300001200,"stop":1716300003500,"duration":2300},{"name":"Wait for page load complete","status":"passed","start":1716300003500,"stop":1716300003700,"duration":200}]},{"name":"Then the page title should contain \"Selenium\"","status":"passed","start":1779663472953,"stop":1779663473153,"duration":200,"steps":[{"name":"Get page title → \"Selenium: Web Browser Automation\"","status":"passed","start":1716300003700,"stop":1716300003800,"duration":100},{"name":"Assert title contains \"Selenium\"","status":"passed","start":1716300003800,"stop":1716300003900,"duration":100}]},{"name":"And the navigation bar should be present","status":"passed","start":1779663473153,"stop":1779663473453,"duration":300,"steps":[{"name":"Find: nav[class*='navbar']","status":"passed","start":1716300003900,"stop":1716300004100,"duration":200},{"name":"Assert element visible","status":"passed","start":1716300004100,"stop":1716300004200,"duration":100}]}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"homepage"},{"name":"tag","value":"tms:1"},{"name":"tag","value":"severity:medium"},{"name":"tag","value":"owner:ui-team"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@homepage"]},"testClass":"Selenium Website Navigation","testMethod":"Homepage loads with correct title"}},{"uuid":"cu-0001-779663469253","tool":"cucumber","name":"Documentation page is accessible","fullName":"Selenium Website Navigation > Documentation page is accessible","status":"passed","stage":"finished","start":1779663475453,"stop":1779663478953,"duration":3500,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779663475453,"stop":1779663476553,"duration":1100,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300006200,"stop":1716300006950,"duration":750},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300006950,"stop":1716300007300,"duration":350}]},{"name":"When I navigate to \"https://www.selenium.dev/documentation/\"","status":"passed","start":1779663476553,"stop":1779663478753,"duration":2200,"steps":[{"name":"Navigate: https://www.selenium.dev/documentation/","status":"passed","start":1716300007300,"stop":1716300009300,"duration":2000},{"name":"Wait for page load complete","status":"passed","start":1716300009300,"stop":1716300009500,"duration":200}]},{"name":"Then the page title should not be empty","status":"passed","start":1779663478753,"stop":1779663478853,"duration":100,"steps":[{"name":"Get page title → \"The Selenium Browser Automation Project\"","status":"passed","start":1716300009500,"stop":1716300009600,"duration":100}]},{"name":"And the main heading should be visible","status":"passed","start":1779663478853,"stop":1779663478953,"duration":100,"steps":[{"name":"Find: h1, h2[class*='heading']","status":"passed","start":1716300009600,"stop":1716300009700,"duration":100}]}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"documentation"},{"name":"tag","value":"severity:low"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@documentation"]},"testClass":"Selenium Website Navigation","testMethod":"Documentation page is accessible"}},{"uuid":"cu-0002-779663469253","tool":"cucumber","name":"Downloads page loads successfully","fullName":"Selenium Website Navigation > Downloads page loads successfully","status":"passed","stage":"finished","start":1779663480953,"stop":1779663485153,"duration":4200,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779663480953,"stop":1779663481953,"duration":1000,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300011700,"stop":1716300012350,"duration":650},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300012350,"stop":1716300012700,"duration":350}]},{"name":"When I navigate to \"https://www.selenium.dev/downloads/\"","status":"passed","start":1779663481953,"stop":1779663484753,"duration":2800,"steps":[{"name":"Navigate: https://www.selenium.dev/downloads/","status":"passed","start":1716300012700,"stop":1716300015200,"duration":2500},{"name":"Wait for page load complete","status":"passed","start":1716300015200,"stop":1716300015500,"duration":300}]},{"name":"Then the page title should not be empty","status":"passed","start":1779663484753,"stop":1779663484953,"duration":200,"steps":[{"name":"Get page title → \"Downloads\"","status":"passed","start":1716300015500,"stop":1716300015700,"duration":200}]},{"name":"And the page has content","status":"passed","start":1779663484953,"stop":1779663485153,"duration":200,"steps":[{"name":"Find: body","status":"passed","start":1716300015700,"stop":1716300015800,"duration":100},{"name":"Assert body text length > 0","status":"passed","start":1716300015800,"stop":1716300015900,"duration":100}]}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"downloads"},{"name":"tag","value":"issue:7"},{"name":"tag","value":"tms:3"},{"name":"tag","value":"severity:high"},{"name":"tag","value":"owner:ui-team"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@downloads"]},"testClass":"Selenium Website Navigation","testMethod":"Downloads page loads successfully"}},{"uuid":"cu-0003-779663469253","tool":"cucumber","name":"WebDriver docs display content","fullName":"Selenium Website Navigation > WebDriver docs display content","status":"failed","stage":"finished","start":1779663487153,"stop":1779663491353,"duration":4200,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779663487153,"stop":1779663488353,"duration":1200,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300017900,"stop":1716300018750,"duration":850},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300018750,"stop":1716300019100,"duration":350}]},{"name":"When I navigate to \"https://www.selenium.dev/documentation/webdriver/\"","status":"passed","start":1779663488353,"stop":1779663490853,"duration":2500,"steps":[{"name":"Navigate: https://www.selenium.dev/documentation/webdriver/","status":"passed","start":1716300019100,"stop":1716300021400,"duration":2300},{"name":"Wait for page load complete","status":"passed","start":1716300021400,"stop":1716300021600,"duration":200}]},{"name":"Then the main heading should be visible","status":"passed","start":1779663490853,"stop":1779663491153,"duration":300,"steps":[{"name":"Find: h1, h2[class*='heading']","status":"passed","start":1716300021600,"stop":1716300021800,"duration":200},{"name":"Assert element displayed","status":"passed","start":1716300021800,"stop":1716300021900,"duration":100}]},{"name":"And the page has content","status":"failed","start":1779663491153,"stop":1779663491353,"duration":200,"steps":[{"name":"Find: body","status":"passed","start":1716300021900,"stop":1716300022000,"duration":100},{"name":"Assert body text length > 0","status":"passed","start":1716300022000,"stop":1716300022100,"duration":100}],"statusDetails":{"message":"AssertionError: Page content (main/article/section) not found — layout may have changed"}}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"webdriver"},{"name":"tag","value":"issue:12"},{"name":"tag","value":"tms:4"},{"name":"tag","value":"severity:critical"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@webdriver"]},"testClass":"Selenium Website Navigation","testMethod":"WebDriver docs display content"},"statusDetails":{"message":"AssertionError: Page content (main/article/section) not found — layout may have changed"}},{"uuid":"cu-0004-779663469253","tool":"cucumber","name":"Ecosystem page is reachable","fullName":"Selenium Website Navigation > Ecosystem page is reachable","status":"failed","stage":"finished","start":1779663493353,"stop":1779663496753,"duration":3400,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779663493353,"stop":1779663494453,"duration":1100,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300024100,"stop":1716300024900,"duration":800},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300024900,"stop":1716300025200,"duration":300}]},{"name":"When I navigate to \"https://www.selenium.dev/ecosystem/\"","status":"passed","start":1779663494453,"stop":1779663496553,"duration":2100,"steps":[{"name":"Navigate: https://www.selenium.dev/ecosystem/","status":"passed","start":1716300025200,"stop":1716300027100,"duration":1900},{"name":"Wait for page load complete","status":"passed","start":1716300027100,"stop":1716300027300,"duration":200}]},{"name":"Then the page title should not be empty","status":"passed","start":1779663496553,"stop":1779663496653,"duration":100,"steps":[{"name":"Get page title → \"Ecosystem\"","status":"passed","start":1716300027300,"stop":1716300027400,"duration":100}]},{"name":"And the page has content","status":"failed","start":1779663496653,"stop":1779663496753,"duration":100,"steps":[{"name":"Find: body","status":"passed","start":1716300027400,"stop":1716300027500,"duration":100}],"statusDetails":{"message":"AssertionError: Navigation bar not present — site structure may have changed"}}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"ecosystem"},{"name":"tag","value":"severity:low"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@ecosystem"]},"testClass":"Selenium Website Navigation","testMethod":"Ecosystem page is reachable"},"statusDetails":{"message":"AssertionError: Navigation bar not present — site structure may have changed"}},{"uuid":"cu-0005-779663469253","tool":"cucumber","name":"Getting started guide is accessible","fullName":"Selenium Website Navigation > Getting started guide is accessible","status":"passed","stage":"finished","start":1779663498753,"stop":1779663502353,"duration":3600,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779663498753,"stop":1779663499753,"duration":1000,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300029500,"stop":1716300030100,"duration":600},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300030100,"stop":1716300030500,"duration":400}]},{"name":"When I navigate to \"https://www.selenium.dev/documentation/overview/\"","status":"passed","start":1779663499753,"stop":1779663502053,"duration":2300,"steps":[{"name":"Navigate: https://www.selenium.dev/documentation/overview/","status":"passed","start":1716300030500,"stop":1716300032600,"duration":2100},{"name":"Wait for page load complete","status":"passed","start":1716300032600,"stop":1716300032800,"duration":200}]},{"name":"Then the main heading should be visible","status":"passed","start":1779663502053,"stop":1779663502353,"duration":300,"steps":[{"name":"Find: h1, h2[class*='heading']","status":"passed","start":1716300032800,"stop":1716300033000,"duration":200},{"name":"Assert element displayed","status":"passed","start":1716300033000,"stop":1716300033100,"duration":100}]}],"attachments":[],"labels":[{"name":"tag","value":"smoke"},{"name":"tag","value":"selenium"},{"name":"tag","value":"website"},{"name":"tag","value":"getting-started"},{"name":"tag","value":"severity:medium"}],"extra":{"cucumber":{"featureName":"Selenium Website Navigation","featureUri":"features/selenium_website.feature","tags":["@smoke","@selenium","@website","@getting-started"]},"testClass":"Selenium Website Navigation","testMethod":"Getting started guide is accessible"}},{"uuid":"cu-0006-779663469253","tool":"cucumber","name":"WebDriver API reference loads","fullName":"Selenium API Documentation > WebDriver API reference loads","status":"passed","stage":"finished","start":1779663510353,"stop":1779663514153,"duration":3800,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779663510353,"stop":1779663511453,"duration":1100,"steps":[{"name":"Start ChromeDriver session","status":"passed","start":1716300041100,"stop":1716300041850,"duration":750},{"name":"Initialize browser: headless chrome","status":"passed","start":1716300041850,"stop":1716300042200,"duration":350}]},{"name":"When I navigate to \"https://www.selenium.dev/documentation/webdriver/getting_started/\"","status":"passed","start":1779663511453,"stop":1779663513853,"duration":2400,"steps":[{"name":"Navigate: https://www.selenium.dev/documentation/webdriver/getting_started/","status":"passed","start":1716300042200,"stop":1716300044400,"duration":2200},{"name":"Wait for page load complete","status":"passed","start":1716300044400,"stop":1716300044600,"duration":200}]},{"name":"Then the main heading should be visible","status":"passed","start":1779663513853,"stop":1779663514053,"duration":200,"steps":[{"name":"Find: h1, h2[class*='heading']","status":"passed","start":1716300044600,"stop":1716300044750,"duration":150},{"name":"Assert element displayed","status":"passed","start":1716300044750,"stop":1716300044800,"duration":50}]},{"name":"And the page has content","status":"passed","start":1779663514053,"stop":1779663514153,"duration":100,"steps":[{"name":"Find: body","status":"passed","start":1716300044800,"stop":1716300044850,"duration":50},{"name":"Assert body text length > 0","status":"passed","start":1716300044850,"stop":1716300044900,"duration":50}]}],"attachments":[],"labels":[{"name":"tag","value":"api-docs"},{"name":"tag","value":"selenium"},{"name":"tag","value":"webdriver-api"},{"name":"tag","value":"issue:15"},{"name":"tag","value":"tms:6"},{"name":"tag","value":"severity:high"},{"name":"tag","value":"owner:api-team"}],"extra":{"cucumber":{"featureName":"Selenium API Documentation","featureUri":"features/selenium_api_docs.feature","tags":["@api-docs","@selenium","@webdriver-api"]},"testClass":"Selenium API Documentation","testMethod":"WebDriver API reference loads"}},{"uuid":"cu-0007-779663469253","tool":"cucumber","name":"User login with valid credentials","fullName":"Selenium Website Navigation > User login with valid credentials","status":"flaky","stage":"finished","start":1779663514253,"stop":1779663517653,"duration":3400,"steps":[{"name":"Given a Chrome browser is launched","status":"passed","start":1779663514253,"stop":1779663515353,"duration":1100},{"name":"When I navigate to the login page","status":"passed","start":1779663515353,"stop":1779663516153,"duration":800},{"name":"And I enter valid credentials","status":"passed","start":1779663516153,"stop":1779663516853,"duration":700},{"name":"Then I should be logged in successfully","status":"passed","start":1779663516853,"stop":1779663517653,"duration":800}],"attachments":[],"labels":[{"name":"severity","value":"high"}],"extra":{"flakyReason":"Scenario passed after retry due to timing issue"}}],
+          {"id":"cli-1779710283484","tool":"cucumber","timestamp":1779710283484,"duration":30300,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},
+          {"runs":[{"id":"cli-1779710283484","timestamp":1779710283484,"duration":30300,"total":8,"passed":5,"failed":2,"skipped":0,"flaky":1,"passRate":62.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779710282905","timestamp":1779710282905,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710282336","timestamp":1779710282336,"duration":30300,"total":8,"passed":5,"failed":2,"skipped":0,"flaky":1,"passRate":62.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779710281759","timestamp":1779710281759,"duration":30300,"total":8,"passed":6,"failed":0,"skipped":0,"flaky":2,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710281182","timestamp":1779710281182,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779710280605","timestamp":1779710280605,"duration":30300,"total":8,"passed":7,"failed":0,"skipped":0,"flaky":1,"passRate":87.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710280018","timestamp":1779710280018,"duration":30300,"total":8,"passed":8,"failed":0,"skipped":0,"flaky":0,"passRate":100,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779710279427","timestamp":1779710279427,"duration":30300,"total":8,"passed":7,"failed":1,"skipped":0,"flaky":0,"passRate":87.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":0,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710278838","timestamp":1779710278838,"duration":30300,"total":8,"passed":7,"failed":0,"skipped":0,"flaky":1,"passRate":87.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710278262","timestamp":1779710278262,"duration":30300,"total":8,"passed":8,"failed":0,"skipped":0,"flaky":0,"passRate":100,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779710277683","timestamp":1779710277683,"duration":30300,"total":8,"passed":7,"failed":0,"skipped":0,"flaky":1,"passRate":87.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710277097","timestamp":1779710277097,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710276532","timestamp":1779710276532,"duration":30300,"total":8,"passed":6,"failed":0,"skipped":0,"flaky":2,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710275964","timestamp":1779710275964,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779710275387","timestamp":1779710275387,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710274817","timestamp":1779710274817,"duration":30300,"total":8,"passed":5,"failed":1,"skipped":0,"flaky":2,"passRate":62.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779710274243","timestamp":1779710274243,"duration":30300,"total":8,"passed":4,"failed":2,"skipped":0,"flaky":2,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":2,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779710273665","timestamp":1779710273665,"duration":30300,"total":8,"passed":3,"failed":3,"skipped":0,"flaky":2,"passRate":37.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":3,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779710273094","timestamp":1779710273094,"duration":30300,"total":8,"passed":4,"failed":3,"skipped":0,"flaky":1,"passRate":50,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":2,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779710272523","timestamp":1779710272523,"duration":30300,"total":8,"passed":5,"failed":2,"skipped":0,"flaky":1,"passRate":62.5,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":1,"trivial":0}},{"id":"cli-1779710271950","timestamp":1779710271950,"duration":30300,"total":8,"passed":8,"failed":0,"skipped":0,"flaky":0,"passRate":100,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779710271373","timestamp":1779710271373,"duration":30300,"total":8,"passed":6,"failed":0,"skipped":0,"flaky":2,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":0,"high":2,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710270804","timestamp":1779710270804,"duration":30300,"total":8,"passed":6,"failed":1,"skipped":0,"flaky":1,"passRate":75,"environment":{"name":"QA","ci":"true","branch":"","commit":""},"severityBreakdown":{"critical":1,"high":1,"medium":0,"low":0,"trivial":0}},{"id":"cli-1779710270232","timestamp":1779710270232,"duration":30300,"total":8,"passed":8,"failed":0,"skipped":0,"flaky":0,"passRate":100,"environment":{"name":"QA","ci":"true","branch":"","commit":""}},{"id":"cli-1779710269665","timestamp":1777582669253,"duration":30300,"total":8,"passed":7,"failed":0,"skipped":0,"flaky":1,"passRate":87.5,"environment":{"ci":"false"}}],"testHistory":[{"testId":"cucumber:Selenium Website Navigation > Homepage loads with correct title","testName":"Homepage loads with correct title","history":[{"runId":"cli-1779710283484","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710282905","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710282336","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710281759","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710281182","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710280605","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710280018","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710279427","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710278838","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710278262","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710277683","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710277097","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710276532","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710275964","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710275387","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710274817","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710274243","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710273665","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710273094","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710272523","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710271950","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710271373","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710270804","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710270232","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710269665","status":"passed","duration":4200,"retries":0,"wasFlaky":false}],"flakyScore":0,"lastStatus":"passed","wasEverFlaky":false},{"testId":"cucumber:Selenium Website Navigation > Documentation page is accessible","testName":"Documentation page is accessible","history":[{"runId":"cli-1779710283484","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710282905","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710282336","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710281759","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710281182","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710280605","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710280018","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710279427","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710278838","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710278262","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710277683","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710277097","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710276532","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710275964","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710275387","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710274817","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710274243","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710273665","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710273094","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710272523","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710271950","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710271373","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710270804","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710270232","status":"passed","duration":3500,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710269665","status":"passed","duration":3500,"retries":0,"wasFlaky":false}],"flakyScore":0,"lastStatus":"passed","wasEverFlaky":false},{"testId":"cucumber:Selenium Website Navigation > Downloads page loads successfully","testName":"Downloads page loads successfully","history":[{"runId":"cli-1779710283484","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710282905","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710282336","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710281759","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710281182","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710280605","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710280018","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710279427","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710278838","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710278262","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710277683","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710277097","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710276532","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710275964","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710275387","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710274817","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710274243","status":"failed","duration":4200,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710273665","status":"failed","duration":4200,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710273094","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710272523","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710271950","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710271373","status":"failed","duration":4200,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710270804","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710270232","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710269665","status":"passed","duration":4200,"retries":0,"wasFlaky":false}],"flakyScore":17,"lastStatus":"passed","wasEverFlaky":true,"lastFlakyRunId":"cli-1779710274243"},{"testId":"cucumber:Selenium Website Navigation > WebDriver docs display content","testName":"WebDriver docs display content","history":[{"runId":"cli-1779710283484","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710282905","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710282336","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710281759","status":"failed","duration":4200,"retries":0,"wasFlaky":true,"severity":"critical"},{"runId":"cli-1779710281182","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710280605","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710280018","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710279427","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710278838","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710278262","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710277683","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710277097","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710276532","status":"failed","duration":4200,"retries":0,"wasFlaky":true,"severity":"critical"},{"runId":"cli-1779710275964","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710275387","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710274817","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710274243","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710273665","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710273094","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710272523","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710271950","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710271373","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710270804","status":"failed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710270232","status":"passed","duration":4200,"retries":0,"wasFlaky":false,"severity":"critical"},{"runId":"cli-1779710269665","status":"passed","duration":4200,"retries":0,"wasFlaky":false}],"flakyScore":38,"lastStatus":"failed","wasEverFlaky":true,"lastFlakyRunId":"cli-1779710281759"},{"testId":"cucumber:Selenium Website Navigation > Ecosystem page is reachable","testName":"Ecosystem page is reachable","history":[{"runId":"cli-1779710283484","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710282905","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710282336","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710281759","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710281182","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710280605","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710280018","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710279427","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710278838","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710278262","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710277683","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710277097","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710276532","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710275964","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710275387","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710274817","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"low"},{"runId":"cli-1779710274243","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710273665","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710273094","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710272523","status":"failed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710271950","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710271373","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710270804","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710270232","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"low"},{"runId":"cli-1779710269665","status":"passed","duration":3400,"retries":0,"wasFlaky":false}],"flakyScore":38,"lastStatus":"failed","wasEverFlaky":true,"lastFlakyRunId":"cli-1779710274817"},{"testId":"cucumber:Selenium Website Navigation > Getting started guide is accessible","testName":"Getting started guide is accessible","history":[{"runId":"cli-1779710283484","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710282905","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710282336","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710281759","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710281182","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710280605","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710280018","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710279427","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710278838","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710278262","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710277683","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710277097","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710276532","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710275964","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710275387","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710274817","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710274243","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710273665","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710273094","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710272523","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710271950","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710271373","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710270804","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710270232","status":"passed","duration":3600,"retries":0,"wasFlaky":false,"severity":"medium"},{"runId":"cli-1779710269665","status":"passed","duration":3600,"retries":0,"wasFlaky":false}],"flakyScore":0,"lastStatus":"passed","wasEverFlaky":false},{"testId":"cucumber:Selenium API Documentation > WebDriver API reference loads","testName":"WebDriver API reference loads","history":[{"runId":"cli-1779710283484","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710282905","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710282336","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710281759","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710281182","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710280605","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710280018","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710279427","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710278838","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710278262","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710277683","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710277097","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710276532","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710275964","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710275387","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710274817","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710274243","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710273665","status":"failed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710273094","status":"failed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710272523","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710271950","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710271373","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710270804","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710270232","status":"passed","duration":3800,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710269665","status":"passed","duration":3800,"retries":0,"wasFlaky":false}],"flakyScore":8,"lastStatus":"passed","wasEverFlaky":false},{"testId":"cucumber:Selenium Website Navigation > User login with valid credentials","testName":"User login with valid credentials","history":[{"runId":"cli-1779710283484","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710282905","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710282336","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710281759","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710281182","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710280605","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710280018","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710279427","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710278838","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710278262","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710277683","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710277097","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710276532","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710275964","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710275387","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710274817","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710274243","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710273665","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710273094","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710272523","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710271950","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710271373","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710270804","status":"failed","duration":3400,"retries":0,"wasFlaky":true,"severity":"high"},{"runId":"cli-1779710270232","status":"passed","duration":3400,"retries":0,"wasFlaky":false,"severity":"high"},{"runId":"cli-1779710269665","status":"failed","duration":3400,"retries":0,"wasFlaky":true}],"flakyScore":33,"lastStatus":"failed","wasEverFlaky":true,"lastFlakyRunId":"cli-1779710283484"}]}
         );
       });
     
@@ -6359,6 +7491,18 @@ window.SarvaPrint = function() {
   var runTs   = document.getElementById('sv-run-timestamp');
   if (tocMeta && runTs && runTs.textContent.trim()) {
     tocMeta.textContent = 'Run: ' + runTs.textContent.trim();
+  }
+
+  var histNote     = document.getElementById('sv-print-toc-history-note');
+  var bannerText   = document.getElementById('sv-viewing-banner-text');
+  if (histNote) {
+    var bText = bannerText ? bannerText.textContent.trim() : '';
+    if (bText) {
+      histNote.textContent  = '⏪ ' + bText;
+      histNote.style.display = 'block';
+    } else {
+      histNote.style.display = 'none';
+    }
   }
 
   var wasLight = document.body.classList.contains('light-mode');
@@ -6391,6 +7535,8 @@ window.SarvaPrint = function() {
     if (sidebar) sidebar.style.display = '';
     if (mainEl)  mainEl.style.marginLeft = '';
     views.forEach(function(v, i) { v.style.display = savedDisplays[i]; });
+    var _hn = document.getElementById('sv-print-toc-history-note');
+    if (_hn) { _hn.style.display = 'none'; _hn.textContent = ''; }
     // Clear inline overrides applied during print prep.
     document.querySelectorAll('[id$="-chart"]').forEach(function(el) {
       el.style.width = ''; el.style.maxWidth = '';

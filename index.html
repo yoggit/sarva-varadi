@@ -105,12 +105,19 @@
             font-size: 0.875rem;
         }
 
-        .github-link {
+        .cta-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-link {
             font-family: 'Syne', system-ui, sans-serif;
             display: inline-block;
-            margin-top: 3rem;
             padding: 1rem 2rem;
-            background: #6366f1;
             color: white;
             text-decoration: none;
             border-radius: 8px;
@@ -119,8 +126,22 @@
             transition: background 0.3s ease;
         }
 
-        .github-link:hover {
+        .cta-link-primary {
+            background: #6366f1;
+        }
+
+        .cta-link-primary:hover {
             background: #4f46e5;
+        }
+
+        .cta-link-secondary {
+            background: transparent;
+            border: 2px solid #6366f1;
+            color: #818cf8;
+        }
+
+        .cta-link-secondary:hover {
+            background: rgba(99,102,241,0.15);
         }
     </style>
 </head>
@@ -168,9 +189,14 @@
             </a>
         </div>
 
-        <a href="https://github.com/yoggit/sarva-varadi" class="github-link" target="_blank">
-            ⭐ View on GitHub
-        </a>
+        <div class="cta-links">
+            <a href="docs/" class="cta-link cta-link-secondary">
+                📚 Documentation
+            </a>
+            <a href="https://github.com/yoggit/sarva-varadi" class="cta-link cta-link-primary" target="_blank">
+                ⭐ View on GitHub
+            </a>
+        </div>
     </div>
 </body>
 </html>

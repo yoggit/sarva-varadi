@@ -334,6 +334,260 @@ body.light-mode .sv-topbar {
   flex: 1;
 }
 
+/* ─── Viewing Banner ─────────────────────────────────────────────────────────── */
+.sv-viewing-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.5rem;
+  background: rgba(99, 102, 241, 0.08);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+.sv-viewing-banner-icon { font-size: 0.9rem; }
+.sv-viewing-banner-text { flex: 1; font-weight: 500; color: var(--text-primary); }
+.sv-viewing-banner-back {
+  background: none;
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast);
+  white-space: nowrap;
+}
+.sv-viewing-banner-back:hover {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: var(--accent);
+}
+
+/* ─── Runs view ──────────────────────────────────────────────────────────────── */
+.sv-runs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+.sv-runs-header-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.sv-runs-header h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+.sv-runs-count-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.sv-runs-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.sv-runs-filters select,
+.sv-runs-filters input {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  padding: 0.35rem 0.65rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--t-fast);
+}
+.sv-runs-filters select:hover,
+.sv-runs-filters input:hover { border-color: var(--accent); }
+.sv-runs-filters input { min-width: 120px; }
+.sv-runs-filters input[type="number"] { min-width: 60px; max-width: 70px; }
+.sv-runs-filters input[type="date"]   { min-width: 130px; }
+.sv-runs-filters input::placeholder { color: var(--text-muted); }
+
+.sv-runs-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  padding: 0.2rem 0.55rem;
+}
+.sv-runs-filter-group input {
+  border: none !important;
+  background: transparent !important;
+  padding: 0.15rem 0.25rem !important;
+  min-width: unset !important;
+  max-width: unset !important;
+  font-size: 0.78rem;
+}
+.sv-runs-filter-group input[type="number"] { width: 52px; }
+.sv-runs-filter-group input[type="date"]   { width: 120px; }
+.sv-runs-filter-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  user-select: none;
+}
+.sv-runs-filter-sep {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+/* Pill wrapper for select + search (adds the ✕ button inline) */
+.sv-runs-filter-pill {
+  display: flex;
+  align-items: center;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.sv-runs-filter-pill select,
+.sv-runs-filter-pill input {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* ✕ clear button inside each filter */
+.sv-runs-filter-clear-x {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.65rem;
+  padding: 0 0.4rem;
+  line-height: 1;
+  opacity: 0.55;
+  transition: opacity var(--t-fast), color var(--t-fast);
+}
+.sv-runs-filter-clear-x:hover { opacity: 1; color: var(--accent); }
+
+/* Clear All button */
+.sv-runs-clear-all {
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  white-space: nowrap;
+  transition: border-color var(--t-fast), color var(--t-fast);
+}
+.sv-runs-clear-all:hover { border-color: var(--accent); color: var(--accent); }
+
+.sv-runs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.sv-runs-table th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.sv-runs-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+.sv-runs-table tr:last-child td { border-bottom: none; }
+.sv-runs-table tr:hover td { background: var(--bg-hover); }
+.sv-runs-table tr.sv-runs-row--active td { background: rgba(99,102,241,0.06); }
+
+.sv-runs-num { color: var(--text-muted); font-weight: 600; font-size: 0.75rem; }
+.sv-runs-date { color: var(--text-secondary); white-space: nowrap; }
+.sv-runs-env { white-space: nowrap; }
+.sv-runs-env-chip {
+  display: inline-block;
+  background: rgba(99,102,241,0.12);
+  color: #818cf8;
+  border: 1px solid rgba(99,102,241,0.22);
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: default;
+  vertical-align: middle;
+}
+.light-mode .sv-runs-env-chip {
+  background: rgba(99,102,241,0.1);
+  border-color: rgba(99,102,241,0.2);
+}
+.sv-runs-passrate-wrap { display: flex; align-items: center; gap: 0.5rem; min-width: 100px; }
+.sv-runs-passrate-bar-bg {
+  flex: 1; height: 6px; border-radius: 3px;
+  background: rgba(255,255,255,0.08); overflow: hidden; min-width: 40px;
+}
+.light-mode .sv-runs-passrate-bar-bg { background: rgba(0,0,0,0.08); }
+.sv-runs-passrate-bar { height: 6px; border-radius: 3px; transition: width 0.3s; }
+.sv-runs-passrate-val { font-size: 0.75rem; font-weight: 700; white-space: nowrap; }
+.sv-runs-count { font-size: 0.75rem; white-space: nowrap; }
+.sv-runs-count span { display: inline-block; min-width: 22px; text-align: right; font-weight: 600; }
+.sv-runs-dur { color: var(--text-secondary); font-size: 0.75rem; white-space: nowrap; }
+.sv-runs-action { text-align: right; }
+
+.sv-runs-chip-current {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.18rem 0.5rem;
+  border-radius: 5px;
+  background: rgba(99,102,241,0.12);
+  color: var(--accent);
+  border: 1px solid rgba(99,102,241,0.25);
+}
+.sv-runs-btn-view {
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.28rem 0.65rem;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  white-space: nowrap;
+}
+.sv-runs-btn-view:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(99,102,241,0.08);
+}
+.sv-runs-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
 /* ─── Cards ──────────────────────────────────────────────────────────────────── */
 .sv-card {
   background: var(--bg-surface);
@@ -890,6 +1144,13 @@ body.light-mode .sv-tip-popup {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 }
+@page sv-runs {
+  @top-left {
+    content: "RUN HISTORY";
+    font-size: 7pt; font-weight: 700; letter-spacing: 0.1em; color: #6366f1;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+}
 
 /* ─── @media print ───────────────────────────────────────────────────────────── */
 @media print {
@@ -927,7 +1188,10 @@ body.light-mode .sv-tip-popup {
   #sv-cadence-label,
   [data-sv-hist-filter],
   .sv-print-hide,
-  .sv-dl-btn { display: none !important; }
+  .sv-dl-btn,
+  .sv-viewing-banner,
+  .sv-runs-filter-clear-x,
+  .sv-runs-clear-all { display: none !important; }
 
   /* Full-width layout */
   html, body { background: #fff !important; }
@@ -942,6 +1206,7 @@ body.light-mode .sv-tip-popup {
   .sv-view[data-view="tests"]     { page: sv-tests; }
   .sv-view[data-view="trends"]    { page: sv-trends; }
   .sv-view[data-view="timeline"]  { page: sv-timeline; }
+  .sv-view[data-view="runs"]      { page: sv-runs; }
   /* Named page changes force breaks automatically; keep explicit break as fallback */
   .sv-view + .sv-view { break-before: page; page-break-before: always; }
 
@@ -991,11 +1256,11 @@ body.light-mode .sv-tip-popup {
     margin: 0 0 0.3rem; letter-spacing: -0.03em; line-height: 1.1;
   }
   .sv-print-toc-tool  { font-size: 0.9rem; color: #6b7280; margin: 0 0 0.25rem; }
-  .sv-print-toc-meta  { font-size: 0.75rem; color: #9ca3af; margin: 0 0 2.25rem; }
-  .sv-print-toc-nav   { display: block; text-align: left; border-top: 1px solid #e5e7eb; margin-bottom: 1.75rem; }
+  .sv-print-toc-meta  { font-size: 0.75rem; color: #9ca3af; margin: 0 0 1.5rem; }
+  .sv-print-toc-nav   { display: block; text-align: left; border-top: 1px solid #e5e7eb; margin-bottom: 1.25rem; }
   .sv-print-toc-item  {
     display: flex; align-items: center; gap: 0.9rem;
-    padding: 0.8rem 0; border-bottom: 1px solid #f3f4f6;
+    padding: 0.55rem 0; border-bottom: 1px solid #f3f4f6;
     text-decoration: none; color: inherit;
   }
   .sv-print-toc-num {
@@ -1009,6 +1274,12 @@ body.light-mode .sv-tip-popup {
   .sv-print-toc-desc  { display: block; font-size: 0.73rem; color: #6b7280; margin-top: 0.1rem; }
   .sv-print-toc-arrow { font-size: 0.9rem; color: #6366f1; flex-shrink: 0; }
   .sv-print-toc-footer { font-size: 0.68rem; color: #9ca3af; font-style: italic; }
+  .sv-print-toc-history-note {
+    font-size: 0.7rem; color: #6366f1;
+    background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.22);
+    border-radius: 5px; padding: 0.25rem 0.6rem;
+    margin: 0 0 1rem; display: inline-block;
+  }
 
   /* Executive summary — flows into overview content on same page */
   .sv-print-summary {
@@ -1039,8 +1310,52 @@ body.light-mode .sv-tip-popup {
     margin-bottom: 1rem !important;
     overflow: visible !important;
   }
+  /* Run History table is too long to keep on one page — allow it to break */
+  .sv-view[data-view="runs"] .sv-card {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
   .sv-card-header { border-bottom: 1px solid #e2e8f0 !important; }
   .sv-card-body   { overflow: visible !important; }
+
+  /* Run History filters — show as compact read-only single row, hide interactive controls */
+  .sv-runs-header {
+    flex-wrap: nowrap !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .sv-runs-filters {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0.35rem !important;
+    align-items: center !important;
+  }
+  .sv-runs-filter-pill,
+  .sv-runs-filter-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.2rem !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 5px !important;
+    padding: 0.15rem 0.35rem !important;
+    background: #f9fafb !important;
+    font-size: 0.68rem !important;
+  }
+  .sv-runs-filter-label { font-size: 0.65rem !important; color: #6b7280 !important; }
+  .sv-runs-filter-sep   { color: #9ca3af !important; font-size: 0.65rem !important; }
+  .sv-runs-filters select,
+  .sv-runs-filters input {
+    border: none !important;
+    background: transparent !important;
+    font-size: 0.68rem !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+    color: #374151 !important;
+    box-shadow: none !important;
+  }
+  .sv-runs-filters input[type="text"]   { width: 70px !important; }
+  .sv-runs-filters input[type="date"]   { width: 90px !important; }
+  .sv-runs-filters input[type="number"] { width: 36px !important; }
+  .sv-runs-filters .sv-info-btn { display: none !important; }
 
   /* Charts — scale to fit, never clip */
   [id$="-chart"] { max-width: 100% !important; overflow: visible !important; }
@@ -1211,12 +1526,12 @@ body.light-mode .sv-tip-popup {
             <div class="header-right" style="display: flex; flex-direction: column; align-items: flex-end; gap: 0;">
                 
                 <div class="subtitle">
-                    Latest Run on <span id="timestamp" data-time="2026-05-24T23:50:24.705Z"></span>
+                    Latest Run on <span id="timestamp" data-time="2026-05-25T11:57:28.237Z"></span>
                 </div>
                 
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <div class="subtitle">
-                        Historical analysis across 50 runs
+                        Historical analysis across 51 runs
                     </div>
                     <div class="theme-toggle">
                         <input type="checkbox" id="themeToggle" class="theme-toggle-checkbox">
@@ -1345,13 +1660,16 @@ body.light-mode .sv-tip-popup {
                         <div class="test-title">should be flaky</div>
                         <div class="test-meta">
                             <span class="test-tag" style="background: var(--color-flaky);">
-                                Flaky Score: 68%
+                                Flaky Score: 69%
                             </span>
                             <span style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem;">
-                                Last flaky: <span class="last-flaky-date" data-time="2026-05-22T19:54:01.951Z">Loading...</span>
+                                Last flaky: <span class="last-flaky-date" data-time="2026-05-25T11:57:28.237Z">Loading...</span>
                             </span>
                             <span style="margin-left: 1rem; font-family: monospace;">
-                                <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
+                                <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
+                  ~
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-25T11:57:28.237Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
                   <span class="tooltip-text tooltip-date" data-time="2026-05-24T23:50:24.705Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
@@ -1378,9 +1696,6 @@ body.light-mode .sv-tip-popup {
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
                   <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:06.553Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
-                </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
-                  ✗
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:09.610Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span>
                                 <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--color-text-secondary); font-style: italic; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">(hover for details)</span>
                             </span>
@@ -1397,13 +1712,16 @@ body.light-mode .sv-tip-popup {
                         <div class="test-title">should navigate to Getting Started</div>
                         <div class="test-meta">
                             <span class="test-tag" style="background: var(--color-flaky);">
-                                Flaky Score: 53%
+                                Flaky Score: 54%
                             </span>
                             <span style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem;">
                                 Last flaky: <span class="last-flaky-date" data-time="2026-05-22T19:43:56.626Z">Loading...</span>
                             </span>
                             <span style="margin-left: 1rem; font-family: monospace;">
                                 <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
+                  ✗
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-25T11:57:28.237Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
+                </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
                   ✗
                   <span class="tooltip-text tooltip-date" data-time="2026-05-24T23:50:24.705Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
@@ -1430,9 +1748,6 @@ body.light-mode .sv-tip-popup {
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
                   ✗
                   <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:06.553Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
-                </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-failed); cursor: help; margin: 0 0.15rem;">
-                  ✗
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:09.610Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Failed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span>
                                 <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--color-text-secondary); font-style: italic; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">(hover for details)</span>
                             </span>
@@ -1449,13 +1764,16 @@ body.light-mode .sv-tip-popup {
                         <div class="test-title">should load homepage successfully</div>
                         <div class="test-meta">
                             <span class="test-tag" style="background: var(--color-flaky);">
-                                Flaky Score: 45%
+                                Flaky Score: 46%
                             </span>
                             <span style="margin-left: 1rem; color: var(--color-text-secondary); font-size: 0.875rem;">
-                                Last flaky: <span class="last-flaky-date" data-time="2026-05-23T04:12:18.241Z">Loading...</span>
+                                Last flaky: <span class="last-flaky-date" data-time="2026-05-25T11:57:28.237Z">Loading...</span>
                             </span>
                             <span style="margin-left: 1rem; font-family: monospace;">
-                                <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
+                                <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
+                  ~
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-25T11:57:28.237Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
+                </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
                   <span class="tooltip-text tooltip-date" data-time="2026-05-24T23:50:24.705Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
@@ -1482,9 +1800,6 @@ body.light-mode .sv-tip-popup {
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-flaky); cursor: help; margin: 0 0.15rem;">
                   ~
                   <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:06.553Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Flaky (passed after retry)</strong><br><span class="date-placeholder">Loading...</span></span>
-                </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
-                  ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:09.610Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span>
                                 <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--color-text-secondary); font-style: italic; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">(hover for details)</span>
                             </span>
@@ -1508,6 +1823,9 @@ body.light-mode .sv-tip-popup {
                             </span>
                             <span style="margin-left: 1rem; font-family: monospace;">
                                 <span style="color: var(--color-text-secondary);">Last 10 runs:</span> <span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
+                  ✓
+                  <span class="tooltip-text tooltip-date" data-time="2026-05-25T11:57:28.237Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
+                </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
                   <span class="tooltip-text tooltip-date" data-time="2026-05-24T23:50:24.705Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
@@ -1534,9 +1852,6 @@ body.light-mode .sv-tip-popup {
                 </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
                   ✓
                   <span class="tooltip-text tooltip-date" data-time="2026-05-22T15:07:06.553Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
-                </span><span class="info-tooltip" style="position: relative; display: inline-flex; color: var(--color-passed); cursor: help; margin: 0 0.15rem;">
-                  ✓
-                  <span class="tooltip-text tooltip-date" data-time="2026-05-22T12:52:09.610Z" style="white-space: nowrap; width: auto; min-width: 200px; left: 50%; transform: translateX(-50%); right: auto; top: auto; bottom: 100%; margin-top: 0; margin-bottom: 0.5rem;"><strong>Passed</strong><br><span class="date-placeholder">Loading...</span></span>
                 </span>
                                 <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--color-text-secondary); font-style: italic; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">(hover for details)</span>
                             </span>
@@ -1618,6 +1933,17 @@ body.light-mode .sv-tip-popup {
                   </thead>
                   <tbody>
                       
+        <tr>
+            <td><span class="activity-date" data-time="2026-05-25T11:57:28.237Z">Loading...</span></td>
+            <td style="color: var(--color-failed); font-weight: 600;">64.3%</td>
+            <td>
+                <span style="color: var(--color-passed);">✓ 9</span>
+                <span style="color: var(--color-failed); margin-left: 0.5rem;">✗ 1</span>
+                <span style="color: var(--color-flaky); margin-left: 0.5rem;">~ 2</span>
+                <span style="color: var(--color-skipped); margin-left: 0.5rem;">○ 2</span>
+            </td>
+            <td>16s</td>
+        </tr>
         <tr>
             <td><span class="activity-date" data-time="2026-05-24T23:50:24.705Z">Loading...</span></td>
             <td style="color: var(--color-failed); font-weight: 600;">78.6%</td>
@@ -2205,6 +2531,8 @@ window.SarvaStore = window.SarvaStore || (() => {
   let _metadata = {};
   let _history = [];
   let _stats = {};
+  let _originalTests = [];
+  let _originalMetadata = {};
 
   function computeStats(tests) {
     const unique = new Map();
@@ -2228,6 +2556,8 @@ window.SarvaStore = window.SarvaStore || (() => {
     init(tests, metadata, historyData) {
       _tests = tests || [];
       _metadata = metadata || {};
+      _originalTests = _tests;
+      _originalMetadata = _metadata;
       // historyData may be { runs, testHistory } or a plain runs array (backwards compat)
       if (Array.isArray(historyData)) {
         _history = historyData;
@@ -2238,6 +2568,25 @@ window.SarvaStore = window.SarvaStore || (() => {
       }
       _stats = computeStats(_tests);
       SarvaEventBus.emit('store:ready', { tests: _tests, metadata: _metadata, history: _history, stats: _stats });
+    },
+    switchToRun(tests, runSummary) {
+      _tests = tests || [];
+      _metadata = {
+        id: runSummary.id,
+        timestamp: runSummary.timestamp,
+        duration: runSummary.duration,
+        environment: runSummary.environment || {},
+      };
+      _stats = computeStats(_tests);
+      SarvaEventBus.emit('store:ready', { tests: _tests, metadata: _metadata, history: _history, stats: _stats });
+      SarvaEventBus.emit('run:switched', { runId: runSummary.id });
+    },
+    restoreLatest() {
+      _tests = _originalTests;
+      _metadata = _originalMetadata;
+      _stats = computeStats(_tests);
+      SarvaEventBus.emit('store:ready', { tests: _tests, metadata: _metadata, history: _history, stats: _stats });
+      SarvaEventBus.emit('run:switched', { runId: null });
     },
     get tests() { return _tests; },
     get metadata() { return _metadata; },
@@ -2351,6 +2700,12 @@ const SarvaShell = (() => {
       if (n > 0) { failBadge.textContent = n; failBadge.style.display = ''; }
       else failBadge.style.display = 'none';
     }
+    const runsBadge = document.getElementById('sv-nav-badge-runs');
+    if (runsBadge) {
+      const n = (SarvaStore.history || []).length;
+      if (n > 0) { runsBadge.textContent = n; runsBadge.style.display = ''; }
+      else runsBadge.style.display = 'none';
+    }
   }
 
   /* ── Timestamp ─────────────────────────────────────────────────────────────── */
@@ -2392,6 +2747,100 @@ const SarvaShell = (() => {
 
 document.addEventListener('DOMContentLoaded', () => SarvaShell.init());
 
+/* ── Run Switcher — loads historical run data and swaps store state ────────── */
+const SarvaRunSwitch = (() => {
+  let _activeRunId    = null;
+  let _currentSummary = null;
+  let _currentView    = 'overview';
+
+  function fmtDate(ts) {
+    return new Date(ts).toLocaleString(undefined, {
+      month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+    });
+  }
+
+  function fmtDur(ms) {
+    if (!ms || ms <= 0) return '';
+    if (ms < 60000) return `${(ms / 1000).toFixed(1)}s`;
+    return `${Math.floor(ms / 60000)}m ${Math.floor((ms % 60000) / 1000)}s`;
+  }
+
+  function switchToRun(runId, runSummary) {
+    _activeRunId    = runId;
+    _currentSummary = runSummary;
+    if (window.SarvaRunData && window.SarvaRunData[runId]) {
+      _apply(runId, runSummary);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = `history/${runId}/data.js`;
+    script.onload = () => _apply(runId, runSummary);
+    script.onerror = () => {
+      console.warn(`[SarvaRunSwitch] Could not load history/${runId}/data.js`);
+      _activeRunId = null;
+      _currentSummary = null;
+    };
+    document.head.appendChild(script);
+  }
+
+  function _apply(runId, runSummary) {
+    const tests = window.SarvaRunData && window.SarvaRunData[runId];
+    if (!tests) return;
+    SarvaStore.switchToRun(tests, runSummary);
+    SarvaShell.navigate('overview'); // nav:change will call _updateBanner
+  }
+
+  function restoreLatest() {
+    _activeRunId    = null;
+    _currentSummary = null;
+    SarvaStore.restoreLatest();
+    _hideBanner();
+  }
+
+  function _updateBanner() {
+    if (!_activeRunId || !_currentSummary) { _hideBanner(); return; }
+    const banner = document.getElementById('sv-viewing-banner');
+    const text   = document.getElementById('sv-viewing-banner-text');
+    if (!banner || !text) return;
+
+    const runs   = SarvaStore.history || [];
+    const idx    = runs.findIndex(r => r.id === _currentSummary.id);
+    const runNum = idx >= 0 ? runs.length - idx : '?';
+
+    if (_currentView === 'overview' || _currentView === 'timeline') {
+      const pct = _currentSummary.passRate != null ? `${_currentSummary.passRate}% pass rate` : '';
+      const dur = fmtDur(_currentSummary.duration);
+      text.textContent = [
+        `Viewing Run #${runNum}`,
+        fmtDate(_currentSummary.timestamp),
+        pct, dur,
+      ].filter(Boolean).join(' · ');
+      banner.style.display = 'flex';
+    } else if (_currentView === 'trends') {
+      text.textContent = `Trend marker showing Run #${runNum}`;
+      banner.style.display = 'flex';
+    } else {
+      _hideBanner();
+    }
+  }
+
+  function _hideBanner() {
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
+  }
+
+  SarvaEventBus.on('nav:change', ({ view }) => {
+    _currentView = view;
+    _updateBanner();
+  });
+
+  return {
+    switchToRun,
+    restoreLatest,
+    get activeRunId() { return _activeRunId; },
+  };
+})();
+
 /**
  * Overview micro-app.
  * Renders stat cards, segmented pass rate, donut, health pulse, stacked run history,
@@ -2402,6 +2851,8 @@ const SarvaOverview = (() => {
   let _cachedStats   = null;
   let _cachedHistory = null;
   let _filterN       = 20; // default: last 20 runs
+  let _activeRunId   = null;
+  let _centeredSlice = null; // { sliceStart, sliceEnd } when centering on a run outside the filter window
   let _healthChart   = null;
   let _historyChart  = null;
   let _healthSeriesVisible = { passRate: true, duration: true };
@@ -2409,14 +2860,88 @@ const SarvaOverview = (() => {
 
   function getFilteredHistory() {
     if (!_cachedHistory) return [];
+    if (_centeredSlice) return _cachedHistory.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
     return _filterN > 0 ? _cachedHistory.slice(0, _filterN) : _cachedHistory;
+  }
+
+  // Actual run number (#1 = oldest) for a run object
+  function _runNum(r) {
+    const hi = (_cachedHistory || []).findIndex(h => h.id === r.id);
+    return hi >= 0 ? _cachedHistory.length - hi : '?';
+  }
+
+  // Dashed vertical marker config for the active historical run
+  function _overviewMarkLine(display) {
+    if (!_activeRunId) return null;
+    const mi = display.findIndex(r => r.id === _activeRunId);
+    if (mi === -1) return null;
+    const actualNum = _runNum(display[mi]);
+    return {
+      xAxis: `#${actualNum}`,
+      lineStyle: { color: 'rgba(129,140,248,0.9)', type: 'dashed', width: 1.5 },
+      label: {
+        show: true, position: 'insideStartTop',
+        formatter: `Run #${actualNum}`,
+        color: '#fff', fontSize: 9,
+        backgroundColor: 'rgba(99,102,241,0.92)',
+        padding: [2, 4, 2, 4], borderRadius: 3,
+      },
+    };
+  }
+
+  function _applyCentering() {
+    if (!_activeRunId || !_cachedHistory) { _centeredSlice = null; _updateOverviewLabel(); return; }
+    const hi = _cachedHistory.findIndex(r => r.id === _activeRunId);
+    if (hi === -1) { _centeredSlice = null; _updateOverviewLabel(); return; }
+    if (_filterN > 0 && hi < _filterN) { _centeredSlice = null; _updateOverviewLabel(); return; }
+    const windowSize = 20;
+    let sliceStart = Math.max(0, hi - 9);
+    let sliceEnd   = Math.min(_cachedHistory.length, sliceStart + windowSize);
+    sliceStart = Math.max(0, sliceEnd - windowSize);
+    _centeredSlice = { sliceStart, sliceEnd };
+    document.querySelectorAll('.sv-run-filter-btn').forEach(b => b.classList.remove('active'));
+    _updateOverviewLabel();
+  }
+
+  function _updateOverviewLabel() {
+    const lbl = document.getElementById('sv-overview-run-label');
+    if (!lbl) return;
+    if (!_centeredSlice || !_cachedHistory) { lbl.textContent = ''; return; }
+    const { sliceStart, sliceEnd } = _centeredSlice;
+    const len       = _cachedHistory.length;
+    const newestNum = len - sliceStart;
+    const oldestNum = len - (sliceEnd - 1);
+    const hi        = _cachedHistory.findIndex(r => r.id === _activeRunId);
+    const activeNum = len - hi;
+    lbl.textContent = `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+  }
+
+  // Returns the run window label for chart headers
+  function _runWindowLabel(display) {
+    if (_centeredSlice && _cachedHistory) {
+      const { sliceStart, sliceEnd } = _centeredSlice;
+      const len       = _cachedHistory.length;
+      const newestNum = len - sliceStart;
+      const oldestNum = len - (sliceEnd - 1);
+      const hi        = _cachedHistory.findIndex(r => r.id === _activeRunId);
+      const activeNum = len - hi;
+      return `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+    }
+    return _filterN > 0 && _cachedHistory && _cachedHistory.length > _filterN
+      ? `Last ${display.length} runs` : `${display.length} runs`;
   }
 
   function setRunFilter(n, btn) {
     _filterN = n;
+    _centeredSlice = null;
+    _activeRunId   = null; // suppress marker for this visit only — re-syncs on next nav:change
     document.querySelectorAll('.sv-run-filter-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
-    if (typeof echarts !== 'undefined') {
+    _updateOverviewLabel();
+    // Hide banner locally without touching global history state (other views stay in history mode)
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
+    if (typeof echarts !== 'undefined' && _cachedHistory !== null) {
       const h = getFilteredHistory();
       renderHealthPulse(h);
       renderHistoryChart(h);
@@ -2458,9 +2983,10 @@ const SarvaOverview = (() => {
       }
     }
 
-    // New tests / removed tests detection — uses same stripTags logic as renderCoverageChanges
+    // Coverage chips are always relative to the latest run — skip when viewing history
+    const _isViewingHistory = typeof SarvaRunSwitch !== 'undefined' && SarvaRunSwitch.activeRunId;
     const _latestRunId = SarvaStore.history && SarvaStore.history.length > 0 ? SarvaStore.history[0].id : null;
-    if (_latestRunId && SarvaStore.history && SarvaStore.history.length > 1) {
+    if (!_isViewingHistory && _latestRunId && SarvaStore.history && SarvaStore.history.length > 1) {
       const _th = SarvaStore.testHistory || [];
       const _stripTags = n => (n || '').replace(/\s*@\S+/g, '').trim();
       const _latestBN = new Set(_th.filter(t => t.history.length > 0 && t.history[0].runId === _latestRunId).map(t => _stripTags(t.testName || '')));
@@ -2698,7 +3224,16 @@ const SarvaOverview = (() => {
       return;
     }
 
-    if (label) label.textContent = `Last ${display.length} runs`;
+    if (label) label.textContent = _runWindowLabel(display);
+
+    // Update print insight with window-aware text
+    const _healthInsightEl = document.getElementById('sv-print-insight-health');
+    if (_healthInsightEl && display.length >= 2) {
+      const _rates = display.map(r => { const t=(r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0); return t>0?+((r.passed/t)*100).toFixed(1):0; });
+      const _avg = +(_rates.reduce((a,b)=>a+b,0)/_rates.length).toFixed(1);
+      const _best = Math.max(..._rates), _worst = Math.min(..._rates);
+      _healthInsightEl.textContent = `${_runWindowLabel(display)}: avg pass rate ${_avg}%, best ${_best}%, worst ${_worst}%.`;
+    }
 
     /* Trend badge: delta between the two most recent runs */
     const trendEl = document.getElementById('sv-health-trend');
@@ -2737,12 +3272,13 @@ const SarvaOverview = (() => {
       });
     };
 
-    const xData = display.map((_, i) => `#${i + 1}`);
+    const xData = display.map(r => `#${_runNum(r)}`);
     const yData = display.map(r => {
       const t = (r.passed || 0) + (r.failed || 0) + (r.flaky || 0) + (r.skipped || 0);
       return t > 0 ? +((r.passed / t) * 100).toFixed(1) : 0;
     });
     const durData = display.map(r => r.duration > 0 ? +(r.duration / 1000).toFixed(1) : null);
+    const healthMl = _overviewMarkLine(display);
     const hasDuration = durData.some(d => d !== null && d > 0);
 
     const axisColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
@@ -2856,6 +3392,7 @@ const SarvaOverview = (() => {
             ],
           },
         },
+        ...(healthMl ? { markLine: { silent: true, symbol: ['none','none'], data: [healthMl] } } : {}),
       },
       ...(hasDuration ? [{
         name: 'Duration',
@@ -2919,13 +3456,24 @@ const SarvaOverview = (() => {
       return;
     }
 
-    if (label) label.textContent = `Last ${display.length} runs`;
+    if (label) label.textContent = _runWindowLabel(display);
+
+    // Update print insight with window-aware text
+    const _histInsightEl = document.getElementById('sv-print-insight-history');
+    if (_histInsightEl && display.length >= 2) {
+      const _hRates = display.map(r => { const t=(r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0); return t>0?+((r.passed/t)*100).toFixed(1):0; });
+      const _hBest = Math.max(..._hRates), _hWorst = Math.min(..._hRates);
+      const _hLatest = _hRates[_hRates.length - 1];
+      _histInsightEl.textContent = `${_runWindowLabel(display)}. Latest: ${_hLatest}%. Range: ${_hWorst}%–${_hBest}%.`;
+    }
+
     const isDark = !document.body.classList.contains('light-mode');
     if (_historyChart) { try { _historyChart.dispose(); } catch (e) {} _historyChart = null; }
     _historyChart = echarts.init(el, null, { renderer: 'svg' });
     const chart = _historyChart;
 
-    const xData   = display.map((_, i) => `#${i + 1}`);
+    const xData      = display.map(r => `#${_runNum(r)}`);
+    const historyMl  = _overviewMarkLine(display);
     const passed  = display.map(r => r.passed  || 0);
     const failed  = display.map(r => r.failed  || 0);
     const flaky   = display.map(r => r.flaky   || 0);
@@ -3002,7 +3550,7 @@ const SarvaOverview = (() => {
         },
       },
       series: [
-        mkBar('Passed',  passed,  '#22c55e'),
+        { ...mkBar('Passed', passed, '#22c55e'), ...(historyMl ? { markLine: { silent: true, symbol: ['none','none'], data: [historyMl] } } : {}) },
         mkBar('Failed',  failed,  '#f43f5e'),
         mkBar('Flaky',   flaky,   '#f59e0b'),
         mkBar('Skipped', skipped, '#64748b'),
@@ -3035,6 +3583,12 @@ const SarvaOverview = (() => {
   function renderCoverageChanges() {
     const section = document.getElementById('sv-coverage-changes');
     if (!section) return;
+
+    // Coverage changes are always relative to the latest run; not meaningful for historical views
+    if (typeof SarvaRunSwitch !== 'undefined' && SarvaRunSwitch.activeRunId) {
+      section.style.display = 'none';
+      return;
+    }
 
     const latestRunId = SarvaStore.history && SarvaStore.history.length > 0 ? SarvaStore.history[0].id : null;
     if (!latestRunId || !SarvaStore.history || SarvaStore.history.length < 2) {
@@ -3141,7 +3695,7 @@ const SarvaOverview = (() => {
         <div class="sv-card-header">
           <span style="display:flex;align-items:center;gap:0.4rem;">
             <span class="sv-card-title" style="color:#22d3ee;">New Tests</span>
-            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>New Tests</b><br>• Appearing in the suite for the first time this run<br>• Review to confirm they are intentionally added<br>• Click any test to inspect its result and steps')}">${INFO_ICON_SM}</span>
+            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>New Tests</b><br>• Appearing in the suite for the first time this run<br>• Review to confirm they are intentionally added<br>• Click any test to inspect its result and steps<br>• Always reflects the current/latest run — hidden when viewing a historical run')}">${INFO_ICON_SM}</span>
           </span>
           <span style="font-size:0.72rem;color:var(--text-muted);">${newTests.length} test${newTests.length !== 1 ? 's' : ''}</span>
         </div>
@@ -3153,7 +3707,7 @@ const SarvaOverview = (() => {
         <div class="sv-card-header">
           <span style="display:flex;align-items:center;gap:0.4rem;">
             <span class="sv-card-title" style="color:#f97316;">Absent Tests</span>
-            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Absent Tests</b><br>• Ran in previous runs but missing from this run<br>• Could be deleted, renamed, or excluded by a filter<br>• Last-seen status shown to help diagnose the cause')}">${INFO_ICON_SM}</span>
+            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Absent Tests</b><br>• Ran in previous runs but missing from this run<br>• Could be deleted, renamed, or excluded by a filter<br>• Last-seen status shown to help diagnose the cause<br>• Always reflects the current/latest run — hidden when viewing a historical run')}">${INFO_ICON_SM}</span>
           </span>
           <span style="font-size:0.72rem;color:var(--text-muted);">${absentTests.length} test${absentTests.length !== 1 ? 's' : ''}</span>
         </div>
@@ -3356,6 +3910,39 @@ const SarvaOverview = (() => {
   SarvaEventBus.on('echarts:ready', () => {
     if (_cachedStats)   renderDonut(_cachedStats);
     if (_cachedHistory) {
+      const h = getFilteredHistory();
+      renderHealthPulse(h);
+      renderHistoryChart(h);
+    }
+  });
+
+  // Re-render ECharts when Overview becomes visible (e.g. after a run switch from Runs view)
+  SarvaEventBus.on('nav:change', ({ view }) => {
+    if (view === 'overview' && typeof echarts !== 'undefined' && _cachedStats) {
+      // Re-sync history mode from global state (restores after a view-local filter reset)
+      _activeRunId = (typeof SarvaRunSwitch !== 'undefined') ? SarvaRunSwitch.activeRunId : null;
+      _applyCentering();
+      setTimeout(() => {
+        const h = getFilteredHistory();
+        renderDonut(_cachedStats);
+        renderHealthPulse(h);
+        renderHistoryChart(h);
+      }, 50);
+    }
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeRunId = runId;
+    if (typeof echarts !== 'undefined' && _cachedHistory) {
+      _applyCentering();
+      if (!runId) {
+        // Restore: reset to default Last 20 filter
+        _filterN = 20;
+        document.querySelectorAll('.sv-run-filter-btn').forEach(b => {
+          b.classList.toggle('active', b.textContent.trim() === 'Last 20');
+        });
+        _updateOverviewLabel();
+      }
       const h = getFilteredHistory();
       renderHealthPulse(h);
       renderHistoryChart(h);
@@ -5162,9 +5749,11 @@ window.SarvaTestDetail = SarvaTestDetail;
  */
 const SarvaTrends = (() => {
 
-  let _history = null;
-  let _filterN  = 20;
-  let _charts   = {};
+  let _history        = null;
+  let _filterN        = 20;
+  let _charts         = {};
+  let _activeRunId    = null;
+  let _centeredSlice  = null; // { sliceStart, sliceEnd } when centering on a run outside the filter window
 
   /* ── Utilities ──────────────────────────────────────────────────────────── */
   function fmtDur(ms) {
@@ -5191,7 +5780,86 @@ const SarvaTrends = (() => {
 
   function getFiltered() {
     if (!_history || _history.length === 0) return [];
+    if (_centeredSlice) return _history.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
     return _filterN > 0 ? _history.slice(0, _filterN) : _history;
+  }
+
+  function _applyCentering() {
+    if (!_activeRunId || !_history) { _centeredSlice = null; _updateRunLabel(); return; }
+    const hi = _history.findIndex(r => r.id === _activeRunId);
+    if (hi === -1) { _centeredSlice = null; _updateRunLabel(); return; }
+    // Skip centering only if a specific filter is active AND the run is within that window
+    if (_filterN > 0 && hi < _filterN) { _centeredSlice = null; _updateRunLabel(); return; }
+    // Center a 20-run window around the selected run
+    const windowSize = 20;
+    let sliceStart = Math.max(0, hi - 9);
+    let sliceEnd   = Math.min(_history.length, sliceStart + windowSize);
+    sliceStart = Math.max(0, sliceEnd - windowSize);
+    _centeredSlice = { sliceStart, sliceEnd };
+    document.querySelectorAll('.sv-trends-run-btn').forEach(b => b.classList.remove('active'));
+    _updateRunLabel();
+  }
+
+  function _runWindowLabel(display) {
+    if (_centeredSlice && _history) {
+      const { sliceStart, sliceEnd } = _centeredSlice;
+      const len       = _history.length;
+      const newestNum = len - sliceStart;
+      const oldestNum = len - (sliceEnd - 1);
+      const hi        = _history.findIndex(r => r.id === _activeRunId);
+      const activeNum = len - hi;
+      return `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+    }
+    return _filterN > 0 && _history && _history.length > _filterN
+      ? `Last ${display.length} runs` : `${display.length} runs`;
+  }
+
+  function _updateRunLabel() {
+    const lbl = document.getElementById('sv-trends-run-label');
+    if (!lbl) return;
+    if (!_centeredSlice || !_history) { lbl.textContent = ''; return; }
+    const { sliceStart, sliceEnd } = _centeredSlice;
+    const len       = _history.length;
+    const newestNum = len - sliceStart;
+    const oldestNum = len - (sliceEnd - 1);
+    const hi        = _history.findIndex(r => r.id === _activeRunId);
+    const activeNum = len - hi;
+    lbl.textContent = `Runs #${oldestNum}–#${newestNum} · centered on Run #${activeNum}`;
+  }
+
+  // Returns actual run number (#1 = oldest) for a run object
+  function _runNum(r) {
+    const hi = (_history || []).findIndex(h => h.id === r.id);
+    return hi >= 0 ? _history.length - hi : '?';
+  }
+
+  function _runMarker(display) {
+    if (!_activeRunId) return null;
+    const mi = display.findIndex(r => r.id === _activeRunId);
+    if (mi === -1) return null;
+    const actualNum = _runNum(display[mi]);
+    return {
+      xAxis: `#${actualNum}`,  // actual run number, matches new xData labels
+      lineStyle: { color: 'rgba(129,140,248,0.9)', type: 'dashed', width: 1.5 },
+      label: {
+        show: true, position: 'insideStartTop',
+        formatter: `Run #${actualNum}`,
+        color: '#fff', fontSize: 9,
+        backgroundColor: 'rgba(99,102,241,0.92)',
+        padding: [2, 4, 2, 4], borderRadius: 3,
+      },
+    };
+  }
+
+  function _markerSeries(display) {
+    const m = _runMarker(display);
+    if (!m) return [];
+    // No 'name' → stays out of chart legends
+    return [{
+      type: 'line', data: [], animation: false,
+      lineStyle: { opacity: 0 }, itemStyle: { opacity: 0 }, symbol: 'none',
+      markLine: { silent: true, symbol: ['none', 'none'], data: [m] },
+    }];
   }
 
   /* ── Chart lifecycle ────────────────────────────────────────────────────── */
@@ -5242,8 +5910,14 @@ const SarvaTrends = (() => {
   /* ── Top-level render ───────────────────────────────────────────────────── */
   function setRunFilter(n, btn) {
     _filterN = n;
+    _centeredSlice = null;
+    _activeRunId   = null; // suppress marker for this visit only — re-syncs on next nav:change
     document.querySelectorAll('.sv-trends-run-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
+    _updateRunLabel();
+    // Hide banner locally without touching global history state (other views stay in history mode)
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
     if (typeof echarts !== 'undefined' && _history !== null) renderAll();
   }
 
@@ -5322,13 +5996,13 @@ const SarvaTrends = (() => {
   /* ── Pass Rate Trend ────────────────────────────────────────────────────── */
   function renderPassRateChart(display) {
     const lbl = document.getElementById('sv-trends-passrate-label');
-    if (lbl) lbl.textContent = `${display.length} runs`;
+    if (lbl) lbl.textContent = _runWindowLabel(display);
 
     const chart = initChart('sv-trends-passrate-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData = display.map((_, i) => `#${i + 1}`);
+    const xData = display.map(r => `#${_runNum(r)}`);
     const yData = display.map(r => {
       const t = (r.passed||0)+(r.failed||0)+(r.flaky||0)+(r.skipped||0);
       return t > 0 ? +((r.passed / t) * 100).toFixed(1) : 0;
@@ -5417,6 +6091,7 @@ const SarvaTrends = (() => {
           itemStyle: { color: '#f59e0b' },
           areaStyle: { color: 'transparent' },
         }] : []),
+        ..._markerSeries(display),
       ],
     });
 
@@ -5426,13 +6101,13 @@ const SarvaTrends = (() => {
   /* ── Failures & Flakiness ───────────────────────────────────────────────── */
   function renderStabilityChart(display) {
     const lbl = document.getElementById('sv-trends-stability-label');
-    if (lbl) lbl.textContent = `${display.length} runs`;
+    if (lbl) lbl.textContent = _runWindowLabel(display);
 
     const chart = initChart('sv-trends-stability-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData  = display.map((_, i) => `#${i + 1}`);
+    const xData  = display.map(r => `#${_runNum(r)}`);
     const failed = display.map(r => r.failed || 0);
     const flaky  = display.map(r => r.flaky  || 0);
 
@@ -5477,6 +6152,7 @@ const SarvaTrends = (() => {
       series: [
         mkArea('Failed', failed, '#f43f5e', 'rgba(244,63,94,0.18)'),
         mkArea('Flaky',  flaky,  '#f59e0b', 'rgba(245,158,11,0.18)'),
+        ..._markerSeries(display),
       ],
     });
 
@@ -5495,11 +6171,13 @@ const SarvaTrends = (() => {
 
   /* ── Test Count Over Time ───────────────────────────────────────────────── */
   function renderCountChart(display) {
+    const lbl = document.getElementById('sv-trends-count-label');
+    if (lbl) lbl.textContent = _runWindowLabel(display);
     const chart = initChart('sv-trends-count-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData   = display.map((_, i) => `#${i + 1}`);
+    const xData   = display.map(r => `#${_runNum(r)}`);
     const passed  = display.map(r => r.passed  || 0);
     const failed  = display.map(r => r.failed  || 0);
     const flaky   = display.map(r => r.flaky   || 0);
@@ -5557,6 +6235,7 @@ const SarvaTrends = (() => {
         mkStack('Failed',  failed,  '#f43f5e', 'rgba(244,63,94,0.4)'),
         mkStack('Flaky',   flaky,   '#f59e0b', 'rgba(245,158,11,0.4)'),
         mkStack('Skipped', skipped, '#64748b', 'rgba(100,116,139,0.3)'),
+        ..._markerSeries(display),
         // Scatter markers for test count changes (+N / -N)
         {
           name: 'Changes', type: 'scatter', data: display.map((r, i) => {
@@ -5602,6 +6281,8 @@ const SarvaTrends = (() => {
 
   /* ── Run Duration Trend ─────────────────────────────────────────────────── */
   function renderDurationChart(display) {
+    const lbl = document.getElementById('sv-trends-duration-label');
+    if (lbl) lbl.textContent = _runWindowLabel(display);
     const empty = document.getElementById('sv-trends-duration-empty');
     const durs  = display.map(r => r.duration > 0 ? +(r.duration / 1000).toFixed(1) : null);
     const valid  = durs.filter(d => d !== null && d > 0);
@@ -5618,7 +6299,7 @@ const SarvaTrends = (() => {
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
-    const xData  = display.map((_, i) => `#${i + 1}`);
+    const xData  = display.map(r => `#${_runNum(r)}`);
     const avgDur = +(valid.reduce((a, b) => a + b, 0) / valid.length).toFixed(1);
 
     chart.setOption({
@@ -5684,6 +6365,7 @@ const SarvaTrends = (() => {
             }],
           },
         },
+        ..._markerSeries(display),
       ],
     });
 
@@ -6013,14 +6695,14 @@ const SarvaTrends = (() => {
     }
     if (section) section.style.display = '';
     if (empty) empty.style.display = 'none';
-    if (lbl) lbl.textContent = `${display.length} runs`;
+    if (lbl) lbl.textContent = _runWindowLabel(display);
 
     const chart = initChart('sv-trends-severity-chart', 'canvas');
     if (!chart) return;
 
     const { label, split, tipBg, tipBdr, tipTxt } = colors();
 
-    const xData    = display.map((_, i) => `#${i + 1}`);
+    const xData    = display.map(r => `#${_runNum(r)}`);
     const critical = display.map(r => (r.severityBreakdown && r.severityBreakdown.critical) || 0);
     const high     = display.map(r => (r.severityBreakdown && r.severityBreakdown.high)     || 0);
     const medium   = display.map(r => (r.severityBreakdown && r.severityBreakdown.medium)   || 0);
@@ -6085,6 +6767,7 @@ const SarvaTrends = (() => {
         mkBar('Medium',   medium,   '#f59e0b'),
         mkBar('Low',      low,      '#3b82f6'),
         mkBar('Trivial',  trivial,  '#94a3b8'),
+        ..._markerSeries(display),
       ],
     });
 
@@ -6104,7 +6787,26 @@ const SarvaTrends = (() => {
   // Re-render when tab becomes visible (ECharts needs a visible container)
   SarvaEventBus.on('nav:change', ({ view }) => {
     if (view === 'trends' && typeof echarts !== 'undefined' && _history !== null) {
+      // Re-sync history mode from global state (restores after a view-local filter reset)
+      _activeRunId = (typeof SarvaRunSwitch !== 'undefined') ? SarvaRunSwitch.activeRunId : null;
+      _applyCentering();
       setTimeout(renderAll, 50);
+    }
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeRunId = runId;
+    if (typeof echarts !== 'undefined' && _history !== null) {
+      _applyCentering();
+      if (!runId) {
+        // Restore: reset to default Last 20 filter
+        _filterN = 20;
+        document.querySelectorAll('.sv-trends-run-btn').forEach(b => {
+          b.classList.toggle('active', b.textContent.trim() === 'Last 20');
+        });
+        _updateRunLabel();
+      }
+      renderAll();
     }
   });
 
@@ -6123,8 +6825,10 @@ window.SarvaTrends = SarvaTrends;
  */
 const SarvaTimeline = (() => {
 
-  let _charts = {};
-  let _cadenceFilterN = 20; // default: last 20 runs
+  let _charts          = {};
+  let _cadenceFilterN  = 20; // default: last 20 runs
+  let _activeRunId     = null;
+  let _centeredSlice   = null; // { sliceStart, sliceEnd } in oldest-first sorted history
 
   /* ── Utilities ──────────────────────────────────────────────────────────── */
   function fmtDur(ms) {
@@ -6177,13 +6881,70 @@ const SarvaTimeline = (() => {
     return '#64748b';
   }
 
+  /* ── Run Cadence marker (vertical dashed line for selected historical run) ── */
+  function _cadenceMarkerSeries(display, xData) {
+    if (!_activeRunId) return [];
+    const mi = display.findIndex(r => r.id === _activeRunId);
+    if (mi === -1) return [];
+    // run number in the full history (oldest-first counting)
+    const allHistory = SarvaStore.history || [];
+    const sorted     = allHistory.slice().sort((a, b) => a.timestamp - b.timestamp);
+    const fullIdx    = sorted.findIndex(r => r.id === _activeRunId);
+    const runNum     = fullIdx >= 0 ? fullIdx + 1 : mi + 1;
+    return [{
+      type: 'line', data: [], animation: false,
+      lineStyle: { opacity: 0 }, itemStyle: { opacity: 0 }, symbol: 'none',
+      markLine: {
+        silent: true, symbol: ['none', 'none'],
+        data: [{
+          xAxis: xData[mi],
+          lineStyle: { color: 'rgba(129,140,248,0.9)', type: 'dashed', width: 1.5 },
+          label: {
+            show: true, position: 'insideStartTop',
+            formatter: `Run #${runNum}`,
+            color: '#818cf8', fontSize: 9,
+            backgroundColor: 'rgba(16,20,32,0.75)',
+            padding: [2, 4, 2, 4], borderRadius: 3,
+          },
+        }],
+      },
+    }];
+  }
+
   /* ── Run Cadence ────────────────────────────────────────────────────────── */
   function setCadenceFilter(n, btn) {
     _cadenceFilterN = n;
+    _centeredSlice  = null;
+    _activeRunId    = null; // suppress marker for this visit only — re-syncs on next nav:change
     document.querySelectorAll('.sv-cadence-run-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
-    renderRunCadence();
-    renderTimelinePrintInsights();
+    // Hide banner locally without touching global history state (other views stay in history mode)
+    const banner = document.getElementById('sv-viewing-banner');
+    if (banner) banner.style.display = 'none';
+    if (typeof echarts !== 'undefined') {
+      renderRunCadence();
+      renderTimelinePrintInsights();
+    }
+  }
+
+  function _applyCadenCentering(sorted) {
+    // sorted = oldest-first array from SarvaStore.history
+    if (!_activeRunId || !sorted || sorted.length === 0) { _centeredSlice = null; return; }
+    const hi = sorted.findIndex(r => r.id === _activeRunId);
+    if (hi === -1) { _centeredSlice = null; return; }
+    // In oldest-first sorted array: position hi; current window is the LAST _cadenceFilterN items
+    const windowStart = _cadenceFilterN > 0 ? Math.max(0, sorted.length - _cadenceFilterN) : 0;
+    const windowEnd   = sorted.length;
+    if (_cadenceFilterN > 0 && hi >= windowStart && hi < windowEnd) {
+      _centeredSlice = null; return; // visible in current window
+    }
+    // Center a 20-run window around hi in sorted (oldest-first)
+    const windowSize = 20;
+    let sliceStart = Math.max(0, hi - 9);
+    let sliceEnd   = Math.min(sorted.length, sliceStart + windowSize);
+    sliceStart = Math.max(0, sliceEnd - windowSize);
+    _centeredSlice = { sliceStart, sliceEnd };
+    document.querySelectorAll('.sv-cadence-run-btn').forEach(b => b.classList.remove('active'));
   }
 
   function renderRunCadence() {
@@ -6203,13 +6964,24 @@ const SarvaTimeline = (() => {
 
     // Sort all history oldest → newest, then apply filter (keep most recent N)
     const sorted = allHistory.slice().sort((a, b) => a.timestamp - b.timestamp);
-    const history = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+    _applyCadenCentering(sorted);
+    let history;
+    if (_centeredSlice) {
+      history = sorted.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
+      // Label shows the run number range (oldest-first: run #1 = index 0)
+      const hi           = sorted.findIndex(r => r.id === _activeRunId);
+      const runNumOldest = _centeredSlice.sliceStart + 1;
+      const runNumNewest = _centeredSlice.sliceEnd;
+      const activeRunNum = hi + 1;
+      if (lbl) lbl.textContent = `Runs #${runNumOldest}–#${runNumNewest} · centered on Run #${activeRunNum}`;
+    } else {
+      history = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+      if (lbl) lbl.textContent = _cadenceFilterN > 0 && allHistory.length > _cadenceFilterN
+        ? `Last ${history.length} of ${allHistory.length} runs`
+        : `${history.length} runs`;
+    }
 
-    if (lbl) lbl.textContent = _cadenceFilterN > 0 && allHistory.length > _cadenceFilterN
-      ? `Last ${history.length} of ${allHistory.length} runs`
-      : `${history.length} runs`;
-
-    // Sort oldest → newest (already sorted, but kept for clarity)
+    // oldest → newest (already sorted)
     const display = history;
 
     const chart = initChart('sv-cadence-chart', 'canvas');
@@ -6296,12 +7068,15 @@ const SarvaTimeline = (() => {
           handleStyle: { color: '#6366f1' }, textStyle: { color: label, fontSize: 10 },
           showDataShadow: false, showDetail: false },
       ],
-      series: [{
-        type: 'bar', data: durs.map((v, i) => ({ value: v, itemStyle: { color: barColors[i] } })),
-        itemStyle: { borderRadius: [3, 3, 0, 0] },
-        emphasis: { itemStyle: { opacity: 0.8 } },
-        barMaxWidth: 32,
-      }],
+      series: [
+        {
+          type: 'bar', data: durs.map((v, i) => ({ value: v, itemStyle: { color: barColors[i] } })),
+          itemStyle: { borderRadius: [3, 3, 0, 0] },
+          emphasis: { itemStyle: { opacity: 0.8 } },
+          barMaxWidth: 32,
+        },
+        ..._cadenceMarkerSeries(display, xData),
+      ],
     });
 
     SarvaEventBus.on('theme:changed', () => renderRunCadence());
@@ -6313,6 +7088,20 @@ const SarvaTimeline = (() => {
     const empty   = document.getElementById('sv-gantt-empty');
     const chartEl = document.getElementById('sv-gantt-chart');
     if (!chartEl) return;
+
+    // Update title to reflect whether we're viewing history or the current run
+    const titleEl = document.getElementById('sv-gantt-title');
+    if (titleEl) {
+      if (_activeRunId) {
+        const allHistory = SarvaStore.history || [];
+        const sorted = allHistory.slice().sort((a, b) => a.timestamp - b.timestamp);
+        const hi = sorted.findIndex(r => r.id === _activeRunId);
+        const runNum = hi >= 0 ? hi + 1 : '?';
+        titleEl.textContent = `Execution Gantt — Run #${runNum}`;
+      } else {
+        titleEl.textContent = 'Execution Gantt — Current Run';
+      }
+    }
 
     const tests = (SarvaStore.stats && SarvaStore.stats.finalTests) || SarvaStore.tests || [];
     if (!tests.length) {
@@ -6502,7 +7291,18 @@ const SarvaTimeline = (() => {
 
     const allHistory = SarvaStore.history;
     const sorted = (allHistory || []).slice().sort((a, b) => a.timestamp - b.timestamp);
-    const cadenceHistory = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+    // Use centered slice if active, otherwise the standard filter window
+    let cadenceHistory;
+    let windowLabel;
+    if (_centeredSlice) {
+      cadenceHistory = sorted.slice(_centeredSlice.sliceStart, _centeredSlice.sliceEnd);
+      const hi = sorted.findIndex(r => r.id === _activeRunId);
+      windowLabel = `Runs #${_centeredSlice.sliceStart + 1}–#${_centeredSlice.sliceEnd} · centered on Run #${hi + 1}`;
+    } else {
+      cadenceHistory = _cadenceFilterN > 0 ? sorted.slice(-_cadenceFilterN) : sorted;
+      windowLabel = _cadenceFilterN > 0 && sorted.length > _cadenceFilterN
+        ? `Last ${cadenceHistory.length} of ${sorted.length} runs` : `${cadenceHistory.length} runs`;
+    }
 
     if (cadenceHistory.length >= 2) {
       const durs = cadenceHistory.filter(r => r.duration > 0).map(r => r.duration);
@@ -6521,7 +7321,7 @@ const SarvaTimeline = (() => {
           : 'Most runs are healthy; a few dipped below 95%.';
       const durNote = avgS ? ` Average run duration: ${avgS}s.` : '';
       set('sv-print-insight-cadence',
-        `${cadenceHistory.length} runs shown. Average pass rate: ${avgRate !== null ? avgRate + '%' : '—'}.${durNote} ${healthSummary}`
+        `${windowLabel}. Average pass rate: ${avgRate !== null ? avgRate + '%' : '—'}.${durNote} ${healthSummary}`
       );
     }
 
@@ -6558,7 +7358,24 @@ const SarvaTimeline = (() => {
   // Lazy-render when tab becomes visible
   SarvaEventBus.on('nav:change', ({ view }) => {
     if (view === 'timeline' && typeof echarts !== 'undefined') {
+      // Re-sync history mode from global state (restores after a view-local filter reset)
+      _activeRunId = (typeof SarvaRunSwitch !== 'undefined') ? SarvaRunSwitch.activeRunId : null;
+      if (_activeRunId) _applyCadenCentering((SarvaStore.history || []).slice().sort((a, b) => a.timestamp - b.timestamp));
       setTimeout(renderAll, 50);
+    }
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeRunId = runId;
+    if (typeof echarts !== 'undefined') {
+      if (!runId) {
+        // Restore: reset to default Last 20 filter
+        _cadenceFilterN = 20;
+        document.querySelectorAll('.sv-cadence-run-btn').forEach(b => {
+          b.classList.toggle('active', b.textContent.trim() === 'Last 20');
+        });
+      }
+      renderAll();
     }
   });
 
@@ -6567,6 +7384,218 @@ const SarvaTimeline = (() => {
 })();
 
 window.SarvaTimeline = SarvaTimeline;
+
+/**
+ * Runs micro-app — filterable historical run list.
+ * Clicking a row loads that run's data.js and swaps the store state in-place.
+ */
+const SarvaRuns = (() => {
+
+  let _allRuns      = [];
+  let _activeId     = null;
+  let _initialized  = false;
+
+  function _localDateStr(d) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  function _setDefaultDateRange() {
+    const from = document.getElementById('sv-runs-filter-date-from');
+    const to   = document.getElementById('sv-runs-filter-date-to');
+    if (!from || !to) return;
+    const today = new Date();
+    const past  = new Date(today);
+    past.setDate(today.getDate() - 29); // last 30 days (today inclusive)
+    from.value = _localDateStr(past);
+    to.value   = _localDateStr(today);
+  }
+
+  /* ── Utilities ──────────────────────────────────────────────────────────── */
+  function fmtDate(ts) {
+    return new Date(ts).toLocaleString(undefined, {
+      month: 'short', day: 'numeric', year: 'numeric',
+      hour: '2-digit', minute: '2-digit',
+    });
+  }
+
+  function fmtDur(ms) {
+    if (!ms || ms <= 0) return '—';
+    if (ms < 60000) return `${(ms / 1000).toFixed(1)}s`;
+    return `${Math.floor(ms / 60000)}m ${Math.floor((ms % 60000) / 1000)}s`;
+  }
+
+  function passRateColor(rate) {
+    if (rate >= 90) return 'var(--status-passed)';
+    if (rate >= 70) return 'var(--status-flaky)';
+    return 'var(--status-failed)';
+  }
+
+  function escHtml(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function envChip(run) {
+    const env = run.environment || {};
+    const display = env.name || env.branch || (env.commit ? env.commit.slice(0, 7) : '') || '';
+    const full    = [env.name, env.branch, env.commit ? env.commit.slice(0, 7) : null].filter(Boolean).join(' · ');
+    if (!display) return '<span style="color:var(--text-muted)">—</span>';
+    const label = display.length > 14 ? display.slice(0, 13) + '…' : display;
+    return `<span class="sv-runs-env-chip" title="${escHtml(full || display)}">${escHtml(label)}</span>`;
+  }
+
+  /* ── Render ─────────────────────────────────────────────────────────────── */
+  function renderRows(runs) {
+    const tbody = document.getElementById('sv-runs-tbody');
+    if (!tbody) return;
+
+    // Update count label
+    const lbl = document.getElementById('sv-runs-count-label');
+    if (lbl) {
+      const total = _allRuns.length;
+      if (runs && runs.length > 0) {
+        lbl.textContent = runs.length === total
+          ? `${total} run${total !== 1 ? 's' : ''}`
+          : `${runs.length} of ${total} runs`;
+      } else {
+        lbl.textContent = '';
+      }
+    }
+
+    if (!runs || runs.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="11" class="sv-runs-empty">No runs match the current filters.</td></tr>';
+      return;
+    }
+
+    const total = _allRuns.length;
+
+    tbody.innerHTML = runs.map((run) => {
+      const globalIdx = _allRuns.indexOf(run);
+      const runNum    = total - globalIdx;
+      const isLatest  = globalIdx === 0;
+      const isActive  = run.id === _activeId;
+      const rate      = run.passRate != null ? +run.passRate : 0;
+      const color     = passRateColor(rate);
+
+      const actionCell = isLatest
+        ? `<span class="sv-runs-chip-current">Current</span>`
+        : `<button class="sv-runs-btn-view" onclick="SarvaRuns.viewRun(${escHtml(JSON.stringify(run.id))})">View →</button>`;
+
+      return `
+        <tr class="${isActive ? 'sv-runs-row--active' : ''}">
+          <td class="sv-runs-num">#${runNum}</td>
+          <td class="sv-runs-date">${fmtDate(run.timestamp)}</td>
+          <td class="sv-runs-env">${envChip(run)}</td>
+          <td>
+            <div class="sv-runs-passrate-wrap">
+              <div class="sv-runs-passrate-bar-bg">
+                <div class="sv-runs-passrate-bar" style="width:${Math.min(100, rate)}%;background:${color};"></div>
+              </div>
+            </div>
+          </td>
+          <td class="sv-runs-passrate-val" style="color:${color};">${rate}%</td>
+          <td class="sv-runs-count" style="text-align:right;"><span style="color:var(--status-passed);">${run.passed || 0}</span></td>
+          <td class="sv-runs-count" style="text-align:right;"><span style="color:var(--status-failed);">${run.failed || 0}</span></td>
+          <td class="sv-runs-count" style="text-align:right;"><span style="color:var(--status-flaky);">${run.flaky || 0}</span></td>
+          <td class="sv-runs-count" style="text-align:right;"><span style="color:var(--text-muted);">${run.skipped || 0}</span></td>
+          <td class="sv-runs-dur">${fmtDur(run.duration)}</td>
+          <td class="sv-runs-action">${actionCell}</td>
+        </tr>`;
+    }).join('');
+  }
+
+  /* ── Filters ────────────────────────────────────────────────────────────── */
+  function applyFilters() {
+    const status   = (document.getElementById('sv-runs-filter-status')    || {}).value || '';
+    const search   = ((document.getElementById('sv-runs-filter-search')   || {}).value || '').toLowerCase().trim();
+    const dateFrom = (document.getElementById('sv-runs-filter-date-from') || {}).value || '';
+    const dateTo   = (document.getElementById('sv-runs-filter-date-to')   || {}).value || '';
+    const passMin  = (document.getElementById('sv-runs-filter-pass-min')  || {}).value;
+    const passMax  = (document.getElementById('sv-runs-filter-pass-max')  || {}).value;
+    const durMin   = (document.getElementById('sv-runs-filter-dur-min')   || {}).value;
+    const durMax   = (document.getElementById('sv-runs-filter-dur-max')   || {}).value;
+
+    let runs = _allRuns.slice();
+
+    if (status === 'pass')  runs = runs.filter(r => (r.failed || 0) === 0 && (r.flaky || 0) === 0);
+    if (status === 'fail')  runs = runs.filter(r => (r.failed || 0) > 0);
+    if (status === 'flaky') runs = runs.filter(r => (r.flaky  || 0) > 0);
+
+    // Parse date strings as local midnight to avoid UTC offset shifting the boundary day
+    const parseLocalDay = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d).getTime(); };
+    if (dateFrom) runs = runs.filter(r => r.timestamp >= parseLocalDay(dateFrom));
+    if (dateTo)   runs = runs.filter(r => r.timestamp <  parseLocalDay(dateTo) + 86400000);
+
+    if (passMin !== '') runs = runs.filter(r => (r.passRate || 0) >= +passMin);
+    if (passMax !== '') runs = runs.filter(r => (r.passRate || 0) <= +passMax);
+
+    // Compare against displayed 1-decimal seconds to avoid raw-ms vs rounded-display mismatch
+    if (durMin !== '') runs = runs.filter(r => +((r.duration || 0) / 1000).toFixed(1) >= +durMin);
+    if (durMax !== '') runs = runs.filter(r => +((r.duration || 0) / 1000).toFixed(1) <= +durMax);
+
+    if (search) {
+      runs = runs.filter(r => {
+        const env = r.environment || {};
+        const gi  = _allRuns.indexOf(r);
+        const num = String(_allRuns.length - gi);
+        const hay = [num, env.name, env.branch, env.commit, env.ci].filter(Boolean).join(' ').toLowerCase();
+        return hay.includes(search);
+      });
+    }
+
+    renderRows(runs);
+  }
+
+  /* ── Clear helpers ──────────────────────────────────────────────────────── */
+  function clearFilter(which) {
+    const g = id => document.getElementById(id);
+    if (which === 'status') { const el = g('sv-runs-filter-status'); if (el) el.value = ''; }
+    if (which === 'search') { const el = g('sv-runs-filter-search'); if (el) el.value = ''; }
+    if (which === 'date')   { ['sv-runs-filter-date-from','sv-runs-filter-date-to'].forEach(i => { const el = g(i); if (el) el.value = ''; }); }
+    if (which === 'pass')   { ['sv-runs-filter-pass-min','sv-runs-filter-pass-max'].forEach(i => { const el = g(i); if (el) el.value = ''; }); }
+    if (which === 'dur')    { ['sv-runs-filter-dur-min','sv-runs-filter-dur-max'].forEach(i => { const el = g(i); if (el) el.value = ''; }); }
+    applyFilters();
+  }
+
+  function clearAllFilters() {
+    ['sv-runs-filter-status','sv-runs-filter-search',
+     'sv-runs-filter-pass-min','sv-runs-filter-pass-max',
+     'sv-runs-filter-dur-min','sv-runs-filter-dur-max'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    _setDefaultDateRange(); // restore default 30-day window instead of clearing date entirely
+    applyFilters();
+  }
+
+  /* ── View a run ─────────────────────────────────────────────────────────── */
+  function viewRun(runId) {
+    const run = _allRuns.find(r => r.id === runId);
+    if (!run) return;
+    _activeId = runId;
+    applyFilters(); // re-render to highlight the active row
+    SarvaRunSwitch.switchToRun(runId, run);
+  }
+
+  /* ── Init ───────────────────────────────────────────────────────────────── */
+  SarvaEventBus.on('store:ready', ({ history }) => {
+    _allRuns = history || [];
+    if (!_initialized) {
+      _initialized = true;
+      _setDefaultDateRange();
+    }
+    applyFilters();
+  });
+
+  SarvaEventBus.on('run:switched', ({ runId }) => {
+    _activeId = runId;
+    applyFilters();
+  });
+
+  return { applyFilters, viewRun, clearFilter, clearAllFilters };
+
+})();
+
+window.SarvaRuns = SarvaRuns;
 </script>
     
     <script>
@@ -6578,7 +7607,7 @@ window.SarvaTimeline = SarvaTimeline;
         if (passRateCtx) {
             passRateChart = new Chart(passRateCtx, {
                 type: 'line',
-                data: {"labels":[["05/17/2026","15:27"],["05/17/2026","18:30"],["05/17/2026","20:20"],["05/17/2026","20:55"],["05/17/2026","21:34"],["05/18/2026","02:34"],["05/18/2026","03:42"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"],["05/18/2026","05:01"],["05/18/2026","05:07"],["05/18/2026","05:13"],["05/18/2026","05:26"],["05/18/2026","05:32"],["05/22/2026","05:58"],["05/22/2026","06:15"],["05/22/2026","12:12"],["05/22/2026","12:52"],["05/22/2026","15:07"],["05/22/2026","19:43"],["05/22/2026","19:54"],["05/23/2026","04:02"],["05/23/2026","04:12"],["05/24/2026","23:13"],["05/24/2026","23:18"],["05/24/2026","23:27"],["05/24/2026","23:39"],["05/24/2026","23:50"]],"datasets":[{"label":"Pass Rate %","data":[71.4,64.3,57.1,57.1,71.4,50,57.1,64.3,78.6,64.3,50,78.6,57.1,71.4,64.3,71.4,64.3,57.1,71.4,71.4,71.4,50,50,64.3,71.4,71.4,64.3,64.3,64.3,78.6],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","tension":0.3,"fill":true}]},
+                data: {"labels":[["05/17/2026","18:30"],["05/17/2026","20:20"],["05/17/2026","20:55"],["05/17/2026","21:34"],["05/18/2026","02:34"],["05/18/2026","03:42"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"],["05/18/2026","05:01"],["05/18/2026","05:07"],["05/18/2026","05:13"],["05/18/2026","05:26"],["05/18/2026","05:32"],["05/22/2026","05:58"],["05/22/2026","06:15"],["05/22/2026","12:12"],["05/22/2026","12:52"],["05/22/2026","15:07"],["05/22/2026","19:43"],["05/22/2026","19:54"],["05/23/2026","04:02"],["05/23/2026","04:12"],["05/24/2026","23:13"],["05/24/2026","23:18"],["05/24/2026","23:27"],["05/24/2026","23:39"],["05/24/2026","23:50"],["05/25/2026","11:57"]],"datasets":[{"label":"Pass Rate %","data":[64.3,57.1,57.1,71.4,50,57.1,64.3,78.6,64.3,50,78.6,57.1,71.4,64.3,71.4,64.3,57.1,71.4,71.4,71.4,50,50,64.3,71.4,71.4,64.3,64.3,64.3,78.6,64.3],"borderColor":"#10b981","backgroundColor":"rgba(16, 185, 129, 0.1)","tension":0.3,"fill":true}]},
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -6624,11 +7653,11 @@ window.SarvaTimeline = SarvaTimeline;
         let distributionChart;
         let currentDistributionTimestamps = [];
         const distributionCtx = document.getElementById('distribution-chart');
-        const distributionDatasets = [{"label":"Passed","data":[10,9,8,8,10,7,8,9,11,9,7,11,8,10,9,10,9,8,10,10,10,7,7,9,10,10,9,9,9,11],"backgroundColor":"#10b981"},{"label":"Failed","data":[2,1,2,3,2,3,1,1,1,1,2,1,3,2,2,1,2,2,2,2,1,2,3,2,1,2,3,3,3,1],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[0,2,2,1,0,2,3,2,0,2,3,0,1,0,1,1,1,2,0,0,1,3,2,1,1,0,0,0,0,0],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"backgroundColor":"#6b7280"}];
+        const distributionDatasets = [{"label":"Passed","data":[9,8,8,10,7,8,9,11,9,7,11,8,10,9,10,9,8,10,10,10,7,7,9,10,10,9,9,9,11,9],"backgroundColor":"#10b981"},{"label":"Failed","data":[1,2,3,2,3,1,1,1,1,2,1,3,2,2,1,2,2,2,2,1,2,3,2,1,2,3,3,3,1,1],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[2,2,1,0,2,3,2,0,2,3,0,1,0,1,1,1,2,0,0,1,3,2,1,1,0,0,0,0,0,2],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"backgroundColor":"#6b7280"}];
         if (distributionCtx) {
             distributionChart = new Chart(distributionCtx, {
                 type: 'bar',
-                data: {"labels":[["05/17/2026","15:27"],["05/17/2026","18:30"],["05/17/2026","20:20"],["05/17/2026","20:55"],["05/17/2026","21:34"],["05/18/2026","02:34"],["05/18/2026","03:42"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"],["05/18/2026","05:01"],["05/18/2026","05:07"],["05/18/2026","05:13"],["05/18/2026","05:26"],["05/18/2026","05:32"],["05/22/2026","05:58"],["05/22/2026","06:15"],["05/22/2026","12:12"],["05/22/2026","12:52"],["05/22/2026","15:07"],["05/22/2026","19:43"],["05/22/2026","19:54"],["05/23/2026","04:02"],["05/23/2026","04:12"],["05/24/2026","23:13"],["05/24/2026","23:18"],["05/24/2026","23:27"],["05/24/2026","23:39"],["05/24/2026","23:50"]],"datasets":[{"label":"Passed","data":[10,9,8,8,10,7,8,9,11,9,7,11,8,10,9,10,9,8,10,10,10,7,7,9,10,10,9,9,9,11],"backgroundColor":"#10b981"},{"label":"Failed","data":[2,1,2,3,2,3,1,1,1,1,2,1,3,2,2,1,2,2,2,2,1,2,3,2,1,2,3,3,3,1],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[0,2,2,1,0,2,3,2,0,2,3,0,1,0,1,1,1,2,0,0,1,3,2,1,1,0,0,0,0,0],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"backgroundColor":"#6b7280"}]},
+                data: {"labels":[["05/17/2026","18:30"],["05/17/2026","20:20"],["05/17/2026","20:55"],["05/17/2026","21:34"],["05/18/2026","02:34"],["05/18/2026","03:42"],["05/18/2026","03:57"],["05/18/2026","04:00"],["05/18/2026","04:37"],["05/18/2026","04:46"],["05/18/2026","05:01"],["05/18/2026","05:07"],["05/18/2026","05:13"],["05/18/2026","05:26"],["05/18/2026","05:32"],["05/22/2026","05:58"],["05/22/2026","06:15"],["05/22/2026","12:12"],["05/22/2026","12:52"],["05/22/2026","15:07"],["05/22/2026","19:43"],["05/22/2026","19:54"],["05/23/2026","04:02"],["05/23/2026","04:12"],["05/24/2026","23:13"],["05/24/2026","23:18"],["05/24/2026","23:27"],["05/24/2026","23:39"],["05/24/2026","23:50"],["05/25/2026","11:57"]],"datasets":[{"label":"Passed","data":[9,8,8,10,7,8,9,11,9,7,11,8,10,9,10,9,8,10,10,10,7,7,9,10,10,9,9,9,11,9],"backgroundColor":"#10b981"},{"label":"Failed","data":[1,2,3,2,3,1,1,1,1,2,1,3,2,2,1,2,2,2,2,1,2,3,2,1,2,3,3,3,1,1],"backgroundColor":"#ef4444"},{"label":"Flaky","data":[2,2,1,0,2,3,2,0,2,3,0,1,0,1,1,1,2,0,0,1,3,2,1,1,0,0,0,0,0,2],"backgroundColor":"#f59e0b"},{"label":"Skipped","data":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"backgroundColor":"#6b7280"}]},
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -6735,7 +7764,7 @@ window.SarvaTimeline = SarvaTimeline;
         }
 
         // Date range filter function
-        const allRuns = [{"id":"2026-05-11-232930","timestamp":1778542146806,"duration":17859,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-11-233410","timestamp":1778542430326,"duration":17741,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-11-234106","timestamp":1778542851132,"duration":17273,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-11-234321","timestamp":1778542984208,"duration":19140,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-11-234952","timestamp":1778543369669,"duration":17506,"total":14,"passed":6,"failed":3,"skipped":2,"flaky":3,"passRate":42.9,"environment":{"ci":"false"}},{"id":"2026-05-11-235911","timestamp":1778543939273,"duration":14360,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-12-001216","timestamp":1778544713564,"duration":17655,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-001755","timestamp":1778545053114,"duration":18630,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-12-002648","timestamp":1778545592897,"duration":16457,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-004251","timestamp":1778546556110,"duration":14402,"total":14,"passed":8,"failed":1,"skipped":2,"flaky":3,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-011835","timestamp":1778548696378,"duration":14949,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-015803","timestamp":1778551061942,"duration":17480,"total":14,"passed":9,"failed":3,"skipped":2,"flaky":0,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-020618","timestamp":1778551563086,"duration":17177,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-021157","timestamp":1778551897210,"duration":18183,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-021850","timestamp":1778552312206,"duration":17646,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-021912","timestamp":1778552334903,"duration":17255,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-022518","timestamp":1778552695686,"duration":18755,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-025932","timestamp":1778554756627,"duration":15589,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-034753","timestamp":1778557654954,"duration":17371,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-16-051238","timestamp":1778908337447,"duration":15976,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-17-152737","timestamp":1779031640081,"duration":17053,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-17-183056","timestamp":1779042637176,"duration":15618,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-17-202104","timestamp":1779049247221,"duration":16530,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-17-205554","timestamp":1779051332969,"duration":18181,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-17-213503","timestamp":1779053685695,"duration":18073,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-18-023446","timestamp":1779071666198,"duration":16893,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-18-034313","timestamp":1779075771425,"duration":17532,"total":14,"passed":8,"failed":1,"skipped":2,"flaky":3,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-18-035759","timestamp":1779076660504,"duration":17545,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-040037","timestamp":1779076822376,"duration":16472,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-18-043728","timestamp":1779079027355,"duration":16074,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-044625","timestamp":1779079564857,"duration":16690,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-18-050132","timestamp":1779080478126,"duration":15739,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-18-050753","timestamp":1779080854098,"duration":17895,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-18-051353","timestamp":1779081213007,"duration":16438,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-18-052634","timestamp":1779081974934,"duration":16823,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-053242","timestamp":1779082342659,"duration":18619,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-055837","timestamp":1779429499255,"duration":15300,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-22-061618","timestamp":1779430556136,"duration":17900,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-22-121250","timestamp":1779451954156,"duration":16916,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-125229","timestamp":1779454329610,"duration":17838,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-150726","timestamp":1779462426553,"duration":18299,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-194419","timestamp":1779479036626,"duration":16793,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-22-195422","timestamp":1779479641951,"duration":17514,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-23-040224","timestamp":1779508924940,"duration":17235,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-23-041238","timestamp":1779509538241,"duration":18032,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-24-231334","timestamp":1779664396753,"duration":16193,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-24-231833","timestamp":1779664693184,"duration":15881,"total":14,"passed":9,"failed":3,"skipped":2,"flaky":0,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-24-232724","timestamp":1779665223259,"duration":19487,"total":14,"passed":9,"failed":3,"skipped":2,"flaky":0,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-24-233940","timestamp":1779665962699,"duration":15495,"total":14,"passed":9,"failed":3,"skipped":2,"flaky":0,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-24-235038","timestamp":1779666624705,"duration":16665,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}}];
+        const allRuns = [{"id":"2026-05-11-232930","timestamp":1778542146806,"duration":17859,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-11-233410","timestamp":1778542430326,"duration":17741,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-11-234106","timestamp":1778542851132,"duration":17273,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-11-234321","timestamp":1778542984208,"duration":19140,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-11-234952","timestamp":1778543369669,"duration":17506,"total":14,"passed":6,"failed":3,"skipped":2,"flaky":3,"passRate":42.9,"environment":{"ci":"false"}},{"id":"2026-05-11-235911","timestamp":1778543939273,"duration":14360,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-12-001216","timestamp":1778544713564,"duration":17655,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-001755","timestamp":1778545053114,"duration":18630,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-12-002648","timestamp":1778545592897,"duration":16457,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-004251","timestamp":1778546556110,"duration":14402,"total":14,"passed":8,"failed":1,"skipped":2,"flaky":3,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-011835","timestamp":1778548696378,"duration":14949,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-015803","timestamp":1778551061942,"duration":17480,"total":14,"passed":9,"failed":3,"skipped":2,"flaky":0,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-020618","timestamp":1778551563086,"duration":17177,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-021157","timestamp":1778551897210,"duration":18183,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-021850","timestamp":1778552312206,"duration":17646,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-021912","timestamp":1778552334903,"duration":17255,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-12-022518","timestamp":1778552695686,"duration":18755,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-12-025932","timestamp":1778554756627,"duration":15589,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-12-034753","timestamp":1778557654954,"duration":17371,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-16-051238","timestamp":1778908337447,"duration":15976,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-17-152737","timestamp":1779031640081,"duration":17053,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-17-183056","timestamp":1779042637176,"duration":15618,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-17-202104","timestamp":1779049247221,"duration":16530,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-17-205554","timestamp":1779051332969,"duration":18181,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-17-213503","timestamp":1779053685695,"duration":18073,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-18-023446","timestamp":1779071666198,"duration":16893,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-18-034313","timestamp":1779075771425,"duration":17532,"total":14,"passed":8,"failed":1,"skipped":2,"flaky":3,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-18-035759","timestamp":1779076660504,"duration":17545,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-040037","timestamp":1779076822376,"duration":16472,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-18-043728","timestamp":1779079027355,"duration":16074,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-044625","timestamp":1779079564857,"duration":16690,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-18-050132","timestamp":1779080478126,"duration":15739,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-18-050753","timestamp":1779080854098,"duration":17895,"total":14,"passed":8,"failed":3,"skipped":2,"flaky":1,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-18-051353","timestamp":1779081213007,"duration":16438,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-18-052634","timestamp":1779081974934,"duration":16823,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-18-053242","timestamp":1779082342659,"duration":18619,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-055837","timestamp":1779429499255,"duration":15300,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-22-061618","timestamp":1779430556136,"duration":17900,"total":14,"passed":8,"failed":2,"skipped":2,"flaky":2,"passRate":57.1,"environment":{"ci":"false"}},{"id":"2026-05-22-121250","timestamp":1779451954156,"duration":16916,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-125229","timestamp":1779454329610,"duration":17838,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-150726","timestamp":1779462426553,"duration":18299,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-22-194419","timestamp":1779479036626,"duration":16793,"total":14,"passed":7,"failed":2,"skipped":2,"flaky":3,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-22-195422","timestamp":1779479641951,"duration":17514,"total":14,"passed":7,"failed":3,"skipped":2,"flaky":2,"passRate":50,"environment":{"ci":"false"}},{"id":"2026-05-23-040224","timestamp":1779508924940,"duration":17235,"total":14,"passed":9,"failed":2,"skipped":2,"flaky":1,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-23-041238","timestamp":1779509538241,"duration":18032,"total":14,"passed":10,"failed":1,"skipped":2,"flaky":1,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-24-231334","timestamp":1779664396753,"duration":16193,"total":14,"passed":10,"failed":2,"skipped":2,"flaky":0,"passRate":71.4,"environment":{"ci":"false"}},{"id":"2026-05-24-231833","timestamp":1779664693184,"duration":15881,"total":14,"passed":9,"failed":3,"skipped":2,"flaky":0,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-24-232724","timestamp":1779665223259,"duration":19487,"total":14,"passed":9,"failed":3,"skipped":2,"flaky":0,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-24-233940","timestamp":1779665962699,"duration":15495,"total":14,"passed":9,"failed":3,"skipped":2,"flaky":0,"passRate":64.3,"environment":{"ci":"false"}},{"id":"2026-05-24-235038","timestamp":1779666624705,"duration":16665,"total":14,"passed":11,"failed":1,"skipped":2,"flaky":0,"passRate":78.6,"environment":{"ci":"false"}},{"id":"2026-05-25-115749","timestamp":1779710248237,"duration":16321,"total":14,"passed":9,"failed":1,"skipped":2,"flaky":2,"passRate":64.3,"environment":{"ci":"false"}}];
         let currentFilter = 'last20';
 
         function filterByDateRange(filter) {
