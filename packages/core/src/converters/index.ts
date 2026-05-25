@@ -5,6 +5,7 @@ import { TestNGConverter } from './testng-converter';
 import { TestNGListenerConverter } from './testng-listener-converter';
 import { TestNGSeleniumConverter } from './testng-selenium-converter';
 import { CucumberConverter } from './cucumber-converter';
+import { RobotConverter } from './robot-converter';
 
 export * from './format-detector';
 export * from './base-converter';
@@ -13,6 +14,7 @@ export * from './testng-converter';
 export * from './testng-listener-converter';
 export * from './testng-selenium-converter';
 export * from './cucumber-converter';
+export * from './robot-converter';
 
 /**
  * Smart converter that auto-detects format and converts to Sarva-Varadi format
@@ -70,6 +72,10 @@ export class SmartConverter {
       case 'cucumber':
         console.log('Converting from Cucumber format...');
         return new CucumberConverter().convert(data);
+
+      case 'robot':
+        console.log('Converting from Robot Framework format...');
+        return new RobotConverter().convert(data);
 
       case 'mocha':
       case 'jest':

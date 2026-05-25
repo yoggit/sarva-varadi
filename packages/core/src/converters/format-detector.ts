@@ -1,6 +1,4 @@
-import { SarvaTestResult } from '../types';
-
-export type SupportedFormat = 'sarva-varadi' | 'junit' | 'testng' | 'testng-listener' | 'testng-selenium' | 'cucumber' | 'mocha' | 'jest' | 'unknown';
+export type SupportedFormat = 'sarva-varadi' | 'junit' | 'testng' | 'testng-listener' | 'testng-selenium' | 'cucumber' | 'robot' | 'mocha' | 'jest' | 'unknown';
 
 /**
  * Detects if data is already in Sarva-Varadi format
@@ -30,6 +28,11 @@ export function detectFormat(data: any): SupportedFormat {
   // Already Sarva-Varadi format
   if (isSarvaVaradiFormat(data)) {
     return 'sarva-varadi';
+  }
+
+  // Robot Framework output.xml (parsed to JSON) — <robot> root element
+  if (data.robot?.suite !== undefined) {
+    return 'robot';
   }
 
   // JUnit XML (parsed to JSON)
