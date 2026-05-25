@@ -659,6 +659,76 @@ The report shows the full **Feature → Scenario → Step** hierarchy. If the to
 
 ---
 
+## 🤖 Robot Framework
+
+<details>
+<summary>Show setup steps</summary>
+
+No adapter code needed — the CLI converter reads Robot Framework's standard `output.xml` directly.
+
+### Step 1 — Install the CLI
+
+```bash
+npm install -g @sarva-varadi/core
+```
+
+### Step 2 — Run your Robot Framework tests
+
+```bash
+robot --outputdir results tests/
+```
+
+### Step 3 — Generate the report
+
+```bash
+sarva-varadi generate \
+  --input results/output.xml \
+  --output sarva-report \
+  --title "Robot Suite"
+```
+
+### Step 4 — Open the report
+
+```bash
+open sarva-report/index.html       # macOS
+start sarva-report/index.html      # Windows
+xdg-open sarva-report/index.html   # Linux
+```
+
+### What's captured automatically
+
+- ✅ Full nested keyword hierarchy (sub-keywords at any depth)
+- ✅ Per-keyword timing and pass/fail status
+- ✅ Tags mapped to severity/TMS labels (`severity:critical`, `tms:JIRA-123`)
+- ✅ Suite breadcrumb (Suite → Sub-suite → Test)
+- ✅ Error messages with failure path highlighted in detail drawer
+- ✅ RF 4, 5, 6, and 7 supported
+
+### CI/CD example (GitHub Actions)
+
+```yaml
+- name: Run Robot Framework tests
+  run: robot --outputdir results tests/
+
+- name: Generate Sarva-Varadi report
+  run: |
+    npm install -g @sarva-varadi/core
+    sarva-varadi generate \
+      --input results/output.xml \
+      --output sarva-report \
+      --title "Robot Suite"
+
+- name: Upload report
+  uses: actions/upload-artifact@v4
+  with:
+    name: robot-report
+    path: sarva-report/
+```
+
+</details>
+
+---
+
 ## View your report
 
 After running tests the report is at `sarva-report/index.html` — a self-contained HTML file. Share it, attach to a CI artifact, or host on GitHub Pages.

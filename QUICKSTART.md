@@ -7,6 +7,7 @@ Get started with Sarva-Varadi in 2 minutes! Choose your framework below:
 - [🌐 Selenium](#-selenium-quick-start)
 - [🔌 RestAssured (TestNG)](#-restassured-testng-quick-start)
 - [🔌 RestAssured (JUnit 5)](#-restassured-junit-5-quick-start)
+- [🤖 Robot Framework](#-robot-framework-quick-start)
 
 ---
 
@@ -347,6 +348,65 @@ xdg-open sarva-report/index.html  # Linux
 
 ---
 
+## 🤖 Robot Framework Quick Start
+
+<details>
+<summary><b>Click to expand Robot Framework setup</b></summary>
+
+No adapter code needed — the CLI converter reads Robot Framework's standard `output.xml` directly.
+
+### Installation
+
+```bash
+npm install -g @sarva-varadi/core
+```
+
+### Run your Robot Framework tests
+
+```bash
+robot --outputdir results tests/
+```
+
+### Generate Sarva-Varadi report
+
+```bash
+sarva-varadi generate \
+  --input results/output.xml \
+  --output sarva-report \
+  --title "Robot Suite"
+```
+
+### View Report
+
+```bash
+open sarva-report/index.html   # macOS
+start sarva-report/index.html  # Windows
+xdg-open sarva-report/index.html  # Linux
+```
+
+### What's captured automatically
+
+- ✅ Full nested keyword hierarchy (`<kw>` tree from `output.xml`)
+- ✅ Pass/Fail/Skip per keyword and test
+- ✅ Timing per keyword
+- ✅ Tags mapped to severity/TMS labels (`severity:critical`, `tms:JIRA-123`)
+- ✅ Suite hierarchy (Suite → Sub-suite → Test)
+- ✅ Error messages and failure path highlighting
+- ✅ Works with RF 4, 5, 6, and 7
+
+### Supported RF versions
+
+| Version | Status |
+|---------|--------|
+| Robot Framework 4.x | ✅ |
+| Robot Framework 5.x | ✅ |
+| Robot Framework 6.x | ✅ |
+| Robot Framework 7.x | ✅ |
+
+</details>
+
+---
+
 ## 📊 Your Report
 
 All frameworks generate the same interactive report at `sarva-report/index.html` — a single-page app with six sidebar tabs:
@@ -366,7 +426,7 @@ Export options: PDF print (all six sections), PNG chart download, CSV data expor
 
 - [README.md](README.md) - Complete features and configuration
 - [NOTIFICATIONS.md](NOTIFICATIONS.md) - Slack/Teams/Email setup
-- [CONVERTER.md](CONVERTER.md) - CLI converter for other formats
+- [CONVERTER.md](CONVERTER.md) - CLI converter (JUnit, TestNG, Cucumber, Robot Framework)
 - [packages/playwright/README.md](packages/playwright/README.md) - Playwright details
 - [packages/selenium/README.md](packages/selenium/README.md) - Selenium details
 - [packages/rest-assured/README.md](packages/rest-assured/README.md) - RestAssured details
