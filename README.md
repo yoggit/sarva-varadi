@@ -179,7 +179,7 @@ The `SarvaTestResult` schema is the single integration contract. Any tool that c
 ### For Playwright
 
 ```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/playwright
+npm install --save-dev @sarva-varadi/core@latest@latest @sarva-varadi/playwright@latest
 ```
 
 ### For RestAssured + TestNG
@@ -217,7 +217,7 @@ See the [demo-restassured-cucumber/](demo-restassured-cucumber/) project for a f
 No additional packages needed — Robot Framework is covered by the CLI converter built into `@sarva-varadi/core`. Run your tests normally, then convert `output.xml`:
 
 ```bash
-npm install -g @sarva-varadi/core
+npm install -g @sarva-varadi/core@latest
 sarva-varadi generate --input output.xml --output sarva-report
 ```
 
@@ -255,7 +255,7 @@ Understanding what is automatic vs what requires an extra setup step saves a lot
 ### Installation
 
 ```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/playwright
+npm install --save-dev @sarva-varadi/core@latest@latest @sarva-varadi/playwright@latest
 ```
 
 ### Setup
@@ -1014,9 +1014,9 @@ The report captures the full **Feature → Scenario → Step** hierarchy. If the
 ### Step 1 — Install the CLI
 
 ```bash
-npm install -g @sarva-varadi/core
+npm install -g @sarva-varadi/core@latest
 # or locally:
-npm install --save-dev @sarva-varadi/core
+npm install --save-dev @sarva-varadi/core@latest
 ```
 
 ### Step 2 — Run your Robot Framework tests
@@ -1050,7 +1050,7 @@ xdg-open sarva-report/index.html    # Linux
 
 - name: Generate Sarva-Varadi report
   run: |
-    npm install -g @sarva-varadi/core
+    npm install -g @sarva-varadi/core@latest
     sarva-varadi generate \
       --input results/output.xml \
       --output sarva-report \
@@ -1113,10 +1113,10 @@ Already have test results from other tools? Sarva-Varadi can convert them into b
 
 ```bash
 # Install globally for CLI access
-npm install -g @sarva-varadi/core
+npm install -g @sarva-varadi/core@latest
 
 # Or use locally in your project
-npm install --save-dev @sarva-varadi/core
+npm install --save-dev @sarva-varadi/core@latest
 npx sarva-varadi generate --input <file> --output <dir>
 ```
 
@@ -1221,7 +1221,7 @@ Add as a post-test step to generate reports from any tool:
 # GitHub Actions example
 - name: Generate Sarva-Varadi Report
   run: |
-    npm install -g @sarva-varadi/core
+    npm install -g @sarva-varadi/core@latest
     sarva-varadi generate -i test-results.xml -o sarva-report
     
 - name: Upload Report

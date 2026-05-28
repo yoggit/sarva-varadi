@@ -11,7 +11,7 @@ RestAssured (JUnit 5) adapter for Sarva-Varadi — automatically captures HTTP r
 **Step 1 — npm package** (report generator):
 
 ```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/rest-assured-junit
+npm install --save-dev @sarva-varadi/core@latest @sarva-varadi/rest-assured-junit@latest
 ```
 
 **Step 2 — Maven dependency** (Java extension, via JitPack):

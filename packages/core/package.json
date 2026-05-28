@@ -1,6 +1,6 @@
 {
   "name": "@sarva-varadi/core",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Core library for Sarva-Varadi test reporter - common types, adapters, and report generation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -32,8 +32,15 @@
     "src/generators/varadi-scripts.js"
   ],
   "dependencies": {
-    "nodemailer": "^6.9.0",
     "xml2js": "^0.6.2"
+  },
+  "peerDependencies": {
+    "nodemailer": ">=6"
+  },
+  "peerDependenciesMeta": {
+    "nodemailer": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

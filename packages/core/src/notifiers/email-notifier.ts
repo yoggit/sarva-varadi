@@ -1,15 +1,27 @@
 import { BaseNotifier } from './base-notifier';
 import { NotificationData, EmailOptions } from '../types';
-import * as nodemailer from 'nodemailer';
-import * as fs from 'fs';
-import * as path from 'path';
+import type * as Nodemailer from 'nodemailer';
 
 export class EmailNotifier extends BaseNotifier {
-  private transporter: nodemailer.Transporter;
+  private transporter: Nodemailer.Transporter | null = null;
 
   constructor(private options: EmailOptions) {
     super();
-    this.transporter = nodemailer.createTransport(this.options.smtp);
+  }
+
+  private async getTransporter(): Promise<Nodemailer.Transporter> {
+    if (!this.transporter) {
+      let nodemailer: typeof Nodemailer;
+      try {
+        nodemailer = await import('nodemailer');
+      } catch {
+        throw new Error(
+          'Email notifications require "nodemailer". Install it with: npm install nodemailer'
+        );
+      }
+      this.transporter = nodemailer.createTransport(this.options.smtp);
+    }
+    return this.transporter;
   }
 
   async send(data: NotificationData): Promise<void> {
@@ -22,7 +34,9 @@ export class EmailNotifier extends BaseNotifier {
 
     const subject = this.options.subject || `${statusEmoji} Test Results - ${summary.passRate}% Pass Rate`;
 
-    const mailOptions: nodemailer.SendMailOptions = {
+    const transporter = await this.getTransporter();
+
+    const mailOptions: Nodemailer.SendMailOptions = {
       from: this.options.from,
       to: this.options.to.join(', '),
       subject,
@@ -30,7 +44,7 @@ export class EmailNotifier extends BaseNotifier {
     };
 
     try {
-      await this.transporter.sendMail(mailOptions);
+      await transporter.sendMail(mailOptions);
       console.log('✅ Email notification sent');
     } catch (error) {
       console.error('Error sending email notification:', error);
