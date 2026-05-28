@@ -33,7 +33,9 @@ export default defineConfig({
     ['@sarva-varadi/playwright', {
       outputFolder: 'sarva-report',
       title: 'My Test Report',
-      maskSensitiveData: false,       // set true to mask passwords/tokens
+      maskSensitiveData: true,        // enable sensitive data masking
+      sensitiveEnvVars: ['PASSWORD', 'EMAIL', 'API_TOKEN'], // optional — env var names whose resolved values are masked in step titles
+      maskAllFills: false,            // optional — set true to mask every Fill/Type step value unconditionally (no .env needed)
       history: {
         enabled: true,
         maxRuns: 30,
