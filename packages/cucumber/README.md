@@ -7,7 +7,7 @@ In practice, the Java plugin writes Sarva-Varadi native JSON directly — the CL
 ## Installation
 
 ```bash
-npm install @sarva-varadi/cucumber
+npm install --save-dev @sarva-varadi/cucumber@latest
 ```
 
 ## Usage

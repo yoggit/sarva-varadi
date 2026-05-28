@@ -11,7 +11,7 @@ RestAssured (TestNG) adapter for Sarva-Varadi — captures HTTP request/response
 **Step 1 — npm package** (report generator):
 
 ```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/rest-assured
+npm install --save-dev @sarva-varadi/core@latest @sarva-varadi/rest-assured@latest
 ```
 
 **Step 2 — Maven dependency** (Java listener, via JitPack):

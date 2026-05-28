@@ -218,7 +218,7 @@ npm install --legacy-peer-deps
 
 ### `Cannot find module '@sarva-varadi/core'`
 ```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/playwright
+npm install --save-dev @sarva-varadi/core@latest @sarva-varadi/playwright@latest
 npm list @sarva-varadi/core   # verify it's installed
 ```
 

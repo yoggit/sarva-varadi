@@ -19,7 +19,7 @@ Get started with Sarva-Varadi in 2 minutes! Choose your framework below:
 ### Installation
 
 ```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/playwright
+npm install --save-dev @sarva-varadi/core@latest @sarva-varadi/playwright@latest
 ```
 
 ### Basic Configuration
@@ -110,7 +110,7 @@ export default defineConfig({
 ### Installation
 
 ```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/selenium
+npm install --save-dev @sarva-varadi/core@latest @sarva-varadi/selenium@latest
 ```
 
 ### Copy TestNG Listener Files
@@ -358,7 +358,7 @@ No adapter code needed — the CLI converter reads Robot Framework's standard `o
 ### Installation
 
 ```bash
-npm install -g @sarva-varadi/core
+npm install -g @sarva-varadi/core@latest
 ```
 
 ### Run your Robot Framework tests

@@ -10,7 +10,16 @@ Works with all frameworks: Playwright, Selenium, RestAssured (TestNG + JUnit 5 +
 
 ## Playwright setup
 
-Add a `notifications` block in `playwright.config.ts`:
+Add a `notifications` block in `playwright.config.ts`.
+
+::: tip Email notifications need nodemailer
+Email support uses [nodemailer](https://nodemailer.com/) as an optional peer dependency — it is **not** installed automatically. If you enable email notifications, install it first:
+
+```sh
+npm install nodemailer
+```
+:::
+
 
 ```typescript
 export default defineConfig({

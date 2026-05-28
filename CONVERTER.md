@@ -16,7 +16,7 @@ Sarva-Varadi includes a powerful CLI converter that transforms test results from
 
 ```bash
 # Install globally
-npm install -g @sarva-varadi/core
+npm install -g @sarva-varadi/core@latest
 
 # Convert any test results
 sarva-varadi generate --input test-results.xml --output sarva-report
@@ -319,7 +319,7 @@ jobs:
         run: mvn test
       
       - name: Install Sarva-Varadi
-        run: npm install -g @sarva-varadi/core
+        run: npm install -g @sarva-varadi/core@latest
       
       - name: Generate Report
         if: always()
@@ -352,7 +352,7 @@ test:
   stage: test
   script:
     - mvn test
-    - npm install -g @sarva-varadi/core
+    - npm install -g @sarva-varadi/core@latest
     - sarva-varadi generate -i target/surefire-reports/TEST-*.xml -o sarva-report
   artifacts:
     when: always
@@ -380,7 +380,7 @@ pipeline {
         stage('Generate Report') {
             steps {
                 sh '''
-                    npm install -g @sarva-varadi/core
+                    npm install -g @sarva-varadi/core@latest
                     sarva-varadi generate \
                         -i target/surefire-reports/TEST-*.xml \
                         -o sarva-report
@@ -421,7 +421,7 @@ jobs:
       - run:
           name: Generate Report
           command: |
-            npm install -g @sarva-varadi/core
+            npm install -g @sarva-varadi/core@latest
             sarva-varadi generate -i target/surefire-reports/TEST-*.xml -o sarva-report
       - store_artifacts:
           path: sarva-report

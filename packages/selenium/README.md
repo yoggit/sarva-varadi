@@ -9,7 +9,7 @@ Selenium WebDriver (TestNG) adapter for Sarva-Varadi — captures browser action
 **Step 1 — npm package** (report generator):
 
 ```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/selenium
+npm install --save-dev @sarva-varadi/core@latest @sarva-varadi/selenium@latest
 ```
 
 **Step 2 — Copy Java listener files** to your test project:

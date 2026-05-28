@@ -16,7 +16,7 @@ Java 11+, Maven 3.6+, [Node.js](https://nodejs.org) (required to generate the HT
 ### Installation
 
 ```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/playwright
+npm install --save-dev @sarva-varadi/core@latest @sarva-varadi/playwright@latest
 ```
 
 ### Configure `playwright.config.ts`
@@ -669,7 +669,7 @@ No adapter code needed — the CLI converter reads Robot Framework's standard `o
 ### Step 1 — Install the CLI
 
 ```bash
-npm install -g @sarva-varadi/core
+npm install -g @sarva-varadi/core@latest
 ```
 
 ### Step 2 — Run your Robot Framework tests
@@ -712,7 +712,7 @@ xdg-open sarva-report/index.html   # Linux
 
 - name: Generate Sarva-Varadi report
   run: |
-    npm install -g @sarva-varadi/core
+    npm install -g @sarva-varadi/core@latest
     sarva-varadi generate \
       --input results/output.xml \
       --output sarva-report \

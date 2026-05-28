@@ -10,7 +10,7 @@ The built-in converter transforms test results from other formats (JUnit XML, Te
 
 ```bash
 # Install globally
-npm install -g @sarva-varadi/core
+npm install -g @sarva-varadi/core@latest
 
 # Convert any test results
 sarva-varadi generate --input test-results.xml --output sarva-report
@@ -83,7 +83,7 @@ sarva-varadi generate \
 
 - name: Generate Sarva-Varadi report
   run: |
-    npm install -g @sarva-varadi/core
+    npm install -g @sarva-varadi/core@latest
     sarva-varadi generate \
       --input target/surefire-reports/ \
       --output sarva-report \
@@ -104,7 +104,7 @@ sarva-varadi generate \
 
 - name: Generate report
   run: |
-    npm install -g @sarva-varadi/core
+    npm install -g @sarva-varadi/core@latest
     sarva-varadi generate \
       --input build/test-results/test/ \
       --output sarva-report
@@ -118,7 +118,7 @@ sarva-varadi generate \
 
 - name: Generate Sarva-Varadi report
   run: |
-    npm install -g @sarva-varadi/core
+    npm install -g @sarva-varadi/core@latest
     sarva-varadi generate \
       --input results/output.xml \
       --output sarva-report \

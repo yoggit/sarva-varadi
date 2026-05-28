@@ -7,7 +7,7 @@ Playwright adapter for Sarva-Varadi — captures test results, steps, attachment
 ## Installation
 
 ```bash
-npm install --save-dev @sarva-varadi/core @sarva-varadi/playwright
+npm install --save-dev @sarva-varadi/core@latest @sarva-varadi/playwright@latest
 ```
 
 ---
