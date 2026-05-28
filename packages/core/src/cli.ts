@@ -214,7 +214,6 @@ async function handleGenerate(args: string[]) {
     console.log(`\n✅ Report generated successfully!`);
     console.log(`📁 Output: ${path.resolve(options.output)}`);
     console.log(`📄 Latest report: ${path.join(options.output, 'index.html')}`);
-    console.log(`📈 Trends dashboard: ${path.join(options.output, 'trends.html')}\n`);
   } catch (error) {
     console.error(`\n❌ Error: ${error instanceof Error ? error.message : String(error)}\n`);
     process.exit(1);

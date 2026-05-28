@@ -3,21 +3,18 @@ import * as path from 'path';
 import { SarvaTestResult, RunMetadata, RunSummary, SarvaReporterOptions, DEFAULT_OPTIONS } from '../types';
 import { HistoryManager } from '../history-manager';
 import { HTMLGenerator } from './html-generator';
-import { TrendsGenerator } from './trends-generator';
 import { NotificationManager } from '../notifiers';
 
 export class ReportGenerator {
   private options: Required<SarvaReporterOptions>;
   private historyManager: HistoryManager;
   private htmlGenerator: HTMLGenerator;
-  private trendsGenerator: TrendsGenerator;
   private notificationManager: NotificationManager;
 
   constructor(options: SarvaReporterOptions = {}) {
     this.options = { ...DEFAULT_OPTIONS, ...options };
     this.historyManager = new HistoryManager(this.options.outputFolder, this.options.history);
     this.htmlGenerator = new HTMLGenerator(this.options);
-    this.trendsGenerator = new TrendsGenerator(this.options);
     this.notificationManager = new NotificationManager(this.options.notifications);
   }
 
@@ -51,16 +48,7 @@ export class ReportGenerator {
     const indexPath = path.join(outputDir, this.options.outputFile);
     fs.writeFileSync(indexPath, indexHtml);
 
-    if (this.options.trends.enabled) {
-      const trendsHtml = this.trendsGenerator.generate(history, metadata);
-      const trendsPath = path.join(outputDir, 'trends.html');
-      fs.writeFileSync(trendsPath, trendsHtml);
-    }
-
     console.log(`\n📊 Sarva-Varadi report generated: ${indexPath}`);
-    if (this.options.trends.enabled) {
-      console.log(`📈 Trends dashboard: ${path.join(outputDir, 'trends.html')}`);
-    }
 
     // Send notifications
     if (this.options.notifications?.enabled) {
