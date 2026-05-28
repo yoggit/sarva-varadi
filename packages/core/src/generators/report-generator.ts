@@ -12,7 +12,14 @@ export class ReportGenerator {
   private notificationManager: NotificationManager;
 
   constructor(options: SarvaReporterOptions = {}) {
-    this.options = { ...DEFAULT_OPTIONS, ...options };
+    this.options = {
+      ...DEFAULT_OPTIONS,
+      ...options,
+      history:       { ...DEFAULT_OPTIONS.history,       ...(options.history       ?? {}) },
+      trends:        { ...DEFAULT_OPTIONS.trends,        ...(options.trends        ?? {}) },
+      notifications: { ...DEFAULT_OPTIONS.notifications, ...(options.notifications ?? {}) },
+      links:         { ...DEFAULT_OPTIONS.links,         ...(options.links         ?? {}) },
+    };
     this.historyManager = new HistoryManager(this.options.outputFolder, this.options.history);
     this.htmlGenerator = new HTMLGenerator(this.options);
     this.notificationManager = new NotificationManager(this.options.notifications);
