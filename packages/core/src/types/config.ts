@@ -9,6 +9,8 @@ export interface SarvaReporterOptions {
   showStackTrace?: boolean;
   embedAttachments?: boolean;
   maskSensitiveData?: boolean;
+  sensitiveEnvVars?: string[];  // env var names whose resolved values are masked in step titles, e.g. ['PASSWORD', 'EMAIL']
+  maskAllFills?: boolean;       // when true, masks the value in every Fill/Type step regardless of locator
 
   history?: HistoryOptions;
   trends?: TrendsOptions;
@@ -42,6 +44,8 @@ export const DEFAULT_OPTIONS: Required<SarvaReporterOptions> = {
   showStackTrace: true,
   embedAttachments: true,
   maskSensitiveData: false,
+  sensitiveEnvVars: [],
+  maskAllFills: false,
   history: {
     enabled: true,
     maxRuns: 30,

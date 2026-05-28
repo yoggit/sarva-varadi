@@ -6,23 +6,37 @@ import type {
 } from '@playwright/test/reporter';
 import { BaseAdapter, SarvaTestResult, TestStep, Attachment, TestStatus } from '@sarva-varadi/core';
 
-const SENSITIVE_PATTERNS = [
-  /password/i, /passwd/i, /pwd/i,
-  /secret/i, /token/i, /apikey/i, /api_key/i,
-  /authorization/i, /auth/i, /credential/i,
-];
-
 export class PlaywrightAdapter extends BaseAdapter {
-  constructor(private maskSensitiveData: boolean = false) {
+  private sensitiveValues: string[];
+
+  constructor(
+    private maskSensitiveData: boolean = false,
+    sensitiveEnvVars: string[] = [],
+    private maskAllFills: boolean = false
+  ) {
     super();
+    this.sensitiveValues = sensitiveEnvVars
+      .map(name => process.env[name])
+      .filter((v): v is string => typeof v === 'string' && v.length > 0);
   }
 
-  // Masks the value argument in step titles like: page.fill('#password', 'secret') → page.fill('#password', '***')
   private maskStepTitle(title: string): string {
     if (!this.maskSensitiveData) return title;
-    const isSensitive = SENSITIVE_PATTERNS.some(p => p.test(title));
-    if (!isSensitive) return title;
-    return title.replace(/(,\s*['"])([^'"]+)(['"])/g, '$1***$3');
+
+    let masked = title;
+
+    // Mask value in every Fill/Type step regardless of locator: Fill "value" locator(...) → Fill "***" locator(...)
+    if (this.maskAllFills) {
+      masked = masked.replace(/^(Fill|Type|Press sequentially)\s+"([^"]*)"/i, '$1 "***"');
+    }
+
+    // Replace resolved env var values wherever they appear in the step title
+    for (const value of this.sensitiveValues) {
+      const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      masked = masked.replace(new RegExp(escaped, 'g'), '***');
+    }
+
+    return masked;
   }
 
   adaptTest(testCase: TestCase, result: TestResult, projectName: string): SarvaTestResult {

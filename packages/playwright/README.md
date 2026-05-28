@@ -95,6 +95,11 @@ xdg-open sarva-report/index.html  # Linux
       channel: '#test-results',
     },
   },
+
+  // Sensitive data masking
+  maskSensitiveData: true,
+  sensitiveEnvVars: ['PASSWORD', 'EMAIL', 'API_TOKEN'], // env var names — values are masked in step titles
+  maskAllFills: false,   // set true to mask every Fill/Type step value unconditionally
 }]
 ```
 

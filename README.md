@@ -269,7 +269,9 @@ reporter: [
   ['@sarva-varadi/playwright', {
     outputFolder: 'sarva-report',
     title: 'My Test Report',
-    maskSensitiveData: false,      // set true to mask passwords/tokens in step titles
+    maskSensitiveData: true,       // enable sensitive data masking
+    sensitiveEnvVars: ['PASSWORD', 'EMAIL', 'API_TOKEN'], // env var names whose values are masked in step titles
+    maskAllFills: false,           // set true to mask every Fill/Type step value unconditionally
     history: {
       enabled: true,
       maxRuns: 30,

@@ -18,7 +18,11 @@ export default class SarvaPlaywrightReporter implements Reporter {
 
   constructor(options: SarvaReporterOptions = {}) {
     this.options = options;
-    this.adapter = new PlaywrightAdapter(options.maskSensitiveData ?? false);
+    this.adapter = new PlaywrightAdapter(
+      options.maskSensitiveData ?? false,
+      options.sensitiveEnvVars ?? [],
+      options.maskAllFills ?? false
+    );
     this.reportGenerator = new ReportGenerator(options);
   }
 

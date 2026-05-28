@@ -39,7 +39,21 @@ Pass an options object to the reporter plugin in `playwright.config.ts`:
 | `title` | string | `'Sarva-Varadi Test Report'` | Title shown in the report header |
 | `showStackTrace` | boolean | `true` | Show full stack traces in test detail |
 | `embedAttachments` | boolean | `true` | Embed screenshots/videos inline |
-| `maskSensitiveData` | boolean | `false` | Mask passwords, tokens, API keys with `***` |
+| `maskSensitiveData` | boolean | `false` | Enable sensitive data masking in step titles |
+| `sensitiveEnvVars` | string[] | `[]` | Env var names whose resolved values are masked wherever they appear in step titles, e.g. `['PASSWORD', 'EMAIL']` |
+| `maskAllFills` | boolean | `false` | Mask the typed value in every `Fill`/`Type` step regardless of locator |
+
+::: tip Masking sensitive data
+Sensitive values typically come from a `.env` file. List the env var names you want masked — the reporter resolves their values at runtime and redacts them from every step title they appear in, regardless of locator type (XPath, CSS, role, etc.).
+
+```typescript
+['@sarva-varadi/playwright', {
+  maskSensitiveData: true,
+  sensitiveEnvVars: ['PASSWORD', 'EMAIL', 'API_TOKEN'],  // values read from process.env
+  maskAllFills: false,  // set true to also mask every Fill/Type step unconditionally
+}]
+```
+:::
 
 ### History options
 
