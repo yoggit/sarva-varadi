@@ -18,6 +18,9 @@ Pass an options object to the reporter plugin in `playwright.config.ts`:
 ['@sarva-varadi/playwright', {
   outputFolder: 'sarva-report',
   title: 'My Test Report',
+  maskSensitiveData: true,
+  sensitiveEnvVars: ['PASSWORD', 'EMAIL', 'API_TOKEN'], // optional — env var names whose resolved values are masked in step titles
+  maskAllFills: false,   // optional — set true to mask every Fill/Type step value unconditionally (no .env needed)
   history: {
     enabled: true,
     maxRuns: 25,
