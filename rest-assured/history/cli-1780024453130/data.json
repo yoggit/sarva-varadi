@@ -1,0 +1,1163 @@
+[
+  {
+    "uuid": "e022e81c-1b7e-43de-ba3c-d1207730ed81",
+    "tool": "rest-assured",
+    "name": "GET /users - List all users",
+    "fullName": "com.example.restassured.tests.ApiTests.GET /users - List all users",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778181251825,
+    "stop": 1778181253025,
+    "duration": 1200,
+    "steps": [
+      {
+        "name": "GET /users - List all users",
+        "status": "passed",
+        "start": 1778181251925,
+        "stop": 1778181252885,
+        "duration": 960,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181251925,
+            "stop": 1778181251926,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: /users",
+                "status": "passed",
+                "start": 1778181251925,
+                "stop": 1778181251925,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181251925,
+                "stop": 1778181251925,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181252884,
+            "stop": 1778181252885,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 960ms",
+                "status": "passed",
+                "start": 1778181252884,
+                "stop": 1778181252885,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181252884,
+                "stop": 1778181252885,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181252884,
+                "stop": 1778181252885,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"success\":true,\"data\":{\"id\":123}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "medium"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "GET /users - List all users"
+    }
+  },
+  {
+    "uuid": "d4e86cba-297b-4431-a6f3-69c7a74f5426",
+    "tool": "rest-assured",
+    "name": "GET /users/{id} - Get user by ID",
+    "fullName": "com.example.restassured.tests.ApiTests.GET /users/{id} - Get user by ID",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778181253025,
+    "stop": 1778181253825,
+    "duration": 800,
+    "steps": [
+      {
+        "name": "GET /users/{id} - Get user by ID",
+        "status": "passed",
+        "start": 1778181253125,
+        "stop": 1778181253765,
+        "duration": 640,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181253125,
+            "stop": 1778181253126,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: /users/{id}",
+                "status": "passed",
+                "start": 1778181253125,
+                "stop": 1778181253125,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181253125,
+                "stop": 1778181253125,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181253764,
+            "stop": 1778181253765,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 640ms",
+                "status": "passed",
+                "start": 1778181253764,
+                "stop": 1778181253765,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181253764,
+                "stop": 1778181253765,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181253764,
+                "stop": 1778181253765,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"success\":true,\"data\":{\"id\":123}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "medium"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "GET /users/{id} - Get user by ID"
+    }
+  },
+  {
+    "uuid": "23eb1698-d631-4e49-a45c-7ca867d0cb63",
+    "tool": "rest-assured",
+    "name": "POST /users - Create new user",
+    "fullName": "com.example.restassured.tests.ApiTests.POST /users - Create new user",
+    "status": "flaky",
+    "stage": "finished",
+    "start": 1778181253825,
+    "stop": 1778181255325,
+    "duration": 1500,
+    "steps": [
+      {
+        "name": "POST /users - Create new user",
+        "status": "passed",
+        "start": 1778181253925,
+        "stop": 1778181255125,
+        "duration": 1200,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181253925,
+            "stop": 1778181253926,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: POST | URL: /users",
+                "status": "passed",
+                "start": 1778181253925,
+                "stop": 1778181253925,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181253925,
+                "stop": 1778181253925,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181253925,
+                "stop": 1778181253925,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"name\":\"test\",\"email\":\"test@example.com\"}"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181255124,
+            "stop": 1778181255125,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 1200ms",
+                "status": "passed",
+                "start": 1778181255124,
+                "stop": 1778181255125,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181255124,
+                "stop": 1778181255125,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181255124,
+                "stop": 1778181255125,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"success\":true,\"data\":{\"id\":123}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "medium"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 1
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "POST /users - Create new user"
+    }
+  },
+  {
+    "uuid": "879ff48a-3b4e-46f6-b3de-396da9e08e92",
+    "tool": "rest-assured",
+    "name": "PUT /users/{id} - Update user",
+    "fullName": "com.example.restassured.tests.ApiTests.PUT /users/{id} - Update user",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778181255325,
+    "stop": 1778181257125,
+    "duration": 1800,
+    "steps": [
+      {
+        "name": "PUT /users/{id} - Update user",
+        "status": "passed",
+        "start": 1778181255425,
+        "stop": 1778181256865,
+        "duration": 1440,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181255425,
+            "stop": 1778181255426,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: PUT | URL: /users/{id}",
+                "status": "passed",
+                "start": 1778181255425,
+                "stop": 1778181255425,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181255425,
+                "stop": 1778181255425,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181255425,
+                "stop": 1778181255425,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"name\":\"test\",\"email\":\"test@example.com\"}"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181256864,
+            "stop": 1778181256865,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 1440ms",
+                "status": "passed",
+                "start": 1778181256864,
+                "stop": 1778181256865,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181256864,
+                "stop": 1778181256865,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181256864,
+                "stop": 1778181256865,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"success\":true,\"data\":{\"id\":123}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "issue",
+        "value": "9"
+      },
+      {
+        "name": "severity",
+        "value": "critical"
+      },
+      {
+        "name": "feature",
+        "value": "posts-api"
+      },
+      {
+        "name": "owner",
+        "value": "backend-team"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "PUT /users/{id} - Update user"
+    }
+  },
+  {
+    "uuid": "d0b26de4-7dbf-4605-83c3-65d5eaef4f67",
+    "tool": "rest-assured",
+    "name": "DELETE /users/{id} - Delete user",
+    "fullName": "com.example.restassured.tests.ApiTests.DELETE /users/{id} - Delete user",
+    "status": "skipped",
+    "stage": "finished",
+    "start": 1778181257125,
+    "stop": 1778181257125,
+    "duration": 0,
+    "steps": [
+      {
+        "name": "DELETE /users/{id} - Delete user",
+        "status": "passed",
+        "start": 1778181257225,
+        "stop": 1778181257225,
+        "duration": 0,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181257225,
+            "stop": 1778181257226,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: DELETE | URL: /users/{id}",
+                "status": "passed",
+                "start": 1778181257225,
+                "stop": 1778181257225,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181257225,
+                "stop": 1778181257225,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181257224,
+            "stop": 1778181257225,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 0ms",
+                "status": "passed",
+                "start": 1778181257224,
+                "stop": 1778181257225,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181257224,
+                "stop": 1778181257225,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181257224,
+                "stop": 1778181257225,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"success\":true,\"data\":{\"id\":123}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "trivial"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "DELETE /users/{id} - Delete user"
+    }
+  },
+  {
+    "uuid": "c0ef1d14-adb5-4168-a816-e3b151e15527",
+    "tool": "rest-assured",
+    "name": "GET /posts - List all posts",
+    "fullName": "com.example.restassured.tests.ApiTests.GET /posts - List all posts",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778181257125,
+    "stop": 1778181258225,
+    "duration": 1100,
+    "steps": [
+      {
+        "name": "GET /posts - List all posts",
+        "status": "passed",
+        "start": 1778181257225,
+        "stop": 1778181258105,
+        "duration": 880,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181257225,
+            "stop": 1778181257226,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: /posts",
+                "status": "passed",
+                "start": 1778181257225,
+                "stop": 1778181257225,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181257225,
+                "stop": 1778181257225,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181258104,
+            "stop": 1778181258105,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 880ms",
+                "status": "passed",
+                "start": 1778181258104,
+                "stop": 1778181258105,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181258104,
+                "stop": 1778181258105,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181258104,
+                "stop": 1778181258105,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"success\":true,\"data\":{\"id\":123}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tms",
+        "value": "2"
+      },
+      {
+        "name": "severity",
+        "value": "high"
+      },
+      {
+        "name": "feature",
+        "value": "posts-api"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "GET /posts - List all posts"
+    }
+  },
+  {
+    "uuid": "21ab0aed-fe4c-45e9-a0ac-10eef9edbd1b",
+    "tool": "rest-assured",
+    "name": "POST /posts - Create new post",
+    "fullName": "com.example.restassured.tests.ApiTests.POST /posts - Create new post",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778181258225,
+    "stop": 1778181259625,
+    "duration": 1400,
+    "steps": [
+      {
+        "name": "POST /posts - Create new post",
+        "status": "passed",
+        "start": 1778181258325,
+        "stop": 1778181259445,
+        "duration": 1120,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181258325,
+            "stop": 1778181258326,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: POST | URL: /posts",
+                "status": "passed",
+                "start": 1778181258325,
+                "stop": 1778181258325,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181258325,
+                "stop": 1778181258325,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181258325,
+                "stop": 1778181258325,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"name\":\"test\",\"email\":\"test@example.com\"}"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181259444,
+            "stop": 1778181259445,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 1120ms",
+                "status": "passed",
+                "start": 1778181259444,
+                "stop": 1778181259445,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181259444,
+                "stop": 1778181259445,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181259444,
+                "stop": 1778181259445,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"success\":true,\"data\":{\"id\":123}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "tms",
+        "value": "5"
+      },
+      {
+        "name": "severity",
+        "value": "medium"
+      },
+      {
+        "name": "feature",
+        "value": "posts-api"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "POST /posts - Create new post"
+    }
+  },
+  {
+    "uuid": "408134ae-8d81-498c-9973-f9ab163d3ea1",
+    "tool": "rest-assured",
+    "name": "GET /posts/{id}/comments - Get post comments",
+    "fullName": "com.example.restassured.tests.ApiTests.GET /posts/{id}/comments - Get post comments",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778181259625,
+    "stop": 1778181260525,
+    "duration": 900,
+    "steps": [
+      {
+        "name": "GET /posts/{id}/comments - Get post comments",
+        "status": "passed",
+        "start": 1778181259725,
+        "stop": 1778181260445,
+        "duration": 720,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181259725,
+            "stop": 1778181259726,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: /posts/{id}/comments",
+                "status": "passed",
+                "start": 1778181259725,
+                "stop": 1778181259725,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181259725,
+                "stop": 1778181259725,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181260444,
+            "stop": 1778181260445,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 720ms",
+                "status": "passed",
+                "start": 1778181260444,
+                "stop": 1778181260445,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181260444,
+                "stop": 1778181260445,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181260444,
+                "stop": 1778181260445,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"success\":true,\"data\":{\"id\":123}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "low"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "GET /posts/{id}/comments - Get post comments"
+    }
+  },
+  {
+    "uuid": "cceeb729-42f1-4d6f-9856-10f578c55d17",
+    "tool": "rest-assured",
+    "name": "GET /users/{id}/posts - Get user posts",
+    "fullName": "com.example.restassured.tests.ApiTests.GET /users/{id}/posts - Get user posts",
+    "status": "skipped",
+    "stage": "finished",
+    "start": 1778181260525,
+    "stop": 1778181260525,
+    "duration": 0,
+    "steps": [
+      {
+        "name": "GET /users/{id}/posts - Get user posts",
+        "status": "passed",
+        "start": 1778181260625,
+        "stop": 1778181260625,
+        "duration": 0,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181260625,
+            "stop": 1778181260626,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: GET | URL: /users/{id}/posts",
+                "status": "passed",
+                "start": 1778181260625,
+                "stop": 1778181260625,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181260625,
+                "stop": 1778181260625,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181260624,
+            "stop": 1778181260625,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 0ms",
+                "status": "passed",
+                "start": 1778181260624,
+                "stop": 1778181260625,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181260624,
+                "stop": 1778181260625,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181260624,
+                "stop": 1778181260625,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"success\":true,\"data\":{\"id\":123}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "trivial"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "GET /users/{id}/posts - Get user posts"
+    }
+  },
+  {
+    "uuid": "bf172260-f2f2-4000-9956-0e74e087617b",
+    "tool": "rest-assured",
+    "name": "PATCH /users/{id} - Partial update",
+    "fullName": "com.example.restassured.tests.ApiTests.PATCH /users/{id} - Partial update",
+    "status": "flaky",
+    "stage": "finished",
+    "start": 1778181260525,
+    "stop": 1778181261475,
+    "duration": 950,
+    "steps": [
+      {
+        "name": "PATCH /users/{id} - Partial update",
+        "status": "passed",
+        "start": 1778181260625,
+        "stop": 1778181261385,
+        "duration": 760,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181260625,
+            "stop": 1778181260626,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: PATCH | URL: /users/{id}",
+                "status": "passed",
+                "start": 1778181260625,
+                "stop": 1778181260625,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181260625,
+                "stop": 1778181260625,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181261384,
+            "stop": 1778181261385,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 760ms",
+                "status": "passed",
+                "start": 1778181261384,
+                "stop": 1778181261385,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181261384,
+                "stop": 1778181261385,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181261384,
+                "stop": 1778181261385,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"success\":true,\"data\":{\"id\":123}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "low"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 1
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "PATCH /users/{id} - Partial update"
+    }
+  },
+  {
+    "uuid": "7190f642-4b79-4be6-9f9c-bf2c2d0f28f3",
+    "tool": "rest-assured",
+    "name": "POST /users - Validate response schema",
+    "fullName": "com.example.restassured.tests.ApiTests.POST /users - Validate response schema",
+    "status": "passed",
+    "stage": "finished",
+    "start": 1778181261475,
+    "stop": 1778181262575,
+    "duration": 1100,
+    "steps": [
+      {
+        "name": "POST /users - Validate response schema",
+        "status": "passed",
+        "start": 1778181261575,
+        "stop": 1778181262465,
+        "duration": 890,
+        "steps": [
+          {
+            "name": "📤 Request",
+            "status": "passed",
+            "start": 1778181261575,
+            "stop": 1778181261576,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Method: POST | URL: /users",
+                "status": "passed",
+                "start": 1778181261575,
+                "stop": 1778181261575,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181261575,
+                "stop": 1778181261575,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json\nAccept: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181261575,
+                "stop": 1778181261575,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"name\":\"John Doe\",\"email\":\"john@example.com\"}"
+                }
+              }
+            ]
+          },
+          {
+            "name": "📥 Response",
+            "status": "passed",
+            "start": 1778181262464,
+            "stop": 1778181262465,
+            "duration": 1,
+            "steps": [
+              {
+                "name": "Status: 200 OK | Response Time: 890ms",
+                "status": "passed",
+                "start": 1778181262464,
+                "stop": 1778181262465,
+                "duration": 0
+              },
+              {
+                "name": "Headers",
+                "status": "passed",
+                "start": 1778181262464,
+                "stop": 1778181262465,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "Content-Type: application/json"
+                }
+              },
+              {
+                "name": "Body",
+                "status": "passed",
+                "start": 1778181262464,
+                "stop": 1778181262465,
+                "duration": 0,
+                "statusDetails": {
+                  "message": "{\"id\":456,\"name\":\"John Doe\"}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "labels": [
+      {
+        "name": "severity",
+        "value": "critical"
+      },
+      {
+        "name": "feature",
+        "value": "users-api"
+      }
+    ],
+    "extra": {
+      "restAssured": {
+        "retries": 0
+      },
+      "parameters": [],
+      "testClass": "com.example.restassured.tests.ApiTests",
+      "testMethod": "POST /users - Validate response schema"
+    }
+  }
+]
