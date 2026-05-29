@@ -18,6 +18,20 @@ export default class SarvaPlaywrightReporter implements Reporter {
 
   constructor(options: SarvaReporterOptions = {}) {
     this.options = options;
+
+    if (options.maskSensitiveData) {
+      const hasEnvVars = (options.sensitiveEnvVars ?? []).length > 0;
+      const hasMaskAllFills = options.maskAllFills === true;
+      if (!hasEnvVars && !hasMaskAllFills) {
+        console.warn(
+          '\n⚠️  Sarva-Varadi: maskSensitiveData is enabled but nothing will be masked.' +
+          '\n    Configure at least one masking strategy:' +
+          '\n      maskAllFills: true              → masks every Fill/Type step value (no .env needed)' +
+          '\n      sensitiveEnvVars: [\'VAR_NAME\']  → masks specific values resolved from .env\n'
+        );
+      }
+    }
+
     this.adapter = new PlaywrightAdapter(
       options.maskSensitiveData ?? false,
       options.sensitiveEnvVars ?? [],

@@ -836,7 +836,7 @@ const SarvaOverview = (() => {
         <span class="sv-pill ${t.lastStatus}" style="flex-shrink:0;opacity:0.6;">${sym}</span>
         <div style="flex:1;min-width:0;">
           <div style="display:flex;align-items:center;gap:0.3rem;min-width:0;">
-            <span class="sv-truncate" style="font-size:0.8rem;font-weight:500;color:var(--text-secondary);">${escHtml(t.name)}</span>
+            <span class="sv-truncate" style="font-size:0.8rem;font-weight:500;color:var(--text-secondary);">${t.name ? escHtml(t.name) : '<em style="color:var(--text-muted)">(unnamed test)</em>'}</span>
             ${t.browser ? `<span class="sv-browser-badge">${escHtml(t.browser)}</span>` : ''}
           </div>
           <div style="font-size:0.68rem;color:var(--text-muted);margin-top:1px;">Last seen${t.lastSeenAt ? `: ${escHtml(t.lastSeenAt)}` : ' in a previous run'}</div>
