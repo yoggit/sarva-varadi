@@ -58,6 +58,16 @@ Sensitive values typically come from a `.env` file. List the env var names you w
 ```
 :::
 
+::: warning Masking requires at least one strategy
+`maskSensitiveData: true` alone does nothing. If neither `sensitiveEnvVars` nor `maskAllFills: true` is configured, the reporter prints this warning at test run start:
+```
+⚠️  Sarva-Varadi: maskSensitiveData is enabled but nothing will be masked.
+    Configure at least one masking strategy:
+      maskAllFills: true              → masks every Fill/Type step value (no .env needed)
+      sensitiveEnvVars: ['VAR_NAME']  → masks specific values resolved from .env
+```
+:::
+
 ### History options
 
 | Option | Type | Default | Description |

@@ -103,6 +103,11 @@ xdg-open sarva-report/index.html  # Linux
 }]
 ```
 
+> **Note:** `maskSensitiveData: true` alone does nothing — at least one of `sensitiveEnvVars` or `maskAllFills: true` must be configured. If neither is set, the reporter prints a warning at test run start reminding you to configure a masking strategy.
+
+```typescript
+```
+
 ---
 
 ## Notifications

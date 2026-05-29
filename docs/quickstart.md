@@ -56,6 +56,16 @@ export default defineConfig({
 
 > `@sarva-varadi/playwright` works alongside other reporters — all reporters in the array run together.
 
+::: warning Masking requires at least one strategy
+`maskSensitiveData: true` alone does nothing. If neither `sensitiveEnvVars` nor `maskAllFills: true` is configured, the reporter prints this warning at test run start:
+```
+⚠️  Sarva-Varadi: maskSensitiveData is enabled but nothing will be masked.
+    Configure at least one masking strategy:
+      maskAllFills: true              → masks every Fill/Type step value (no .env needed)
+      sensitiveEnvVars: ['VAR_NAME']  → masks specific values resolved from .env
+```
+:::
+
 ### What's captured automatically
 
 - ✅ Screenshots, video, and trace on failure
