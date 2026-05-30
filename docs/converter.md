@@ -251,6 +251,75 @@ sarva-varadi generate \
     path: sarva-report/
 ```
 
+### GitHub Actions — Allure (Java / Maven)
+
+Works with any Java framework that has an Allure adapter (`allure-testng`, `allure-junit5`, `allure-restassured`). The adapter writes `allure-results/` automatically — no Allure report generation step needed.
+
+```yaml
+- name: Run tests
+  run: mvn test   # allure-testng/allure-junit5 adapter writes allure-results/ automatically
+
+- name: Generate Sarva-Varadi report
+  run: |
+    npm install -g @sarva-varadi/core@latest
+    sarva-varadi generate \
+      --input allure-results/ \
+      --output sarva-report \
+      --title "Java Test Suite"
+
+- name: Upload report
+  uses: actions/upload-artifact@v4
+  with:
+    name: sarva-report
+    path: sarva-report/
+```
+
+### GitHub Actions — Allure (Playwright / JavaScript)
+
+```yaml
+- name: Install dependencies
+  run: npm ci
+
+- name: Run Playwright tests
+  run: npx playwright test
+  # allure-playwright adapter writes allure-results/ automatically
+
+- name: Generate Sarva-Varadi report
+  run: |
+    npm install -g @sarva-varadi/core@latest
+    sarva-varadi generate \
+      --input allure-results/ \
+      --output sarva-report \
+      --title "Playwright Suite"
+
+- name: Upload report
+  uses: actions/upload-artifact@v4
+  with:
+    name: sarva-report
+    path: sarva-report/
+```
+
+### GitHub Actions — Allure (Pytest / Python)
+
+```yaml
+- name: Run tests
+  run: pytest --alluredir=allure-results   # allure-pytest writes allure-results/
+
+- name: Generate Sarva-Varadi report
+  run: |
+    npm install -g @sarva-varadi/core@latest
+    sarva-varadi generate \
+      --input allure-results/ \
+      --output sarva-report \
+      --title "Python Test Suite"
+
+- name: Upload report
+  uses: actions/upload-artifact@v4
+  with:
+    name: sarva-report
+    path: sarva-report/
+```
+
 ---
 
 ## Which approach gives you what?
