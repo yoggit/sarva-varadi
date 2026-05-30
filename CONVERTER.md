@@ -585,12 +585,42 @@ await generator.generateReport(results, {
 });
 ```
 
+## Which approach gives you what?
+
+There are two ways to get a sarva-varadi report:
+
+- **Via native adapter** — add a sarva-varadi adapter to your test project. Captures the richest data because it runs inside your test execution.
+- **Via converter** — sarva-varadi reads an output file your existing toolchain already produces. No code changes needed. Data richness depends on how much the source format carries:
+  - **Standard formats** (JUnit XML, TestNG XML) — minimal metadata, designed for CI pass/fail only
+  - **Rich formats** (Robot Framework `output.xml`, Allure `allure-results/`) — full test data, nearly as rich as a native adapter
+
+| Feature | Via converter — Standard (JUnit / TestNG) | Via converter — Rich (Robot / Allure) | Via native adapter |
+|---------|-----------|----------------|----------------|
+| Pass/fail/skip counts | ✅ | ✅ | ✅ |
+| Test duration | ✅ | ✅ | ✅ |
+| Error messages | ✅ | ✅ | ✅ |
+| Stack traces | ✅ | ✅ | ✅ |
+| Nested step hierarchy | ✗ | ✅ Robot (keyword tree) / ✅ Allure (steps) | ✅ |
+| Screenshots / attachments | ✗ | ✗ Robot / ✅ Allure | ✅ Full |
+| Video / traces | ✗ | ✗ | ✅ Playwright only |
+| HTTP request/response | ✗ | ✗ | ✅ RestAssured only |
+| Flaky test detection | ✗ | ✅ Allure (`@Flaky`) / ✗ Robot | ✅ Full score (auto) |
+| Severity labels | ✗ | ✅ Both | ✅ |
+| Issue / TMS links | ✗ | ✅ Both | ✅ |
+| BDD Gherkin hierarchy | ✗ | ✗ | ✅ Cucumber only |
+| Browser grouping | ✗ | ✗ | ✅ Playwright (automatic) |
+
 ## Migration Path
 
 ### Phase 1: Use Converter (Quick Win)
 Start using Sarva-Varadi reports immediately without changing test code:
 ```bash
+# Standard formats
 sarva-varadi generate -i junit.xml -o reports
+
+# Rich formats — near-native quality with zero code changes
+sarva-varadi generate --input allure-results/ --output reports
+sarva-varadi generate --input results/output.xml --output reports
 ```
 
 ### Phase 2: Add Native Adapter (Full Features)

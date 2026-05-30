@@ -144,23 +144,34 @@ sarva-varadi generate \
 
 ---
 
-## Native adapters vs. converter
+## Which approach gives you what?
 
-The converter is great for a quick start or when you can't modify the test code. For the richest experience, use the native adapters:
+There are two ways to get a sarva-varadi report:
 
-| Feature | Converter | Native adapter |
-|---------|-----------|----------------|
-| Pass/fail/skip counts | ✅ | ✅ |
-| Test duration | ✅ | ✅ |
-| Error messages | ✅ | ✅ |
-| Stack traces | ✅ | ✅ |
-| Screenshots | ⚠️ Limited | ✅ Full |
-| Video / traces | ✗ | ✅ (Playwright) |
-| HTTP request/response | ✗ | ✅ (RestAssured) |
-| Flaky test detection | ⚠️ Basic | ✅ Full score |
-| Severity labels | ✗ (except Robot — tags map automatically) | ✅ |
-| BDD Gherkin hierarchy | ✗ | ✅ (Cucumber) |
-| Keyword step tree | ✅ (Robot Framework — full nested keyword hierarchy) | N/A |
-| Browser grouping | ⚠️ Name parsing | ✅ Automatic |
+- **Via native adapter** — add a sarva-varadi adapter to your test project. Captures the richest data because it runs inside your test execution.
+- **Via converter** — sarva-varadi reads an output file your existing toolchain already produces. No code changes needed. Data richness depends on how much information the source format carries:
+  - **Standard formats** (JUnit XML, TestNG XML) — designed for CI pass/fail only, carry minimal metadata
+  - **Rich formats** (Robot Framework `output.xml`, Allure `allure-results/`) — designed to carry full test data, converter output is nearly as rich as a native adapter
 
-> **Robot Framework** is the only converter input that captures a full step hierarchy (keyword tree with sub-keywords) and tag-based labels — making the converter output nearly as rich as a native adapter.
+| Feature | Via converter — Standard (JUnit / TestNG) | Via converter — Rich (Robot / Allure) | Via native adapter |
+|---------|-----------|----------------|----------------|
+| Pass/fail/skip counts | ✅ | ✅ | ✅ |
+| Test duration | ✅ | ✅ | ✅ |
+| Error messages | ✅ | ✅ | ✅ |
+| Stack traces | ✅ | ✅ | ✅ |
+| Nested step hierarchy | ✗ | ✅ Robot (keyword tree) / ✅ Allure (steps) | ✅ |
+| Screenshots / attachments | ✗ | ✗ Robot / ✅ Allure | ✅ Full |
+| Video / traces | ✗ | ✗ | ✅ Playwright only |
+| HTTP request/response | ✗ | ✗ | ✅ RestAssured only |
+| Flaky test detection | ✗ | ✅ Allure (`@Flaky`) / ✗ Robot | ✅ Full score (auto) |
+| Severity labels | ✗ | ✅ Both (tags / labels) | ✅ |
+| Issue / TMS links | ✗ | ✅ Both | ✅ |
+| BDD Gherkin hierarchy | ✗ | ✗ | ✅ Cucumber only |
+| Browser grouping | ✗ | ✗ | ✅ Playwright (automatic) |
+
+::: tip Choosing the right approach
+- Already using **Allure adapters**? → Use the Allure converter. Zero code changes, near-native quality.
+- Already using **Robot Framework**? → Use the Robot converter. Full step tree and labels included.
+- Starting fresh or want the **richest data**? → Use a native adapter.
+- Just need **quick pass/fail** from an existing CI pipeline? → Use JUnit/TestNG converter.
+:::
