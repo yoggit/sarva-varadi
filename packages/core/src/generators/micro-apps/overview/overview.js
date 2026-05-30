@@ -767,6 +767,26 @@ const SarvaOverview = (() => {
         .map(t => stripTags(t.testName || ''))
     );
 
+    // All run IDs newest-first (matches SarvaStore.history order)
+    const allRunIds = (SarvaStore.history || []).map(r => r.id);
+
+    // Count consecutive most-recent runs where a test was absent.
+    // Iterates newest→oldest and stops the moment the test is found in a run.
+    const countConsecutiveAbsent = t => {
+      const ranIn = new Set(t.history.map(h => h.runId));
+      let n = 0;
+      for (const rid of allRunIds) {
+        if (!ranIn.has(rid)) n++;
+        else break;
+      }
+      return n;
+    };
+
+    // Absent tests are shown for up to ABSENT_AGE_OUT_RUNS consecutive absent runs,
+    // then aged out of the display. History data is preserved — if the test returns
+    // under the same name its full history is automatically restored.
+    const ABSENT_AGE_OUT_RUNS = 3;
+
     const INFO_ICON_SM = `<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
 
     const newTests = th.filter(t =>
@@ -790,21 +810,26 @@ const SarvaOverview = (() => {
       return { uuid: cur?.uuid || null, name: cur?.name || t.testName, status: t.history[0].status, browser };
     });
 
-    const absentTests = th.filter(t =>
-      t.history.length > 0 &&
-      t.history[0].runId !== latestRunId &&
-      !latestBaseNames.has(stripTags(t.testName || ''))
-    ).map(t => {
-      const lastRun = (SarvaStore.history || []).find(r => r.id === t.history[0].runId);
-      const fmtTs = ts => ts ? new Date(ts).toLocaleString(undefined, {
-        year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
-      }) : '';
-      const ci       = t.testId ? t.testId.indexOf(':') : -1;
-      const histFN   = ci > 0 ? t.testId.slice(ci + 1) : null;
-      const firstSeg = histFN ? histFN.split('>')[0].trim() : '';
-      const browser  = firstSeg && !firstSeg.includes('.') && !firstSeg.includes('/') ? firstSeg : null;
-      return { name: t.testName, testId: t.testId, lastRunId: t.history[0].runId, lastStatus: t.history[0].status, lastSeenAt: lastRun?.timestamp ? fmtTs(lastRun.timestamp) : null, browser };
-    });
+    // Compute absent count once per candidate to avoid double-traversal.
+    const absentTests = th
+      .filter(t =>
+        t.history.length > 0 &&
+        t.history[0].runId !== latestRunId &&
+        !latestBaseNames.has(stripTags(t.testName || ''))
+      )
+      .map(t => ({ trend: t, absentCount: countConsecutiveAbsent(t) }))
+      .filter(({ absentCount }) => absentCount <= ABSENT_AGE_OUT_RUNS)
+      .map(({ trend: t, absentCount }) => {
+        const lastRun = (SarvaStore.history || []).find(r => r.id === t.history[0].runId);
+        const fmtTs = ts => ts ? new Date(ts).toLocaleString(undefined, {
+          year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+        }) : '';
+        const ci       = t.testId ? t.testId.indexOf(':') : -1;
+        const histFN   = ci > 0 ? t.testId.slice(ci + 1) : null;
+        const firstSeg = histFN ? histFN.split('>')[0].trim() : '';
+        const browser  = firstSeg && !firstSeg.includes('.') && !firstSeg.includes('/') ? firstSeg : null;
+        return { name: t.testName, testId: t.testId, lastRunId: t.history[0].runId, lastStatus: t.history[0].status, lastSeenAt: lastRun?.timestamp ? fmtTs(lastRun.timestamp) : null, browser, absentCount };
+      });
 
     if (newTests.length === 0 && absentTests.length === 0) { section.style.display = 'none'; return; }
     section.style.display = '';
@@ -817,9 +842,12 @@ const SarvaOverview = (() => {
            onclick="SarvaTestDetail.open('${t.uuid}')"
            onmouseenter="this.style.background='var(--bg-hover)'" onmouseleave="this.style.background=''">
         <span class="sv-pill ${t.status}" style="flex-shrink:0;">${sym}</span>
-        <div style="flex:1;min-width:0;display:flex;align-items:center;gap:0.3rem;">
-          <span class="sv-truncate" style="font-size:0.8rem;font-weight:500;">${escHtml(t.name)}</span>
-          ${t.browser ? `<span class="sv-browser-badge">${escHtml(t.browser)}</span>` : ''}
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:0.3rem;min-width:0;">
+            <span class="sv-truncate" style="font-size:0.8rem;font-weight:500;">${escHtml(t.name)}</span>
+            ${t.browser ? `<span class="sv-browser-badge">${escHtml(t.browser)}</span>` : ''}
+          </div>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:2px;font-style:italic;">First time in this run — new test, or renamed / moved from an existing one</div>
         </div>
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
       </div>`;
@@ -828,6 +856,7 @@ const SarvaOverview = (() => {
       const sym     = t.lastStatus === 'failed' ? '✗' : t.lastStatus === 'flaky' ? '~' : t.lastStatus === 'passed' ? '✓' : '○';
       const safeId  = escHtml(t.testId || '');
       const lastRunId = escHtml(t.lastRunId || '');
+      const runWord = t.absentCount === 1 ? 'run' : 'runs';
       return `
       <div style="display:flex;align-items:center;gap:0.65rem;padding:0.55rem 1rem;
                   border-bottom:1px solid var(--border);cursor:pointer;"
@@ -839,7 +868,8 @@ const SarvaOverview = (() => {
             <span class="sv-truncate" style="font-size:0.8rem;font-weight:500;color:var(--text-secondary);">${t.name ? escHtml(t.name) : '<em style="color:var(--text-muted)">(unnamed test)</em>'}</span>
             ${t.browser ? `<span class="sv-browser-badge">${escHtml(t.browser)}</span>` : ''}
           </div>
-          <div style="font-size:0.68rem;color:var(--text-muted);margin-top:1px;">Last seen${t.lastSeenAt ? `: ${escHtml(t.lastSeenAt)}` : ' in a previous run'}</div>
+          <div style="font-size:0.68rem;color:var(--text-muted);margin-top:1px;">Not seen in ${t.absentCount} consecutive ${runWord} · Last seen${t.lastSeenAt ? `: ${escHtml(t.lastSeenAt)}` : ' in a previous run'}</div>
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-top:2px;font-style:italic;">May be deleted, renamed, or moved — verify recent changes</div>
         </div>
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
       </div>`;
@@ -852,7 +882,7 @@ const SarvaOverview = (() => {
         <div class="sv-card-header">
           <span style="display:flex;align-items:center;gap:0.4rem;">
             <span class="sv-card-title" style="color:#22d3ee;">New Tests</span>
-            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>New Tests</b><br>• Appearing in the suite for the first time this run<br>• Review to confirm they are intentionally added<br>• Click any test to inspect its result and steps<br>• Always reflects the current/latest run — hidden when viewing a historical run')}">${INFO_ICON_SM}</span>
+            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>New Tests</b><br>• Appeared for the first time in this run<br>• Possible reasons: genuinely new test added, or an existing test was renamed or moved to a different file<br>• History begins from this run onwards<br>• Always reflects the current/latest run — hidden when viewing a historical run')}">${INFO_ICON_SM}</span>
           </span>
           <span style="font-size:0.72rem;color:var(--text-muted);">${newTests.length} test${newTests.length !== 1 ? 's' : ''}</span>
         </div>
@@ -864,7 +894,7 @@ const SarvaOverview = (() => {
         <div class="sv-card-header">
           <span style="display:flex;align-items:center;gap:0.4rem;">
             <span class="sv-card-title" style="color:#f97316;">Absent Tests</span>
-            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Absent Tests</b><br>• Ran in previous runs but missing from this run<br>• Could be deleted, renamed, or excluded by a filter<br>• Last-seen status shown to help diagnose the cause<br>• Always reflects the current/latest run — hidden when viewing a historical run')}">${INFO_ICON_SM}</span>
+            <span class="sv-info-btn" data-sv-tip="${escHtml('<b>Absent Tests</b><br>• Ran in previous runs but missing from this run<br>• Possible reasons: test deleted, renamed, or moved to a different file<br>• Shown for up to 3 consecutive absent runs, then aged out automatically<br>• History data is preserved — if the test returns under the same name, its full history is restored<br>• Always reflects the current/latest run — hidden when viewing a historical run')}">${INFO_ICON_SM}</span>
           </span>
           <span style="font-size:0.72rem;color:var(--text-muted);">${absentTests.length} test${absentTests.length !== 1 ? 's' : ''}</span>
         </div>

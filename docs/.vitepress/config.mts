@@ -31,6 +31,7 @@ export default defineConfig({
         items: [
           { text: 'The 6 Sections', link: '/report-guide' },
           { text: 'Run History', link: '/run-history' },
+          { text: 'New & Absent Tests', link: '/new-absent-tests' },
           { text: 'PDF & Export', link: '/export' },
         ],
       },
