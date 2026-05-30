@@ -424,6 +424,44 @@ async function main() {
   }
 
   cleanTmp();
+
+  // ─── Inject absent/new demo scenarios into Selenium testHistory ───────────────
+  // Shows the absent/new detection feature in the live demo.
+  // "Deprecated Feature Test" was in runs 1-24 but removed before run 25 → shows as absent (1 run).
+  // This is regenerated fresh on every CI run so it always shows exactly 1 absent run.
+  (function injectAbsentNewDemo() {
+    const selRunsPath = path.join(ROOT, 'demo-selenium/sarva-report/history/runs.json');
+    if (!fs.existsSync(selRunsPath)) return;
+
+    const data = JSON.parse(fs.readFileSync(selRunsPath, 'utf-8'));
+    const allRunIds = data.runs.map(r => r.id);   // newest first
+    const latestRunId = allRunIds[0];
+    const olderRunIds = allRunIds.slice(1);        // runs 1-24 (excluding latest)
+
+    if (olderRunIds.length === 0) return;
+
+    // Remove any previously injected demo entries to avoid duplicates on re-generation
+    data.testHistory = (data.testHistory || []).filter(t =>
+      !['demo-absent-deprecated', 'demo-new-benchmark'].includes(t.testId)
+    );
+
+    // Absent: "Deprecated Feature Test" — present in runs 1-24, absent from run 25 (latest)
+    data.testHistory.push({
+      testId:   'demo-absent-deprecated',
+      testName: 'Deprecated Feature Test',
+      flakyScore: 0,
+      history: olderRunIds.map((runId, i) => ({
+        runId,
+        status: i % 7 === 0 ? 'failed' : 'passed',
+        flaky: false,
+        duration: 1200 + (i * 137 % 800),
+      })),
+    });
+
+    fs.writeFileSync(selRunsPath, JSON.stringify(data, null, 2));
+    console.log('  ✓ Injected absent/new demo scenarios into Selenium testHistory');
+  })();
+
   console.log('\n✅ Done! Reports generated in:');
   console.log('   demo-selenium/sarva-report/index.html');
   console.log('   demo-restassured/sarva-report/index.html');

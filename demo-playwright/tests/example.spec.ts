@@ -114,6 +114,20 @@ test.describe('Playwright Website Tests', () => {
     await expect(page).toHaveTitle(/Test/);
   });
 
+  test('should verify accessibility of homepage @severity:low', async ({ page }) => {
+    await test.step('Navigate to homepage', async () => {
+      await page.goto('/');
+    });
+
+    await test.step('Verify page has a main landmark', async () => {
+      await expect(page.locator('main, [role="main"]').first()).toBeVisible();
+    });
+
+    await test.step('Verify page has a navigation landmark', async () => {
+      await expect(page.locator('nav, [role="navigation"]').first()).toBeVisible();
+    });
+  });
+
   test('should be flaky @issue:12 @severity:medium', async ({ page }) => {
     await test.step('Navigate to homepage', async () => {
       await page.goto('/');
