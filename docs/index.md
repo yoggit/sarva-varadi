@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "Sarva-Varadi"
   text: "Universal Test Reporting"
-  tagline: Single self-contained HTML file. No server. No database. Works with Playwright, Selenium, RestAssured, Cucumber & Robot Framework.
+  tagline: Single self-contained HTML file. No server. No database. Works with Playwright, Selenium, RestAssured, Cucumber, Robot Framework & Allure.
   image:
     src: /logo.svg
     alt: Sarva-Varadi
@@ -48,5 +48,6 @@ features:
 | 🧪 RestAssured (JUnit 5) | `@sarva-varadi/rest-assured-junit` | Java |
 | 🔀 RestAssured (Cucumber BDD) | `@sarva-varadi/cucumber` | Java |
 | 🤖 Robot Framework | CLI converter (`output.xml`) | Python |
+| 🔷 Allure 2/3 | CLI converter (`allure-results/`) | Any language |
 
 → [Live Demos](https://yoggit.github.io/sarva-varadi/) — each has 25 historical runs pre-loaded.
