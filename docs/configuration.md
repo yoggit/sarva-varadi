@@ -144,34 +144,34 @@ sarva.maxRetryCount=2                # requires @Test(retryAnalyzer=...) on Test
 
 ---
 
-## Robot Framework (CLI converter)
+## CLI Converter (all formats)
 
-The CLI converter is configured through **flags** and an optional **`sarva-varadi.properties`** file placed in the directory where you run the command.
+The CLI converter applies to **all supported formats** — JUnit XML, TestNG XML, Cucumber JSON, Robot Framework XML, and Allure results. Configuration is through **CLI flags** and an optional **`sarva-varadi.properties`** file placed in the directory where you run the command.
 
 ### CLI flags
 
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--input`, `-i` | required | Path to `output.xml` |
-| `--output`, `-o` | required | Output directory for the report |
-| `--title`, `-t` | `'Sarva-Varadi Test Report'` | Title shown in the report header |
-| `--use-current-timestamp` | off | Shift all test timestamps to the current time (useful for demo/sample data) |
+| Flag | Short | Required | Description |
+|------|-------|----------|-------------|
+| `--input` | `-i` | ✅ | Input file path or directory (for Allure: point at `allure-results/` directory) |
+| `--output` | `-o` | ✅ | Output directory for the report |
+| `--title` | `-t` | ✗ | Title shown in the report header |
 
 ```bash
-sarva-varadi generate \
-  --input results/output.xml \
-  --output sarva-report \
-  --title "Robot Suite — Nightly"
+# JUnit / TestNG / Cucumber / Robot — single file or directory
+sarva-varadi generate --input target/surefire-reports/ --output sarva-report --title "Nightly Suite"
+
+# Allure — directory input
+sarva-varadi generate --input allure-results/ --output sarva-report --title "Allure Migration"
 ```
 
 ### `sarva-varadi.properties` (CLI)
 
-Place this file in the same directory you run the CLI from. Flags always take precedence over file values.
+Place this file in the directory where you run the CLI. Flags always take precedence over file values. Applies to all converter formats.
 
 ```properties
 # ── Report display ──────────────────────────────────────────
-sarva.report.title=Robot Framework Tests
-sarva.report.frameworkLabel=Robot Framework
+sarva.report.title=My Test Suite
+sarva.report.frameworkLabel=Selenium-TestNG
 sarva.report.showStackTrace=true
 sarva.report.embedAttachments=true
 
@@ -197,7 +197,7 @@ sarva.links.tms=https://testrail.example.com/index.php?/cases/view/{tms}
 | Property | Default | Description |
 |----------|---------|-------------|
 | `sarva.report.title` | `Sarva-Varadi Test Report` | Report title (overridden by `--title` flag) |
-| `sarva.report.frameworkLabel` | `robot` | Label shown below the report heading |
+| `sarva.report.frameworkLabel` | — | Label shown below the report heading (e.g. `Selenium-TestNG`, `Allure`) |
 | `sarva.report.showStackTrace` | `true` | Show stack traces in test detail |
 | `sarva.report.embedAttachments` | `true` | Embed attachments inline |
 | `sarva.report.history` | `true` | Enable run history tracking |

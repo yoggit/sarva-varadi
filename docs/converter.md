@@ -54,7 +54,7 @@ This works with any framework that has an Allure adapter — Playwright, Seleniu
 | `--output` | `-o` | ✅ | Output directory for the report |
 | `--title` | `-t` | ✗ | Report title shown in the header |
 
-> History retention, max runs, notifications, and other options are configured via `sarva-varadi.properties` in your project root — see [Configuration](/configuration#robot-framework-cli-converter).
+> History retention, max runs, notifications, and other options are configured via `sarva-varadi.properties` in your project root — see [CLI Converter configuration](/configuration#cli-converter-all-formats).
 
 ---
 
