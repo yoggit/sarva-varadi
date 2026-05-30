@@ -218,6 +218,25 @@ robot --outputdir results tests/
 - ✅ Error messages and failure path
 - ✅ RF 4, 5, 6, and 7 supported
 
+### ✅ Allure 2/3 Results Directory
+
+**Source:** `allure-results/` directory produced by any Allure adapter (Playwright, Selenium, RestAssured, Pytest, NUnit, etc.)
+
+**Input:** Pass the **directory** path (not a single file) — the converter scans all `*-result.json` files automatically:
+
+```bash
+sarva-varadi generate --input allure-results/ --output sarva-report
+```
+
+**What's converted:**
+- ✅ Test name, fullName, status (passed/failed/broken/skipped/flaky)
+- ✅ Flaky detection via Allure's `flaky: true` field (`@Flaky` annotation)
+- ✅ Previous retry attempts skipped (`hidden: true` entries filtered out)
+- ✅ Full nested step hierarchy with timing
+- ✅ Attachments (screenshots, videos, logs) per step and per test
+- ✅ Severity, owner, feature, epic, story labels
+- ✅ Issue and TMS links → rendered as badges in test detail
+
 ### ✅ Sarva-Varadi JSON (Native)
 
 **Source:** Playwright/Selenium adapters, or previous converter output
@@ -257,6 +276,7 @@ The converter uses these detection rules:
 | **TestNG** | Root element `testng-results`, `testng`, or `suite` with `test` child |
 | **Cucumber** | Array with objects containing `type: "feature"` and `elements` array |
 | **Robot Framework** | Root element `robot` with `suite` child containing `test` elements with `kw` children |
+| **Allure** | Array of objects containing both `uuid` and `historyId` fields |
 
 **No configuration needed** - just point to your file and let the converter handle it.
 

@@ -1,4 +1,4 @@
-export type SupportedFormat = 'sarva-varadi' | 'junit' | 'testng' | 'testng-listener' | 'testng-selenium' | 'cucumber' | 'robot' | 'mocha' | 'jest' | 'unknown';
+export type SupportedFormat = 'sarva-varadi' | 'junit' | 'testng' | 'testng-listener' | 'testng-selenium' | 'cucumber' | 'robot' | 'allure' | 'mocha' | 'jest' | 'unknown';
 
 /**
  * Detects if data is already in Sarva-Varadi format
@@ -52,6 +52,11 @@ export function detectFormat(data: any): SupportedFormat {
       return 'testng-selenium';
     }
     return 'testng-listener';
+  }
+
+  // Allure 2/3 result files — array of {uuid, historyId, ...} objects
+  if (Array.isArray(data) && data.length > 0 && data[0]?.historyId && data[0]?.uuid) {
+    return 'allure';
   }
 
   // Cucumber JSON

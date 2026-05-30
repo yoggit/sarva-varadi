@@ -1,6 +1,6 @@
 # CLI Converter
 
-The built-in converter transforms test results from other formats (JUnit XML, TestNG XML, Cucumber JSON, Robot Framework XML) into a Sarva-Varadi report — without adding any adapter code to your tests.
+The built-in converter transforms test results from other formats (JUnit XML, TestNG XML, Cucumber JSON, Robot Framework XML, Allure results) into a Sarva-Varadi report — without adding any adapter code to your tests.
 
 [[toc]]
 
@@ -29,9 +29,20 @@ open sarva-report/index.html
 | **TestNG XML** | Standard TestNG `testng-results.xml` | ✅ Yes |
 | **Cucumber JSON** | Cucumber JSON formatter output | ✅ Yes |
 | **Robot Framework XML** | `output.xml` from RF 4, 5, 6, and 7 | ✅ Yes |
+| **Allure results directory** | `allure-results/` from any Allure 2/3 adapter | ✅ Yes (directory input) |
 | **Sarva-Varadi JSON** | Native format (no conversion needed) | ✅ Skips conversion |
 
 Format is **auto-detected** from file structure — no `--format` flag needed in most cases.
+
+::: tip Using Allure results
+Point `--input` at the `allure-results/` **directory** (not a single file). The converter scans all `*-result.json` files automatically:
+
+```bash
+sarva-varadi generate --input allure-results/ --output sarva-report
+```
+
+This works with any framework that has an Allure adapter — Playwright, Selenium, RestAssured, Pytest, NUnit, and more — with **zero changes** to your existing test code.
+:::
 
 ---
 

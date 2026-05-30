@@ -6,6 +6,7 @@ import { TestNGListenerConverter } from './testng-listener-converter';
 import { TestNGSeleniumConverter } from './testng-selenium-converter';
 import { CucumberConverter } from './cucumber-converter';
 import { RobotConverter } from './robot-converter';
+import { AllureConverter } from './allure-converter';
 
 export * from './format-detector';
 export * from './base-converter';
@@ -15,6 +16,7 @@ export * from './testng-listener-converter';
 export * from './testng-selenium-converter';
 export * from './cucumber-converter';
 export * from './robot-converter';
+export * from './allure-converter';
 
 /**
  * Smart converter that auto-detects format and converts to Sarva-Varadi format
@@ -38,7 +40,7 @@ export class SmartConverter {
     console.log(`Detected format: ${format}`);
 
     if (format === 'unknown') {
-      throw new Error('Unable to detect test results format. Supported formats: Sarva-Varadi, JUnit, TestNG, Cucumber');
+      throw new Error('Unable to detect test results format. Supported formats: Sarva-Varadi, JUnit, TestNG, Cucumber, Robot Framework, Allure');
     }
 
     // Convert based on detected format
@@ -76,6 +78,10 @@ export class SmartConverter {
       case 'robot':
         console.log('Converting from Robot Framework format...');
         return new RobotConverter().convert(data);
+
+      case 'allure':
+        console.log('Converting from Allure format...');
+        return new AllureConverter().convert(data);
 
       case 'mocha':
       case 'jest':

@@ -1,6 +1,6 @@
 export type TestStatus = 'passed' | 'failed' | 'broken' | 'skipped' | 'flaky';
 export type TestStage = 'scheduled' | 'running' | 'finished' | 'interrupted';
-export type TestTool = 'playwright' | 'selenium' | 'cypress' | 'rest-assured' | 'junit' | 'testng' | 'cucumber' | 'robot';
+export type TestTool = 'playwright' | 'selenium' | 'cypress' | 'rest-assured' | 'junit' | 'testng' | 'cucumber' | 'robot' | 'allure';
 
 export interface SarvaTestResult {
   uuid: string;

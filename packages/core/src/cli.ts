@@ -121,29 +121,46 @@ async function handleGenerate(args: string[]) {
   try {
     console.log(`\n📂 Reading test results from: ${options.input}`);
 
-    // Read input file
     if (!fs.existsSync(options.input)) {
-      throw new Error(`Input file not found: ${options.input}`);
+      throw new Error(`Input path not found: ${options.input}`);
     }
-
-    const fileContent = fs.readFileSync(options.input, 'utf-8');
-    const ext = path.extname(options.input).toLowerCase();
 
     let data: any;
 
-    // Parse based on file extension
-    if (ext === '.xml') {
-      console.log('📄 Parsing XML file...');
-      data = await parseStringPromise(fileContent, {
-        explicitArray: false,
-        mergeAttrs: false,
-        trim: true,
-      });
-    } else if (ext === '.json') {
-      console.log('📄 Parsing JSON file...');
-      data = JSON.parse(fileContent);
+    // Directory input — scan for Allure *-result.json files
+    if (fs.statSync(options.input).isDirectory()) {
+      const resultFiles = fs.readdirSync(options.input)
+        .filter(f => f.endsWith('-result.json'))
+        .map(f => path.join(options.input, f));
+
+      if (resultFiles.length === 0) {
+        throw new Error(`No *-result.json files found in directory: ${options.input}. For Allure results, ensure the directory contains files named {uuid}-result.json`);
+      }
+
+      console.log(`📄 Found ${resultFiles.length} Allure result file(s)...`);
+      data = resultFiles.map(f => {
+        try { return JSON.parse(fs.readFileSync(f, 'utf-8')); }
+        catch { console.warn(`⚠️  Skipping unreadable file: ${f}`); return null; }
+      }).filter(Boolean);
+
     } else {
-      throw new Error(`Unsupported file format: ${ext}. Supported: .xml, .json`);
+      // Single file input
+      const fileContent = fs.readFileSync(options.input, 'utf-8');
+      const ext = path.extname(options.input).toLowerCase();
+
+      if (ext === '.xml') {
+        console.log('📄 Parsing XML file...');
+        data = await parseStringPromise(fileContent, {
+          explicitArray: false,
+          mergeAttrs: false,
+          trim: true,
+        });
+      } else if (ext === '.json') {
+        console.log('📄 Parsing JSON file...');
+        data = JSON.parse(fileContent);
+      } else {
+        throw new Error(`Unsupported file format: ${ext}. Supported: .xml, .json, or a directory of Allure *-result.json files`);
+      }
     }
 
     // Smart convert (auto-detects format, skips if already Sarva-Varadi)
